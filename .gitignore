@@ -10,3 +10,4 @@
 *.vrb
 *.fls
 *.fdb_latexmk
+.vscode
