@@ -1,32 +1,33 @@
 #pragma once
 
 #include <vector>
+#include <deque>
 
 typedef unsigned int color_t;
 const color_t INVALID_COLOR = 0;
 
-typedef std::stack<color_t> Tube;
+typedef std::deque<color_t> Tube;
 
-class Gameboard : public std::vector<Tube> {
+class GameboardModel : public std::vector<Tube> {
 private:
     size_t _num_tubes;
     size_t _tube_height;
 public:
     /**
-     * @brief Construct a new Gameboard.
+     * @brief Construct a new GameboardModel.
      * 
      * @param num_tubes     Number of tubes
      * @param tube_height   Tube height
      */
-    Gameboard(size_t num_tubes, size_t tube_height);
+    GameboardModel(size_t num_tubes, size_t tube_height);
 
     /**
-     * @brief Clear gameboard.
+     * @brief Clear GameboardModel.
      */
     void clear();
 
     /**
-     * @brief Fill a gameboard with random pieces.
+     * @brief Fill a GameboardModel with random pieces.
      * 
      * @param num_colors    Number of colors of pieces to place
      * @param num_pieces    Total number of pieces
