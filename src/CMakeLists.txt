@@ -10,6 +10,8 @@ add_executable(main
     main.cpp
     GameboardModel.cpp
     GameboardView.cpp
+    ScoreboardModel.cpp
+    ScoreboardView.cpp
     TerminalGUI.cpp
     TerminalGUIFile.cpp
     TerminalGUIColor.cpp

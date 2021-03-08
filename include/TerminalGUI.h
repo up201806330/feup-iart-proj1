@@ -18,14 +18,14 @@ public:
      */
     enum Color {
         DEFAULT = 0,
-        BLACK   = 1,
-        WHITE   = 2,
-        RED     = 3,
-        GREEN   = 4,
-        BLUE    = 5,
-        CYAN    = 6,
-        MAGENTA = 7,
-        YELLOW  = 8
+        RED     = 1,
+        GREEN   = 2,
+        BLUE    = 3,
+        MAGENTA = 5,
+        YELLOW  = 6,
+        CYAN    = 4,
+        WHITE   = 7,
+        BLACK   = 8
     };
 
     typedef uint32_t effects_t;
@@ -98,6 +98,27 @@ public:
      * @param background    Background color
      */
     void drawCharacterAbsolute(pos_t pos, std::string c, Color foreground = DEFAULT, Color background = DEFAULT, effects_t effects = 0);
+
+    /**
+     * @brief Draw string in position, accounting for coordinate of the
+     * upper-left corner.
+     * 
+     * @param pos           Position
+     * @param s             String
+     * @param foreground    Foreground color
+     * @param background    Background color
+     */
+    void drawString(pos_t pos, std::string c, Color foreground = DEFAULT, Color background = DEFAULT, effects_t effects = 0);
+
+    /**
+     * @brief Draw string in absolute terminal position.
+     * 
+     * @param pos           Absolute position
+     * @param s             String
+     * @param foreground    Foreground color
+     * @param background    Background color
+     */
+    void drawStringAbsolute(pos_t pos, std::string c, Color foreground = DEFAULT, Color background = DEFAULT, effects_t effects = 0);
 
     /**
      * @brief Display buffer contents.

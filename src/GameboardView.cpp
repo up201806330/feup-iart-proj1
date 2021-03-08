@@ -9,20 +9,19 @@ GameboardView::GameboardView(const GameboardModel &gameboardModel):
 {
 }
 
-void GameboardView::display(TerminalGUI &terminal){
+void GameboardView::draw(TerminalGUI &terminal){
     for(size_t tube = 0; tube < _gameboardModel.size(); ++tube){
-        displayTube(terminal, tube);
+        drawTube(terminal, tube);
     }
     for(size_t i = 0; i < _gameboardModel.size(); ++i){
         Tube tube = _gameboardModel[i];
         for(size_t j = 0; j < tube.size(); ++j){
-            displayPiece(terminal, i, j, tube[j]);
+            drawPiece(terminal, i, j, tube[j]);
         }
     }
-    terminal.display();
 }
 
-void GameboardView::displayPiece(TerminalGUI &terminal, size_t tube, size_t place, color_t piece_color){
+void GameboardView::drawPiece(TerminalGUI &terminal, size_t tube, size_t place, color_t piece_color){
     pos_t size(
         coord_t((PIECE_X+2*TUBE_PADDING_X)*_gameboardModel.size      () + TUBE_MARGIN_X*max(size_t(0), _gameboardModel.size      ()-1)),
         coord_t((PIECE_Y                 )*_gameboardModel.tubeHeight() + PIECE_MARGIN_Y*max(size_t(0), _gameboardModel.tubeHeight()-1))
@@ -52,7 +51,7 @@ void GameboardView::displayPiece(TerminalGUI &terminal, size_t tube, size_t plac
     terminal.drawCharacter(pos1+pos_t(3, -0), "▛", static_cast<TerminalGUI::Color>(piece_color));
 }
 
-void GameboardView::displayTube(TerminalGUI &terminal, size_t tube){
+void GameboardView::drawTube(TerminalGUI &terminal, size_t tube){
     pos_t size(
         coord_t((PIECE_X+2*TUBE_PADDING_X)*_gameboardModel.size      () + TUBE_MARGIN_X*max(size_t(0), _gameboardModel.size      ()-1)),
         coord_t((PIECE_Y                 )*_gameboardModel.tubeHeight() + PIECE_MARGIN_Y*max(size_t(0), _gameboardModel.tubeHeight()-1))
