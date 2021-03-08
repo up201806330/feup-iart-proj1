@@ -13,3 +13,5 @@
 .vscode
 build
 /main
+/main.exe
+*.exe

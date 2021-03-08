@@ -22,6 +22,13 @@ public:
     GameboardModel(size_t num_tubes, size_t tube_height);
 
     /**
+     * @brief Get tubes' height.
+     * 
+     * @return size_t Tube height
+     */
+    size_t tubeHeight() const;
+
+    /**
      * @brief Clear GameboardModel.
      */
     void clear();
@@ -30,9 +37,8 @@ public:
      * @brief Fill a GameboardModel with random pieces.
      * 
      * @param num_colors    Number of colors of pieces to place
-     * @param num_pieces    Total number of pieces
      */
-    void fillRandom(size_t num_colors, size_t num_pieces);
+    void fillRandom(size_t num_colors);
 
     /**
      * @brief Check if the top piece of a tube can be moved to the top of

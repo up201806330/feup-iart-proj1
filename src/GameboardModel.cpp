@@ -12,13 +12,16 @@ GameboardModel::GameboardModel(size_t num_tubes, size_t tube_height):
 
 }
 
+size_t GameboardModel::tubeHeight() const{ return _tube_height; }
+
 void GameboardModel::clear(){
     for(size_t i = 0; i < _num_tubes; ++i){
         (*this)[i] = deque<color_t>();
     }
 }
 
-void GameboardModel::fillRandom(size_t num_colors, size_t num_pieces){
+void GameboardModel::fillRandom(size_t num_colors){
+    size_t num_pieces = num_colors*_tube_height;
     // There must be at least as many tubes as there are colors, since each
     // color will be in a separate tube.
     if(num_colors > _num_tubes) throw invalid_argument("more colors than tubes");
@@ -58,6 +61,7 @@ void GameboardModel::fillRandom(size_t num_colors, size_t num_pieces){
             } while((*this)[tube].size() >= _tube_height);
             // i is the index, i+1 is the color ID.
             (*this)[tube].push_back(color_t(i+1));
+            --num_pieces_per_color[i];
         }
     }
 }

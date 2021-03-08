@@ -6,7 +6,14 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/..)
 
 include_directories(../include)
 
-add_executable(main main.cpp GameboardModel.cpp)
+add_executable(main
+    main.cpp
+    GameboardModel.cpp
+    GameboardView.cpp
+    TerminalGUI.cpp
+    TerminalGUIFile.cpp
+    TerminalGUIColor.cpp
+)
 
 set(CPP_COMPILER_WARNINGS -Wall -Wunused-result -pedantic-errors -Wextra -Wcast-align -Wcast-qual -Wchar-subscripts
                           -Wcomment -Wconversion -Wdisabled-optimization -Wfloat-equal  -Wformat  -Wformat=2
