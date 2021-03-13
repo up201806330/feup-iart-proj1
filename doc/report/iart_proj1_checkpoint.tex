@@ -3,6 +3,7 @@
 \usepackage[utf8]{inputenc}
 % Language
 \usepackage[english]{babel}
+\usepackage{verbatim}
 
 \usetheme{Madrid}
 \usecolortheme{default}
@@ -70,7 +71,7 @@
 	\email{up201806330@fe.up.pt} & Rafael Soares Ribeiro
 \end{tabular}
 }
-\institute[FEUP/AEDA]{Faculdade de Engenharia da Universidade do Porto \\ Artificial Intelligence (IART) -- Group 48}
+\institute[FEUP/IART]{Faculdade de Engenharia da Universidade do Porto \\ Artificial Intelligence (IART) -- Group 48}
 \date[?/?/2021]{?th of ?, 2021}
 }
 
@@ -91,10 +92,19 @@ Sample text.
 
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile=singleslide]
 \frametitle{Formulation}
 
-Sample text.
+\textbf{State representation:} For N tubes of height H, a given game state is a 
+\verb!vector<N,deque<H>>! , in which each \verb!deque! represents a tube and each \verb!int! represent a colored ball inside that tube. Each integer corresponds to a different color.
+
+\textbf{Initial state:} The game starts with a number of tubes of the same height, filled with balls of randomized colors.
+
+\textbf{Objective test:} All balls of each color are stacked together in a single tube.
+
+\textbf{Operators:} The only operator is a move consisting of choosing a tube with at least one ball inside to remove the top ball, followed by a tube with at least one empty space to place said ball. Since it is the only type of operator allowed, it's cost will be \textbf{1 (one)}.
+
+\textbf{Heuristics/Evaluation function:} Number of moves played; Number of balls of same color grouped together; 
 
 \end{frame}
 
