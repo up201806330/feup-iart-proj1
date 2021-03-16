@@ -10,3 +10,8 @@
 *.vrb
 *.fls
 *.fdb_latexmk
+.vscode
+build
+/main
+/main.exe
+*.exe
