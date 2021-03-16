@@ -1,4 +1,14 @@
+<!--
+Copyright (C) 2021 Diogo Rodrigues, Rafael Ribeiro, Bernardo Ferreira
+Distributed under the terms of the GNU General Public License, version 3
+-->
+
 # IART project 1
+
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![License: CC BY-NC-ND 4.0](https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-nd/4.0/)
+
+[![build](https://github.com/dmfrodrigues/feup-iart-proj1/actions/workflows/build.yml/badge.svg)](https://github.com/dmfrodrigues/feup-iart-proj1/actions/workflows/build.yml)
 
 Based on game [*Ball Sort Puzzle*](https://play.google.com/store/apps/details?id=com.spicags.ballsort&hl=pt_PT&gl=US) by [Spica Game Studio](https://play.google.com/store/apps/developer?id=Spica+Game+Studio).
 
@@ -27,3 +37,13 @@ Add the following line to `.vscode/settings.json`:
 and open a new integrated terminal to run with correct color rendering and avoid garbage being printed.
 
 ### Compile
+
+
+# License
+
+© 2021 Diogo Rodrigues, Rafael Ribeiro, Bernardo Ferreira
+
+All files are licensed under [GNU General Public License v3](LICENSE) by **© 2021 Diogo Rodrigues, Rafael Ribeiro, Bernardo Ferreira**, to the exception of:
+- all files inside directory `doc/report` and all artifacts deriving from them, which are licensed under the [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International](doc/report/LICENSE) public license.
+
+<!-- The files not authored by us are presented as a fundamental complement to the presented solutions, and are made available under *fair use for education*. -->
