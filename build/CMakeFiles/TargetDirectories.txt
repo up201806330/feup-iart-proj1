@@ -1,5 +1,0 @@
-/home/bernardo/Desktop/IART/Trabalho Prático/build/CMakeFiles/rebuild_cache.dir
-/home/bernardo/Desktop/IART/Trabalho Prático/build/CMakeFiles/edit_cache.dir
-/home/bernardo/Desktop/IART/Trabalho Prático/build/src/CMakeFiles/rebuild_cache.dir
-/home/bernardo/Desktop/IART/Trabalho Prático/build/src/CMakeFiles/edit_cache.dir
-/home/bernardo/Desktop/IART/Trabalho Prático/build/src/CMakeFiles/main.dir
