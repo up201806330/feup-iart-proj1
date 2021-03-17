@@ -9,6 +9,7 @@ Distributed under the terms of the GNU General Public License, version 3
 [![License: CC BY-NC-ND 4.0](https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-nd/4.0/)
 
 [![build](https://github.com/dmfrodrigues/feup-iart-proj1/actions/workflows/build.yml/badge.svg)](https://github.com/dmfrodrigues/feup-iart-proj1/actions/workflows/build.yml)
+[![report1](https://github.com/dmfrodrigues/feup-iart-proj1/actions/workflows/report1.yml/badge.svg)](https://github.com/dmfrodrigues/feup-iart-proj1/actions/workflows/report1.yml)
 
 Based on game [*Ball Sort Puzzle*](https://play.google.com/store/apps/details?id=com.spicags.ballsort&hl=pt_PT&gl=US) by [Spica Game Studio](https://play.google.com/store/apps/developer?id=Spica+Game+Studio).
 
