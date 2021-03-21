@@ -96,7 +96,7 @@ Starting with a set of differently coloured balls distributed at random in diffe
 \begin{minipage}{0.42\textwidth}
   \begin{itemize}
     \itemsep0em
-    \item There are at least as many tubes as there are colors;
+    \item There are more tubes than colors;
     \item There are as many balls of a color as can fit in a tube;
     \item Cannot place more balls in a tube than it can hold;
     \item Can only move a ball on top of same-color ball (or tube is empty).
@@ -170,7 +170,7 @@ This research is significant for our problem; even though the problems are quite
 \textbf{Operators} | The only operator is a move:
 \begin{itemize}
   \item Given state $S$, choose origin \& destination tubes $1 \leq i, j \leq N$ ($i \neq j$).
-  \item Preconditions: $h_j < H$ and either $h_j = 0$ or $t_i(h_i)=t_j(h_j)$.
+  \item Preconditions: $h_i \geq 1$, $h_j < H$ and either $h_j = 0$ or $t_i(h_i)=t_j(h_j)$.
   \item Cost: $1$ (one).
   \item Postconditions: $S'$ is built from $S$, except $t_i$ is a ball shorter (say it had color $c$), and $t_j$ has one more ball at the top with color $c$.
 \end{itemize}
@@ -181,7 +181,7 @@ This research is significant for our problem; even though the problems are quite
   \frametitle{Formulation}
   \textbf{Heuristics/Evaluation function} | This heuristic will describe an estimate of the distance to a solution in \# of moves:
   \begin{itemize}
-    \item For each tube, add the number of balls above and including the first ball that is a different color than the last ball in that tube.
+    \item For each tube, add the number of balls in that tube that have a different color than the last ball in the tube.
     \item Number of balls in the $N-C$ tubes with least balls.
   \end{itemize}
 
