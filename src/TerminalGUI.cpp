@@ -91,3 +91,6 @@ void TerminalGUI::drawStringAbsolute(
     }
 }
 
+void TerminalGUI::draw(TerminalGUIDrawable &drawable){
+    drawable.draw(*this);
+}

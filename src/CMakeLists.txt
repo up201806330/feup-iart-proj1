@@ -16,8 +16,9 @@ add_executable(main
     ScoreboardModel.cpp
     ScoreboardView.cpp
     TerminalGUI.cpp
-    TerminalGUIFile.cpp
     TerminalGUIColor.cpp
+    TerminalGUIFile.cpp
+    TerminalGUISprite.cpp
 )
 
 set(CPP_COMPILER_WARNINGS -Wall -Wunused-result -pedantic-errors -Wextra -Wcast-align -Wcast-qual -Wchar-subscripts

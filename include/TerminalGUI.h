@@ -10,6 +10,7 @@
 #include <list>
 #include <tuple>
 
+#include "TerminalGUIDrawable.h"
 
 /**
  * @brief Terminal GUI.
@@ -130,6 +131,8 @@ public:
      * @param background    Background color
      */
     void drawStringAbsolute(pos_t pos, std::string c, Color foreground = DEFAULT, Color background = DEFAULT, effects_t effects = 0);
+
+    void draw(TerminalGUIDrawable &drawable);
 
     /**
      * @brief Display buffer contents.
