@@ -11,15 +11,15 @@ include_directories(../include)
 
 add_executable(main
     main.cpp
-    GameboardModel.cpp
-    GameboardView.cpp
-    MainMenuView.cpp
-    ScoreboardModel.cpp
-    ScoreboardView.cpp
-    TerminalGUI.cpp
-    TerminalGUIColor.cpp
-    TerminalGUIFile.cpp
-    TerminalGUISprite.cpp
+    model/GameboardModel.cpp
+    model/ScoreboardModel.cpp
+    view/gui/TerminalGUI.cpp
+    view/gui/TerminalGUIColor.cpp
+    view/gui/TerminalGUIFile.cpp
+    view/gui/TerminalGUISprite.cpp
+    view/GameboardView.cpp
+    view/MainMenuView.cpp
+    view/ScoreboardView.cpp
 )
 
 set(CPP_COMPILER_WARNINGS -Wall -Wunused-result -pedantic-errors -Wextra -Wcast-align -Wcast-qual -Wchar-subscripts
