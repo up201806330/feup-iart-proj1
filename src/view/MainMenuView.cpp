@@ -8,9 +8,9 @@
 #include <iostream>
 
 using namespace std;
-typedef TerminalGUI::coord_t coord_t;
-typedef TerminalGUI::pos_t pos_t;
-using Color = TerminalGUI::Color;
+using coord_t = TerminalGUI::coord_t;
+using pos_t   = TerminalGUI::pos_t;
+using Color   = TerminalGUI::Color;
 
 const Color DEFAULT = TerminalGUI::DEFAULT;
 const Color GRAY    = TerminalGUI::GRAY   ;
@@ -19,13 +19,13 @@ const Color BLUE    = TerminalGUI::BLUE   ;
 const Color RED     = TerminalGUI::RED    ;
 const Color YELLOW  = TerminalGUI::YELLOW ;
 
-MainMenuView::MainMenuView()
+MainMenuView::MainMenuView(const MainMenuModel &mainMenuModel): menuView(mainMenuModel)
 {
 }
 
 void MainMenuView::draw(TerminalGUI &terminal){
     terminal.setCorner(-terminal.getSize()/2);
-    pos_t POS0 = pos_t(-31,-10);
+    pos_t POS0 = pos_t(-31,-12);
 
     TerminalGUISprite iconSprite(
         {
@@ -78,4 +78,7 @@ void MainMenuView::draw(TerminalGUI &terminal){
     );
     textSprite.setPosition(POS0+pos_t(21, 1));
     terminal.draw(textSprite);
+
+    menuView.setPosition(pos_t(0, POS0.y) + pos_t(0, 10));
+    menuView.draw(terminal);
 }

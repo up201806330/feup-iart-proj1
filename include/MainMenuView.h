@@ -4,10 +4,13 @@
 #pragma once
 
 #include "TerminalGUI.h"
+#include "MainMenuModel.h"
+#include "MenuView.h"
 
 class MainMenuView {
-public:
-    MainMenuView();
-    void draw(TerminalGUI &terminal);
 private:
+    MenuView menuView;
+public:
+    MainMenuView(const MainMenuModel &mainMenuModel);
+    void draw(TerminalGUI &terminal);
 };

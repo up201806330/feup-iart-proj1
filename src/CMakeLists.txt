@@ -12,6 +12,8 @@ include_directories(../include)
 add_executable(main
     main.cpp
     model/GameboardModel.cpp
+    model/MainMenuModel.cpp
+    model/MenuModel.cpp
     model/ScoreboardModel.cpp
     view/gui/TerminalGUI.cpp
     view/gui/TerminalGUIColor.cpp
@@ -19,6 +21,8 @@ add_executable(main
     view/gui/TerminalGUISprite.cpp
     view/GameboardView.cpp
     view/MainMenuView.cpp
+    view/MenuView.cpp
+    view/Rectangle.cpp
     view/ScoreboardView.cpp
 )
 
