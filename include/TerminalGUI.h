@@ -28,7 +28,8 @@ public:
         YELLOW  = 6,
         CYAN    = 4,
         WHITE   = 7,
-        BLACK   = 8
+        BLACK   = 8,
+        GRAY    = 9
     };
 
     typedef uint32_t effects_t;
