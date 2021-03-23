@@ -51,6 +51,13 @@ public:
         pos_t operator+(const pos_t &p) const;
         pos_t operator-(const pos_t &p) const;
         pos_t operator/(coord_t c) const;
+        pos_t operator-() const;
+
+        bool operator==(const pos_t &p) const;
+        bool operator< (const pos_t &p) const;
+        bool operator> (const pos_t &p) const;
+        bool operator<=(const pos_t &p) const;
+        bool operator>=(const pos_t &p) const;
     };
 private:
     pos_t corner = {0,0}; ///< @brief Coordinates of leftmost, upmost character.

@@ -10,6 +10,24 @@ TerminalGUI::pos_t::pos_t(TerminalGUI::coord_t x_, TerminalGUI::coord_t y_):x(x_
 TerminalGUI::pos_t TerminalGUI::pos_t::operator+(const TerminalGUI::pos_t &p) const { return {x+p.x, y+p.y}; }
 TerminalGUI::pos_t TerminalGUI::pos_t::operator-(const TerminalGUI::pos_t &p) const { return {x-p.x, y-p.y}; }
 TerminalGUI::pos_t TerminalGUI::pos_t::operator/(TerminalGUI::coord_t c) const { return {x/c, y/c}; }
+TerminalGUI::pos_t TerminalGUI::pos_t::operator-() const { return {-x, -y}; }
+
+bool TerminalGUI::pos_t::operator==(const TerminalGUI::pos_t &p) const { return (x == p.x && y == p.y); }
+bool TerminalGUI::pos_t::operator< (const TerminalGUI::pos_t &p) const {
+    if(x != p.x) return (x < p.x);
+    return (y < p.y);
+}
+bool TerminalGUI::pos_t::operator> (const TerminalGUI::pos_t &p) const { return p < *this; }
+bool TerminalGUI::pos_t::operator<=(const TerminalGUI::pos_t &p) const { return !(*this > p); }
+bool TerminalGUI::pos_t::operator>=(const TerminalGUI::pos_t &p) const { return !(*this < p); }
+
+namespace std {
+    template <> struct hash<TerminalGUI::pos_t>{
+        std::size_t operator()(const TerminalGUI::pos_t& p) const {
+            return (hash<TerminalGUI::coord_t>()(p.x) << 1) ^ hash<TerminalGUI::coord_t>()(p.y);
+        }
+    };
+}
 
 using pos_t = TerminalGUI::pos_t;
 using Color = TerminalGUI::Color;
