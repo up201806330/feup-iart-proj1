@@ -1,4 +1,4 @@
-#include "TerminalGUISprite.h"
+#include "view/gui/TerminalGUISprite.h"
 
 using namespace std;
 

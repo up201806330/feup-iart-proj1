@@ -1,8 +1,8 @@
 // Copyright (C) 2021 Diogo Rodrigues, Rafael Ribeiro, Bernardo Ferreira
 // Distributed under the terms of the GNU General Public License, version 3
 
-#include "MainMenuView.h"
-#include "TerminalGUISprite.h"
+#include "view/MainMenuView.h"
+#include "view/gui/TerminalGUISprite.h"
 
 #include <vector>
 #include <iostream>

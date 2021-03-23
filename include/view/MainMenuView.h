@@ -3,9 +3,9 @@
 
 #pragma once
 
-#include "TerminalGUI.h"
-#include "MainMenuModel.h"
-#include "MenuView.h"
+#include "view/gui/TerminalGUI.h"
+#include "model/MainMenuModel.h"
+#include "view/MenuView.h"
 
 class MainMenuView {
 private:

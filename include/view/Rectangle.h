@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "GameboardView.h"
+#include "view/GameboardView.h"
 
 class Rectangle : public TerminalGUIDrawable {
 public:

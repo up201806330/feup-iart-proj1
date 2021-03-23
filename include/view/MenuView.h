@@ -3,8 +3,8 @@
 
 #pragma once
 
-#include "TerminalGUI.h"
-#include "MenuModel.h"
+#include "view/gui/TerminalGUI.h"
+#include "model/MenuModel.h"
 
 class MenuView {
 private:

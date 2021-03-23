@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "TerminalGUI.h"
+#include "view/gui/TerminalGUI.h"
 
 class TerminalGUIFile: public TerminalGUI {
 private:

@@ -3,13 +3,13 @@
 
 #include <iostream>
 
-#include "TerminalGUIColor.h"
-#include "GameboardModel.h"
-#include "GameboardView.h"
-#include "ScoreboardModel.h"
-#include "ScoreboardView.h"
-#include "MainMenuModel.h"
-#include "MainMenuView.h"
+#include "view/gui/TerminalGUIColor.h"
+#include "model/GameboardModel.h"
+#include "view/GameboardView.h"
+#include "model/ScoreboardModel.h"
+#include "view/ScoreboardView.h"
+#include "model/MainMenuModel.h"
+#include "view/MainMenuView.h"
 
 #include <unistd.h>
 

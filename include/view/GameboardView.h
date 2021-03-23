@@ -3,8 +3,8 @@
 
 #pragma once
 
-#include "GameboardModel.h"
-#include "TerminalGUI.h"
+#include "model/GameboardModel.h"
+#include "view/gui/TerminalGUI.h"
 
 class GameboardView {
 private:

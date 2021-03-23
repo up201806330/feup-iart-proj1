@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "GUI.h"
+#include "view/gui/GUI.h"
 
 #include <cstdint>
 #include <cwchar>

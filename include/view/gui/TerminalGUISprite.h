@@ -6,8 +6,8 @@
 #include <map>
 #include <vector>
 
-#include "TerminalGUI.h"
-#include "TerminalGUIDrawable.h"
+#include "view/gui/TerminalGUI.h"
+#include "view/gui/TerminalGUIDrawable.h"
 
 class TerminalGUISprite : public TerminalGUIDrawable {
 private:
