@@ -13,6 +13,7 @@ add_executable(main
     main.cpp
     GameboardModel.cpp
     GameboardView.cpp
+    MainMenuView.cpp
     ScoreboardModel.cpp
     ScoreboardView.cpp
     TerminalGUI.cpp

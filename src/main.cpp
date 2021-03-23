@@ -8,6 +8,7 @@
 #include "GameboardView.h"
 #include "ScoreboardModel.h"
 #include "ScoreboardView.h"
+#include "MainMenuView.h"
 
 #include <unistd.h>
 
@@ -16,6 +17,7 @@ using namespace std;
 int main(){
     TerminalGUI *gui = new TerminalGUIColor();
 
+    /*
     GameboardModel gameboard(5, 4);
     gameboard.fillRandom(3);
     ScoreboardModel scoreboard;
@@ -25,6 +27,9 @@ int main(){
 
     gameboardView.draw(*gui);
     scoreboardView.draw(*gui);
+     */
+    MainMenuView menuView;
+    menuView.draw(*gui);
 
     gui->display();
     
