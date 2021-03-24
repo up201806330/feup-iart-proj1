@@ -70,16 +70,30 @@ void GameboardModel::fillRandom(size_t num_colors){
 }
 
 bool GameboardModel::canMove(size_t tube_orig, size_t tube_dest) const {
+    const Tube &tube_origin = this->at(tube_orig);
+    const Tube &tube_destin = this->at(tube_dest);
+
     return (
         // Origin is not empty
-        !(*this)[tube_orig].empty() &&
+        !tube_origin.empty() &&
         // Destination is not full
-        (*this)[tube_dest].size() < _tube_height &&
+        tube_destin.size() < _tube_height &&
         (
             // Destination is empty; or
-            (*this)[tube_dest].empty() ||
+            tube_destin.empty() ||
             // Destination top is same color as origin top
-            (*this)[tube_orig].front() == (*this)[tube_dest].front()
+            tube_origin.back() == tube_destin.back()
         )
     );
+}
+
+void GameboardModel::move(size_t tube_orig, size_t tube_dest) {
+    if(!canMove(tube_orig, tube_dest)) throw invalid_argument("");
+
+    Tube &tube_origin = this->at(tube_orig);
+    Tube &tube_destin = this->at(tube_dest);
+
+    color_t c = tube_origin.back();
+    tube_origin.pop_back();
+    tube_destin.push_back(c);
 }

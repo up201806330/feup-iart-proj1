@@ -26,19 +26,31 @@ State *PlayHumanState::run() {
     GameboardView gameboardView(gameboard);
     ScoreboardView scoreboardView(scoreboard);
 
-    int option = -1;
+    int fr, to;
+    bool invalidMove = false;
     string s;
     while(true) {
         getTerminal()->clear();
         gameboardView.draw(*getTerminal());
         scoreboardView.draw(*getTerminal());
+        if(invalidMove){
+            getTerminal()->drawStringAbsolute(pos_t(0, getTerminal()->getSize().y-2), "Invalid move");
+            invalidMove = false;
+        }
 
         getTerminal()->display();
 
         getline(cin, s);
         stringstream ss(s);
-        ss >> option;
-        if(option == 0) break;
+        ss >> fr;
+        if(fr == -1) break;
+        ss >> to;
+
+        if(gameboard.canMove(fr, to)) {
+            gameboard.move(fr, to);
+        } else {
+            invalidMove = true;
+        }
     }
 
     return State::mainMenuState;
