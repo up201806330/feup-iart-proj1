@@ -4,6 +4,7 @@
 #include "model/GameboardModel.h"
 
 #include <stdexcept>
+#include <algorithm>
 
 using namespace std;
 
@@ -96,4 +97,29 @@ void GameboardModel::move(size_t tube_orig, size_t tube_dest) {
     color_t c = tube_origin.back();
     tube_origin.pop_back();
     tube_destin.push_back(c);
+}
+
+/**
+ * Checks if all elements of a vector are equal to each other.
+ *
+ * Returns true if all adjacent elements are equal to each other, or if the vector has less than 2 elements.
+ *
+ * Returns false if there is at least one adjacent pair of different elements.
+ *
+ * @tparam T
+ * @param v Vector
+ * @return  False if at least one pair of adjacent elements are different, true otherwise
+ */
+template<class T>
+bool checkAllEqual(const deque<T> &v){
+    return adjacent_find(v.begin(), v.end(), not_equal_to<>()) == v.end();
+}
+
+bool GameboardModel::isGameOver() const {
+    for(size_t i = 0; i < size(); ++i){
+        size_t s = this->at(i).size();
+        if(!(s == 0 || s == tubeHeight())) return false;
+        if(!checkAllEqual(this->at(i))) return false;
+    }
+    return true;
 }

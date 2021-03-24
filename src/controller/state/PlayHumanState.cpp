@@ -51,6 +51,10 @@ State *PlayHumanState::run() {
         } else {
             invalidMove = true;
         }
+
+        if(gameboard.isGameOver()){
+            break;
+        }
     }
 
     return State::mainMenuState;
