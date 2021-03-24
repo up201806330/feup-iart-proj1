@@ -12,18 +12,18 @@
 #include "view/MainMenuView.h"
 
 #include <unistd.h>
+#include "controller/state/State.h"
 
 using namespace std;
 
 int main(){
-    TerminalGUI *gui = new TerminalGUIColor();
+    TerminalGUI *terminal = new TerminalGUIColor();
+    State::initializeStates(terminal);
 
-    MainMenuModel mainMenuModel;
-
-    MainMenuView mainMenuView(mainMenuModel);
-    mainMenuView.draw(*gui);
-
-    gui->display();
+    State *currentState = State::mainMenuState;
+    while(currentState != nullptr){
+        currentState = currentState->run();
+    }
     
     return 0;
 }
