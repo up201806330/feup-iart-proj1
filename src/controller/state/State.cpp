@@ -3,8 +3,10 @@
 
 #include "controller/state/State.h"
 #include "controller/state/MainMenuState.h"
+#include "controller/state/PlayHumanState.h"
 
-State *State::mainMenuState = nullptr;
+State *State::mainMenuState  = nullptr;
+State *State::playHumanState = nullptr;
 
 State::State(TerminalGUI *term): terminal(term) {
 }
@@ -14,5 +16,6 @@ TerminalGUI *State::getTerminal() {
 }
 
 void State::initializeStates(TerminalGUI *terminal) {
-    mainMenuState = new MainMenuState(terminal);
+    mainMenuState  = new MainMenuState(terminal);
+    playHumanState = new PlayHumanState(terminal);
 }

@@ -18,9 +18,9 @@ void MenuView::draw(TerminalGUI &terminal){
     const pos_t BUTTON_MARGIN (0, 0);
     const pos_t MENU_PADDING(1, 0);
 
-    const vector< pair<string, void (*)()> > &v = _menuModel.getButtons();
+    const vector<MenuModel::Button> &v = _menuModel.getButtons();
     size_t maxTextSize = 0;
-    for(size_t i = 0; i < v.size(); ++i) maxTextSize = max(maxTextSize, v[i].first.size());
+    for(size_t i = 0; i < v.size(); ++i) maxTextSize = max(maxTextSize, v[i].label.size());
 
     const pos_t TEXT_SIZE(coord_t(maxTextSize), 1);
     const pos_t BUTTON_SIZE = TEXT_SIZE + pos_t(2*BUTTON_PADDING.x + 2, 2*BUTTON_PADDING.y + 2);
@@ -35,7 +35,7 @@ void MenuView::draw(TerminalGUI &terminal){
         coord_t y = (BUTTON_SIZE.y + BUTTON_MARGIN.y)*coord_t(i) + 1 + MENU_PADDING.y;
         buttonRectangle.setPosition(getPosition() + pos_t(-BUTTON_SIZE.x/2, y));
         terminal.draw(buttonRectangle);
-        terminal.drawString(getPosition() + pos_t(-TEXT_SIZE.x/2, y + 1 + BUTTON_PADDING.y), v[i].first);
+        terminal.drawString(getPosition() + pos_t(-TEXT_SIZE.x/2, y + 1 + BUTTON_PADDING.y), v[i].label);
     }
 
     Rectangle menuRectangle(getPosition() + pos_t(-MENU_SIZE.x/2, 0), MENU_SIZE);

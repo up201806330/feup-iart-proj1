@@ -3,10 +3,10 @@
 
 #pragma once
 
-#include <view/MenuView.h>
-#include "MenuModel.h"
+#include "State.h"
 
-class MainMenuModel : public MenuModel {
+class PlayHumanState: public State {
 public:
-    MainMenuModel();
+    PlayHumanState(TerminalGUI *term);
+    virtual State* run();
 };

@@ -14,5 +14,7 @@ public:
     virtual State* run() = 0;
 
     static State *mainMenuState;
+    static State *playHumanState;
+    static State *playMachineState;
     static void initializeStates(TerminalGUI *terminal);
 };

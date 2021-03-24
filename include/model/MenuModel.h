@@ -7,10 +7,17 @@
 #include <string>
 
 class MenuModel {
-private:
-    std::vector< std::pair<std::string, void (*)()> > buttons;
 public:
-    void addButton(const std::string &label, void (*func)());
+    struct Button {
+        int id;
+        std::string label;
+        void (*func)();
+        Button(int id, const std::string &label, void (*func)());
+    };
+private:
+    std::vector<Button> buttons;
+public:
+    void addButton(int id, const std::string &label, void (*func)());
 
-    const std::vector<std::pair < std::string, void (*)(void)>>& getButtons() const;
+    const std::vector<Button>& getButtons() const;
 };

@@ -5,10 +5,17 @@
 
 using namespace std;
 
-void MenuModel::addButton(const string &label, void (*func)()){
-    buttons.push_back(make_pair(label, func));
+MenuModel::Button::Button(int _id, const std::string &_label, void (*_func)()):
+    id(_id),
+    label(_label),
+    func(_func)
+{
 }
 
-const vector< pair<string, void (*)()> >& MenuModel::getButtons() const {
+void MenuModel::addButton(int id, const string &label, void (*func)()){
+    buttons.push_back(Button(id, label, func));
+}
+
+const vector<MenuModel::Button>& MenuModel::getButtons() const {
     return buttons;
 }

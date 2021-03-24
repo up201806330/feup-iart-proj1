@@ -26,6 +26,8 @@ add_executable(main
     view/ScoreboardView.cpp
     controller/state/State.cpp
     controller/state/MainMenuState.cpp
+    controller/state/PlayHumanState.cpp
+    controller/MenuController.cpp
 )
 
 set(CPP_COMPILER_WARNINGS -Wall -Wunused-result -pedantic-errors -Wextra -Wcast-align -Wcast-qual -Wchar-subscripts
