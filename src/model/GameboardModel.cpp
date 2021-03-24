@@ -1,9 +1,10 @@
 // Copyright (C) 2021 Diogo Rodrigues, Rafael Ribeiro, Bernardo Ferreira
 // Distributed under the terms of the GNU General Public License, version 3
 
-#include "GameboardModel.h"
+#include "model/GameboardModel.h"
 
 #include <stdexcept>
+#include <algorithm>
 
 using namespace std;
 
@@ -70,16 +71,55 @@ void GameboardModel::fillRandom(size_t num_colors){
 }
 
 bool GameboardModel::canMove(size_t tube_orig, size_t tube_dest) const {
+    const Tube &tube_origin = this->at(tube_orig);
+    const Tube &tube_destin = this->at(tube_dest);
+
     return (
         // Origin is not empty
-        !(*this)[tube_orig].empty() &&
+        !tube_origin.empty() &&
         // Destination is not full
-        (*this)[tube_dest].size() < _tube_height &&
+        tube_destin.size() < _tube_height &&
         (
             // Destination is empty; or
-            (*this)[tube_dest].empty() ||
+            tube_destin.empty() ||
             // Destination top is same color as origin top
-            (*this)[tube_orig].front() == (*this)[tube_dest].front()
+            tube_origin.back() == tube_destin.back()
         )
     );
+}
+
+void GameboardModel::move(size_t tube_orig, size_t tube_dest) {
+    if(!canMove(tube_orig, tube_dest)) throw invalid_argument("");
+
+    Tube &tube_origin = this->at(tube_orig);
+    Tube &tube_destin = this->at(tube_dest);
+
+    color_t c = tube_origin.back();
+    tube_origin.pop_back();
+    tube_destin.push_back(c);
+}
+
+/**
+ * Checks if all elements of a vector are equal to each other.
+ *
+ * Returns true if all adjacent elements are equal to each other, or if the vector has less than 2 elements.
+ *
+ * Returns false if there is at least one adjacent pair of different elements.
+ *
+ * @tparam T
+ * @param v Vector
+ * @return  False if at least one pair of adjacent elements are different, true otherwise
+ */
+template<class T>
+bool checkAllEqual(const deque<T> &v){
+    return adjacent_find(v.begin(), v.end(), not_equal_to<>()) == v.end();
+}
+
+bool GameboardModel::isGameOver() const {
+    for(size_t i = 0; i < size(); ++i){
+        size_t s = this->at(i).size();
+        if(!(s == 0 || s == tubeHeight())) return false;
+        if(!checkAllEqual(this->at(i))) return false;
+    }
+    return true;
 }

@@ -3,30 +3,27 @@
 
 #include <iostream>
 
-#include "TerminalGUIColor.h"
-#include "GameboardModel.h"
-#include "GameboardView.h"
-#include "ScoreboardModel.h"
-#include "ScoreboardView.h"
+#include "view/gui/TerminalGUIColor.h"
+#include "model/GameboardModel.h"
+#include "view/GameboardView.h"
+#include "model/ScoreboardModel.h"
+#include "view/ScoreboardView.h"
+#include "model/MainMenuModel.h"
+#include "view/MainMenuView.h"
 
 #include <unistd.h>
+#include "controller/state/State.h"
 
 using namespace std;
 
 int main(){
-    TerminalGUI *gui = new TerminalGUIColor();
+    TerminalGUI *terminal = new TerminalGUIColor();
+    State::initializeStates(terminal);
 
-    GameboardModel gameboard(5, 4);
-    gameboard.fillRandom(3);
-    ScoreboardModel scoreboard;
-
-    GameboardView gameboardView(gameboard);
-    ScoreboardView scoreboardView(scoreboard);
-
-    gameboardView.draw(*gui);
-    scoreboardView.draw(*gui);
-
-    gui->display();
+    State *currentState = State::mainMenuState;
+    while(currentState != nullptr){
+        currentState = currentState->run();
+    }
     
     return 0;
 }

@@ -1,7 +1,7 @@
 // Copyright (C) 2021 Diogo Rodrigues, Rafael Ribeiro, Bernardo Ferreira
 // Distributed under the terms of the GNU General Public License, version 3
 
-#include "TerminalGUIColor.h"
+#include "view/gui/TerminalGUIColor.h"
 
 #include <vector>
 
@@ -23,6 +23,7 @@ const string COLOR_FOREGROUND_MAGENTA = "\033[35m";
 const string COLOR_FOREGROUND_CYAN    = "\033[36m";
 const string COLOR_FOREGROUND_WHITE   = "\033[37m";
 const string COLOR_FOREGROUND_DEFAULT = "\033[39m";
+const string COLOR_FOREGROUND_GRAY    = "\033[90m";
 const string COLOR_BACKGROUND_BLACK   = "\033[40m";
 const string COLOR_BACKGROUND_RED     = "\033[41m";
 const string COLOR_BACKGROUND_GREEN   = "\033[42m";
@@ -32,6 +33,7 @@ const string COLOR_BACKGROUND_MAGENTA = "\033[45m";
 const string COLOR_BACKGROUND_CYAN    = "\033[46m";
 const string COLOR_BACKGROUND_WHITE   = "\033[47m";
 const string COLOR_BACKGROUND_DEFAULT = "\033[49m";
+const string COLOR_BACKGROUND_GRAY    = "\033[100m";
 // const string COLOR_FOREGROUND_WHITE   = "\033[97m";
 // const string COLOR_BACKGROUND_WHITE   = "\033[107m";
 
@@ -46,6 +48,7 @@ string getForegroundColor(TerminalGUI::Color c){
         case TerminalGUI::Color::CYAN   : return COLOR_FOREGROUND_CYAN   ;
         case TerminalGUI::Color::MAGENTA: return COLOR_FOREGROUND_MAGENTA;
         case TerminalGUI::Color::YELLOW : return COLOR_FOREGROUND_YELLOW ;
+        case TerminalGUI::Color::GRAY   : return COLOR_FOREGROUND_GRAY   ;
         default: throw invalid_argument("");
     }
 }
@@ -61,6 +64,7 @@ string getBackgroundColor(TerminalGUI::Color c){
         case TerminalGUI::Color::CYAN   : return COLOR_BACKGROUND_CYAN   ;
         case TerminalGUI::Color::MAGENTA: return COLOR_BACKGROUND_MAGENTA;
         case TerminalGUI::Color::YELLOW : return COLOR_BACKGROUND_YELLOW ;
+        case TerminalGUI::Color::GRAY   : return COLOR_BACKGROUND_GRAY   ;
         default: throw invalid_argument("");
     }
 }

@@ -3,13 +3,14 @@
 
 #pragma once
 
-#include "ScoreboardModel.h"
-#include "TerminalGUI.h"
+#include "view/gui/TerminalGUI.h"
+#include "model/MainMenuModel.h"
+#include "view/MenuView.h"
 
-class ScoreboardView {
+class MainMenuView {
 private:
-    const ScoreboardModel &_scoreboardModel;
+    MenuView menuView;
 public:
-    ScoreboardView(const ScoreboardModel &scoreboardModel);
+    MainMenuView(const MainMenuModel &mainMenuModel);
     void draw(TerminalGUI &terminal);
 };

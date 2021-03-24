@@ -61,4 +61,6 @@ public:
      * @param tube_dest     Destination tube
      */
     void move(size_t tube_orig, size_t tube_dest);
+
+    bool isGameOver() const;
 };

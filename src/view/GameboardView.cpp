@@ -1,7 +1,7 @@
 // Copyright (C) 2021 Diogo Rodrigues, Rafael Ribeiro, Bernardo Ferreira
 // Distributed under the terms of the GNU General Public License, version 3
 
-#include "GameboardView.h"
+#include "view/GameboardView.h"
 
 using namespace std;
 typedef TerminalGUI::coord_t coord_t;
@@ -17,7 +17,7 @@ void GameboardView::draw(TerminalGUI &terminal){
         drawTube(terminal, tube);
     }
     for(size_t i = 0; i < _gameboardModel.size(); ++i){
-        Tube tube = _gameboardModel[i];
+        const Tube &tube = _gameboardModel[i];
         for(size_t j = 0; j < tube.size(); ++j){
             drawPiece(terminal, i, j, tube[j]);
         }

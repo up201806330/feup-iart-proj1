@@ -3,13 +3,14 @@
 
 #pragma once
 
-#include "GUI.h"
+#include "view/gui/GUI.h"
 
 #include <cstdint>
 #include <cwchar>
 #include <list>
 #include <tuple>
 
+#include "TerminalGUIDrawable.h"
 
 /**
  * @brief Terminal GUI.
@@ -28,7 +29,8 @@ public:
         YELLOW  = 6,
         CYAN    = 4,
         WHITE   = 7,
-        BLACK   = 8
+        BLACK   = 8,
+        GRAY    = 9
     };
 
     typedef uint32_t effects_t;
@@ -51,6 +53,13 @@ public:
         pos_t operator+(const pos_t &p) const;
         pos_t operator-(const pos_t &p) const;
         pos_t operator/(coord_t c) const;
+        pos_t operator-() const;
+
+        bool operator==(const pos_t &p) const;
+        bool operator< (const pos_t &p) const;
+        bool operator> (const pos_t &p) const;
+        bool operator<=(const pos_t &p) const;
+        bool operator>=(const pos_t &p) const;
     };
 private:
     pos_t corner = {0,0}; ///< @brief Coordinates of leftmost, upmost character.
@@ -122,6 +131,8 @@ public:
      * @param background    Background color
      */
     void drawStringAbsolute(pos_t pos, std::string c, Color foreground = DEFAULT, Color background = DEFAULT, effects_t effects = 0);
+
+    void draw(TerminalGUIDrawable &drawable);
 
     /**
      * @brief Display buffer contents.

@@ -11,13 +11,23 @@ include_directories(../include)
 
 add_executable(main
     main.cpp
-    GameboardModel.cpp
-    GameboardView.cpp
-    ScoreboardModel.cpp
-    ScoreboardView.cpp
-    TerminalGUI.cpp
-    TerminalGUIFile.cpp
-    TerminalGUIColor.cpp
+    model/GameboardModel.cpp
+    model/MainMenuModel.cpp
+    model/MenuModel.cpp
+    model/ScoreboardModel.cpp
+    view/gui/TerminalGUI.cpp
+    view/gui/TerminalGUIColor.cpp
+    view/gui/TerminalGUIFile.cpp
+    view/gui/TerminalGUISprite.cpp
+    view/GameboardView.cpp
+    view/MainMenuView.cpp
+    view/MenuView.cpp
+    view/Rectangle.cpp
+    view/ScoreboardView.cpp
+    controller/state/State.cpp
+    controller/state/MainMenuState.cpp
+    controller/state/PlayHumanState.cpp
+    controller/MenuController.cpp
 )
 
 set(CPP_COMPILER_WARNINGS -Wall -Wunused-result -pedantic-errors -Wextra -Wcast-align -Wcast-qual -Wchar-subscripts

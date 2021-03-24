@@ -17,3 +17,5 @@ build
 /main
 /main.exe
 *.exe
+.idea/
+cmake-build-*/
