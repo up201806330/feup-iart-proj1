@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "Search.h"
+#include "algorithm/Search.h"
 
 class GreedySearch: public Search {
 private:
