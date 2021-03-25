@@ -80,15 +80,12 @@ void GameboardModel::fillRandom(size_t num_colors){
 bool GameboardModel::canMove(size_t tube_orig, size_t tube_dest) const {
     const Tube &tube_origin = this->at(tube_orig);
     const Tube &tube_destin = this->at(tube_dest);
-    return canMove(tube_origin, tube_destin);
-}
-
-bool GameboardModel::canMove(Tube tube_origin, Tube tube_destin) {
+    
     return (
         // Origin is not empty
         !tube_origin.empty() &&
         // Destination is not full
-        tube_destin.size() < tube_origin.size() &&
+        tube_destin.size() < _tube_height &&
         (
             // Destination is empty; or
             tube_destin.empty() ||
@@ -114,15 +111,11 @@ std::vector<std::pair<size_t, size_t>> GameboardModel::getAllMoves() {
 
     if (this->size() < 2) return result;
 
-    do{
-        if (canMove(this->at(0), this->at(1))) 
-            result.push_back(
-                std::make_pair(
-                    std::find(this->begin(), this->end(), this->at(0)) - this->begin() , 
-                    std::find(this->begin(), this->end(), this->at(1)) - this->begin()
-                    )
-                );
-    } while(std::next_permutation(this->begin(), this->end()));
+    for (size_t i = 0 ; i < this->size() ; i++){
+        for (size_t j = i + 1 ; j < this->size() ; j++){
+            if (canMove(i, j)) result.push_back(std::make_pair(i, j));
+        }
+    }
 
     return result;
 }

@@ -67,17 +67,6 @@ public:
     bool canMove(size_t tube_orig, size_t tube_dest) const;
 
     /**
-     * @brief Check if the top piece of a tube can be moved to the top of
-     * another tube.
-     * 
-     * @param tube_origin     Origin tube
-     * @param tube_destin     Destination tube
-     * @return true         If movement is valid
-     * @return false        otherwise
-     */
-    static bool canMove(Tube tube_origin, Tube tube_destin);
-
-    /**
      * @brief Move piece from one tube to another.
      * 
      * @param tube_orig     Origin tube
