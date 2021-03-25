@@ -123,3 +123,49 @@ bool GameboardModel::isGameOver() const {
     }
     return true;
 }
+
+bool GameboardModel::operator==(const GameboardModel &model) const {
+    GameboardModel this_sorted = *this;
+    sort(this_sorted.begin(), this_sorted.end());
+    GameboardModel model_sorted = model;
+    sort(model_sorted.begin(), model_sorted.end());
+    return static_cast<vector<Tube>>(this_sorted) == static_cast<vector<Tube>>(model_sorted);
+}
+
+bool GameboardModel::operator<(const GameboardModel &model) const {
+    GameboardModel this_sorted = *this;
+    sort(this_sorted.begin(), this_sorted.end());
+    GameboardModel model_sorted = model;
+    sort(model_sorted.begin(), model_sorted.end());
+    return static_cast<vector<Tube>>(this_sorted) < static_cast<vector<Tube>>(model_sorted);
+}
+
+bool GameboardModel::operator> (const GameboardModel &model) const { return model < *this; }
+bool GameboardModel::operator<=(const GameboardModel &model) const { return !(*this > model); }
+bool GameboardModel::operator>=(const GameboardModel &model) const { return !(*this < model); }
+
+namespace std {
+    template <class T> struct hash<deque<T>> {
+        size_t operator()(deque<T> const &vec) const {
+            size_t seed = vec.size();
+            for (auto &i : vec) {
+                seed ^= hash<T>()(i) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+            }
+            return seed;
+        }
+    };
+
+    // TODO
+    // Possibly a weak hash, not sure tho
+    template <> struct hash<GameboardModel>{
+        size_t operator()(const GameboardModel& model) const {
+            GameboardModel model_sorted = model;
+            sort(model_sorted.begin(), model_sorted.end());
+            size_t seed = model_sorted.size();
+            for(const Tube &t: model_sorted){
+                seed = (seed << 1) ^ hash<Tube>()(t);
+            }
+            return seed;
+        }
+    };
+}
