@@ -129,4 +129,6 @@ std::vector<GameboardModel> GameboardModel::getAdjacentStates() {
         newGameboard.move(move.first, move.second);
         result.push_back(newGameboard);
     }
+
+    return result;
 }
