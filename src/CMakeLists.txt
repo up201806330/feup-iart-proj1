@@ -29,6 +29,7 @@ add_executable(main
     controller/state/PlayHumanState.cpp
     controller/MenuController.cpp
     algorithms/Search.cpp
+    algorithms/GreedySearch.cpp
 )
 
 set(CPP_COMPILER_WARNINGS -Wall -Wunused-result -pedantic-errors -Wextra -Wcast-align -Wcast-qual -Wchar-subscripts
