@@ -77,12 +77,12 @@ bool GameboardModel::canMove(size_t tube_orig, size_t tube_dest) const {
     return canMove(tube_origin, tube_destin);
 }
 
-bool GameboardModel::canMove(Tube tube_origin, Tube tube_destin) const {
+bool GameboardModel::canMove(Tube tube_origin, Tube tube_destin) {
     return (
         // Origin is not empty
         !tube_origin.empty() &&
         // Destination is not full
-        tube_destin.size() < _tube_height &&
+        tube_destin.size() < tube_origin.size() &&
         (
             // Destination is empty; or
             tube_destin.empty() ||
