@@ -17,6 +17,18 @@ private:
     size_t _tube_height;
 public:
     /**
+     * @brief Default constructor
+     * 
+     */
+    GameboardModel();
+
+    /**
+     * @brief Copy constructor
+     * 
+     */
+    GameboardModel(const GameboardModel& original);
+
+    /**
      * @brief Construct a new GameboardModel.
      * 
      * @param num_tubes     Number of tubes
@@ -47,8 +59,8 @@ public:
      * @brief Check if the top piece of a tube can be moved to the top of
      * another tube.
      * 
-     * @param tube_orig     Origin tube
-     * @param tube_dest     Destination tube
+     * @param tube_orig     Origin tube index
+     * @param tube_dest     Destination tube index
      * @return true         If movement is valid
      * @return false        otherwise
      */
@@ -62,6 +74,19 @@ public:
      */
     void move(size_t tube_orig, size_t tube_dest);
 
+    /**
+     * @brief Get all possible legal moves from current state
+     * 
+     * @return std::vector<std::pair<size_t, size_t>> 
+     */
+    std::vector<std::pair<size_t, size_t>> getAllMoves();
+
+    /**
+     * @brief Get all boards reacheable by one move from the current one
+     * 
+     * @return std::vector<GameboardModel> 
+     */
+    std::vector<GameboardModel> getAdjacentStates();
     bool isGameOver() const;
 
     bool operator==(const GameboardModel &model) const;

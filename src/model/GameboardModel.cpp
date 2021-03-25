@@ -5,8 +5,15 @@
 
 #include <stdexcept>
 #include <algorithm>
+#include <utility> 
 
 using namespace std;
+
+GameboardModel::GameboardModel(const GameboardModel& original){
+    *this = original;
+    _num_tubes = original._num_tubes;
+    _tube_height = original._tube_height;
+}
 
 GameboardModel::GameboardModel(size_t num_tubes, size_t tube_height):
     std::vector<Tube>(num_tubes),
@@ -73,7 +80,7 @@ void GameboardModel::fillRandom(size_t num_colors){
 bool GameboardModel::canMove(size_t tube_orig, size_t tube_dest) const {
     const Tube &tube_origin = this->at(tube_orig);
     const Tube &tube_destin = this->at(tube_dest);
-
+    
     return (
         // Origin is not empty
         !tube_origin.empty() &&
@@ -99,6 +106,31 @@ void GameboardModel::move(size_t tube_orig, size_t tube_dest) {
     tube_destin.push_back(c);
 }
 
+std::vector<std::pair<size_t, size_t>> GameboardModel::getAllMoves() {
+    std::vector<std::pair<size_t, size_t>> result;
+
+    if (this->size() < 2) return result;
+
+    for (size_t i = 0 ; i < this->size() ; i++){
+        for (size_t j = i + 1 ; j < this->size() ; j++){
+            if (canMove(i, j)) result.push_back(std::make_pair(i, j));
+        }
+    }
+
+    return result;
+}
+
+std::vector<GameboardModel> GameboardModel::getAdjacentStates() {
+    std::vector<GameboardModel> result;
+
+    for (const auto move : getAllMoves()){ //TODO Havia forma de melhorar isto right?
+        GameboardModel newGameboard = GameboardModel(*this);
+        newGameboard.move(move.first, move.second);
+        result.push_back(newGameboard);
+    }
+
+    return result;
+}
 /**
  * Checks if all elements of a vector are equal to each other.
  *
