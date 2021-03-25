@@ -5,8 +5,15 @@
 
 #include <stdexcept>
 #include <algorithm>
+#include <utility> 
 
 using namespace std;
+
+GameboardModel::GameboardModel(const GameboardModel& original){
+    *this = original;
+    _num_tubes = original._num_tubes;
+    _tube_height = original._tube_height;
+}
 
 GameboardModel::GameboardModel(size_t num_tubes, size_t tube_height):
     std::vector<Tube>(num_tubes),
@@ -73,12 +80,15 @@ void GameboardModel::fillRandom(size_t num_colors){
 bool GameboardModel::canMove(size_t tube_orig, size_t tube_dest) const {
     const Tube &tube_origin = this->at(tube_orig);
     const Tube &tube_destin = this->at(tube_dest);
+    return canMove(tube_origin, tube_destin);
+}
 
+bool GameboardModel::canMove(Tube tube_origin, Tube tube_destin) {
     return (
         // Origin is not empty
         !tube_origin.empty() &&
         // Destination is not full
-        tube_destin.size() < _tube_height &&
+        tube_destin.size() < tube_origin.size() &&
         (
             // Destination is empty; or
             tube_destin.empty() ||
@@ -99,6 +109,35 @@ void GameboardModel::move(size_t tube_orig, size_t tube_dest) {
     tube_destin.push_back(c);
 }
 
+std::vector<std::pair<size_t, size_t>> GameboardModel::getAllMoves() {
+    std::vector<std::pair<size_t, size_t>> result;
+
+    if (this->size() < 2) return result;
+
+    do{
+        if (canMove(this->at(0), this->at(1))) 
+            result.push_back(
+                std::make_pair(
+                    std::find(this->begin(), this->end(), this->at(0)) - this->begin() , 
+                    std::find(this->begin(), this->end(), this->at(1)) - this->begin()
+                    )
+                );
+    } while(std::next_permutation(this->begin(), this->end()));
+
+    return result;
+}
+
+std::vector<GameboardModel> GameboardModel::getAdjacentStates() {
+    std::vector<GameboardModel> result;
+
+    for (const auto move : getAllMoves()){ //TODO Havia forma de melhorar isto right?
+        GameboardModel newGameboard = GameboardModel(*this);
+        newGameboard.move(move.first, move.second);
+        result.push_back(newGameboard);
+    }
+
+    return result;
+}
 /**
  * Checks if all elements of a vector are equal to each other.
  *
