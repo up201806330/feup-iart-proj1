@@ -45,9 +45,10 @@ State *PlayHumanState::run() {
         ss >> fr;
         if(fr == -1) break;
         ss >> to;
+        GameboardModel::Move move(fr, to);
 
-        if(gameboard.canMove(fr, to)) {
-            gameboard.move(fr, to);
+        if(gameboard.canMove(move)) {
+            gameboard.move(move);
         } else {
             invalidMove = true;
         }
