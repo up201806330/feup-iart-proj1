@@ -63,4 +63,10 @@ public:
     void move(size_t tube_orig, size_t tube_dest);
 
     bool isGameOver() const;
+
+    bool operator==(const GameboardModel &model) const;
+    bool operator< (const GameboardModel &model) const;
+    bool operator> (const GameboardModel &model) const;
+    bool operator<=(const GameboardModel &model) const;
+    bool operator>=(const GameboardModel &model) const;
 };
