@@ -8,12 +8,14 @@
 #include <utility> 
 
 using namespace std;
+using Move = GameboardModel::Move;
 
 GameboardModel::Move::Move(size_t f, size_t t):from(f), to(t) {
 }
 
-GameboardModel::GameboardModel(const GameboardModel& original){
-    *this = original;
+GameboardModel::GameboardModel(const GameboardModel& original):
+    vector<Tube>(static_cast<vector<Tube>>(original))
+{
     _num_tubes = original._num_tubes;
     _tube_height = original._tube_height;
 }
@@ -115,8 +117,10 @@ vector<Move> GameboardModel::getAllMoves() {
     if (this->size() < 2) return result;
 
     for (size_t i = 0 ; i < this->size() ; i++){
-        for (size_t j = i + 1 ; j < this->size() ; j++){
-            if (canMove(i, j)) result.push_back(Move(i, j));
+        for (size_t j = 0 ; j < this->size() ; j++){
+            if(i == j) continue;
+            Move m(i, j);
+            if (canMove(m)) result.push_back(m);
         }
     }
 
@@ -126,9 +130,9 @@ vector<Move> GameboardModel::getAllMoves() {
 vector<GameboardModel> GameboardModel::getAdjacentStates() {
     vector<GameboardModel> result;
 
-    for (const auto move : getAllMoves()){ //TODO Havia forma de melhorar isto right?
+    for (const Move &move : getAllMoves()){ //TODO Havia forma de melhorar isto right?
         GameboardModel newGameboard = GameboardModel(*this);
-        newGameboard.move(move.first, move.second);
+        newGameboard.move(move);
         result.push_back(newGameboard);
     }
 
