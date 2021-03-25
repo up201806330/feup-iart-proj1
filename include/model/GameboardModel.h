@@ -12,6 +12,10 @@ const color_t INVALID_COLOR = 0;
 typedef std::deque<color_t> Tube;
 
 class GameboardModel : public std::vector<Tube> {
+public:
+    struct Move {
+        size_t from, to;
+    };
 private:
     size_t _num_tubes;
     size_t _tube_height;

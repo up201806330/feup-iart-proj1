@@ -28,6 +28,7 @@ add_executable(main
     controller/state/MainMenuState.cpp
     controller/state/PlayHumanState.cpp
     controller/MenuController.cpp
+    algorithms/Search.cpp
 )
 
 set(CPP_COMPILER_WARNINGS -Wall -Wunused-result -pedantic-errors -Wextra -Wcast-align -Wcast-qual -Wchar-subscripts
