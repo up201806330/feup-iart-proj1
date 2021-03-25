@@ -98,4 +98,11 @@ public:
      * @return std::vector<GameboardModel> 
      */
     std::vector<GameboardModel> getAdjacentStates();
+    bool isGameOver() const;
+
+    bool operator==(const GameboardModel &model) const;
+    bool operator< (const GameboardModel &model) const;
+    bool operator> (const GameboardModel &model) const;
+    bool operator<=(const GameboardModel &model) const;
+    bool operator>=(const GameboardModel &model) const;
 };

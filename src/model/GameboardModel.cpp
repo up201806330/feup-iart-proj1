@@ -138,3 +138,73 @@ std::vector<GameboardModel> GameboardModel::getAdjacentStates() {
 
     return result;
 }
+/**
+ * Checks if all elements of a vector are equal to each other.
+ *
+ * Returns true if all adjacent elements are equal to each other, or if the vector has less than 2 elements.
+ *
+ * Returns false if there is at least one adjacent pair of different elements.
+ *
+ * @tparam T
+ * @param v Vector
+ * @return  False if at least one pair of adjacent elements are different, true otherwise
+ */
+template<class T>
+bool checkAllEqual(const deque<T> &v){
+    return adjacent_find(v.begin(), v.end(), not_equal_to<>()) == v.end();
+}
+
+bool GameboardModel::isGameOver() const {
+    for(size_t i = 0; i < size(); ++i){
+        size_t s = this->at(i).size();
+        if(!(s == 0 || s == tubeHeight())) return false;
+        if(!checkAllEqual(this->at(i))) return false;
+    }
+    return true;
+}
+
+bool GameboardModel::operator==(const GameboardModel &model) const {
+    GameboardModel this_sorted = *this;
+    sort(this_sorted.begin(), this_sorted.end());
+    GameboardModel model_sorted = model;
+    sort(model_sorted.begin(), model_sorted.end());
+    return static_cast<vector<Tube>>(this_sorted) == static_cast<vector<Tube>>(model_sorted);
+}
+
+bool GameboardModel::operator<(const GameboardModel &model) const {
+    GameboardModel this_sorted = *this;
+    sort(this_sorted.begin(), this_sorted.end());
+    GameboardModel model_sorted = model;
+    sort(model_sorted.begin(), model_sorted.end());
+    return static_cast<vector<Tube>>(this_sorted) < static_cast<vector<Tube>>(model_sorted);
+}
+
+bool GameboardModel::operator> (const GameboardModel &model) const { return model < *this; }
+bool GameboardModel::operator<=(const GameboardModel &model) const { return !(*this > model); }
+bool GameboardModel::operator>=(const GameboardModel &model) const { return !(*this < model); }
+
+namespace std {
+    template <class T> struct hash<deque<T>> {
+        size_t operator()(deque<T> const &vec) const {
+            size_t seed = vec.size();
+            for (auto &i : vec) {
+                seed ^= hash<T>()(i) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+            }
+            return seed;
+        }
+    };
+
+    // TODO
+    // Possibly a weak hash, not sure tho
+    template <> struct hash<GameboardModel>{
+        size_t operator()(const GameboardModel& model) const {
+            GameboardModel model_sorted = model;
+            sort(model_sorted.begin(), model_sorted.end());
+            size_t seed = model_sorted.size();
+            for(const Tube &t: model_sorted){
+                seed = (seed << 1) ^ hash<Tube>()(t);
+            }
+            return seed;
+        }
+    };
+}
