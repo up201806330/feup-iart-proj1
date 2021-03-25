@@ -9,6 +9,12 @@
 
 using namespace std;
 
+GameboardModel::GameboardModel(const GameboardModel& original){
+    *this = original;
+    _num_tubes = original._num_tubes;
+    _tube_height = original._tube_height;
+}
+
 GameboardModel::GameboardModel(size_t num_tubes, size_t tube_height):
     std::vector<Tube>(num_tubes),
     _num_tubes(num_tubes),
