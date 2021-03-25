@@ -5,14 +5,21 @@
 
 #include <stdexcept>
 #include <algorithm>
+#include <utility> 
 
 using namespace std;
 
 GameboardModel::Move::Move(size_t f, size_t t):from(f), to(t) {
 }
 
+GameboardModel::GameboardModel(const GameboardModel& original){
+    *this = original;
+    _num_tubes = original._num_tubes;
+    _tube_height = original._tube_height;
+}
+
 GameboardModel::GameboardModel(size_t num_tubes, size_t tube_height):
-    std::vector<Tube>(num_tubes),
+    vector<Tube>(num_tubes),
     _num_tubes(num_tubes),
     _tube_height(tube_height)
 {
@@ -102,6 +109,31 @@ void GameboardModel::move(const Move &move) {
     tube_destin.push_back(c);
 }
 
+vector<Move> GameboardModel::getAllMoves() {
+    vector<Move> result;
+
+    if (this->size() < 2) return result;
+
+    for (size_t i = 0 ; i < this->size() ; i++){
+        for (size_t j = i + 1 ; j < this->size() ; j++){
+            if (canMove(i, j)) result.push_back(Move(i, j));
+        }
+    }
+
+    return result;
+}
+
+vector<GameboardModel> GameboardModel::getAdjacentStates() {
+    vector<GameboardModel> result;
+
+    for (const auto move : getAllMoves()){ //TODO Havia forma de melhorar isto right?
+        GameboardModel newGameboard = GameboardModel(*this);
+        newGameboard.move(move.first, move.second);
+        result.push_back(newGameboard);
+    }
+
+    return result;
+}
 /**
  * Checks if all elements of a vector are equal to each other.
  *
