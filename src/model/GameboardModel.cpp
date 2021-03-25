@@ -8,6 +8,9 @@
 
 using namespace std;
 
+GameboardModel::Move::Move(size_t f, size_t t):from(f), to(t) {
+}
+
 GameboardModel::GameboardModel(size_t num_tubes, size_t tube_height):
     std::vector<Tube>(num_tubes),
     _num_tubes(num_tubes),
@@ -70,9 +73,9 @@ void GameboardModel::fillRandom(size_t num_colors){
     }
 }
 
-bool GameboardModel::canMove(size_t tube_orig, size_t tube_dest) const {
-    const Tube &tube_origin = this->at(tube_orig);
-    const Tube &tube_destin = this->at(tube_dest);
+bool GameboardModel::canMove(const Move &move) const {
+    const Tube &tube_origin = this->at(move.from);
+    const Tube &tube_destin = this->at(move.to  );
 
     return (
         // Origin is not empty
@@ -88,11 +91,11 @@ bool GameboardModel::canMove(size_t tube_orig, size_t tube_dest) const {
     );
 }
 
-void GameboardModel::move(size_t tube_orig, size_t tube_dest) {
-    if(!canMove(tube_orig, tube_dest)) throw invalid_argument("");
+void GameboardModel::move(const Move &move) {
+    if(!canMove(move)) throw invalid_argument("");
 
-    Tube &tube_origin = this->at(tube_orig);
-    Tube &tube_destin = this->at(tube_dest);
+    Tube &tube_origin = this->at(move.from);
+    Tube &tube_destin = this->at(move.to  );
 
     color_t c = tube_origin.back();
     tube_origin.pop_back();
