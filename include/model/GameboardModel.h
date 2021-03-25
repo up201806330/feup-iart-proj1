@@ -12,6 +12,12 @@ const color_t INVALID_COLOR = 0;
 typedef std::deque<color_t> Tube;
 
 class GameboardModel : public std::vector<Tube> {
+public:
+    struct Move {
+        Move(size_t fr, size_t to);
+
+        size_t from, to;
+    };
 private:
     size_t _num_tubes;
     size_t _tube_height;
@@ -64,7 +70,7 @@ public:
      * @return true         If movement is valid
      * @return false        otherwise
      */
-    bool canMove(size_t tube_orig, size_t tube_dest) const;
+    bool canMove(const Move &move) const;
 
     /**
      * @brief Move piece from one tube to another.
@@ -72,14 +78,14 @@ public:
      * @param tube_orig     Origin tube
      * @param tube_dest     Destination tube
      */
-    void move(size_t tube_orig, size_t tube_dest);
+    void move(const Move &move);
 
     /**
      * @brief Get all possible legal moves from current state
      * 
-     * @return std::vector<std::pair<size_t, size_t>> 
+     * @return std::vector<Move> 
      */
-    std::vector<std::pair<size_t, size_t>> getAllMoves();
+    std::vector<Move> getAllMoves();
 
     /**
      * @brief Get all boards reacheable by one move from the current one

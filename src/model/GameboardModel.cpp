@@ -8,15 +8,20 @@
 #include <utility> 
 
 using namespace std;
+using Move = GameboardModel::Move;
 
-GameboardModel::GameboardModel(const GameboardModel& original){
-    *this = original;
+GameboardModel::Move::Move(size_t f, size_t t):from(f), to(t) {
+}
+
+GameboardModel::GameboardModel(const GameboardModel& original):
+    vector<Tube>(static_cast<vector<Tube>>(original))
+{
     _num_tubes = original._num_tubes;
     _tube_height = original._tube_height;
 }
 
 GameboardModel::GameboardModel(size_t num_tubes, size_t tube_height):
-    std::vector<Tube>(num_tubes),
+    vector<Tube>(num_tubes),
     _num_tubes(num_tubes),
     _tube_height(tube_height)
 {
@@ -77,10 +82,10 @@ void GameboardModel::fillRandom(size_t num_colors){
     }
 }
 
-bool GameboardModel::canMove(size_t tube_orig, size_t tube_dest) const {
-    const Tube &tube_origin = this->at(tube_orig);
-    const Tube &tube_destin = this->at(tube_dest);
-    
+bool GameboardModel::canMove(const Move &move) const {
+    const Tube &tube_origin = this->at(move.from);
+    const Tube &tube_destin = this->at(move.to  );
+
     return (
         // Origin is not empty
         !tube_origin.empty() &&
@@ -95,37 +100,39 @@ bool GameboardModel::canMove(size_t tube_orig, size_t tube_dest) const {
     );
 }
 
-void GameboardModel::move(size_t tube_orig, size_t tube_dest) {
-    if(!canMove(tube_orig, tube_dest)) throw invalid_argument("");
+void GameboardModel::move(const Move &move) {
+    if(!canMove(move)) throw invalid_argument("");
 
-    Tube &tube_origin = this->at(tube_orig);
-    Tube &tube_destin = this->at(tube_dest);
+    Tube &tube_origin = this->at(move.from);
+    Tube &tube_destin = this->at(move.to  );
 
     color_t c = tube_origin.back();
     tube_origin.pop_back();
     tube_destin.push_back(c);
 }
 
-std::vector<std::pair<size_t, size_t>> GameboardModel::getAllMoves() {
-    std::vector<std::pair<size_t, size_t>> result;
+vector<Move> GameboardModel::getAllMoves() {
+    vector<Move> result;
 
     if (this->size() < 2) return result;
 
     for (size_t i = 0 ; i < this->size() ; i++){
-        for (size_t j = i + 1 ; j < this->size() ; j++){
-            if (canMove(i, j)) result.push_back(std::make_pair(i, j));
+        for (size_t j = 0 ; j < this->size() ; j++){
+            if(i == j) continue;
+            Move m(i, j);
+            if (canMove(m)) result.push_back(m);
         }
     }
 
     return result;
 }
 
-std::vector<GameboardModel> GameboardModel::getAdjacentStates() {
-    std::vector<GameboardModel> result;
+vector<GameboardModel> GameboardModel::getAdjacentStates() {
+    vector<GameboardModel> result;
 
-    for (const auto move : getAllMoves()){ //TODO Havia forma de melhorar isto right?
+    for (const Move &move : getAllMoves()){ //TODO Havia forma de melhorar isto right?
         GameboardModel newGameboard = GameboardModel(*this);
-        newGameboard.move(move.first, move.second);
+        newGameboard.move(move);
         result.push_back(newGameboard);
     }
 
