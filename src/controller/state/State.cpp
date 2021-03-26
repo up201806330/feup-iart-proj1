@@ -5,8 +5,9 @@
 #include "controller/state/MainMenuState.h"
 #include "controller/state/PlayHumanState.h"
 
-State *State::mainMenuState  = nullptr;
-State *State::playHumanState = nullptr;
+State *State::mainMenuState    = nullptr;
+State *State::playHumanState   = nullptr;
+State *State::playMachineState = nullptr;
 
 State::State(TerminalGUI *term): terminal(term) {
 }

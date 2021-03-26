@@ -10,7 +10,7 @@
 
 class GreedySearch: public Search {
 public:
-    typedef double (*heuristic_t)(const GameboardModel);
+    typedef double (*heuristic_t)(const GameboardModel &);
 private:
     heuristic_t h;
     GameboardModel gameboard;

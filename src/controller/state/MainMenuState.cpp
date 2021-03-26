@@ -27,9 +27,8 @@ State *MainMenuState::run() {
 
     State *ret;
     switch(option){
-        case 1: ret = State::playHumanState; break;
-        case 2: ret = nullptr; break;
-        case 3: ret = nullptr; break;
+        case 1: ret = State::playHumanState  ; break;
+        case 3:
         case 4: ret = nullptr; break;
         default: throw logic_error("");
     }
