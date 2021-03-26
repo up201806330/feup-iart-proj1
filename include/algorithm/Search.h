@@ -3,9 +3,15 @@
 
 #pragma once
 
+#include <stdexcept>
 #include "model/GameboardModel.h"
 
 class Search {
+public:
+    class failed_to_find_solution: public std::logic_error {
+    public:
+        failed_to_find_solution(const std::string &what_arg);
+    };
 public:
     virtual void initialize(const GameboardModel &gameboard) = 0;
     virtual GameboardModel::Move next() = 0;

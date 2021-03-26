@@ -13,11 +13,24 @@ using Move = GameboardModel::Move;
 GameboardModel::Move::Move(size_t f, size_t t):from(f), to(t) {
 }
 
+GameboardModel::GameboardModel():
+    _num_tubes(0),
+    _tube_height(0)
+{
+}
+
 GameboardModel::GameboardModel(const GameboardModel& original):
     vector<Tube>(static_cast<vector<Tube>>(original))
 {
     _num_tubes = original._num_tubes;
     _tube_height = original._tube_height;
+}
+
+GameboardModel &GameboardModel::operator=(const GameboardModel &gameboard) {
+    this->vector<Tube>::operator=(gameboard);
+    _num_tubes = gameboard._num_tubes;
+    _tube_height = gameboard._tube_height;
+    return *this;
 }
 
 GameboardModel::GameboardModel(size_t num_tubes, size_t tube_height):
@@ -164,47 +177,47 @@ bool GameboardModel::isGameOver() const {
 }
 
 bool GameboardModel::operator==(const GameboardModel &model) const {
+    /*
     GameboardModel this_sorted = *this;
     sort(this_sorted.begin(), this_sorted.end());
     GameboardModel model_sorted = model;
     sort(model_sorted.begin(), model_sorted.end());
     return static_cast<vector<Tube>>(this_sorted) == static_cast<vector<Tube>>(model_sorted);
+     */
+    return static_cast<vector<Tube>>(*this) == static_cast<vector<Tube>>(model);
 }
 
 bool GameboardModel::operator<(const GameboardModel &model) const {
+    /*
     GameboardModel this_sorted = *this;
     sort(this_sorted.begin(), this_sorted.end());
     GameboardModel model_sorted = model;
     sort(model_sorted.begin(), model_sorted.end());
     return static_cast<vector<Tube>>(this_sorted) < static_cast<vector<Tube>>(model_sorted);
+     */
+    return static_cast<vector<Tube>>(*this) < static_cast<vector<Tube>>(model);
 }
 
 bool GameboardModel::operator> (const GameboardModel &model) const { return model < *this; }
 bool GameboardModel::operator<=(const GameboardModel &model) const { return !(*this > model); }
 bool GameboardModel::operator>=(const GameboardModel &model) const { return !(*this < model); }
 
-namespace std {
-    template <class T> struct hash<deque<T>> {
-        size_t operator()(deque<T> const &vec) const {
-            size_t seed = vec.size();
-            for (auto &i : vec) {
-                seed ^= hash<T>()(i) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-            }
-            return seed;
-        }
-    };
+size_t std::hash<Tube>::operator()(const Tube &vec) const {
+    size_t seed = vec.size();
+    for (auto &i : vec) {
+        seed ^= hash<color_t>()(i) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+    }
+    return seed;
+}
 
-    // TODO
-    // Possibly a weak hash, not sure tho
-    template <> struct hash<GameboardModel>{
-        size_t operator()(const GameboardModel& model) const {
-            GameboardModel model_sorted = model;
-            sort(model_sorted.begin(), model_sorted.end());
-            size_t seed = model_sorted.size();
-            for(const Tube &t: model_sorted){
-                seed = (seed << 1) ^ hash<Tube>()(t);
-            }
-            return seed;
-        }
-    };
+// TODO
+// Possibly a weak hash, not sure tho
+size_t std::hash<GameboardModel>::operator()(const GameboardModel& model) const {
+    GameboardModel model_sorted = model;
+    std::sort(model_sorted.begin(), model_sorted.end());
+    size_t seed = model_sorted.size();
+    for(const Tube &t: model_sorted){
+        seed = (seed << 1) ^ hash<Tube>()(t);
+    }
+    return seed;
 }

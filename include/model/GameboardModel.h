@@ -34,6 +34,8 @@ public:
      */
     GameboardModel(const GameboardModel& original);
 
+    GameboardModel& operator=(const GameboardModel &gameboard);
+
     /**
      * @brief Construct a new GameboardModel.
      * 
@@ -101,3 +103,15 @@ public:
     bool operator<=(const GameboardModel &model) const;
     bool operator>=(const GameboardModel &model) const;
 };
+
+namespace std {
+    template <> struct hash<Tube> {
+        hash() = default;
+        size_t operator()(const Tube &vec) const;
+    };
+
+    template <> struct hash<GameboardModel>{
+        hash() = default;
+        size_t operator()(const GameboardModel& model) const;
+    };
+}

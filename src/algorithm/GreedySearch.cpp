@@ -3,10 +3,50 @@
 
 #include "algorithm/GreedySearch.h"
 
+using Move = GameboardModel::Move;
+
+const double INF = 1000000000000.0;
+
+GreedySearch::GreedySearch(GreedySearch::heuristic_t heuristic):
+    h(heuristic)
+{
+}
+
 void GreedySearch::initialize(const GameboardModel &gameboardModel){
     gameboard = gameboardModel;
+
+    visited.clear();
+    GameboardModel g = gameboard;
+    visited.insert(g);
+    while(!g.isGameOver()){
+        Move bestMove(0, 0);
+        GameboardModel bestGameboard;
+        {
+            double bestScore = -INF;
+
+            GameboardModel g_;
+            double score;
+            for (const Move &m: g.getAllMoves()) {
+                g_ = g;
+                g_.move(m);
+                score = h(g_);
+                if (score > bestScore) {
+                    bestMove = m;
+                    bestGameboard = g_;
+                    bestScore = score;
+                }
+            }
+        }
+
+        if(visited.count(bestGameboard)) throw Search::failed_to_find_solution("GreedySearch");
+        visited.insert(bestGameboard);
+        moves.push(bestMove);
+
+        g = bestGameboard;
+    }
 }
 
 GameboardModel::Move GreedySearch::next() {
-    return GameboardModel::Move(0, 0);
+    Move ret = moves.front(); moves.pop();
+    return ret;
 }
