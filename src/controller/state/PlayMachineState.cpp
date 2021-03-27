@@ -17,7 +17,7 @@ PlayMachineState::PlayMachineState(TerminalGUI *term) :
 }
 
 void PlayMachineState::setSearchStrategy(SearchStrategy *strategy) {
-    delete strategy;
+    delete this->searchStrategy;
     this->searchStrategy = strategy;
 }
 
