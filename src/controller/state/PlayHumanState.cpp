@@ -49,6 +49,7 @@ State *PlayHumanState::run() {
 
         if(gameboard.canMove(move)) {
             gameboard.move(move);
+            scoreboard.addScore();
         } else {
             invalidMove = true;
         }

@@ -45,6 +45,7 @@ State *PlayMachineState::run() {
 
         if(gameboard.canMove(move)) {
             gameboard.move(move);
+            scoreboard.addScore();
         } else {
             return State::mainMenuState;
         }
