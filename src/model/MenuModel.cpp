@@ -7,17 +7,22 @@
 
 using namespace std;
 
-MenuModel::Button::Button(int _id, std::string _label, void (*_func)()):
+MenuModel::Button::Button(int _id, std::string _label):
     id(_id),
-    label(std::move(_label)),
-    func(_func)
+    label(std::move(_label))
 {
 }
 
-void MenuModel::addButton(int id, const string &label, void (*func)()){
-    buttons.emplace_back(id, label, func);
+void MenuModel::addButton(int id, const string &label){
+    buttons.emplace_back(id, label);
 }
 
 const vector<MenuModel::Button>& MenuModel::getButtons() const {
     return buttons;
+}
+
+bool MenuModel::hasButtonWithId(int id) const {
+    for(const Button &b: getButtons())
+        if(b.id == id) return true;
+    return false;
 }

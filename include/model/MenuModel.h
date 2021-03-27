@@ -11,13 +11,14 @@ public:
     struct Button {
         int id;
         std::string label;
-        void (*func)();
-        Button(int id, std::string label, void (*func)());
+        Button(int id, std::string label);
     };
 private:
     std::vector<Button> buttons;
 public:
-    void addButton(int id, const std::string &label, void (*func)());
+    void addButton(int id, const std::string &label);
 
     const std::vector<Button>& getButtons() const;
+
+    bool hasButtonWithId(int id) const;
 };

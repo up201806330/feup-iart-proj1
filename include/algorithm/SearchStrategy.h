@@ -6,7 +6,7 @@
 #include <stdexcept>
 #include "model/GameboardModel.h"
 
-class Search {
+class SearchStrategy {
 public:
     class failed_to_find_solution: public std::logic_error {
     public:

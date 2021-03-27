@@ -40,7 +40,7 @@ void GreedySearch::initialize(const GameboardModel &gameboardModel){
             }
         }
 
-        if(visited.count(bestGameboard)) throw Search::failed_to_find_solution("GreedySearch");
+        if(visited.count(bestGameboard)) throw SearchStrategy::failed_to_find_solution("GreedySearch");
         visited.insert(bestGameboard);
         moves.push(bestMove);
 
