@@ -3,13 +3,14 @@
 
 #pragma once
 
-#include "algorithm/Search.h"
+#include "algorithm/SearchStrategy.h"
 #include "State.h"
 
 class PlayMachineState: public State {
 private:
-    Search *search;
+    SearchStrategy *searchStrategy = nullptr;
 public:
-    PlayMachineState(TerminalGUI *term, Search *search);
+    explicit PlayMachineState(TerminalGUI *term);
+    void setSearchStrategy(SearchStrategy *strategy);
     State* run() override;
 };

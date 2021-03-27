@@ -3,12 +3,12 @@
 
 #pragma once
 
-#include "algorithm/Search.h"
+#include "algorithm/SearchStrategy.h"
 
 #include <queue>
 #include <unordered_set>
 
-class GreedySearch: public Search {
+class GreedySearch: public SearchStrategy {
 public:
     typedef double (*heuristic_t)(const GameboardModel &);
 private:

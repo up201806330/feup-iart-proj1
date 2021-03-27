@@ -1,18 +1,23 @@
 // Copyright (C) 2021 Diogo Rodrigues, Rafael Ribeiro, Bernardo Ferreira
 // Distributed under the terms of the GNU General Public License, version 3
 
+#include "controller/state/PlayMachineState.h"
+
 #include "model/GameboardModel.h"
 #include "model/ScoreboardModel.h"
 #include "view/GameboardView.h"
 #include "view/ScoreboardView.h"
-#include "controller/state/PlayMachineState.h"
 
 using namespace std;
 using pos_t = TerminalGUI::pos_t;
 
-PlayMachineState::PlayMachineState(TerminalGUI *term, Search *src) :
-    State(term), search(src)
+PlayMachineState::PlayMachineState(TerminalGUI *term) :
+    State(term)
 {
+}
+
+void PlayMachineState::setSearchStrategy(SearchStrategy *strategy) {
+    this->searchStrategy = strategy;
 }
 
 State *PlayMachineState::run() {
@@ -25,7 +30,7 @@ State *PlayMachineState::run() {
     GameboardView gameboardView(gameboard);
     ScoreboardView scoreboardView(scoreboard);
 
-    search->initialize(gameboard);
+    searchStrategy->initialize(gameboard);
 
     while(true) {
         getTerminal()->clear();
@@ -35,7 +40,7 @@ State *PlayMachineState::run() {
         getTerminal()->display();
 
         getchar();
-        GameboardModel::Move move = search->next();
+        GameboardModel::Move move = searchStrategy->next();
 
         if(gameboard.canMove(move)) {
             gameboard.move(move);
