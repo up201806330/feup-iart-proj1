@@ -1,9 +1,9 @@
 // Copyright (C) 2021 Diogo Rodrigues, Rafael Ribeiro, Bernardo Ferreira
 // Distributed under the terms of the GNU General Public License, version 3
 
-#include <algorithm/GreedySearch.h>
+#include <algorithm/DepthFirstGreedySearch.h>
 #include "algorithm/Heuristics.h"
-#include "algorithm/GreedySearch.h"
+#include "algorithm/DepthFirstGreedySearch.h"
 #include "algorithm/DepthFirstSearch.h"
 #include "algorithm/IterativeDeepeningSearch.h"
 #include "controller/state/ChooseMachineState.h"
@@ -44,7 +44,7 @@ State *ChooseMachineState::run() {
     switch(option){
         case 1: State::playMachineState->setSearchStrategy(new DepthFirstSearch()); break;
         case 3: State::playMachineState->setSearchStrategy(new IterativeDeepeningSearch()); break;
-        case 4: State::playMachineState->setSearchStrategy(new GreedySearch(Heuristics::h1)); break;
+        case 4: State::playMachineState->setSearchStrategy(new DepthFirstGreedySearch(Heuristics::h1)); break;
         case 5: State::playMachineState->setSearchStrategy(new AstarSearch(Heuristics::h1)); break;
         default: throw logic_error("");
     }

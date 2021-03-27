@@ -10,13 +10,13 @@
 #include <deque>
 #include <unordered_set>
 
-class GreedySearch : public SearchStrategy {
+class DepthFirstGreedySearch : public SearchStrategy {
 private:
     Heuristics::heuristic_t h;
     std::deque<GameboardModel::Move> solution;
     std::unordered_set<GameboardModel> visited;
 public:
-    explicit GreedySearch(Heuristics::heuristic_t heuristic);
+    explicit DepthFirstGreedySearch(Heuristics::heuristic_t heuristic);
     bool dfs(const GameboardModel& gameBoard);
 
     void initialize(const GameboardModel &gameboardModel) override;
