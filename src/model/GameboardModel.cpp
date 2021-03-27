@@ -145,7 +145,8 @@ vector<Move> GameboardModel::getAllMoves() const {
 vector<GameboardModel> GameboardModel::getAdjacentStates() {
     vector<GameboardModel> result;
 
-    for (const Move &move : getAllMoves()){ //TODO There's a way to improve this, right?
+    vector<Move> moves = getAllMoves();
+    for (const Move &move : moves){
         GameboardModel newGameboard = GameboardModel(*this);
         newGameboard.move(move);
         result.push_back(newGameboard);
