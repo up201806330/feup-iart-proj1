@@ -15,8 +15,6 @@ bool Dfs::dfs(const GameboardModel& gameBoard) {
     if (gameBoard.isGameOver()) return true;
 
     vector<Move> moves = gameBoard.getAllMoves();
-    // for(int i = 0 ; i < moves.size() ; i++) 
-    //     cout << i << ": " << moves[i].from << ";" << moves[i].to << endl;
     for (const Move &move : moves){
         GameboardModel state = gameBoard;
         state.move(move);
