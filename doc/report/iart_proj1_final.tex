@@ -1,0 +1,222 @@
+% Copyright (C) 2021 Diogo Rodrigues, Rafael Ribeiro, Bernardo Ferreira
+% Distributed under the terms of the GNU General Public License, version 3
+
+\documentclass{beamer}
+% Encodings (to render letters with diacritics and special characters)
+\usepackage[utf8]{inputenc}
+% Language
+\usepackage[english]{babel}
+\usepackage{verbatim}
+
+\usetheme{Madrid}
+\usecolortheme{default}
+
+\pdfstringdefDisableCommands{
+  \def\\{}
+  \def\texttt#1{<#1>}
+}
+
+\newcommand{\email}[1]{
+{\footnotesize \texttt{\href{mailto:#1}{#1}} }
+}
+
+\usepackage{caption}
+\DeclareCaptionFont{black}{\color{black}}
+\DeclareCaptionFormat{listing}{{\tiny \textbf{#1}#2#3}}
+\captionsetup[lstlisting]{format=listing,labelfont=black,textfont=black}
+
+\usepackage{listings}
+\lstset{
+    frame=tb, % draw frame at top and bottom of the code
+    basewidth  = {0.5em,0.5em},
+    numbers=left, % display line numbers on the left
+    showstringspaces=false, % don't mark spaces in strings  
+    commentstyle=\color{green}, % comment color
+    keywordstyle=\color{blue}, % keyword color
+    stringstyle=\color{red}, % string color
+	aboveskip=-0.2em,
+    belowskip=-0.2em,
+    basicstyle=\tiny
+}
+\lstset{literate=
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {Ã}{{\~A}}1 {ã}{{\~a}}1 {Õ}{{\~O}}1 {õ}{{\~o}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\euro}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
+  {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
+}
+
+\usepackage{dirtree}
+
+\usepackage[style=british]{csquotes}
+
+\usepackage{tabularx}
+
+\usepackage{graphicx}
+	\graphicspath{{./images/}{../documentacao/}}
+ 
+%Information to be included in the title page:
+\AtBeginDocument{
+\title[Ball Sort Puzzle (Checkpoint)]{Ball Sort Puzzle}
+\subtitle[]{Checkpoint}
+\author[Group 48]{
+\begin{tabular}{r l}
+	\email{up201806581@fe.up.pt} & Bernardo António Magalhães Ferreira \\
+	\email{up201806429@fe.up.pt} & Diogo Miguel Ferreira Rodrigues     \\
+	\email{up201806330@fe.up.pt} & Rafael Soares Ribeiro
+\end{tabular}
+}
+\institute[FEUP/IART]{Faculdade de Engenharia da Universidade do Porto \\ Artificial Intelligence (IART) -- Group 48}
+\date[21/03/2021]{21st of March, 2021}
+}
+
+\begin{document}
+\frame{\titlepage}
+
+\begin{frame}
+\frametitle{Work specification}
+
+\textbf{The problem}
+
+Solve solitaire game \href{https://play.google.com/store/apps/details?id=com.spicags.ballsort&hl=pt_PT&gl=US}{\textit{Ball Sort Puzzle}} by \href{https://play.google.com/store/apps/developer?id=Spica+Game+Studio}{Spica Game Studio}, using heuristic search methods.
+
+Starting with a set of differently coloured balls distributed at random in different tubes, sort them so each tube has balls of a single color.
+
+\vspace{0.5em}
+
+\begin{minipage}{0.42\textwidth}
+  \begin{itemize}
+    \itemsep0em
+    \item There are more tubes than colors;
+    \item There are as many balls of a color as can fit in a tube;
+    \item Cannot place more balls in a tube than it can hold;
+    \item Can only move a ball on top of same-color ball (or tube is empty).
+  \end{itemize}
+\end{minipage}%
+\begin{minipage}{0.58\textwidth}
+  \centering
+  \includegraphics[width=29mm]{img/lvl6-begin.png}
+  \includegraphics[width=29mm]{img/lvl6-end.png}
+\end{minipage}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Work specification}
+\textbf{How we will solve it}
+
+\begin{enumerate}
+  \itemsep0em
+  \item Implement the game and a human-friendly interface.
+  \item Implement search algorithms to solve the game, and compare performances. These algorithms are used to search for a path to a solution in a tree of game states.
+
+  \begin{itemize}
+    \itemsep0em
+    \item We can use uninformed search algorithms: BFS, DFS, iterative deepening, uniform cost, or heuristic search algorithms (greedy search, A* algorithm).
+  \end{itemize}
+\end{enumerate}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Related works}
+
+A few common problems related to stacks, mostly applied to cargo containers.
+
+Assume there is a set of cargo containers in a yard with a certain number of slots, and that containers are stacked to save space.
+
+\vspace{0.5em}
+
+\begin{tabular}{@{}p{46mm} p{70mm}@{}}
+  \textbf{Container Pre-Marshalling Problem (CPMP)} & \textbf{Block Relocation Problem (BRP)} \\
+  Some containers have more priority than others (e.g., are meant to be shipped first than others), so each stack must be sorted in non-decreasing order of priority from the bottom up with the least number of moves. &
+  Containers will be extracted in a specific order (say that the $N$ containers are numbered from $1$ to $N$; container 1 is extracted first, then 2, ..., and finally container $N$). The goal is to extract all containers in that order with the least amount of moves (i.e., if you need to remove container 3 to extract container 1, you'd prefer to put 3 on top of 4 than on top of 2, otherwise you'd have to again relocate 3 to reach 2).
+\end{tabular}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Related works}
+\begin{itemize}
+\item In both problems, search methods such as A* (with carefully considered heuristics) and branch-and-bound are regularly applied and yield good results, although optimal methods are clearly only reasonable in small scenarios, or to evaluate quality of sub-optimal, faster heuristic search methods.
+
+\item \cite{bortfeldt2012} provided a lower bound for the number of moves (very important to use as admissible heuristic for A*), and applied a tree search procedure to CPMP. \cite{tierney2017} further applied branching/symmetry breaking rules and iterative deepening A* to increase the size of problems that can be solved optimally.
+
+\item \cite{tricoire2018} proposed heuristics/metaheuristics for large BRP instances, and compared those approaches to branch-and-bound algorithms.
+\end{itemize}
+
+This research is significant for our problem; even though the problems are quite different in nature, they share some traits with our problem, and can contribute with ideas for our own heuristics.
+
+\end{frame}
+
+\begin{frame}[fragile=singleslide]
+\frametitle{Formulation}
+
+\textbf{Game state} | Vector $S = \langle t_1, t_2, ..., t_N \rangle$ of $N$ tubes with maximum capacity $H$, where tube $i$ is a stack $t_i = \langle t_i(1), t_i(2), ..., t_i(h_i) \rangle$ with $h_i$ balls ($0 \leq h_i \leq H$), where $t_i(1)$ is the color of the ball at the bottom, and $t_i(h_i)$ the color at the top. There are $C$ colors ($C < N$) numbered sequentially, thus $\forall i, j,~1 \leq t_i(j) \leq C$.
+
+\textbf{Initial state} | The balls are randomly distributed over the tubes.
+
+\textbf{Objective test} | For each tube, the tube is empty or all balls on that tube have the same color.
+
+\textbf{Operators} | The only operator is a move:
+\begin{itemize}
+  \item Given state $S$, choose origin \& destination tubes $1 \leq i, j \leq N$ ($i \neq j$).
+  \item Pre-conditions: $h_i \geq 1$, $h_j < H$ and either $h_j = 0$ or $t_i(h_i)=t_j(h_j)$.
+  \item Cost: $1$ (one).
+  \item Post-conditions: $S'$ is built from $S$, except $t_i$ is a ball shorter (say it had color $c$), and $t_j$ has one more ball at the top with color $c$.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Formulation}
+  \textbf{Heuristics/Evaluation function} | This heuristic will describe an estimate of the distance to a solution in \# of moves:
+  \begin{itemize}
+    \item For each tube, add the number of balls in that tube that have a different color than the last ball in the tube.
+    \item Number of balls in the $N-C$ tubes with least balls.
+  \end{itemize}
+
+  Other ideas:
+  \begin{itemize}
+    \item Number of balls of same color as the most frequent color in a tube;
+    \item When a tube is complete with a color, remove it from game board (reduces problem size).
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Implementation (so far)}
+
+\begin{itemize}
+  \item \textbf{Language} | C++
+  \item \textbf{Environment} | Compiled with CMake, terminal interface
+  \item \textbf{Data structures} | Game state represented as \texttt{vector<deque<color\_t>>}, where \texttt{color\_t} is a \texttt{typedef} for an \texttt{int}
+  \item \textbf{File structure} | No input from files; project is being developed using an MVC model with small but useful functions
+\end{itemize}
+
+\textbf{Summary:} almost done implementing the game and human interface.
+
+\begin{center}
+  \includegraphics[width=75mm]{img/game-interface.png}
+\end{center}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Bibliography}
+  \setbeamertemplate{bibliography item}{\insertbiblabel}
+  \bibliographystyle{acm}
+  \bibliography{report}
+  
+\end{frame}
+
+\end{document}
