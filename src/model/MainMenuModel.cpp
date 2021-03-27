@@ -7,5 +7,5 @@ MainMenuModel::MainMenuModel(){
     addButton(1, "1. Play"             );
     addButton(2, "2. Autonomous player");
     addButton(3, "3. About"            );
-    addButton(4, "4. Exit"             );
+    addButton(0, "0. Exit"             );
 }
