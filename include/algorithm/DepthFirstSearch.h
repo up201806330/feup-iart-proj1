@@ -10,7 +10,7 @@
 #include <deque>
 #include <unordered_set>
 
-class Dfs : public SearchStrategy {
+class DepthFirstSearch : public SearchStrategy {
 private:
     std::deque<GameboardModel::Move> solution;
     std::unordered_set<GameboardModel> visited;
