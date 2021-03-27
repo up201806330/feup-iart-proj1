@@ -148,7 +148,7 @@ vector<GameboardModel> GameboardModel::getAdjacentStates() {
     vector<Move> moves = getAllMoves();
     for (const Move &move : moves){
         GameboardModel newGameboard = GameboardModel(*this);
-        newGameboard.move(move);
+        if (newGameboard.canMove(move)) newGameboard.move(move);
         result.push_back(newGameboard);
     }
 

@@ -5,25 +5,34 @@
 
 using namespace std;
 
-Dfs::Dfs(const GameboardModel& initialBoard):
-    _initialBoard(initialBoard)
-{
+using Move = GameboardModel::Move;
 
-}
+bool Dfs::dfs(const GameboardModel& gameBoard) {
+    if (visited.count(gameBoard)) return false;
 
-void Dfs::dfs(GameboardModel gameBoard) {
-//    if (visitedBoards.find(gameBoard) != visitedBoards.end() || _finalBoard) return;
-    visitedBoards.insert(gameBoard);
+    visited.insert(gameBoard);
 
-    // TODO end state
-    // if (gameBoard)
+    if (gameBoard.isGameOver()) return true;
 
-    for (const auto &state : gameBoard.getAdjacentStates()){
-        dfs(state);
+    vector<Move> moves = gameBoard.getAllMoves();
+    for (const Move &move : moves){
+        GameboardModel state = gameBoard;
+        state.move(move);
+        solution.push_back(move);
+        if (dfs(state)) return true;
+        solution.pop_back();
     }
+
+    return false;
 }
 
-GameboardModel Dfs::run(){
-    dfs(_initialBoard);
-    return _finalBoard;
+void Dfs::initialize(const GameboardModel &gameboardModel){
+    visited.clear();
+
+    if (!dfs(gameboardModel)) throw SearchStrategy::failed_to_find_solution("Dfs");
+}
+
+GameboardModel::Move Dfs::next() {
+    Move ret = solution.front(); solution.pop_front();
+    return ret;
 }

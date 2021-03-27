@@ -4,33 +4,19 @@
 #pragma once
 
 #include "model/GameboardModel.h"
+#include "algorithm/SearchStrategy.h"
 
 #include <bits/stdc++.h>
+#include <deque>
+#include <unordered_set>
 
-class Dfs {
+class Dfs : public SearchStrategy {
 private:
-    GameboardModel _initialBoard;
-    GameboardModel _finalBoard;
-    std::unordered_set<GameboardModel> visitedBoards;
+    std::deque<GameboardModel::Move> solution;
+    std::unordered_set<GameboardModel> visited;
 public:
+    bool dfs(const GameboardModel& gameBoard);
 
-    /**
-     * @brief Construct a new Dfs object
-     * 
-     * @param initialBoard 
-     */
-    explicit Dfs(const GameboardModel& initialBoard);
-
-    /**
-     * @brief Performs depth first search on gameBoard
-     * 
-     * @param gameBoard 
-     */
-    void dfs(GameboardModel gameBoard);
-
-    /**
-     * @brief Runs the algorithm, returning the final state
-     * 
-     */
-    GameboardModel run();
+    void initialize(const GameboardModel &gameboardModel) override;
+    GameboardModel::Move next() override;
 };
