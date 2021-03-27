@@ -1,14 +1,14 @@
 // Copyright (C) 2021 Diogo Rodrigues, Rafael Ribeiro, Bernardo Ferreira
 // Distributed under the terms of the GNU General Public License, version 3
 
-#include "algorithm/GreedySearch.h"
+#include "algorithm/AstarSearch.h"
 
 #include <algorithm>
 
 using namespace std;
 using Move = GameboardModel::Move;
 
-bool GreedySearch::dfs(const GameboardModel& gameBoard) {
+bool AstarSearch::dfs(const GameboardModel& gameBoard) {
     if (visited.count(gameBoard)) return false;
 
     visited.insert(gameBoard);
@@ -39,18 +39,18 @@ bool GreedySearch::dfs(const GameboardModel& gameBoard) {
     return false;
 }
 
-void GreedySearch::initialize(const GameboardModel &gameboardModel){
+void AstarSearch::initialize(const GameboardModel &gameboardModel){
     visited.clear();
 
-    if (!dfs(gameboardModel)) throw SearchStrategy::failed_to_find_solution("GreedySearch");
+    if (!dfs(gameboardModel)) throw SearchStrategy::failed_to_find_solution("AstarSearch");
 }
 
-GameboardModel::Move GreedySearch::next() {
+GameboardModel::Move AstarSearch::next() {
     Move ret = solution.front(); solution.pop_front();
     return ret;
 }
 
-GreedySearch::GreedySearch(Heuristics::heuristic_t heuristic):
-    h(heuristic)
+AstarSearch::AstarSearch(Heuristics::heuristic_t heuristic):
+        h(heuristic)
 {
 }

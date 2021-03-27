@@ -11,6 +11,7 @@
 #include "controller/MenuController.h"
 #include "view/MenuView.h"
 #include "model/MenuModel.h"
+#include "algorithm/AstarSearch.h"
 
 using namespace std;
 
@@ -22,6 +23,7 @@ State *ChooseMachineState::run() {
     menuModel.addButton(1, "1. Depth first search");
     menuModel.addButton(3, "3. Iterative deepening depth first search");
     menuModel.addButton(4, "4. Best-first search, greedy");
+    menuModel.addButton(4, "5. Best-first search, A*");
     menuModel.addButton(0, "0. Back");
 
     MenuView menuView(menuModel);
@@ -43,6 +45,7 @@ State *ChooseMachineState::run() {
         case 1: State::playMachineState->setSearchStrategy(new DepthFirstSearch()); break;
         case 3: State::playMachineState->setSearchStrategy(new IterativeDeepeningSearch()); break;
         case 4: State::playMachineState->setSearchStrategy(new GreedySearch(Heuristics::h1)); break;
+        case 5: State::playMachineState->setSearchStrategy(new AstarSearch(Heuristics::h1)); break;
         default: throw logic_error("");
     }
     return State::playMachineState;
