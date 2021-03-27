@@ -7,5 +7,6 @@
 
 class Heuristics {
 public:
+    typedef double (*heuristic_t)(const GameboardModel &);
     static double h1(const GameboardModel &gameboard);
 };

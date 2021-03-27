@@ -7,3 +7,5 @@ SearchStrategy::failed_to_find_solution::failed_to_find_solution(const std::stri
     logic_error(s)
 {
 }
+
+SearchStrategy::~SearchStrategy() = default;

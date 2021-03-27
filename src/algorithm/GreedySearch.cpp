@@ -8,7 +8,7 @@ using Move = GameboardModel::Move;
 
 const double INF = 1000000000000.0;
 
-GreedySearch::GreedySearch(GreedySearch::heuristic_t heuristic):
+GreedySearch::GreedySearch(Heuristics::heuristic_t heuristic):
     h(heuristic)
 {
 }

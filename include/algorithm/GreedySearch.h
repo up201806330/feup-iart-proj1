@@ -4,20 +4,19 @@
 #pragma once
 
 #include "algorithm/SearchStrategy.h"
+#include "Heuristics.h"
 
 #include <queue>
 #include <unordered_set>
 
 class GreedySearch: public SearchStrategy {
-public:
-    typedef double (*heuristic_t)(const GameboardModel &);
 private:
-    heuristic_t h;
+    Heuristics::heuristic_t h;
     GameboardModel gameboard;
     std::queue<GameboardModel::Move> moves;
     std::unordered_set<GameboardModel> visited;
 public:
-    explicit GreedySearch(heuristic_t heuristic);
+    explicit GreedySearch(Heuristics::heuristic_t heuristic);
     void initialize(const GameboardModel &gameboardModel) override;
     GameboardModel::Move next() override;
 };
