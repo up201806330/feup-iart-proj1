@@ -1,52 +1,56 @@
 // Copyright (C) 2021 Diogo Rodrigues, Rafael Ribeiro, Bernardo Ferreira
 // Distributed under the terms of the GNU General Public License, version 3
 
+#include <algorithm>
 #include "algorithm/GreedySearch.h"
 
 using namespace std;
+
 using Move = GameboardModel::Move;
+
+bool GreedySearch::dfs(const GameboardModel& gameBoard) {
+    if (visited.count(gameBoard)) return false;
+
+    visited.insert(gameBoard);
+
+    if (gameBoard.isGameOver()) return true;
+
+    vector<Move> moves = gameBoard.getAllMoves();
+    {
+        vector<pair<double, Move> > moves_scores;
+        for (const Move &move : moves) {
+            GameboardModel state = gameBoard;
+            state.move(move);
+            double score = h(state);
+            moves_scores.emplace_back(score, move);
+        }
+        sort(moves_scores.begin(), moves_scores.end());
+        for (size_t i = 0; i < moves.size(); ++i)
+            moves[i] = moves_scores[i].second;
+    }
+    for (const Move &move : moves){
+        GameboardModel state = gameBoard;
+        state.move(move);
+        solution.push_back(move);
+        if (dfs(state)) return true;
+        solution.pop_back();
+    }
+
+    return false;
+}
+
+void GreedySearch::initialize(const GameboardModel &gameboardModel){
+    visited.clear();
+
+    if (!dfs(gameboardModel)) throw SearchStrategy::failed_to_find_solution("GreedySearch");
+}
+
+GameboardModel::Move GreedySearch::next() {
+    Move ret = solution.front(); solution.pop_front();
+    return ret;
+}
 
 GreedySearch::GreedySearch(Heuristics::heuristic_t heuristic):
     h(heuristic)
 {
-}
-
-void GreedySearch::initialize(const GameboardModel &gameboardModel){
-    gameboard = gameboardModel;
-
-    visited.clear();
-    GameboardModel g = gameboard;
-    visited.insert(g);
-    while(!g.isGameOver()){
-        Move bestMove(0, 0);
-        GameboardModel bestGameboard;
-        {
-            double bestScore = Heuristics::INF;
-
-            GameboardModel g_;
-            double score;
-            vector<Move> availableMoves = g.getAllMoves();
-            for (const Move &m: availableMoves) {
-                g_ = g;
-                g_.move(m);
-                score = h(g_);
-                if (score < bestScore) {
-                    bestMove = m;
-                    bestGameboard = g_;
-                    bestScore = score;
-                }
-            }
-        }
-
-        if(visited.count(bestGameboard)) throw SearchStrategy::failed_to_find_solution("GreedySearch");
-        visited.insert(bestGameboard);
-        moves.push(bestMove);
-
-        g = bestGameboard;
-    }
-}
-
-GameboardModel::Move GreedySearch::next() {
-    Move ret = moves.front(); moves.pop();
-    return ret;
 }
