@@ -7,6 +7,7 @@
 
 class Heuristics {
 public:
+    constexpr static const double INF = 1000000000000.0;
     typedef double (*heuristic_t)(const GameboardModel &);
     static double h1(const GameboardModel &gameboard);
 };

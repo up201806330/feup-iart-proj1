@@ -7,21 +7,26 @@
 #include <deque>
 
 typedef unsigned int color_t;
-const color_t INVALID_COLOR = 0;
 
 typedef std::deque<color_t> Tube;
 
 class GameboardModel {
 public:
     struct Move {
+        size_t from, to;
         Move(size_t fr, size_t to);
 
-        size_t from, to;
+        bool operator==(const Move &m) const;
+        bool operator< (const Move &m) const;
+        bool operator> (const Move &m) const;
+        bool operator<=(const Move &m) const;
+        bool operator>=(const Move &m) const;
     };
 private:
     size_t _num_tubes = 0;
     size_t _tube_height = 0;
     std::vector<Tube> tubes;
+    size_t _num_colors = 0;
 public:
     /**
      * @brief Default constructor
@@ -76,6 +81,8 @@ public:
      * @param num_colors    Number of colors of pieces to place
      */
     void fillRandom(size_t num_colors);
+
+    size_t getNumberOfColors() const;
 
     /**
      * @brief Check if the top piece of a tube can be moved to the top of
