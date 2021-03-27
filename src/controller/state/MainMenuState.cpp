@@ -16,7 +16,7 @@ State *MainMenuState::run() {
     MainMenuView mainMenuView(mainMenuModel);
     MenuController mainMenuController(mainMenuModel);
 
-    int option = -1;
+    int option;
     do {
         getTerminal()->clear();
         mainMenuView.draw(*getTerminal());
@@ -27,9 +27,9 @@ State *MainMenuState::run() {
 
     State *ret;
     switch(option){
-        case 1: ret = State::playHumanState; break;
-        case 2: ret = nullptr; break;
-        case 3: ret = nullptr; break;
+        case 1: ret = State::playHumanState  ; break;
+        case 2: ret = State::playMachineState; break;
+        case 3:
         case 4: ret = nullptr; break;
         default: throw logic_error("");
     }

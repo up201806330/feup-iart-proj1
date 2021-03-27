@@ -10,7 +10,7 @@ class GameboardView {
 private:
     const GameboardModel &_gameboardModel;
 public:
-    GameboardView(const GameboardModel &gameboardModel);
+    explicit GameboardView(const GameboardModel &gameboardModel);
     void draw(TerminalGUI &terminal);
 private:
     TerminalGUI::coord_t TUBE_MARGIN_X = 3;

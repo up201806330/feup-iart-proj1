@@ -45,11 +45,11 @@ public:
     typedef int32_t coord_t;
 
     /**
-     * @brief Bidimensional coordinate object. Can be a position or a size.
+     * @brief Bi-dimensional coordinate object. Can be a position or a size.
      */
     struct pos_t {
         coord_t x, y;
-        pos_t(coord_t x = 0, coord_t y = 0);
+        explicit pos_t(coord_t x = 0, coord_t y = 0);
         pos_t operator+(const pos_t &p) const;
         pos_t operator-(const pos_t &p) const;
         pos_t operator/(coord_t c) const;
@@ -62,7 +62,7 @@ public:
         bool operator>=(const pos_t &p) const;
     };
 private:
-    pos_t corner = {0,0}; ///< @brief Coordinates of leftmost, upmost character.
+    pos_t corner = pos_t(0,0); ///< @brief Coordinates of leftmost, upmost character.
 protected:
     typedef std::tuple<pos_t, std::string, Color, Color, effects_t> ToDrawTypedef;
 private:
@@ -86,7 +86,7 @@ public:
     void setCorner(pos_t corner);
 
     /**
-     * @brief Crear drawing buffer.
+     * @brief Clear drawing buffer.
      */
     void clear();
 
@@ -99,7 +99,7 @@ public:
      * @param foreground    Foreground color
      * @param background    Background color
      */
-    void drawCharacter(pos_t pos, std::string c, Color foreground = DEFAULT, Color background = DEFAULT, effects_t effects = 0);
+    void drawCharacter(pos_t pos, const std::string &c, Color foreground = DEFAULT, Color background = DEFAULT, effects_t effects = 0);
 
     /**
      * @brief Draw character in absolute terminal position.
@@ -109,7 +109,7 @@ public:
      * @param foreground    Foreground color
      * @param background    Background color
      */
-    void drawCharacterAbsolute(pos_t pos, std::string c, Color foreground = DEFAULT, Color background = DEFAULT, effects_t effects = 0);
+    void drawCharacterAbsolute(pos_t pos, const std::string &c, Color foreground = DEFAULT, Color background = DEFAULT, effects_t effects = 0);
 
     /**
      * @brief Draw string in position, accounting for coordinate of the
@@ -120,7 +120,7 @@ public:
      * @param foreground    Foreground color
      * @param background    Background color
      */
-    void drawString(pos_t pos, std::string c, Color foreground = DEFAULT, Color background = DEFAULT, effects_t effects = 0);
+    void drawString(pos_t pos, const std::string &c, Color foreground = DEFAULT, Color background = DEFAULT, effects_t effects = 0);
 
     /**
      * @brief Draw string in absolute terminal position.
@@ -130,7 +130,7 @@ public:
      * @param foreground    Foreground color
      * @param background    Background color
      */
-    void drawStringAbsolute(pos_t pos, std::string c, Color foreground = DEFAULT, Color background = DEFAULT, effects_t effects = 0);
+    void drawStringAbsolute(pos_t pos, const std::string &c, Color foreground = DEFAULT, Color background = DEFAULT, effects_t effects = 0);
 
     void draw(TerminalGUIDrawable &drawable);
 

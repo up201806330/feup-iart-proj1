@@ -19,7 +19,7 @@ public:
      * 
      * @param initialBoard 
      */
-    Dfs(const GameboardModel& initialBoard);
+    explicit Dfs(const GameboardModel& initialBoard);
 
     /**
      * @brief Performs depth first search on gameBoard

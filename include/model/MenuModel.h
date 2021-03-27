@@ -12,7 +12,7 @@ public:
         int id;
         std::string label;
         void (*func)();
-        Button(int id, const std::string &label, void (*func)());
+        Button(int id, std::string label, void (*func)());
     };
 private:
     std::vector<Button> buttons;

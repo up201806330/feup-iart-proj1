@@ -16,8 +16,6 @@ TerminalGUISprite::TerminalGUISprite(
     set(cs, foregrounds, backgrounds, effects);
 }
 
-#include <iostream>
-
 void TerminalGUISprite::set(
     const vector<vector<string>> &cs,
     const vector<vector<Color>> &foregrounds,
@@ -60,7 +58,7 @@ void TerminalGUISprite::draw(TerminalGUI &terminal){
     string c;
     Color f, b;
     effects_t e;
-    for(const pair<pos_t, ToDrawNoPosTypedef> &p: m){
+    for(const auto &p: m){
         tie(c, f, b, e) = p.second;
         terminal.drawCharacter(position+p.first, c, f, b, e);
     }
