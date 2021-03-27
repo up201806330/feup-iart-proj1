@@ -12,13 +12,13 @@ Dfs::Dfs(const GameboardModel& initialBoard):
 }
 
 void Dfs::dfs(GameboardModel gameBoard) {
-    if (visitedBoards.find(gameBoard) != visitedBoards.end() || _finalBoard) return;
+//    if (visitedBoards.find(gameBoard) != visitedBoards.end() || _finalBoard) return;
     visitedBoards.insert(gameBoard);
 
     // TODO end state
     // if (gameBoard)
 
-    for (const auto state : gameBoard.getAdjacentStates()){
+    for (const auto &state : gameBoard.getAdjacentStates()){
         dfs(state);
     }
 }

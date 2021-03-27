@@ -9,9 +9,9 @@ class TerminalGUIFile: public TerminalGUI {
 private:
     FILE *of;
 public:
-    TerminalGUIFile(FILE *ofile = stdout);
+    explicit TerminalGUIFile(FILE *file = stdout);
 protected:
     FILE* getFile() const;
 public:
-    virtual pos_t getSize() const;
+    pos_t getSize() const override;
 };

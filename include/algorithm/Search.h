@@ -10,7 +10,7 @@ class Search {
 public:
     class failed_to_find_solution: public std::logic_error {
     public:
-        failed_to_find_solution(const std::string &what_arg);
+        explicit failed_to_find_solution(const std::string &what_arg);
     };
 public:
     virtual void initialize(const GameboardModel &gameboard) = 0;

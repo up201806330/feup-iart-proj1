@@ -8,6 +8,7 @@ using namespace std;
 using coord_t = TerminalGUI::coord_t;
 using pos_t   = TerminalGUI::pos_t;
 using Color   = TerminalGUI::Color;
+using Button  = MenuModel::Button;
 
 MenuView::MenuView(const MenuModel &menuModel):_menuModel(menuModel),position(pos_t(0,0))
 {
@@ -20,7 +21,7 @@ void MenuView::draw(TerminalGUI &terminal){
 
     const vector<MenuModel::Button> &v = _menuModel.getButtons();
     size_t maxTextSize = 0;
-    for(size_t i = 0; i < v.size(); ++i) maxTextSize = max(maxTextSize, v[i].label.size());
+    for(const Button &b : v) maxTextSize = max(maxTextSize, b.label.size());
 
     const pos_t TEXT_SIZE(coord_t(maxTextSize), 1);
     const pos_t BUTTON_SIZE = TEXT_SIZE + pos_t(2*BUTTON_PADDING.x + 2, 2*BUTTON_PADDING.y + 2);

@@ -11,7 +11,7 @@
 
 using namespace std;
 
-TerminalGUIFile::TerminalGUIFile(FILE *ofile): of(ofile){}
+TerminalGUIFile::TerminalGUIFile(FILE *file): of(file){}
 
 FILE* TerminalGUIFile::getFile() const{ return of; }
 
@@ -19,7 +19,7 @@ TerminalGUIFile::pos_t TerminalGUIFile::getSize() const {
     #if defined(unix) || defined(__unix__) || defined(__unix)
         struct winsize size;
         ioctl(fileno(getFile()), TIOCGWINSZ, &size);
-        return pos_t({size.ws_col, size.ws_row});
+        return pos_t(size.ws_col, size.ws_row);
     #elif defined(WIN32)
         CONSOLE_SCREEN_BUFFER_INFO csbi;
         pos_t size;

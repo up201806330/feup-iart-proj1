@@ -26,7 +26,7 @@ State *PlayHumanState::run() {
     GameboardView gameboardView(gameboard);
     ScoreboardView scoreboardView(scoreboard);
 
-    int fr, to;
+    int fr = 0, to = 0;
     bool invalidMove = false;
     string s;
     while(true) {
@@ -45,7 +45,7 @@ State *PlayHumanState::run() {
         ss >> fr;
         if(fr == -1) break;
         ss >> to;
-        GameboardModel::Move move(fr, to);
+        GameboardModel::Move move(static_cast<size_t>(fr), static_cast<size_t>(to));
 
         if(gameboard.canMove(move)) {
             gameboard.move(move);

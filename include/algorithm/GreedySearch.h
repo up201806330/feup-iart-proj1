@@ -17,7 +17,7 @@ private:
     std::queue<GameboardModel::Move> moves;
     std::unordered_set<GameboardModel> visited;
 public:
-    GreedySearch(heuristic_t heuristic);
-    virtual void initialize(const GameboardModel &gameboardModel);
-    virtual GameboardModel::Move next();
+    explicit GreedySearch(heuristic_t heuristic);
+    void initialize(const GameboardModel &gameboardModel) override;
+    GameboardModel::Move next() override;
 };

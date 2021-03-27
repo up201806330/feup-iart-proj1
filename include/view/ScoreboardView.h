@@ -10,6 +10,6 @@ class ScoreboardView {
 private:
     const ScoreboardModel &_scoreboardModel;
 public:
-    ScoreboardView(const ScoreboardModel &scoreboardModel);
+    explicit ScoreboardView(const ScoreboardModel &scoreboardModel);
     void draw(TerminalGUI &terminal);
 };

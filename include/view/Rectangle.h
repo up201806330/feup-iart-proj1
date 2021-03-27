@@ -23,7 +23,7 @@ public:
 
     void setPosition(const TerminalGUI::pos_t &pos);
 
-    virtual void draw(TerminalGUI &terminal);
+    void draw(TerminalGUI &terminal) override;
 
     const TerminalGUI::pos_t &getPosition();
 

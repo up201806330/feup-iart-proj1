@@ -14,9 +14,9 @@ ScoreboardView::ScoreboardView(const ScoreboardModel &scoreboardModel):
 
 void ScoreboardView::draw(TerminalGUI &terminal){
     int score = _scoreboardModel.getScore();
-    char score_cstr[128];
-    sprintf(score_cstr, "Score: %d", score);
-    string score_str(score_cstr);
+    char score_c_str[128];
+    sprintf(score_c_str, "Score: %d", score);
+    string score_str(score_c_str);
 
     terminal.drawStringAbsolute(pos_t(0,0), score_str);
 }

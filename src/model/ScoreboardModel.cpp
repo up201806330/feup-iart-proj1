@@ -7,7 +7,7 @@ using namespace std;
 
 using hrc = chrono::high_resolution_clock;
 
-ScoreboardModel::ScoreboardModel(){}
+ScoreboardModel::ScoreboardModel() = default;
 
 void ScoreboardModel::resetScore(){
     score = 0;

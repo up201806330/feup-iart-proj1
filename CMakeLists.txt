@@ -30,6 +30,7 @@ add_executable(main
     src/controller/state/PlayMachineState.cpp
     src/controller/MenuController.cpp
     src/algorithm/Search.cpp
+    src/algorithm/Dfs.cpp
     src/algorithm/GreedySearch.cpp
     src/algorithm/Heuristics.cpp
 )

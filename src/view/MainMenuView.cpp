@@ -4,8 +4,6 @@
 #include "view/MainMenuView.h"
 #include "view/gui/TerminalGUISprite.h"
 
-#include <vector>
-#include <iostream>
 
 using namespace std;
 using coord_t = TerminalGUI::coord_t;
