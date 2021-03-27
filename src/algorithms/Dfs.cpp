@@ -1,10 +1,11 @@
 // Copyright (C) 2021 Diogo Rodrigues, Rafael Ribeiro, Bernardo Ferreira
 // Distributed under the terms of the GNU General Public License, version 3
 
-#include "algorithm/Dfs.h"
+#include "algorithms/Dfs.h"
 
 using namespace std;
 
+/*
 Dfs::Dfs(const GameboardModel& initialBoard):
     _initialBoard(initialBoard)
 {
@@ -27,3 +28,4 @@ GameboardModel Dfs::run(){
     dfs(_initialBoard);
     return _finalBoard;
 }
+*/

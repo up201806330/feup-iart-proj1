@@ -16,7 +16,7 @@
 
 #include <unistd.h>
 #include "controller/state/State.h"
-#include "algorithm/BFS.h"
+#include "algorithms/BFS.h"
 
 using namespace std;
 
@@ -33,8 +33,11 @@ int main(){
     
     terminal->display();
 
-    BFS bfs(gameboardModel);
+    BFS bfs;
+    bfs.initialize(gameboardModel);
     bfs.bfs_algorithm();
+    
+
     
     /*
     vector<GameboardModel> path = bfs.getPath();
