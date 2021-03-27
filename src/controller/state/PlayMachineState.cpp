@@ -3,6 +3,8 @@
 
 #include "controller/state/PlayMachineState.h"
 
+#include <iostream>
+
 #include "model/GameboardModel.h"
 #include "model/ScoreboardModel.h"
 #include "view/GameboardView.h"
@@ -45,10 +47,12 @@ State *PlayMachineState::run() {
         if(gameboard.canMove(move)) {
             gameboard.move(move);
         } else {
+            // cerr << "Fudeu" << move.from << ";" << move.to << endl;
             return State::mainMenuState;
         }
 
         if(gameboard.isGameOver()){
+            // cerr << "Afinal tb fudeo" << endl;
             break;
         }
     }

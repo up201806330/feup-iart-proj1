@@ -4,15 +4,15 @@
 #pragma once
 
 #include "model/GameboardModel.h"
-#include "algorithm/Search.h"
+#include "algorithm/SearchStrategy.h"
 
 #include <bits/stdc++.h>
-#include <queue>
+#include <deque>
 #include <unordered_set>
 
-class Dfs : public Search {
+class Dfs : public SearchStrategy {
 private:
-    std::queue<GameboardModel::Move> solution;
+    std::deque<GameboardModel::Move> solution;
     std::unordered_set<GameboardModel> visited;
 public:
     bool dfs(const GameboardModel& gameBoard);

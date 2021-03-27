@@ -3,6 +3,8 @@
 
 #include "algorithm/Dfs.h"
 
+using namespace std;
+
 using Move = GameboardModel::Move;
 
 bool Dfs::dfs(const GameboardModel& gameBoard) {
@@ -12,13 +14,15 @@ bool Dfs::dfs(const GameboardModel& gameBoard) {
 
     if (gameBoard.isGameOver()) return true;
 
-    std::vector<Move> moves = gameBoard.getAllMoves();
+    vector<Move> moves = gameBoard.getAllMoves();
+    // for(int i = 0 ; i < moves.size() ; i++) 
+    //     cout << i << ": " << moves[i].from << ";" << moves[i].to << endl;
     for (const Move &move : moves){
         GameboardModel state = gameBoard;
         state.move(move);
-        solution.push(move);
+        solution.push_back(move);
         if (dfs(state)) return true;
-        solution.pop();
+        solution.pop_back();
     }
 
     return false;
@@ -27,10 +31,10 @@ bool Dfs::dfs(const GameboardModel& gameBoard) {
 void Dfs::initialize(const GameboardModel &gameboardModel){
     visited.clear();
 
-    if (!dfs(gameboardModel)) throw Search::failed_to_find_solution("Dfs");
+    if (!dfs(gameboardModel)) throw SearchStrategy::failed_to_find_solution("Dfs");
 }
 
 GameboardModel::Move Dfs::next() {
-    Move ret = solution.front(); solution.pop();
+    Move ret = solution.front(); solution.pop_front();
     return ret;
 }
