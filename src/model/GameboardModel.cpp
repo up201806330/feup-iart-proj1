@@ -13,6 +13,15 @@ using Move = GameboardModel::Move;
 GameboardModel::Move::Move(size_t f, size_t t):from(f), to(t) {
 }
 
+bool GameboardModel::Move::operator==(const GameboardModel::Move &m) const { return from == m.from && to == m.to; }
+bool GameboardModel::Move::operator< (const GameboardModel::Move &m) const {
+    if(from != m.from) return (from < m.from);
+    return (to < m.to);
+}
+bool GameboardModel::Move::operator> (const GameboardModel::Move &m) const { return (m < *this); }
+bool GameboardModel::Move::operator<=(const GameboardModel::Move &m) const { return !(m > *this); }
+bool GameboardModel::Move::operator>=(const GameboardModel::Move &m) const { return !(m < *this); }
+
 GameboardModel::GameboardModel():
     _num_tubes(0),
     _tube_height(0)
@@ -90,11 +99,16 @@ void GameboardModel::fillRandom(size_t num_colors){
             do {
                 tube = static_cast<unsigned long>(rand()) % _num_tubes;
             } while((*this)[tube].size() >= _tube_height);
-            // i is the index, i+1 is the color ID.
-            (*this)[tube].push_back(color_t(i+1));
+            (*this)[tube].push_back(color_t(i));
             --num_pieces_per_color[i];
         }
     }
+
+    _num_colors = num_colors;
+}
+
+size_t GameboardModel::getNumberOfColors() const {
+    return _num_colors;
 }
 
 bool GameboardModel::canMove(const Move &move) const {

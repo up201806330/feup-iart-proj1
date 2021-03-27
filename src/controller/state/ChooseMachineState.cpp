@@ -1,6 +1,7 @@
 // Copyright (C) 2021 Diogo Rodrigues, Rafael Ribeiro, Bernardo Ferreira
 // Distributed under the terms of the GNU General Public License, version 3
 
+#include <algorithm/BestFirstSearch.h>
 #include "algorithm/Heuristics.h"
 #include "algorithm/GreedySearch.h"
 #include "algorithm/Dfs.h"
@@ -17,9 +18,9 @@ ChooseMachineState::ChooseMachineState(TerminalGUI *term) : State(term) {
 
 State *ChooseMachineState::run() {
     MenuModel menuModel;
-    menuModel.addButton(1, "1. Pure greedy search");
-    menuModel.addButton(2, "2. Depth first search");
-//    menuModel.addButton(4, "4. Best-first search");
+    menuModel.addButton(1, "1. Depth first search");
+    menuModel.addButton(3, "3. Pure greedy search");
+    menuModel.addButton(4, "4. Best-first search");
     menuModel.addButton(0, "0. Back");
 
     MenuView menuView(menuModel);
@@ -38,9 +39,9 @@ State *ChooseMachineState::run() {
     if(option == 0) return State::mainMenuState;
 
     switch(option){
-        case 1: State::playMachineState->setSearchStrategy(new GreedySearch(Heuristics::h1)); break;
-        case 2: State::playMachineState->setSearchStrategy(new Dfs()); break;
-//        case 4: State::playMachineState->setSearchStrategy(BestFirstSearch(heuristics::h1)); break;
+        case 1: State::playMachineState->setSearchStrategy(new Dfs()); break;
+        case 3: State::playMachineState->setSearchStrategy(new GreedySearch(Heuristics::h1)); break;
+        case 4: State::playMachineState->setSearchStrategy(new BestFirstSearch(Heuristics::h1)); break;
         default: throw logic_error("");
     }
     return State::playMachineState;

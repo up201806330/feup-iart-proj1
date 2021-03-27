@@ -6,9 +6,7 @@
 using namespace std;
 using Move = GameboardModel::Move;
 
-const double INF = 1000000000000.0;
-
-GreedySearch::GreedySearch(GreedySearch::heuristic_t heuristic):
+GreedySearch::GreedySearch(Heuristics::heuristic_t heuristic):
     h(heuristic)
 {
 }
@@ -23,7 +21,7 @@ void GreedySearch::initialize(const GameboardModel &gameboardModel){
         Move bestMove(0, 0);
         GameboardModel bestGameboard;
         {
-            double bestScore = -INF;
+            double bestScore = Heuristics::INF;
 
             GameboardModel g_;
             double score;
@@ -32,7 +30,7 @@ void GreedySearch::initialize(const GameboardModel &gameboardModel){
                 g_ = g;
                 g_.move(m);
                 score = h(g_);
-                if (score > bestScore) {
+                if (score < bestScore) {
                     bestMove = m;
                     bestGameboard = g_;
                     bestScore = score;

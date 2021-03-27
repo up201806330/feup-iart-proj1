@@ -3,20 +3,22 @@
 
 #pragma once
 
+#include "model/GameboardModel.h"
 #include "algorithm/SearchStrategy.h"
 #include "Heuristics.h"
 
-#include <queue>
+#include <deque>
 #include <unordered_set>
 
-class GreedySearch: public SearchStrategy {
+class BestFirstSearch : public SearchStrategy {
 private:
     Heuristics::heuristic_t h;
-    GameboardModel gameboard;
-    std::queue<GameboardModel::Move> moves;
+    std::deque<GameboardModel::Move> solution;
     std::unordered_set<GameboardModel> visited;
 public:
-    explicit GreedySearch(Heuristics::heuristic_t heuristic);
+    explicit BestFirstSearch(Heuristics::heuristic_t heuristic);
+    bool dfs(const GameboardModel& gameBoard);
+
     void initialize(const GameboardModel &gameboardModel) override;
     GameboardModel::Move next() override;
 };

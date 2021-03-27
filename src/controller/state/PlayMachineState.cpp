@@ -17,6 +17,7 @@ PlayMachineState::PlayMachineState(TerminalGUI *term) :
 }
 
 void PlayMachineState::setSearchStrategy(SearchStrategy *strategy) {
+    delete this->searchStrategy;
     this->searchStrategy = strategy;
 }
 
@@ -44,6 +45,7 @@ State *PlayMachineState::run() {
 
         if(gameboard.canMove(move)) {
             gameboard.move(move);
+            scoreboard.addScore();
         } else {
             return State::mainMenuState;
         }

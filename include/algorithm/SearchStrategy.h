@@ -15,4 +15,6 @@ public:
 public:
     virtual void initialize(const GameboardModel &gameboard) = 0;
     virtual GameboardModel::Move next() = 0;
+
+    virtual ~SearchStrategy();
 };

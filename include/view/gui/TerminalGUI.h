@@ -21,16 +21,16 @@ public:
      * @brief Colors allowed for terminals.
      */
     enum Color {
-        DEFAULT = 0,
-        RED     = 1,
-        GREEN   = 2,
-        BLUE    = 3,
-        MAGENTA = 5,
-        YELLOW  = 6,
-        CYAN    = 4,
-        WHITE   = 7,
-        BLACK   = 8,
-        GRAY    = 9
+        RED     = 0,
+        GREEN   = 1,
+        BLUE    = 2,
+        MAGENTA = 3,
+        YELLOW  = 4,
+        CYAN    = 5,
+        WHITE   = 6,
+        BLACK   = 7,
+        GRAY    = 8,
+        DEFAULT = 255,
     };
 
     typedef uint32_t effects_t;
