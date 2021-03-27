@@ -16,21 +16,21 @@ State *MainMenuState::run() {
     MainMenuView mainMenuView(mainMenuModel);
     MenuController mainMenuController(mainMenuModel);
 
-    int option;
+    int id;
     do {
         getTerminal()->clear();
         mainMenuView.draw(*getTerminal());
         getTerminal()->display();
         mainMenuController.run();
-        option = mainMenuController.getSelectedOption();
-    } while(!(1 <= option && option <= int(mainMenuModel.getButtons().size())));
+        id = mainMenuController.getSelectedOption();
+    } while(!mainMenuModel.hasButtonWithId(id));
 
     State *ret;
-    switch(option){
-        case 1: ret = State::playHumanState  ; break;
-        case 2: ret = State::playMachineState; break;
+    switch(id){
+        case 1: ret = State::playHumanState    ; break;
+        case 2: ret = State::chooseMachineState; break;
         case 3:
-        case 4: ret = nullptr; break;
+        case 0: ret = nullptr; break;
         default: throw logic_error("");
     }
     return ret;
