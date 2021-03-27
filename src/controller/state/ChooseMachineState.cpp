@@ -4,7 +4,7 @@
 #include <algorithm/BestFirstSearch.h>
 #include "algorithm/Heuristics.h"
 #include "algorithm/GreedySearch.h"
-#include "algorithm/Dfs.h"
+#include "algorithm/DepthFirstSearch.h"
 #include "controller/state/ChooseMachineState.h"
 
 #include "controller/MenuController.h"
@@ -39,7 +39,7 @@ State *ChooseMachineState::run() {
     if(option == 0) return State::mainMenuState;
 
     switch(option){
-        case 1: State::playMachineState->setSearchStrategy(new Dfs()); break;
+        case 1: State::playMachineState->setSearchStrategy(new DepthFirstSearch()); break;
         case 3: State::playMachineState->setSearchStrategy(new GreedySearch(Heuristics::h1)); break;
         case 4: State::playMachineState->setSearchStrategy(new BestFirstSearch(Heuristics::h1)); break;
         default: throw logic_error("");

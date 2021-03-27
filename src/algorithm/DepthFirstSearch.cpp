@@ -1,13 +1,13 @@
 // Copyright (C) 2021 Diogo Rodrigues, Rafael Ribeiro, Bernardo Ferreira
 // Distributed under the terms of the GNU General Public License, version 3
 
-#include "algorithm/Dfs.h"
+#include "algorithm/DepthFirstSearch.h"
 
 using namespace std;
 
 using Move = GameboardModel::Move;
 
-bool Dfs::dfs(const GameboardModel& gameBoard) {
+bool DepthFirstSearch::dfs(const GameboardModel& gameBoard) {
     if (visited.count(gameBoard)) return false;
 
     visited.insert(gameBoard);
@@ -26,13 +26,13 @@ bool Dfs::dfs(const GameboardModel& gameBoard) {
     return false;
 }
 
-void Dfs::initialize(const GameboardModel &gameboardModel){
+void DepthFirstSearch::initialize(const GameboardModel &gameboardModel){
     visited.clear();
 
-    if (!dfs(gameboardModel)) throw SearchStrategy::failed_to_find_solution("Dfs");
+    if (!dfs(gameboardModel)) throw SearchStrategy::failed_to_find_solution("DepthFirstSearch");
 }
 
-GameboardModel::Move Dfs::next() {
+GameboardModel::Move DepthFirstSearch::next() {
     Move ret = solution.front(); solution.pop_front();
     return ret;
 }
