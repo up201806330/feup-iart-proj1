@@ -25,7 +25,7 @@ State *ChooseMachineState::run() {
     menuModel.addButton(3, "3. Depth first search, greedy first");
     menuModel.addButton(4, "4. Iterative deepening depth first search");
     menuModel.addButton(5, "5. Best-first search, greedy");
-//    menuModel.addButton(6, "6. Best-first search, A*");
+    menuModel.addButton(6, "6. Best-first search, A*");
     menuModel.addButton(0, "0. Back");
 
     MenuView menuView(menuModel);
@@ -49,7 +49,7 @@ State *ChooseMachineState::run() {
         case 3: State::playMachineState->setSearchStrategy(new DepthFirstGreedySearch(Heuristics::h1)); break;
         case 4: State::playMachineState->setSearchStrategy(new IterativeDeepeningSearch()); break;
         case 5: State::playMachineState->setSearchStrategy(new GreedySearch(Heuristics::h1)); break;
-//        case 6: State::playMachineState->setSearchStrategy(new AstarSearch(Heuristics::h1)); break;
+        case 6: State::playMachineState->setSearchStrategy(new AstarSearch(Heuristics::h1)); break;
         default: throw logic_error("");
     }
     return State::playMachineState;

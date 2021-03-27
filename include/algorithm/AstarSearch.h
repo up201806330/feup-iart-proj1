@@ -12,11 +12,8 @@ class AstarSearch: public SearchStrategy {
 private:
     Heuristics::heuristic_t h;
     std::deque<GameboardModel::Move> solution;
-    std::unordered_set<GameboardModel> visited;
 public:
     explicit AstarSearch(Heuristics::heuristic_t heuristic);
-    bool dfs(const GameboardModel& gameBoard);
-
     void initialize(const GameboardModel &gameboard) override;
     GameboardModel::Move next() override;
 };
