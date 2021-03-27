@@ -19,5 +19,22 @@ double Heuristics::h1(const GameboardModel &gameboard) {
         }
         ret += static_cast<double>(t.size() - i);
     }
+    // Second part
+    size_t nColors = gameboard.getNumberOfColors();
+    vector< vector<size_t> > colors(nColors);
+    for(const Tube &tube: gameboard){
+        if(tube.empty()) continue;
+        color_t c = tube[0];
+        size_t s;
+        for(s = 1; s < tube.size(); ++s)
+            if(tube[s] != c) break;
+        colors[c].push_back(s);
+    }
+    for(color_t c = 0; c < nColors; ++c) {
+        const vector<size_t> c_count = colors.at(c);
+        if(c_count.empty()) continue;
+        ret += accumulate(c_count.begin(), c_count.end(), 0.0) - (double) *max_element(c_count.begin(), c_count.end());
+    }
+
     return ret;
 }
