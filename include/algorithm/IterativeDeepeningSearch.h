@@ -10,12 +10,13 @@
 #include <deque>
 #include <unordered_set>
 
-class Dfs : public SearchStrategy {
+class IterativeDeepeningSearch : public SearchStrategy {
 private:
     std::deque<GameboardModel::Move> solution;
     std::unordered_set<GameboardModel> visited;
+    size_t currentDepth = 0;
 public:
-    bool dfs(const GameboardModel& gameBoard);
+    bool dfs(const GameboardModel& gameBoard, size_t depth);
 
     void initialize(const GameboardModel &gameboardModel) override;
     GameboardModel::Move next() override;
