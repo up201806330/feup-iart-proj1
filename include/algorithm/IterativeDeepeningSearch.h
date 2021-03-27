@@ -14,7 +14,7 @@ class IterativeDeepeningSearch : public SearchStrategy {
 private:
     std::deque<GameboardModel::Move> solution;
     std::unordered_set<GameboardModel> visited;
-    size_t currentDepth = 0;
+    size_t maxDepth;
 public:
     bool dfs(const GameboardModel& gameBoard, size_t depth);
 

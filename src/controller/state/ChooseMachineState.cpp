@@ -42,7 +42,7 @@ State *ChooseMachineState::run() {
 
     switch(option){
         case 1: State::playMachineState->setSearchStrategy(new DepthFirstSearch()); break;
-        case 2: State::playMachineState->setSearchStrategy(new IterativeDeepeningSearch()); break;
+        case 3: State::playMachineState->setSearchStrategy(new IterativeDeepeningSearch()); break;
         case 4: State::playMachineState->setSearchStrategy(new GreedySearch(Heuristics::h1)); break;
         case 5: State::playMachineState->setSearchStrategy(new BestFirstSearch(Heuristics::h1)); break;
         default: throw logic_error("");

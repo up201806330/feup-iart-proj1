@@ -8,7 +8,8 @@ using namespace std;
 using Move = GameboardModel::Move;
 
 bool IterativeDeepeningSearch::dfs(const GameboardModel& gameBoard, size_t depth) {
-    if (depth > currentDepth) return false;
+    if (depth > maxDepth) return false;
+
     if (visited.count(gameBoard)) return false;
 
     visited.insert(gameBoard);
@@ -20,7 +21,7 @@ bool IterativeDeepeningSearch::dfs(const GameboardModel& gameBoard, size_t depth
         GameboardModel state = gameBoard;
         state.move(move);
         solution.push_back(move);
-        if (dfs(state), depth + 1) return true;
+        if (dfs(state, depth + 1)) return true;
         solution.pop_back();
     }
 
@@ -28,10 +29,12 @@ bool IterativeDeepeningSearch::dfs(const GameboardModel& gameBoard, size_t depth
 }
 
 void IterativeDeepeningSearch::initialize(const GameboardModel &gameboardModel){
+    maxDepth = 0;
     visited.clear();
 
-    while (!dfs(gameboardModel, currentDepth)){
-        currentDepth++;
+    while (!dfs(gameboardModel, 0)){
+        ++maxDepth;
+        //cout << "Increasing depth to " << currentDepth << endl;
         solution.clear();
         visited.clear();
     }
