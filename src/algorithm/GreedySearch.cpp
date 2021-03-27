@@ -3,6 +3,7 @@
 
 #include "algorithm/GreedySearch.h"
 
+using namespace std;
 using Move = GameboardModel::Move;
 
 const double INF = 1000000000000.0;
@@ -26,7 +27,8 @@ void GreedySearch::initialize(const GameboardModel &gameboardModel){
 
             GameboardModel g_;
             double score;
-            for (const Move &m: g.getAllMoves()) {
+            vector<Move> availableMoves = g.getAllMoves();
+            for (const Move &m: availableMoves) {
                 g_ = g;
                 g_.move(m);
                 score = h(g_);
