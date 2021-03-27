@@ -4,9 +4,13 @@
 #include "controller/state/State.h"
 #include "controller/state/MainMenuState.h"
 #include "controller/state/PlayHumanState.h"
+#include "controller/state/PlayMachineState.h"
+#include "algorithm/GreedySearch.h"
+#include "algorithm/Heuristics.h"
 
-State *State::mainMenuState  = nullptr;
-State *State::playHumanState = nullptr;
+State *State::mainMenuState    = nullptr;
+State *State::playHumanState   = nullptr;
+State *State::playMachineState = nullptr;
 
 State::State(TerminalGUI *term): terminal(term) {
 }
@@ -18,4 +22,7 @@ TerminalGUI *State::getTerminal() {
 void State::initializeStates(TerminalGUI *terminal) {
     mainMenuState  = new MainMenuState(terminal);
     playHumanState = new PlayHumanState(terminal);
+
+    Search *search = new GreedySearch(Heuristics::h1);
+    playMachineState = new PlayMachineState(terminal, search);
 }

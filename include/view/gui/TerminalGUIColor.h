@@ -7,6 +7,6 @@
 
 class TerminalGUIColor: public TerminalGUIFile {
 public:
-    TerminalGUIColor(FILE *ofile = stdout);
-    virtual void display();
+    explicit TerminalGUIColor(FILE *file = stdout);
+    void display() override;
 };

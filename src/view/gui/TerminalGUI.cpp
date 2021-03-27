@@ -7,10 +7,10 @@ using namespace std;
 
 TerminalGUI::pos_t::pos_t(TerminalGUI::coord_t x_, TerminalGUI::coord_t y_):x(x_),y(y_){}
 
-TerminalGUI::pos_t TerminalGUI::pos_t::operator+(const TerminalGUI::pos_t &p) const { return {x+p.x, y+p.y}; }
-TerminalGUI::pos_t TerminalGUI::pos_t::operator-(const TerminalGUI::pos_t &p) const { return {x-p.x, y-p.y}; }
-TerminalGUI::pos_t TerminalGUI::pos_t::operator/(TerminalGUI::coord_t c) const { return {x/c, y/c}; }
-TerminalGUI::pos_t TerminalGUI::pos_t::operator-() const { return {-x, -y}; }
+TerminalGUI::pos_t TerminalGUI::pos_t::operator+(const TerminalGUI::pos_t &p) const { return pos_t(x+p.x, y+p.y); }
+TerminalGUI::pos_t TerminalGUI::pos_t::operator-(const TerminalGUI::pos_t &p) const { return pos_t(x-p.x, y-p.y); }
+TerminalGUI::pos_t TerminalGUI::pos_t::operator/(TerminalGUI::coord_t c) const { return pos_t(x/c, y/c); }
+TerminalGUI::pos_t TerminalGUI::pos_t::operator-() const { return pos_t(-x, -y); }
 
 bool TerminalGUI::pos_t::operator==(const TerminalGUI::pos_t &p) const { return (x == p.x && y == p.y); }
 bool TerminalGUI::pos_t::operator< (const TerminalGUI::pos_t &p) const {
@@ -46,7 +46,7 @@ void TerminalGUI::clear(){
 
 void TerminalGUI::drawCharacter(
     pos_t pos,
-    string c,
+    const string &c,
     Color foreground,
     Color background,
     effects_t effects
@@ -56,17 +56,17 @@ void TerminalGUI::drawCharacter(
 
 void TerminalGUI::drawCharacterAbsolute(
     pos_t pos,
-    string c,
+    const string &c,
     Color foreground,
     Color background,
     effects_t effects
 ){
-    to_draw.push_back(ToDrawTypedef(pos, c, foreground, background, effects));
+    to_draw.emplace_back(pos, c, foreground, background, effects);
 }
 
 void TerminalGUI::drawString(
     pos_t pos,
-    string s,
+    const string &s,
     Color foreground,
     Color background,
     effects_t effects
@@ -76,7 +76,7 @@ void TerminalGUI::drawString(
 
 void TerminalGUI::drawStringAbsolute(
     pos_t pos,
-    string s,
+    const string &s,
     Color foreground,
     Color background,
     effects_t effects
@@ -85,7 +85,7 @@ void TerminalGUI::drawStringAbsolute(
     for(const char &c: s){
         if(c == '\n') p = pos_t(0, p.y+1);
         else {
-            to_draw.push_back(ToDrawTypedef(pos+p, string(1, c), foreground, background, effects));
+            to_draw.emplace_back(pos+p, string(1, c), foreground, background, effects);
             ++p.x;
         }
     }

@@ -16,7 +16,7 @@ private:
     std::map<TerminalGUI::pos_t, ToDrawNoPosTypedef> m;
     TerminalGUI::pos_t position;
 public:
-    TerminalGUISprite(
+    explicit TerminalGUISprite(
         const std::vector<std::vector<std::string>> &cs,
         const std::vector<std::vector<TerminalGUI::Color>> &foregrounds = {},
         const std::vector<std::vector<TerminalGUI::Color>> &backgrounds = {},
@@ -30,5 +30,5 @@ public:
     );
     void setCharacter(const TerminalGUI::pos_t &pos, const std::string &c, const TerminalGUI::Color &foreground, const TerminalGUI::Color &background, const TerminalGUI::effects_t &effects);
     void setPosition(const TerminalGUI::pos_t &pos);
-    virtual void draw(TerminalGUI &terminal);
+    void draw(TerminalGUI &terminal) override;
 };

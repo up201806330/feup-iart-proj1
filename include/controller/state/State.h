@@ -9,7 +9,7 @@ class State {
 private:
     TerminalGUI *terminal;
 public:
-    State(TerminalGUI *term);
+    explicit State(TerminalGUI *term);
     TerminalGUI* getTerminal();
     virtual State* run() = 0;
 
