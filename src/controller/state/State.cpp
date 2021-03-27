@@ -7,6 +7,7 @@
 #include "controller/state/PlayMachineState.h"
 #include "algorithm/GreedySearch.h"
 #include "algorithm/Heuristics.h"
+#include "algorithm/Dfs.h"
 
 State *State::mainMenuState    = nullptr;
 State *State::playHumanState   = nullptr;
@@ -23,6 +24,7 @@ void State::initializeStates(TerminalGUI *terminal) {
     mainMenuState  = new MainMenuState(terminal);
     playHumanState = new PlayHumanState(terminal);
 
-    Search *search = new GreedySearch(Heuristics::h1);
+    //Search *search = new GreedySearch(Heuristics::h1);
+    Search *search = new Dfs();
     playMachineState = new PlayMachineState(terminal, search);
 }

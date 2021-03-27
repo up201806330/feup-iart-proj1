@@ -3,27 +3,34 @@
 
 #include "algorithm/Dfs.h"
 
-using namespace std;
+using Move = GameboardModel::Move;
 
-Dfs::Dfs(const GameboardModel& initialBoard):
-    _initialBoard(initialBoard)
-{
+bool Dfs::dfs(const GameboardModel& gameBoard) {
+    if (visited.count(gameBoard)) return false;
 
-}
+    visited.insert(gameBoard);
 
-void Dfs::dfs(GameboardModel gameBoard) {
-//    if (visitedBoards.find(gameBoard) != visitedBoards.end() || _finalBoard) return;
-    visitedBoards.insert(gameBoard);
+    if (gameBoard.isGameOver()) return true;
 
-    // TODO end state
-    // if (gameBoard)
-
-    for (const auto &state : gameBoard.getAdjacentStates()){
-        dfs(state);
+    std::vector<Move> moves = gameBoard.getAllMoves();
+    for (const Move &move : moves){
+        GameboardModel state = gameBoard;
+        state.move(move);
+        solution.push(move);
+        if (dfs(state)) return true;
+        solution.pop();
     }
+
+    return false;
 }
 
-GameboardModel Dfs::run(){
-    dfs(_initialBoard);
-    return _finalBoard;
+void Dfs::initialize(const GameboardModel &gameboardModel){
+    visited.clear();
+
+    if (!dfs(gameboardModel)) throw Search::failed_to_find_solution("Dfs");
+}
+
+GameboardModel::Move Dfs::next() {
+    Move ret = solution.front(); solution.pop();
+    return ret;
 }
