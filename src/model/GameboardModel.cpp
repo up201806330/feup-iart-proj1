@@ -13,7 +13,8 @@ using Move = GameboardModel::Move;
 GameboardModel::Move::Move(size_t f, size_t t):from(f), to(t) {
 }
 
-bool GameboardModel::Move::operator==(const GameboardModel::Move &m) const { return from == m.from && to == m.to; }
+bool GameboardModel::Move::operator==(const Move &m) const { return from == m.from && to == m.to; }
+bool GameboardModel::Move::operator!=(const Move &m) const { return !(*this == m); }
 bool GameboardModel::Move::operator< (const GameboardModel::Move &m) const {
     if(from != m.from) return (from < m.from);
     return (to < m.to);
@@ -203,6 +204,7 @@ bool GameboardModel::operator==(const GameboardModel &model) const {
      */
     return tubes == model.tubes;
 }
+bool GameboardModel::operator!=(const GameboardModel &model) const { return !(*this == model); }
 
 bool GameboardModel::operator<(const GameboardModel &model) const {
     /*

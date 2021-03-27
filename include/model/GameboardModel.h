@@ -17,6 +17,7 @@ public:
         Move(size_t fr, size_t to);
 
         bool operator==(const Move &m) const;
+        bool operator!=(const Move &m) const;
         bool operator< (const Move &m) const;
         bool operator> (const Move &m) const;
         bool operator<=(const Move &m) const;
@@ -119,6 +120,7 @@ public:
     bool isGameOver() const;
 
     bool operator==(const GameboardModel &model) const;
+    bool operator!=(const GameboardModel &model) const;
     bool operator< (const GameboardModel &model) const;
     bool operator> (const GameboardModel &model) const;
     bool operator<=(const GameboardModel &model) const;
