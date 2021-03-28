@@ -7,11 +7,11 @@
 
 class ChooseMachineState: public State {
 private:
-    const SearchStrategy *machine = nullptr;
+    SearchStrategy *machine = nullptr;
 public:
     explicit ChooseMachineState(TerminalGUI *term);
     State* run() override;
 
-    void setMachine(const SearchStrategy *machine);
-    const SearchStrategy *getMachine() const;
+    void setMachine(SearchStrategy *machine);
+    SearchStrategy *getMachine() const;
 };

@@ -16,19 +16,19 @@ using namespace std;
 ChooseHeuristicMachineState::ChooseHeuristicMachineState(TerminalGUI *term) : State(term) {
 }
 
-void ChooseHeuristicMachineState::setMachine(const SearchStrategy *machine) {
+void ChooseHeuristicMachineState::setMachine(SearchStrategy *machine) {
     State::chooseMachineState->setMachine(machine);
 }
 
-const SearchStrategy *ChooseHeuristicMachineState::getMachine() const {
+SearchStrategy *ChooseHeuristicMachineState::getMachine() const {
     return State::chooseMachineState->getMachine();
 }
 
 State *ChooseHeuristicMachineState::run() {
     MenuModel menuModel;
     menuModel.addButton(1, "1. Depth first search, greedy first");
-    menuModel.addButton(1, "2. Best-first search, greedy");
-    menuModel.addButton(1, "3. Best-first search, A*");
+    menuModel.addButton(2, "2. Best-first search, greedy");
+    menuModel.addButton(3, "3. Best-first search, A*");
     menuModel.addButton(0, "0. Back");
 
     MenuView menuView(menuModel);

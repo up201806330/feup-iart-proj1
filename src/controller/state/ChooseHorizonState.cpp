@@ -21,12 +21,14 @@ size_t ChooseHorizonState::getHorizon() const {
 }
 
 State *ChooseHorizonState::run() {
-    getTerminal()->setCorner(getTerminal()->getSize()/2);
+    getTerminal()->setCorner(-getTerminal()->getSize()/2);
     string s = "Choose the horizon (must be larger than or equal to 1), or enter 0 to go back";
-    getTerminal()->drawString(pos_t(-coord_t(s.size())/2, 0), s);
 
     int horizon = 0;
     do {
+        getTerminal()->clear();
+        getTerminal()->drawString(pos_t(-coord_t(s.size())/2, 0), s);
+        getTerminal()->display();
         cin >> horizon;
     } while(cin.fail() || horizon < 1);
 

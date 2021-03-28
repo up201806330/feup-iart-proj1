@@ -18,11 +18,11 @@ using namespace std;
 ChooseMachineState::ChooseMachineState(TerminalGUI *term) : State(term) {
 }
 
-void ChooseMachineState::setMachine(const SearchStrategy *searchStrategy) {
+void ChooseMachineState::setMachine(SearchStrategy *searchStrategy) {
     this->machine = searchStrategy;
 }
 
-const SearchStrategy *ChooseMachineState::getMachine() const{
+SearchStrategy *ChooseMachineState::getMachine() const{
     return machine;
 }
 
@@ -30,8 +30,8 @@ State *ChooseMachineState::run() {
     MenuModel menuModel;
     menuModel.addButton(1, "1. Depth first search");
 //    menuModel.addButton(2, "2. Breadth first search");
-    menuModel.addButton(4, "3. Iterative deepening depth first search");
-    menuModel.addButton(3, "4. Informed search methods (+)");
+    menuModel.addButton(3, "3. Iterative deepening depth first search");
+    menuModel.addButton(4, "4. Informed search methods (+)");
     menuModel.addButton(0, "0. Back");
 
     MenuView menuView(menuModel);
@@ -48,9 +48,9 @@ State *ChooseMachineState::run() {
     } while(!menuModel.hasButtonWithId(option));
 
     switch(option){
-        case 1: State::playMachineState->setSearchStrategy(new DepthFirstSearch()); return State::playMachineState;
-//        case 2: State::playMachineState->setSearchStrategy(new BreadthFirstSearch()); return State::playMachineState;
-        case 3: State::playMachineState->setSearchStrategy(new IterativeDeepeningSearch()); return State::playMachineState;
+        case 1: this->setMachine(new DepthFirstSearch()); return State::playMachineState;
+//        case 2: this->setSearchStrategy(new BreadthFirstSearch()); return State::playMachineState;
+        case 3: this->setMachine(new IterativeDeepeningSearch()); return State::playMachineState;
         case 4: return State::chooseHeuristicState;
         case 0: return State::mainMenuState;
         default: throw logic_error("");

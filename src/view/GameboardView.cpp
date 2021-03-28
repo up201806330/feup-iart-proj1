@@ -40,18 +40,21 @@ void GameboardView::drawPiece(TerminalGUI &terminal, size_t tube, size_t place, 
         0,
         coord_t(-(PIECE_Y+PIECE_MARGIN_Y)*place)
     );
-    terminal.drawCharacter(pos1+pos_t(0, -2), "▟", static_cast<TerminalGUI::Color>(piece_color));
+    terminal.drawCharacter(pos1+pos_t(0, -2), "▄", static_cast<TerminalGUI::Color>(piece_color));
     terminal.drawCharacter(pos1+pos_t(1, -2), "█", static_cast<TerminalGUI::Color>(piece_color));
     terminal.drawCharacter(pos1+pos_t(2, -2), "█", static_cast<TerminalGUI::Color>(piece_color));
-    terminal.drawCharacter(pos1+pos_t(3, -2), "▙", static_cast<TerminalGUI::Color>(piece_color));
+    terminal.drawCharacter(pos1+pos_t(3, -2), "█", static_cast<TerminalGUI::Color>(piece_color));
+    terminal.drawCharacter(pos1+pos_t(4, -2), "▄", static_cast<TerminalGUI::Color>(piece_color));
     terminal.drawCharacter(pos1+pos_t(0, -1), "█", static_cast<TerminalGUI::Color>(piece_color));
     terminal.drawCharacter(pos1+pos_t(1, -1), "█", static_cast<TerminalGUI::Color>(piece_color));
     terminal.drawCharacter(pos1+pos_t(2, -1), "█", static_cast<TerminalGUI::Color>(piece_color));
     terminal.drawCharacter(pos1+pos_t(3, -1), "█", static_cast<TerminalGUI::Color>(piece_color));
-    terminal.drawCharacter(pos1+pos_t(0, -0), "▜", static_cast<TerminalGUI::Color>(piece_color));
+    terminal.drawCharacter(pos1+pos_t(4, -1), "█", static_cast<TerminalGUI::Color>(piece_color));
+    terminal.drawCharacter(pos1+pos_t(0, -0), "▀", static_cast<TerminalGUI::Color>(piece_color));
     terminal.drawCharacter(pos1+pos_t(1, -0), "█", static_cast<TerminalGUI::Color>(piece_color));
     terminal.drawCharacter(pos1+pos_t(2, -0), "█", static_cast<TerminalGUI::Color>(piece_color));
-    terminal.drawCharacter(pos1+pos_t(3, -0), "▛", static_cast<TerminalGUI::Color>(piece_color));
+    terminal.drawCharacter(pos1+pos_t(3, -0), "█", static_cast<TerminalGUI::Color>(piece_color));
+    terminal.drawCharacter(pos1+pos_t(4, -0), "▀", static_cast<TerminalGUI::Color>(piece_color));
 }
 
 void GameboardView::drawTube(TerminalGUI &terminal, size_t tube){

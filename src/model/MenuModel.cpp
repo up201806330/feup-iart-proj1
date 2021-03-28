@@ -4,6 +4,7 @@
 #include "model/MenuModel.h"
 
 #include <utility>
+#include <stdexcept>
 
 using namespace std;
 
@@ -14,6 +15,7 @@ MenuModel::Button::Button(int _id, std::string _label):
 }
 
 void MenuModel::addButton(int id, const string &label){
+    if(hasButtonWithId(id)) throw invalid_argument("id");
     buttons.emplace_back(id, label);
 }
 

@@ -11,8 +11,8 @@ private:
 public:
     explicit ChooseHeuristicMachineState(TerminalGUI *term);
 
-    void setMachine(const SearchStrategy *machine);
-    const SearchStrategy *getMachine() const;
+    void setMachine(SearchStrategy *machine);
+    SearchStrategy *getMachine() const;
 
     State* run() override;
 };
