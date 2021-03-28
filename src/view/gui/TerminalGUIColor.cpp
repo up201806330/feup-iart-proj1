@@ -69,15 +69,15 @@ string getBackgroundColor(TerminalGUI::Color c){
     }
 }
 
-TerminalGUIColor::TerminalGUIColor(FILE *ofile): TerminalGUIFile(ofile){}
+TerminalGUIColor::TerminalGUIColor(FILE *file): TerminalGUIFile(file){}
 
 void TerminalGUIColor::display(){
     pos_t size = this->getSize();
     typedef tuple<string, Color, Color, effects_t> ToDrawNoPosTypedef;
     vector<vector<ToDrawNoPosTypedef> > v(
-        size.x,
+        static_cast<size_t>(size.x),
         vector<ToDrawNoPosTypedef>(
-            size.y,
+            static_cast<size_t>(size.y),
             ToDrawNoPosTypedef(" ", DEFAULT, DEFAULT, 0)
         )
     );

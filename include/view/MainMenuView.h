@@ -11,6 +11,6 @@ class MainMenuView {
 private:
     MenuView menuView;
 public:
-    MainMenuView(const MainMenuModel &mainMenuModel);
+    explicit MainMenuView(const MainMenuModel &mainMenuModel);
     void draw(TerminalGUI &terminal);
 };

@@ -3,10 +3,10 @@
 
 #pragma once
 
-#include "TerminalGUIFile.h"
+#include "State.h"
 
-class TerminalGUIColor: public TerminalGUIFile {
+class ChooseMachineState: public State {
 public:
-    explicit TerminalGUIColor(FILE *file = stdout);
-    void display() override;
+    explicit ChooseMachineState(TerminalGUI *term);
+    State* run() override;
 };

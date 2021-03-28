@@ -13,20 +13,45 @@ using Move = GameboardModel::Move;
 GameboardModel::Move::Move(size_t f, size_t t):from(f), to(t) {
 }
 
-GameboardModel::GameboardModel(const GameboardModel& original):
-    vector<Tube>(static_cast<vector<Tube>>(original))
-{
-    _num_tubes = original._num_tubes;
-    _tube_height = original._tube_height;
+bool GameboardModel::Move::operator==(const Move &m) const { return from == m.from && to == m.to; }
+bool GameboardModel::Move::operator!=(const Move &m) const { return !(*this == m); }
+bool GameboardModel::Move::operator< (const GameboardModel::Move &m) const {
+    if(from != m.from) return (from < m.from);
+    return (to < m.to);
 }
+bool GameboardModel::Move::operator> (const GameboardModel::Move &m) const { return (m < *this); }
+bool GameboardModel::Move::operator<=(const GameboardModel::Move &m) const { return !(m > *this); }
+bool GameboardModel::Move::operator>=(const GameboardModel::Move &m) const { return !(m < *this); }
+
+GameboardModel::GameboardModel():
+    _num_tubes(0),
+    _tube_height(0)
+{
+}
+
+GameboardModel::GameboardModel(const GameboardModel& original) = default;
+
+GameboardModel &GameboardModel::operator=(const GameboardModel &gameboard) = default;
 
 GameboardModel::GameboardModel(size_t num_tubes, size_t tube_height):
-    vector<Tube>(num_tubes),
     _num_tubes(num_tubes),
-    _tube_height(tube_height)
+    _tube_height(tube_height),
+    tubes(num_tubes)
 {
-
 }
+
+const Tube &GameboardModel::operator[](size_t i) const { return tubes[i]; }
+Tube &GameboardModel::operator[](size_t i) { return tubes[i]; }
+
+const Tube &GameboardModel::at(size_t i) const { return tubes.at(i); }
+Tube &GameboardModel::at(size_t i) { return tubes.at(i); }
+
+size_t GameboardModel::size() const { return tubes.size(); }
+
+vector<Tube>::iterator       GameboardModel::begin()       noexcept { return tubes.begin(); }
+vector<Tube>::const_iterator GameboardModel::begin() const noexcept { return tubes.begin(); }
+vector<Tube>::iterator       GameboardModel::end  ()       noexcept { return tubes.end(); }
+vector<Tube>::const_iterator GameboardModel::end  () const noexcept { return tubes.end(); }
 
 size_t GameboardModel::tubeHeight() const{ return _tube_height; }
 
@@ -57,7 +82,7 @@ void GameboardModel::fillRandom(size_t num_colors){
         color_t color;
         do {
             // Select random color.
-            color = color_t(rand()%num_colors);
+            color = color_t(static_cast<unsigned long>(rand()) % num_colors);
 
             // Keep trying until a color is found that has not yet been
             // allocated the maximum number of pieces per color.
@@ -73,29 +98,34 @@ void GameboardModel::fillRandom(size_t num_colors){
             // Search for tube that is not yet on maximum capacity.
             size_t tube;
             do {
-                tube = rand()%_num_tubes;
+                tube = static_cast<unsigned long>(rand()) % _num_tubes;
             } while((*this)[tube].size() >= _tube_height);
-            // i is the index, i+1 is the color ID.
-            (*this)[tube].push_back(color_t(i+1));
+            (*this)[tube].push_back(color_t(i));
             --num_pieces_per_color[i];
         }
     }
+
+    _num_colors = num_colors;
+}
+
+size_t GameboardModel::getNumberOfColors() const {
+    return _num_colors;
 }
 
 bool GameboardModel::canMove(const Move &move) const {
-    const Tube &tube_origin = this->at(move.from);
-    const Tube &tube_destin = this->at(move.to  );
+    const Tube &tube_origin      = this->at(move.from);
+    const Tube &tube_destination = this->at(move.to  );
 
     return (
         // Origin is not empty
         !tube_origin.empty() &&
         // Destination is not full
-        tube_destin.size() < _tube_height &&
+        tube_destination.size() < _tube_height &&
         (
             // Destination is empty; or
-            tube_destin.empty() ||
+            tube_destination.empty() ||
             // Destination top is same color as origin top
-            tube_origin.back() == tube_destin.back()
+            tube_origin.back() == tube_destination.back()
         )
     );
 }
@@ -103,15 +133,15 @@ bool GameboardModel::canMove(const Move &move) const {
 void GameboardModel::move(const Move &move) {
     if(!canMove(move)) throw invalid_argument("");
 
-    Tube &tube_origin = this->at(move.from);
-    Tube &tube_destin = this->at(move.to  );
+    Tube &tube_origin      = this->at(move.from);
+    Tube &tube_destination = this->at(move.to  );
 
     color_t c = tube_origin.back();
     tube_origin.pop_back();
-    tube_destin.push_back(c);
+    tube_destination.push_back(c);
 }
 
-vector<Move> GameboardModel::getAllMoves() {
+vector<Move> GameboardModel::getAllMoves() const {
     vector<Move> result;
 
     if (this->size() < 2) return result;
@@ -130,9 +160,10 @@ vector<Move> GameboardModel::getAllMoves() {
 vector<GameboardModel> GameboardModel::getAdjacentStates() {
     vector<GameboardModel> result;
 
-    for (const Move &move : getAllMoves()){ //TODO Havia forma de melhorar isto right?
+    vector<Move> moves = getAllMoves();
+    for (const Move &move : moves){
         GameboardModel newGameboard = GameboardModel(*this);
-        newGameboard.move(move);
+        if (newGameboard.canMove(move)) newGameboard.move(move);
         result.push_back(newGameboard);
     }
 
@@ -164,47 +195,48 @@ bool GameboardModel::isGameOver() const {
 }
 
 bool GameboardModel::operator==(const GameboardModel &model) const {
+    /*
     GameboardModel this_sorted = *this;
     sort(this_sorted.begin(), this_sorted.end());
     GameboardModel model_sorted = model;
     sort(model_sorted.begin(), model_sorted.end());
     return static_cast<vector<Tube>>(this_sorted) == static_cast<vector<Tube>>(model_sorted);
+     */
+    return tubes == model.tubes;
 }
+bool GameboardModel::operator!=(const GameboardModel &model) const { return !(*this == model); }
 
 bool GameboardModel::operator<(const GameboardModel &model) const {
+    /*
     GameboardModel this_sorted = *this;
     sort(this_sorted.begin(), this_sorted.end());
     GameboardModel model_sorted = model;
     sort(model_sorted.begin(), model_sorted.end());
     return static_cast<vector<Tube>>(this_sorted) < static_cast<vector<Tube>>(model_sorted);
+     */
+    return tubes < model.tubes;
 }
 
 bool GameboardModel::operator> (const GameboardModel &model) const { return model < *this; }
 bool GameboardModel::operator<=(const GameboardModel &model) const { return !(*this > model); }
 bool GameboardModel::operator>=(const GameboardModel &model) const { return !(*this < model); }
 
-namespace std {
-    template <class T> struct hash<deque<T>> {
-        size_t operator()(deque<T> const &vec) const {
-            size_t seed = vec.size();
-            for (auto &i : vec) {
-                seed ^= hash<T>()(i) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-            }
-            return seed;
-        }
-    };
+size_t std::hash<Tube>::operator()(const Tube &vec) const {
+    size_t seed = vec.size();
+    for (auto &i : vec) {
+        seed ^= hash<color_t>()(i) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+    }
+    return seed;
+}
 
-    // TODO
-    // Possibly a weak hash, not sure tho
-    template <> struct hash<GameboardModel>{
-        size_t operator()(const GameboardModel& model) const {
-            GameboardModel model_sorted = model;
-            sort(model_sorted.begin(), model_sorted.end());
-            size_t seed = model_sorted.size();
-            for(const Tube &t: model_sorted){
-                seed = (seed << 1) ^ hash<Tube>()(t);
-            }
-            return seed;
-        }
-    };
+// TODO
+// Possibly a weak hash, not sure tho
+size_t std::hash<GameboardModel>::operator()(const GameboardModel& model) const {
+    GameboardModel model_sorted = model;
+    std::sort(model_sorted.begin(), model_sorted.end());
+    size_t seed = model_sorted.size();
+    for(const Tube &t: model_sorted){
+        seed = (seed << 1) ^ hash<Tube>()(t);
+    }
+    return seed;
 }

@@ -12,7 +12,7 @@ private:
 
     TerminalGUI::pos_t position;
 public:
-    MenuView(const MenuModel &menuModel);
+    explicit MenuView(const MenuModel &menuModel);
     void draw(TerminalGUI &terminal);
 
     void setPosition(const TerminalGUI::pos_t &pos);

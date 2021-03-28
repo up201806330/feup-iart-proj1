@@ -10,7 +10,7 @@ private:
     const MenuModel &_menuModel;
     int selectedOption = -1;
 public:
-    MenuController(const MenuModel &menuModel);
+    explicit MenuController(const MenuModel &menuModel);
     void run();
-    int getSelectedOption();
+    int getSelectedOption() const;
 };

@@ -7,6 +7,6 @@
 
 class PlayHumanState: public State {
 public:
-    PlayHumanState(TerminalGUI *term);
-    virtual State* run();
+    explicit PlayHumanState(TerminalGUI *term);
+    State* run() override;
 };

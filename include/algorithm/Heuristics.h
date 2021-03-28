@@ -5,8 +5,9 @@
 
 #include "model/GameboardModel.h"
 
-class Search {
+class Heuristics {
 public:
-    virtual void initialize(const GameboardModel &gameboard) = 0;
-    virtual GameboardModel::Move next() = 0;
+    constexpr static const double INF = 1000000000000.0;
+    typedef double (*heuristic_t)(const GameboardModel &);
+    static double h1(const GameboardModel &gameboard);
 };

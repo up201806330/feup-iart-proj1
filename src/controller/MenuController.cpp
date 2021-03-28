@@ -18,6 +18,6 @@ void MenuController::run() {
     if(ss.fail()) selectedOption = -1;
 }
 
-int MenuController::getSelectedOption() {
+int MenuController::getSelectedOption() const {
     return selectedOption;
 }

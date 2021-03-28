@@ -7,6 +7,6 @@
 
 class MainMenuState: public State {
 public:
-    MainMenuState(TerminalGUI *term);
-    virtual State* run();
+    explicit MainMenuState(TerminalGUI *term);
+    State* run() override;
 };
