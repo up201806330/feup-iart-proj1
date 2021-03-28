@@ -18,7 +18,7 @@ Heuristic::heuristic_t FiniteHorizonHeuristic::operator()(const GameboardModel &
     Heuristic::heuristic_t best = INF;
     for(const GameboardModel &g: adj) {
         best = min(best, (*h)(g));
-        if(best == 0.0) return best+1;
+        if(best <= 0.0) return best+1;
     }
     return best+1;
 }
