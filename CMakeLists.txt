@@ -31,11 +31,12 @@ add_executable(main
     src/controller/MenuController.cpp
     src/algorithm/SearchStrategy.cpp
     src/algorithm/DepthFirstSearch.cpp
-        src/algorithm/DepthFirstGreedySearch.cpp
+    src/algorithm/GreedySearch.cpp
+    src/algorithm/DepthFirstGreedySearch.cpp
     src/algorithm/IterativeDeepeningSearch.cpp
     src/algorithm/Heuristics.cpp
     src/controller/state/ChooseMachineState.cpp
-        src/algorithm/AstarSearch.cpp
+    src/algorithm/AstarSearch.cpp
 )
 
 set(CPP_COMPILER_WARNINGS -Wall -Wunused-result -pedantic-errors -Wextra -Wcast-align -Wcast-qual -Wchar-subscripts

@@ -3,17 +3,19 @@
 
 #pragma once
 
+#include "model/GameboardModel.h"
 #include "algorithm/SearchStrategy.h"
 #include "Heuristics.h"
 
 #include <unordered_set>
+#include <list>
 
-class AstarSearch: public SearchStrategy {
+class GreedySearch : public SearchStrategy {
 private:
     Heuristics::heuristic_t h;
-    std::deque<GameboardModel::Move> solution;
+    std::list<GameboardModel::Move> solution;
 public:
-    explicit AstarSearch(Heuristics::heuristic_t heuristic);
-    void initialize(const GameboardModel &gameboard) override;
+    explicit GreedySearch(Heuristics::heuristic_t heuristic);
+    void initialize(const GameboardModel &gameboardModel) override;
     GameboardModel::Move next() override;
 };
