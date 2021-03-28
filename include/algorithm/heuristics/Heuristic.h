@@ -7,7 +7,8 @@
 
 class Heuristic {
 public:
-    constexpr static const double INF = 1000000000000.0;
-    typedef double (*heuristic_t)(const GameboardModel &);
-    static double h1(const GameboardModel &gameboard);
+    typedef double heuristic_t;
+    constexpr static const heuristic_t INF = 1000000000000.0;
+    virtual heuristic_t operator()(const GameboardModel &g) const = 0;
+    virtual ~Heuristic();
 };

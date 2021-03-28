@@ -1,7 +1,7 @@
 // Copyright (C) 2021 Diogo Rodrigues, Rafael Ribeiro, Bernardo Ferreira
 // Distributed under the terms of the GNU General Public License, version 3
 
-#include "algorithm/Heuristic.h"
+#include "algorithm/heuristics/AdmissibleHeuristic.h"
 #include "algorithm/DepthFirstSearch.h"
 #include "algorithm/DepthFirstGreedySearch.h"
 #include "algorithm/GreedySearch.h"
@@ -46,10 +46,10 @@ State *ChooseMachineState::run() {
     switch(option){
         case 1: State::playMachineState->setSearchStrategy(new DepthFirstSearch()); break;
 //        case 2: State::playMachineState->setSearchStrategy(new BreadthFirstSearch()); break;
-        case 3: State::playMachineState->setSearchStrategy(new DepthFirstGreedySearch(Heuristic::h1)); break;
+        case 3: State::playMachineState->setSearchStrategy(new DepthFirstGreedySearch(new AdmissibleHeuristic())); break;
         case 4: State::playMachineState->setSearchStrategy(new IterativeDeepeningSearch()); break;
-        case 5: State::playMachineState->setSearchStrategy(new GreedySearch(Heuristic::h1)); break;
-        case 6: State::playMachineState->setSearchStrategy(new AstarSearch(Heuristic::h1)); break;
+        case 5: State::playMachineState->setSearchStrategy(new GreedySearch(new AdmissibleHeuristic())); break;
+        case 6: State::playMachineState->setSearchStrategy(new AstarSearch(new AdmissibleHeuristic())); break;
         default: throw logic_error("");
     }
     return State::playMachineState;

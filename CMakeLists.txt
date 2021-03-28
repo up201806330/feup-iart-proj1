@@ -34,9 +34,10 @@ add_executable(main
     src/algorithm/GreedySearch.cpp
     src/algorithm/DepthFirstGreedySearch.cpp
     src/algorithm/IterativeDeepeningSearch.cpp
-        src/algorithm/Heuristic.cpp
+    src/algorithm/heuristics/AdmissibleHeuristic.cpp
     src/controller/state/ChooseMachineState.cpp
     src/algorithm/AstarSearch.cpp
+    src/algorithm/heuristics/Heuristic.cpp
 )
 
 set(CPP_COMPILER_WARNINGS -Wall -Wunused-result -pedantic-errors -Wextra -Wcast-align -Wcast-qual -Wchar-subscripts
