@@ -10,6 +10,11 @@ class MainMenuState;
 class PlayHumanState;
 class ChooseMachineState;
 class PlayMachineState;
+class ChooseHeuristicState;
+class ChooseHorizonState;
+class ChooseBaseHeuristicState;
+class ChooseFiniteHorizonHeuristicState;
+class ChooseHeuristicMachineState;
 
 class State {
 private:
@@ -19,10 +24,15 @@ public:
     TerminalGUI* getTerminal();
     virtual State* run() = 0;
 
-    static MainMenuState *mainMenuState;
-    static PlayHumanState *playHumanState;
-    static ChooseMachineState *chooseMachineState;
-    static PlayMachineState *playMachineState;
+    static MainMenuState                     *mainMenuState                    ;
+    static PlayHumanState                    *playHumanState                   ;
+    static ChooseMachineState                *chooseMachineState               ;
+    static PlayMachineState                  *playMachineState                 ;
+    static ChooseHeuristicState              *chooseHeuristicState             ;
+    static ChooseHorizonState                *chooseHorizonState               ;
+    static ChooseBaseHeuristicState          *chooseBaseHeuristicState         ;
+    static ChooseFiniteHorizonHeuristicState *chooseFiniteHorizonHeuristicState;
+    static ChooseHeuristicMachineState       *chooseHeuristicMachineState      ;
     static void initializeStates(TerminalGUI *terminal);
 };
 
@@ -30,3 +40,8 @@ public:
 #include "PlayHumanState.h"
 #include "ChooseMachineState.h"
 #include "PlayMachineState.h"
+#include "ChooseHeuristicState.h"
+#include "ChooseHorizonState.h"
+#include "ChooseBaseHeuristicState.h"
+#include "ChooseFiniteHorizonHeuristicState.h"
+#include "ChooseHeuristicMachineState.h"

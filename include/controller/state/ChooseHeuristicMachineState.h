@@ -5,13 +5,14 @@
 
 #include "State.h"
 
-class ChooseMachineState: public State {
+class ChooseHeuristicMachineState: public State {
 private:
-    const SearchStrategy *machine = nullptr;
+    const Heuristic *h = nullptr;
 public:
-    explicit ChooseMachineState(TerminalGUI *term);
-    State* run() override;
+    explicit ChooseHeuristicMachineState(TerminalGUI *term);
 
     void setMachine(const SearchStrategy *machine);
     const SearchStrategy *getMachine() const;
+
+    State* run() override;
 };

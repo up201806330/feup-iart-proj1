@@ -12,7 +12,7 @@
 
 class GreedySearch : public SearchStrategy {
 private:
-    const Heuristic *h;
+    const Heuristic *h = nullptr;
     std::list<GameboardModel::Move> solution;
 public:
     explicit GreedySearch(const Heuristic *heuristic);

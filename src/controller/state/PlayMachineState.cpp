@@ -3,7 +3,6 @@
 
 #include "controller/state/PlayMachineState.h"
 
-#include "model/GameboardModel.h"
 #include "model/ScoreboardModel.h"
 #include "view/GameboardView.h"
 #include "view/ScoreboardView.h"

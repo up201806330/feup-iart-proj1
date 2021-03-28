@@ -18,21 +18,27 @@ using namespace std;
 ChooseMachineState::ChooseMachineState(TerminalGUI *term) : State(term) {
 }
 
+void ChooseMachineState::setMachine(const SearchStrategy *searchStrategy) {
+    this->machine = searchStrategy;
+}
+
+const SearchStrategy *ChooseMachineState::getMachine() const{
+    return machine;
+}
+
 State *ChooseMachineState::run() {
     MenuModel menuModel;
     menuModel.addButton(1, "1. Depth first search");
 //    menuModel.addButton(2, "2. Breadth first search");
-    menuModel.addButton(3, "3. Depth first search, greedy first");
-    menuModel.addButton(4, "4. Iterative deepening depth first search");
-    menuModel.addButton(5, "5. Best-first search, greedy");
-    menuModel.addButton(6, "6. Best-first search, A*");
+    menuModel.addButton(4, "3. Iterative deepening depth first search");
+    menuModel.addButton(3, "4. Informed search methods (+)");
     menuModel.addButton(0, "0. Back");
 
     MenuView menuView(menuModel);
 
     MenuController menuController(menuModel);
 
-    int option = 0;
+    int option;
     do {
         getTerminal()->clear();
         menuView.draw(*getTerminal());
@@ -41,16 +47,12 @@ State *ChooseMachineState::run() {
         option = menuController.getSelectedOption();
     } while(!menuModel.hasButtonWithId(option));
 
-    if(option == 0) return State::mainMenuState;
-
     switch(option){
-        case 1: State::playMachineState->setSearchStrategy(new DepthFirstSearch()); break;
-//        case 2: State::playMachineState->setSearchStrategy(new BreadthFirstSearch()); break;
-        case 3: State::playMachineState->setSearchStrategy(new DepthFirstGreedySearch(new AdmissibleHeuristic())); break;
-        case 4: State::playMachineState->setSearchStrategy(new IterativeDeepeningSearch()); break;
-        case 5: State::playMachineState->setSearchStrategy(new GreedySearch(new AdmissibleHeuristic())); break;
-        case 6: State::playMachineState->setSearchStrategy(new AstarSearch(new AdmissibleHeuristic())); break;
+        case 1: State::playMachineState->setSearchStrategy(new DepthFirstSearch()); return State::playMachineState;
+//        case 2: State::playMachineState->setSearchStrategy(new BreadthFirstSearch()); return State::playMachineState;
+        case 3: State::playMachineState->setSearchStrategy(new IterativeDeepeningSearch()); return State::playMachineState;
+        case 4: return State::chooseHeuristicState;
+        case 0: return State::mainMenuState;
         default: throw logic_error("");
     }
-    return State::playMachineState;
 }

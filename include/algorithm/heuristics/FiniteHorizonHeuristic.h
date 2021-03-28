@@ -7,7 +7,7 @@
 
 class FiniteHorizonHeuristic: public Heuristic {
 private:
-    const Heuristic *h;
+    const Heuristic *h = nullptr;
     size_t depth;
 public:
     explicit FiniteHorizonHeuristic(const Heuristic *heuristic, size_t horizon);

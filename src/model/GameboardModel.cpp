@@ -5,7 +5,6 @@
 
 #include <stdexcept>
 #include <algorithm>
-#include <utility> 
 
 using namespace std;
 using Move = GameboardModel::Move;

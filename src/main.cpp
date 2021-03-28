@@ -3,7 +3,6 @@
 
 
 #include "view/gui/TerminalGUIColor.h"
-#include "model/GameboardModel.h"
 
 #include "controller/state/State.h"
 
