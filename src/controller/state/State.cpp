@@ -6,7 +6,7 @@
 #include "controller/state/PlayHumanState.h"
 #include "controller/state/ChooseMachineState.h"
 #include "controller/state/PlayMachineState.h"
-#include "algorithm/Heuristics.h"
+#include "algorithm/Heuristic.h"
 #include "algorithm/GreedySearch.h"
 
 MainMenuState      *State::mainMenuState      = nullptr;

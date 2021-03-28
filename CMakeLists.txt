@@ -34,7 +34,7 @@ add_executable(main
     src/algorithm/GreedySearch.cpp
     src/algorithm/DepthFirstGreedySearch.cpp
     src/algorithm/IterativeDeepeningSearch.cpp
-    src/algorithm/Heuristics.cpp
+        src/algorithm/Heuristic.cpp
     src/controller/state/ChooseMachineState.cpp
     src/algorithm/AstarSearch.cpp
 )

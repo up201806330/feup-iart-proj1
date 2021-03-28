@@ -4,16 +4,16 @@
 #pragma once
 
 #include "algorithm/SearchStrategy.h"
-#include "Heuristics.h"
+#include "Heuristic.h"
 
 #include <unordered_set>
 
 class AstarSearch: public SearchStrategy {
 private:
-    Heuristics::heuristic_t h;
+    Heuristic::heuristic_t h;
     std::deque<GameboardModel::Move> solution;
 public:
-    explicit AstarSearch(Heuristics::heuristic_t heuristic);
+    explicit AstarSearch(Heuristic::heuristic_t heuristic);
     void initialize(const GameboardModel &gameboard) override;
     GameboardModel::Move next() override;
 };

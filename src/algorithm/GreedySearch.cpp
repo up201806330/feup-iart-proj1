@@ -9,7 +9,7 @@
 using namespace std;
 using Move = GameboardModel::Move;
 
-GreedySearch::GreedySearch(Heuristics::heuristic_t heuristic):
+GreedySearch::GreedySearch(Heuristic::heuristic_t heuristic):
     h(heuristic)
 {
 }

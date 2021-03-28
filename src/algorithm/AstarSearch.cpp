@@ -9,7 +9,7 @@
 using namespace std;
 using Move = GameboardModel::Move;
 
-AstarSearch::AstarSearch(Heuristics::heuristic_t heuristic):
+AstarSearch::AstarSearch(Heuristic::heuristic_t heuristic):
         h(heuristic)
 {
 }

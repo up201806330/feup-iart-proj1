@@ -50,7 +50,7 @@ GameboardModel::Move DepthFirstGreedySearch::next() {
     return ret;
 }
 
-DepthFirstGreedySearch::DepthFirstGreedySearch(Heuristics::heuristic_t heuristic):
+DepthFirstGreedySearch::DepthFirstGreedySearch(Heuristic::heuristic_t heuristic):
     h(heuristic)
 {
 }

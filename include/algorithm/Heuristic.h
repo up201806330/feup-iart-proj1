@@ -5,7 +5,7 @@
 
 #include "model/GameboardModel.h"
 
-class Heuristics {
+class Heuristic {
 public:
     constexpr static const double INF = 1000000000000.0;
     typedef double (*heuristic_t)(const GameboardModel &);
