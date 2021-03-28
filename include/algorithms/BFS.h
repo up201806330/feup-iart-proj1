@@ -4,8 +4,6 @@
 #include <vector>
 #include "Search.h"
 
-#include <bits/stdc++.h>
-
 using namespace std;
 
 class BFS : public Search {

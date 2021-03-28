@@ -26,28 +26,17 @@ int main(){
     //State::initializeStates(terminal);
     
     GameboardModel gameboardModel(4, 4);
-    GameboardView view(gameboardModel);
-    
     gameboardModel.fillRandom(3);
+    
+    GameboardView view(gameboardModel);
     view.draw(*terminal);
     
     terminal->display();
 
     BFS bfs;
-    bfs.initialize(gameboardModel);
-    bfs.bfs_algorithm();
-    
+    //bfs.initialize(gameboardModel);
 
     
-    /*
-    vector<GameboardModel> path = bfs.getPath();
-
-    for(int i=0; i<path.size(); i++) {
-        GameboardView viewi(path[i]);
-        viewi.draw(*terminal);
-        sleep(2);
-    }
-*/
     /*
     State *currentState = State::mainMenuState;
     while(currentState != nullptr){

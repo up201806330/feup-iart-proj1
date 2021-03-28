@@ -10,7 +10,6 @@ void BFS::initialize(const GameboardModel &gameboard) {
     queue<GameboardModel::Move> auxPathMoves;
     queue<GameboardModel> auxPathState;
     
-
     auxPathState.push(_initialBoard);
 
     do {
@@ -44,3 +43,4 @@ GameboardModel::Move BFS::next() {
 
     return nextMove;
 }
+
