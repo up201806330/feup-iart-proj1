@@ -116,7 +116,7 @@ public:
      * 
      * @return std::vector<GameboardModel> 
      */
-    std::vector<GameboardModel> getAdjacentStates();
+    std::vector<GameboardModel> getAdjacentStates() const;
     bool isGameOver() const;
 
     bool operator==(const GameboardModel &model) const;

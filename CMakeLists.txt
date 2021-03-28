@@ -38,6 +38,7 @@ add_executable(main
     src/controller/state/ChooseMachineState.cpp
     src/algorithm/AstarSearch.cpp
     src/algorithm/heuristics/Heuristic.cpp
+    src/algorithm/heuristics/FiniteHorizonHeuristic.cpp
 )
 
 set(CPP_COMPILER_WARNINGS -Wall -Wunused-result -pedantic-errors -Wextra -Wcast-align -Wcast-qual -Wchar-subscripts
