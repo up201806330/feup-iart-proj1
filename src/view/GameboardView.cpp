@@ -3,9 +3,12 @@
 
 #include "view/GameboardView.h"
 
+#include "view/gui/TerminalGUISprite.h"
+
 using namespace std;
-typedef TerminalGUI::coord_t coord_t;
-typedef TerminalGUI::pos_t pos_t;
+using coord_t = TerminalGUI::coord_t;
+using pos_t   = TerminalGUI::pos_t;
+using Color   = TerminalGUI::Color;
 
 GameboardView::GameboardView(const GameboardModel &gameboardModel):
     _gameboardModel(gameboardModel)
@@ -38,23 +41,24 @@ void GameboardView::drawPiece(TerminalGUI &terminal, size_t tube, size_t place, 
 
     pos_t pos1 = pos0 + pos_t(
         0,
-        coord_t(-(PIECE_Y+PIECE_MARGIN_Y)*place)
+        coord_t(-(PIECE_Y+PIECE_MARGIN_Y)*place - PIECE_Y+PIECE_MARGIN_Y)
     );
-    terminal.drawCharacter(pos1+pos_t(0, -2), "▄", static_cast<TerminalGUI::Color>(piece_color));
-    terminal.drawCharacter(pos1+pos_t(1, -2), "█", static_cast<TerminalGUI::Color>(piece_color));
-    terminal.drawCharacter(pos1+pos_t(2, -2), "█", static_cast<TerminalGUI::Color>(piece_color));
-    terminal.drawCharacter(pos1+pos_t(3, -2), "█", static_cast<TerminalGUI::Color>(piece_color));
-    terminal.drawCharacter(pos1+pos_t(4, -2), "▄", static_cast<TerminalGUI::Color>(piece_color));
-    terminal.drawCharacter(pos1+pos_t(0, -1), "█", static_cast<TerminalGUI::Color>(piece_color));
-    terminal.drawCharacter(pos1+pos_t(1, -1), "█", static_cast<TerminalGUI::Color>(piece_color));
-    terminal.drawCharacter(pos1+pos_t(2, -1), "█", static_cast<TerminalGUI::Color>(piece_color));
-    terminal.drawCharacter(pos1+pos_t(3, -1), "█", static_cast<TerminalGUI::Color>(piece_color));
-    terminal.drawCharacter(pos1+pos_t(4, -1), "█", static_cast<TerminalGUI::Color>(piece_color));
-    terminal.drawCharacter(pos1+pos_t(0, -0), "▀", static_cast<TerminalGUI::Color>(piece_color));
-    terminal.drawCharacter(pos1+pos_t(1, -0), "█", static_cast<TerminalGUI::Color>(piece_color));
-    terminal.drawCharacter(pos1+pos_t(2, -0), "█", static_cast<TerminalGUI::Color>(piece_color));
-    terminal.drawCharacter(pos1+pos_t(3, -0), "█", static_cast<TerminalGUI::Color>(piece_color));
-    terminal.drawCharacter(pos1+pos_t(4, -0), "▀", static_cast<TerminalGUI::Color>(piece_color));
+
+    Color c = static_cast<TerminalGUI::Color>(piece_color);
+    TerminalGUISprite sprite(
+        {
+            {"▄","█","█","█","▄"},
+            {"█","█","█","█","█"},
+            {"▀","█","█","█","▀"}
+        },
+        {
+            {c,c,c,c,c},
+            {c,c,c,c,c},
+            {c,c,c,c,c}
+        }
+    );
+    sprite.setPosition(pos1);
+    terminal.draw(sprite);
 }
 
 void GameboardView::drawTube(TerminalGUI &terminal, size_t tube){
