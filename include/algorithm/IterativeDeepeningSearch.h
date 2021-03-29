@@ -10,14 +10,26 @@
 #include <deque>
 #include <unordered_set>
 
+/**
+ * @brief Iterative deepening depth-first search.
+ *
+ * Iterative deepening DFS is a method used mostly when the depth of the solution is not known. It consists of, at each
+ * iteration, performing DFS of nodes at depth at most d, check if a solution was found, and if not increment d, and
+ * repeat until a solution is found.
+ *
+ * If there is a solution, it is guaranteed to be optimal.
+ *
+ * It is better than DFS if the optimal path length is considerably smaller than the number of possible states, and if
+ * the branching factor is not too large.
+ */
 class IterativeDeepeningSearch : public SearchStrategy {
 private:
     std::deque<GameboardModel::Move> solution;
     std::unordered_set<GameboardModel> visited;
     size_t maxDepth;
-public:
-    bool dfs(const GameboardModel& gameBoard, size_t depth);
 
+    bool dfs(const GameboardModel& gameBoard, size_t depth);
+public:
     void initialize(const GameboardModel &gameboardModel) override;
     GameboardModel::Move next() override;
 };
