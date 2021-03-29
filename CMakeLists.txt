@@ -43,12 +43,12 @@ add_executable(main
         src/controller/state/State.cpp
         src/controller/state/MainMenuState.cpp
         src/controller/state/PlayHumanState.cpp
-        src/controller/state/ChooseMachineState.cpp
+        src/controller/state/ChooseStrategyState.cpp
         src/controller/state/ChooseHeuristicState.cpp
         src/controller/state/ChooseHorizonState.cpp
         src/controller/state/ChooseBaseHeuristicState.cpp
         src/controller/state/ChooseFiniteHorizonHeuristicState.cpp
-        src/controller/state/ChooseHeuristicMachineState.cpp
+        src/controller/state/ChooseHeuristicStrategyState.cpp
         src/controller/state/PlayMachineState.cpp
 
 )

@@ -6,7 +6,7 @@
 #include "algorithm/DepthFirstGreedySearch.h"
 #include "algorithm/GreedySearch.h"
 #include "algorithm/IterativeDeepeningSearch.h"
-#include "controller/state/ChooseMachineState.h"
+#include "controller/state/ChooseStrategyState.h"
 
 #include "controller/MenuController.h"
 #include "view/MenuView.h"
@@ -15,18 +15,18 @@
 
 using namespace std;
 
-ChooseMachineState::ChooseMachineState(TerminalGUI *term) : State(term) {
+ChooseStrategyState::ChooseStrategyState(TerminalGUI *term) : State(term) {
 }
 
-void ChooseMachineState::setMachine(SearchStrategy *searchStrategy) {
-    this->machine = searchStrategy;
+void ChooseStrategyState::setSearchStrategy(SearchStrategy *search) {
+    this->strategy = search;
 }
 
-SearchStrategy *ChooseMachineState::getMachine() const{
-    return machine;
+SearchStrategy *ChooseStrategyState::getSearchStrategy() const{
+    return strategy;
 }
 
-State *ChooseMachineState::run() {
+State *ChooseStrategyState::run() {
     MenuModel menuModel;
     menuModel.addButton(1, "1. Depth first search");
 //    menuModel.addButton(2, "2. Breadth first search");
@@ -48,9 +48,11 @@ State *ChooseMachineState::run() {
     } while(!menuModel.hasButtonWithId(option));
 
     switch(option){
-        case 1: this->setMachine(new DepthFirstSearch()); return State::playMachineState;
+        case 1:
+            this->setSearchStrategy(new DepthFirstSearch()); return State::playMachineState;
 //        case 2: this->setSearchStrategy(new BreadthFirstSearch()); return State::playMachineState;
-        case 3: this->setMachine(new IterativeDeepeningSearch()); return State::playMachineState;
+        case 3:
+            this->setSearchStrategy(new IterativeDeepeningSearch()); return State::playMachineState;
         case 4: return State::chooseHeuristicState;
         case 0: return State::mainMenuState;
         default: throw logic_error("");

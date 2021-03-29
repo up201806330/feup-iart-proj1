@@ -16,7 +16,7 @@ PlayMachineState::PlayMachineState(TerminalGUI *term) :
 }
 
 State *PlayMachineState::run() {
-    SearchStrategy *searchStrategy = State::chooseMachineState->getMachine();
+    SearchStrategy *searchStrategy = State::chooseMachineState->getSearchStrategy();
 
     getTerminal()->setCorner(pos_t(0,0));
 
