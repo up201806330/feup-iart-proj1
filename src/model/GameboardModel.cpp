@@ -230,7 +230,7 @@ size_t std::hash<Tube>::operator()(const Tube &vec) const {
 }
 
 // TODO
-size_t std::hash<GameboardModel>::operator()(const GameboardModel& model) const {
+size_t hash<GameboardModel>::operator()(const GameboardModel& model) const {
     GameboardModel model_sorted = model;
     /*
     std::sort(model_sorted.begin(), model_sorted.end());

@@ -21,12 +21,8 @@ bool TerminalGUI::pos_t::operator> (const TerminalGUI::pos_t &p) const { return 
 bool TerminalGUI::pos_t::operator<=(const TerminalGUI::pos_t &p) const { return !(*this > p); }
 bool TerminalGUI::pos_t::operator>=(const TerminalGUI::pos_t &p) const { return !(*this < p); }
 
-namespace std {
-    template <> struct hash<TerminalGUI::pos_t>{
-        std::size_t operator()(const TerminalGUI::pos_t& p) const {
-            return (hash<TerminalGUI::coord_t>()(p.x) << 1) ^ hash<TerminalGUI::coord_t>()(p.y);
-        }
-    };
+size_t hash<TerminalGUI::pos_t>::operator()(const TerminalGUI::pos_t& p) const {
+    return (hash<TerminalGUI::coord_t>()(p.x) << 1) ^ hash<TerminalGUI::coord_t>()(p.y);
 }
 
 using pos_t = TerminalGUI::pos_t;

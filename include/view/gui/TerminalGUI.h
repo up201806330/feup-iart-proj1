@@ -179,6 +179,6 @@ namespace std {
      * Uses a decent hash function.
      */
     template <> struct hash<TerminalGUI::pos_t>{
-        std::size_t operator()(const TerminalGUI::pos_t& p) const;
+        size_t operator()(const TerminalGUI::pos_t& p) const;
     };
 }

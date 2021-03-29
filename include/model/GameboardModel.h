@@ -179,7 +179,6 @@ namespace std {
      * Currently implemented as a strong hash (https://stackoverflow.com/a/27216842).
      */
     template <> struct hash<Tube> {
-        hash() = default;
         size_t operator()(const Tube &vec) const;
     };
 
@@ -189,7 +188,6 @@ namespace std {
      * Using a possibly quite weak hash.
      */
     template <> struct hash<GameboardModel>{
-        hash() = default;
         size_t operator()(const GameboardModel& model) const;
     };
 }
