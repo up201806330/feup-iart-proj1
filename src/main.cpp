@@ -2,11 +2,7 @@
 // Distributed under the terms of the GNU General Public License, version 3
 
 
-
-
 #include "view/gui/TerminalGUIColor.h"
-#include "model/GameboardModel.h"
-#include <unistd.h>
 #include "controller/state/State.h"
 
 using namespace std;

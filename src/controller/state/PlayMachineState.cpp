@@ -3,7 +3,6 @@
 
 #include "controller/state/PlayMachineState.h"
 
-#include "model/GameboardModel.h"
 #include "model/ScoreboardModel.h"
 #include "view/GameboardView.h"
 #include "view/ScoreboardView.h"
@@ -18,12 +17,9 @@ PlayMachineState::PlayMachineState(TerminalGUI *term) :
 {
 }
 
-void PlayMachineState::setSearchStrategy(SearchStrategy *strategy) {
-    delete this->searchStrategy;
-    this->searchStrategy = strategy;
-}
-
 State *PlayMachineState::run() {
+    SearchStrategy *searchStrategy = State::chooseMachineState->getSearchStrategy();
+
     getTerminal()->setCorner(pos_t(0,0));
 
     GameboardModel gameboard(5, 4);

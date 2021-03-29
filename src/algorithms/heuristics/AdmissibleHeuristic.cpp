@@ -3,11 +3,11 @@
 
 #include <numeric>
 #include <algorithm>
-//#include "algorithm/Heuristic.h"
+#include "algorithm/heuristics/AdmissibleHeuristic.h"
 
 using namespace std;
 
-double Heuristic::h1(const GameboardModel &gameboard) {
+Heuristic::heuristic_t AdmissibleHeuristic::operator()(const GameboardModel &gameboard) const {
     double ret = 0.0;
     // First part
     for(const Tube &t: gameboard){

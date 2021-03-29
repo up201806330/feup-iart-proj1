@@ -9,8 +9,8 @@
 using namespace std;
 using Move = GameboardModel::Move;
 
-AstarSearch::AstarSearch(Heuristics::heuristic_t heuristic):
-        h(heuristic)
+AstarSearch::AstarSearch(const Heuristic *heuristic):
+    h(heuristic)
 {
 }
 
@@ -29,7 +29,7 @@ void AstarSearch::initialize(const GameboardModel &src){
 
         dist.emplace(src, 0);
         prev.emplace(src, make_pair(src, Move(0,0)));
-        q.emplace(h(src), src);
+        q.emplace((*h)(src), src);
 
         while (!q.empty()) {
             GameboardModel u = q.top().second;
@@ -50,7 +50,7 @@ void AstarSearch::initialize(const GameboardModel &src){
                 if(!dist.count(v) || dist.at(v) > dist.at(u) + 1) {
                     dist.emplace(v, dist.at(u) + 1);
                     prev.emplace(v, make_pair(u, e));
-                    q.emplace(static_cast<double>(dist.at(v)) + h(v), v);
+                    q.emplace(static_cast<double>(dist.at(v)) + (*h)(v), v);
                 }
             }
         }
@@ -73,4 +73,8 @@ void AstarSearch::initialize(const GameboardModel &src){
 GameboardModel::Move AstarSearch::next() {
     Move ret = solution.front(); solution.pop_front();
     return ret;
+}
+
+AstarSearch::~AstarSearch() {
+    delete h;
 }

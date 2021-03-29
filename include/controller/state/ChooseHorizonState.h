@@ -3,11 +3,16 @@
 
 #pragma once
 
-#include "algorithm/SearchStrategy.h"
 #include "State.h"
 
-class PlayMachineState: public State {
+class ChooseHorizonState: public State {
+private:
+    size_t depth = 0;
 public:
-    explicit PlayMachineState(TerminalGUI *term);
+    explicit ChooseHorizonState(TerminalGUI *term);
+
+    void setHorizon(size_t horizon);
+    size_t getHorizon() const;
+
     State* run() override;
 };

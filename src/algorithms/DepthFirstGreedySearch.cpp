@@ -8,6 +8,11 @@
 using namespace std;
 using Move = GameboardModel::Move;
 
+DepthFirstGreedySearch::DepthFirstGreedySearch(const Heuristic *heuristic):
+    h(heuristic)
+{
+}
+
 bool DepthFirstGreedySearch::dfs(const GameboardModel& gameBoard) {
     if (visited.count(gameBoard)) return false;
 
@@ -21,7 +26,7 @@ bool DepthFirstGreedySearch::dfs(const GameboardModel& gameBoard) {
         for (const Move &move : moves) {
             GameboardModel state = gameBoard;
             state.move(move);
-            double score = h(state);
+            double score = (*h)(state);
             moves_scores.emplace_back(score, move);
         }
         sort(moves_scores.begin(), moves_scores.end());
@@ -48,9 +53,4 @@ void DepthFirstGreedySearch::initialize(const GameboardModel &gameboardModel){
 GameboardModel::Move DepthFirstGreedySearch::next() {
     Move ret = solution.front(); solution.pop_front();
     return ret;
-}
-
-DepthFirstGreedySearch::DepthFirstGreedySearch(Heuristics::heuristic_t heuristic):
-    h(heuristic)
-{
 }

@@ -9,7 +9,7 @@
 using namespace std;
 using Move = GameboardModel::Move;
 
-GreedySearch::GreedySearch(Heuristics::heuristic_t heuristic):
+GreedySearch::GreedySearch(const Heuristic *heuristic):
     h(heuristic)
 {
 }
@@ -25,7 +25,7 @@ void GreedySearch::initialize(const GameboardModel &gameboardModel){
                 vector<tuple<double, GameboardModel, Move, GameboardModel> >,
                 greater<>
         > q;
-        q.emplace(h(gameboardModel), gameboardModel, Move(0, 0), gameboardModel);
+        q.emplace((*h)(gameboardModel), gameboardModel, Move(0, 0), gameboardModel);
         double c;
         GameboardModel g_prev;
         Move m(0, 0);
@@ -41,7 +41,7 @@ void GreedySearch::initialize(const GameboardModel &gameboardModel){
             for (const Move &m_new: moves) {
                 GameboardModel g_new = g;
                 g_new.move(m_new);
-                q.emplace(h(g_new), g, m_new, g_new);
+                q.emplace((*h)(g_new), g, m_new, g_new);
             }
         }
     }
@@ -62,4 +62,8 @@ void GreedySearch::initialize(const GameboardModel &gameboardModel){
 GameboardModel::Move GreedySearch::next() {
     Move ret = solution.front(); solution.pop_front();
     return ret;
+}
+
+GreedySearch::~GreedySearch() {
+    delete h;
 }

@@ -3,10 +3,9 @@
 
 #pragma once
 
-#include "State.h"
+#include "Heuristic.h"
 
-class ChooseMachineState: public State {
+class AdmissibleHeuristic: public Heuristic {
 public:
-    explicit ChooseMachineState(TerminalGUI *term);
-    State* run() override;
+    heuristic_t operator()(const GameboardModel &g) const override;
 };

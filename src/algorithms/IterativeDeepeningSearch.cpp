@@ -34,7 +34,6 @@ void IterativeDeepeningSearch::initialize(const GameboardModel &gameboardModel){
 
     while (!dfs(gameboardModel, 0)){
         ++maxDepth;
-        //cout << "Increasing depth to " << currentDepth << endl;
         solution.clear();
         visited.clear();
     }

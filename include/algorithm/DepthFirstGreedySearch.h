@@ -5,18 +5,18 @@
 
 #include "model/GameboardModel.h"
 #include "algorithm/SearchStrategy.h"
-#include "Heuristics.h"
+#include "algorithm/heuristics/Heuristic.h"
 
 #include <deque>
 #include <unordered_set>
 
 class DepthFirstGreedySearch : public SearchStrategy {
 private:
-    Heuristics::heuristic_t h;
+    const Heuristic *h = nullptr;
     std::deque<GameboardModel::Move> solution;
     std::unordered_set<GameboardModel> visited;
 public:
-    explicit DepthFirstGreedySearch(Heuristics::heuristic_t heuristic);
+    explicit DepthFirstGreedySearch(const Heuristic *heuristic);
     bool dfs(const GameboardModel& gameBoard);
 
     void initialize(const GameboardModel &gameboardModel) override;

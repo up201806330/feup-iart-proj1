@@ -5,17 +5,18 @@
 
 #include "model/GameboardModel.h"
 #include "algorithm/SearchStrategy.h"
-#include "Heuristics.h"
+#include "algorithm/heuristics/Heuristic.h"
 
 #include <unordered_set>
 #include <list>
 
 class GreedySearch : public SearchStrategy {
 private:
-    Heuristics::heuristic_t h;
+    const Heuristic *h = nullptr;
     std::list<GameboardModel::Move> solution;
 public:
-    explicit GreedySearch(Heuristics::heuristic_t heuristic);
+    explicit GreedySearch(const Heuristic *heuristic);
     void initialize(const GameboardModel &gameboardModel) override;
     GameboardModel::Move next() override;
+    ~GreedySearch() override;
 };

@@ -3,7 +3,7 @@
 
 #include <numeric>
 #include <algorithm>
-//#include "algorithm/Heuristic.h"
+//#include "algorithm/heuristics/Heuristic.h"
 
 using namespace std;
 
