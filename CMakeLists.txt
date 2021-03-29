@@ -14,6 +14,7 @@ add_executable(main
 
         src/algorithm/SearchStrategy.cpp
         src/algorithm/DepthFirstSearch.cpp
+        src/algorithm/BreadthFirstSearch.cpp
         src/algorithm/GreedySearch.cpp
         src/algorithm/DepthFirstGreedySearch.cpp
         src/algorithm/IterativeDeepeningSearch.cpp
