@@ -5,8 +5,16 @@
 
 #include "State.h"
 
+/**
+ * @brief Human play
+ */
 class PlayHumanState: public State {
 public:
+    /**
+     * @brief Construct a new PlayHumanState object.
+     * 
+     * @param term Terminal to print to
+     */
     explicit PlayHumanState(TerminalGUI *term);
     State* run() override;
     ~PlayHumanState() override;

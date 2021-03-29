@@ -14,12 +14,13 @@ add_executable(main
 
         src/algorithm/SearchStrategy.cpp
         src/algorithm/DepthFirstSearch.cpp
+        src/algorithm/BreadthFirstSearch.cpp
         src/algorithm/GreedySearch.cpp
         src/algorithm/DepthFirstGreedySearch.cpp
         src/algorithm/IterativeDeepeningSearch.cpp
-        src/algorithm/heuristics/AdmissibleHeuristic.cpp
         src/algorithm/AstarSearch.cpp
         src/algorithm/heuristics/Heuristic.cpp
+        src/algorithm/heuristics/AdmissibleHeuristic.cpp
         src/algorithm/heuristics/FiniteHorizonHeuristic.cpp
 
         src/model/GameboardModel.cpp

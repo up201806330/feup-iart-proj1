@@ -44,7 +44,7 @@ void GameboardView::drawPiece(TerminalGUI &terminal, size_t tube, size_t place, 
         coord_t(-(PIECE_Y+PIECE_MARGIN_Y)*place - PIECE_Y+PIECE_MARGIN_Y)
     );
 
-    Color c = static_cast<TerminalGUI::Color>(piece_color);
+    auto c = static_cast<Color>(piece_color);
     TerminalGUISprite sprite(
         {
             {"▄","█","█","█","▄"},

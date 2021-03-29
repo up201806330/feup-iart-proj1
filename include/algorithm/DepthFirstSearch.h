@@ -10,13 +10,18 @@
 #include <deque>
 #include <unordered_set>
 
+/**
+ * @brief Depth-first search.
+ *
+ * Keeps track of visited nodes (nodes added to the path so far) so as to avoid cycles.
+ */
 class DepthFirstSearch : public SearchStrategy {
 private:
     std::deque<GameboardModel::Move> solution;
     std::unordered_set<GameboardModel> visited;
-public:
-    bool dfs(const GameboardModel& gameBoard);
 
+    bool dfs(const GameboardModel& gameBoard);
+public:
     void initialize(const GameboardModel &gameboardModel) override;
     GameboardModel::Move next() override;
 };

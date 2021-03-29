@@ -6,7 +6,13 @@
 #include <view/MenuView.h>
 #include "MenuModel.h"
 
+/**
+ * @brief Main menu model.
+ */
 class MainMenuModel : public MenuModel {
 public:
+    /**
+     * @brief Construct main menu.
+     */
     MainMenuModel();
 };

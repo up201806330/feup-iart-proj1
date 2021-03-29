@@ -5,6 +5,7 @@
 
 #include <utility>
 #include <stdexcept>
+#include <algorithm>
 
 using namespace std;
 
@@ -24,7 +25,5 @@ const vector<MenuModel::Button>& MenuModel::getButtons() const {
 }
 
 bool MenuModel::hasButtonWithId(int id) const {
-    for(const Button &b: getButtons())
-        if(b.id == id) return true;
-    return false;
+    return any_of(buttons.begin(), buttons.end(), [id](const Button &b){ return b.id == id; });
 }

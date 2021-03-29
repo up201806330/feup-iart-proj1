@@ -5,8 +5,16 @@
 
 #include "State.h"
 
+/**
+ * @brief Main menu.
+ */
 class MainMenuState: public State {
 public:
+    /**
+     * @brief Construct a new MainMenuState object.
+     * 
+     * @param term Terminal to print to
+     */
     explicit MainMenuState(TerminalGUI *term);
     State* run() override;
     ~MainMenuState() override;

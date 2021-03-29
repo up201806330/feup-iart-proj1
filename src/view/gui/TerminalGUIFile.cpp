@@ -29,5 +29,7 @@ TerminalGUIFile::pos_t TerminalGUIFile::getSize() const {
         size.y = csbi.srWindow.Bottom - csbi.srWindow.Top  + 1;
 
         return size;
+    #else
+        #error Unknown OS, dont know how to get terminal size
     #endif
 }

@@ -19,3 +19,4 @@ build
 *.exe
 .idea/
 cmake-build-*/
+doc/html

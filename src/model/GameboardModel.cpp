@@ -23,8 +23,9 @@ bool GameboardModel::Move::operator<=(const GameboardModel::Move &m) const { ret
 bool GameboardModel::Move::operator>=(const GameboardModel::Move &m) const { return !(m < *this); }
 
 GameboardModel::GameboardModel():
-    _num_tubes(0),
-    _tube_height(0)
+        nTubes(0),
+        tubeH(0),
+        nColors(0)
 {
 }
 
@@ -33,9 +34,9 @@ GameboardModel::GameboardModel(const GameboardModel& original) = default;
 GameboardModel &GameboardModel::operator=(const GameboardModel &gameboard) = default;
 
 GameboardModel::GameboardModel(size_t num_tubes, size_t tube_height):
-    _num_tubes(num_tubes),
-    _tube_height(tube_height),
-    tubes(num_tubes)
+        nTubes(num_tubes),
+        tubeH(tube_height),
+        tubes(num_tubes)
 {
 }
 
@@ -52,22 +53,22 @@ vector<Tube>::const_iterator GameboardModel::begin() const noexcept { return tub
 vector<Tube>::iterator       GameboardModel::end  ()       noexcept { return tubes.end(); }
 vector<Tube>::const_iterator GameboardModel::end  () const noexcept { return tubes.end(); }
 
-size_t GameboardModel::tubeHeight() const{ return _tube_height; }
+size_t GameboardModel::tubeHeight() const{ return tubeH; }
 
 void GameboardModel::clear(){
-    for(size_t i = 0; i < _num_tubes; ++i){
+    for(size_t i = 0; i < nTubes; ++i){
         (*this)[i] = deque<color_t>();
     }
 }
 
 void GameboardModel::fillRandom(size_t num_colors){
-    size_t num_pieces = num_colors*_tube_height;
+    size_t num_pieces = num_colors * tubeH;
     // There must be at least as many tubes as there are colors, since each
     // color will be in a separate tube.
-    if(num_colors > _num_tubes) throw invalid_argument("more colors than tubes");
+    if(num_colors > nTubes) throw invalid_argument("more colors than tubes");
 
     // There must be enough tubes to contain all pieces.
-    if(num_pieces > _num_tubes*num_colors) throw invalid_argument("too many pieces");
+    if(num_pieces > nTubes * num_colors) throw invalid_argument("too many pieces");
 
     // There must be at least one piece of each color, otherwise one of the
     // colors would have 0 pieces, in which case it should be included as a
@@ -85,7 +86,7 @@ void GameboardModel::fillRandom(size_t num_colors){
 
             // Keep trying until a color is found that has not yet been
             // allocated the maximum number of pieces per color.
-        } while(num_pieces_per_color[color] >= _tube_height);
+        } while(num_pieces_per_color[color] >= tubeH);
 
         ++num_pieces_per_color[color];
     }
@@ -97,18 +98,18 @@ void GameboardModel::fillRandom(size_t num_colors){
             // Search for tube that is not yet on maximum capacity.
             size_t tube;
             do {
-                tube = static_cast<unsigned long>(rand()) % _num_tubes;
-            } while((*this)[tube].size() >= _tube_height);
+                tube = static_cast<unsigned long>(rand()) % nTubes;
+            } while((*this)[tube].size() >= tubeH);
             (*this)[tube].push_back(color_t(i));
             --num_pieces_per_color[i];
         }
     }
 
-    _num_colors = num_colors;
+    nColors = num_colors;
 }
 
 size_t GameboardModel::getNumberOfColors() const {
-    return _num_colors;
+    return nColors;
 }
 
 bool GameboardModel::canMove(const Move &move) const {
@@ -119,7 +120,7 @@ bool GameboardModel::canMove(const Move &move) const {
         // Origin is not empty
         !tube_origin.empty() &&
         // Destination is not full
-        tube_destination.size() < _tube_height &&
+        tube_destination.size() < tubeH &&
         (
             // Destination is empty; or
             tube_destination.empty() ||
@@ -229,10 +230,11 @@ size_t std::hash<Tube>::operator()(const Tube &vec) const {
 }
 
 // TODO
-// Possibly a weak hash, not sure tho
-size_t std::hash<GameboardModel>::operator()(const GameboardModel& model) const {
+size_t hash<GameboardModel>::operator()(const GameboardModel& model) const {
     GameboardModel model_sorted = model;
+    /*
     std::sort(model_sorted.begin(), model_sorted.end());
+     */
     size_t seed = model_sorted.size();
     for(const Tube &t: model_sorted){
         seed = (seed << 1) ^ hash<Tube>()(t);

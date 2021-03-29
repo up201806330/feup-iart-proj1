@@ -5,13 +5,31 @@
 
 #include "State.h"
 
+/**
+ * @brief For a finite horizon heuristic, choose the base heuristic to be used.
+ */
 class ChooseBaseHeuristicState: public State {
 private:
     const Heuristic *h = nullptr;
 public:
+    /**
+     * @brief Construct a new ChooseBaseHeuristicState object.
+     * 
+     * @param term  Terminal to print to
+     */
     explicit ChooseBaseHeuristicState(TerminalGUI *term);
 
-    void setBaseHeuristic(const Heuristic *heuristic);
+    /**
+     * @brief Set base heuristic.
+     *
+     * @param baseHeuristic Base heuristic
+     */
+    void setBaseHeuristic(const Heuristic *baseHeuristic);
+    /**
+     * @brief Get base heuristic.
+     *
+     * @return Base heuristic
+     */
     const Heuristic *getBaseHeuristic() const;
 
     State* run() override;
