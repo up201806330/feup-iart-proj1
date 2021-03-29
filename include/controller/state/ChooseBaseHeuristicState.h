@@ -15,4 +15,6 @@ public:
     const Heuristic *getBaseHeuristic() const;
 
     State* run() override;
+
+    ~ChooseBaseHeuristicState() override;
 };

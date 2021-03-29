@@ -15,4 +15,6 @@ public:
     size_t getHorizon() const;
 
     State* run() override;
+
+    ~ChooseHorizonState() override;
 };

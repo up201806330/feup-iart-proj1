@@ -56,3 +56,5 @@ State *ChooseHeuristicStrategyState::run() {
         default: throw logic_error("");
     }
 }
+
+ChooseHeuristicStrategyState::~ChooseHeuristicStrategyState() = default;

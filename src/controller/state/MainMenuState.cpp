@@ -35,3 +35,5 @@ State *MainMenuState::run() {
     }
     return ret;
 }
+
+MainMenuState::~MainMenuState() = default;

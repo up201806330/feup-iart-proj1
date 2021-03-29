@@ -19,6 +19,7 @@ ChooseStrategyState::ChooseStrategyState(TerminalGUI *term) : State(term) {
 }
 
 void ChooseStrategyState::setSearchStrategy(SearchStrategy *search) {
+    delete this->strategy;
     this->strategy = search;
 }
 
@@ -48,13 +49,13 @@ State *ChooseStrategyState::run() {
     } while(!menuModel.hasButtonWithId(option));
 
     switch(option){
-        case 1:
-            this->setSearchStrategy(new DepthFirstSearch()); return State::playMachineState;
+        case 1: this->setSearchStrategy(new DepthFirstSearch()); return State::playMachineState;
 //        case 2: this->setSearchStrategy(new BreadthFirstSearch()); return State::playMachineState;
-        case 3:
-            this->setSearchStrategy(new IterativeDeepeningSearch()); return State::playMachineState;
+        case 3: this->setSearchStrategy(new IterativeDeepeningSearch()); return State::playMachineState;
         case 4: return State::chooseHeuristicState;
         case 0: return State::mainMenuState;
         default: throw logic_error("");
     }
 }
+
+ChooseStrategyState::~ChooseStrategyState() = default;

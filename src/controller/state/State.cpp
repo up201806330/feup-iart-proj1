@@ -15,19 +15,22 @@
 
 MainMenuState                     *State::mainMenuState                     = nullptr;
 PlayHumanState                    *State::playHumanState                    = nullptr;
-ChooseStrategyState                *State::chooseMachineState                = nullptr;
+ChooseStrategyState               *State::chooseMachineState                = nullptr;
 PlayMachineState                  *State::playMachineState                  = nullptr;
 ChooseHeuristicState              *State::chooseHeuristicState              = nullptr;
 ChooseHorizonState                *State::chooseHorizonState                = nullptr;
 ChooseBaseHeuristicState          *State::chooseBaseHeuristicState          = nullptr;
 ChooseFiniteHorizonHeuristicState *State::chooseFiniteHorizonHeuristicState = nullptr;
-ChooseHeuristicStrategyState       *State::chooseHeuristicMachineState       = nullptr;
+ChooseHeuristicStrategyState      *State::chooseHeuristicMachineState       = nullptr;
 
 State::State(TerminalGUI *term): terminal(term) {
 }
 
 TerminalGUI *State::getTerminal() {
     return terminal;
+}
+
+State::~State() {
 }
 
 void State::initializeStates(TerminalGUI *terminal) {
@@ -40,4 +43,16 @@ void State::initializeStates(TerminalGUI *terminal) {
     chooseBaseHeuristicState          = new ChooseBaseHeuristicState(terminal);
     chooseFiniteHorizonHeuristicState = new ChooseFiniteHorizonHeuristicState(terminal);
     chooseHeuristicMachineState       = new ChooseHeuristicStrategyState(terminal);
+}
+
+void State::deleteStates() {
+    delete mainMenuState;
+    delete playHumanState;
+    delete chooseMachineState;
+    delete playMachineState;
+    delete chooseHeuristicState;
+    delete chooseHorizonState;
+    delete chooseBaseHeuristicState;
+    delete chooseFiniteHorizonHeuristicState;
+    delete chooseHeuristicMachineState;
 }

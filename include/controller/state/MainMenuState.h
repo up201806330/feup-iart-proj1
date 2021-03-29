@@ -9,4 +9,5 @@ class MainMenuState: public State {
 public:
     explicit MainMenuState(TerminalGUI *term);
     State* run() override;
+    ~MainMenuState() override;
 };

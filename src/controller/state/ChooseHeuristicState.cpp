@@ -46,3 +46,5 @@ State *ChooseHeuristicState::run() {
         default: throw logic_error("");
     }
 }
+
+ChooseHeuristicState::~ChooseHeuristicState() = default;

@@ -37,3 +37,5 @@ State *ChooseHorizonState::run() {
     this->setHorizon(static_cast<size_t>(horizon));
     return State::chooseBaseHeuristicState;
 }
+
+ChooseHorizonState::~ChooseHorizonState() = default;

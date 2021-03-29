@@ -9,4 +9,5 @@ class PlayHumanState: public State {
 public:
     explicit PlayHumanState(TerminalGUI *term);
     State* run() override;
+    ~PlayHumanState() override;
 };

@@ -12,4 +12,5 @@ private:
 public:
     explicit FiniteHorizonHeuristic(const Heuristic *heuristic, size_t horizon);
     heuristic_t operator()(const GameboardModel &gameboard) const override;
+    ~FiniteHorizonHeuristic() override;
 };

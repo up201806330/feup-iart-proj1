@@ -23,6 +23,7 @@ public:
     explicit State(TerminalGUI *term);
     TerminalGUI* getTerminal();
     virtual State* run() = 0;
+    virtual ~State();
 
     static MainMenuState                     *mainMenuState                    ;
     static PlayHumanState                    *playHumanState                   ;
@@ -34,6 +35,7 @@ public:
     static ChooseFiniteHorizonHeuristicState *chooseFiniteHorizonHeuristicState;
     static ChooseHeuristicStrategyState       *chooseHeuristicMachineState      ;
     static void initializeStates(TerminalGUI *terminal);
+    static void deleteStates();
 };
 
 #include "MainMenuState.h"

@@ -10,4 +10,5 @@ class PlayMachineState: public State {
 public:
     explicit PlayMachineState(TerminalGUI *term);
     State* run() override;
+    ~PlayMachineState() override;
 };

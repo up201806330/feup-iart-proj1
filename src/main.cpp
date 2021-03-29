@@ -16,6 +16,7 @@ int main(){
     while(currentState != nullptr){
         currentState = currentState->run();
     }
-    
+
+    State::deleteStates();
     return 0;
 }
