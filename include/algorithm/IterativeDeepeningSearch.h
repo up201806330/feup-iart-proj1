@@ -8,12 +8,12 @@
 
 #include <bits/stdc++.h>
 #include <deque>
-#include <unordered_set>
+#include <unordered_map>
 
 class IterativeDeepeningSearch : public SearchStrategy {
 private:
     std::deque<GameboardModel::Move> solution;
-    std::unordered_set<GameboardModel> visited;
+    std::unordered_map<GameboardModel, size_t> visited;
     size_t maxDepth;
 public:
     bool dfs(const GameboardModel& gameBoard, size_t depth);
