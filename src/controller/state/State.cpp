@@ -20,6 +20,9 @@ TerminalGUI *State::getTerminal() {
     return terminal;
 }
 
+State::~State() {
+}
+
 void State::initializeStates(TerminalGUI *terminal) {
     mainMenuState                     = new MainMenuState(terminal);
     playHumanState                    = new PlayHumanState(terminal);
@@ -30,4 +33,16 @@ void State::initializeStates(TerminalGUI *terminal) {
     chooseBaseHeuristicState          = new ChooseBaseHeuristicState(terminal);
     chooseFiniteHorizonHeuristicState = new ChooseFiniteHorizonHeuristicState(terminal);
     chooseHeuristicMachineState       = new ChooseHeuristicStrategyState(terminal);
+}
+
+void State::deleteStates() {
+    delete mainMenuState;
+    delete playHumanState;
+    delete chooseMachineState;
+    delete playMachineState;
+    delete chooseHeuristicState;
+    delete chooseHorizonState;
+    delete chooseBaseHeuristicState;
+    delete chooseFiniteHorizonHeuristicState;
+    delete chooseHeuristicMachineState;
 }

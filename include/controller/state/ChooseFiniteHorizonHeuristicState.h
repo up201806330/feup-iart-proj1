@@ -37,4 +37,6 @@ public:
     const Heuristic *getHeuristic() const;
 
     State* run() override;
+
+    ~ChooseFiniteHorizonHeuristicState() override;
 };

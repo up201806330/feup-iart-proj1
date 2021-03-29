@@ -37,4 +37,6 @@ public:
     SearchStrategy *getSearchStrategy() const;
 
     State* run() override;
+
+    ~ChooseHeuristicStrategyState() override;
 };

@@ -61,3 +61,5 @@ State *PlayHumanState::run() {
 
     return State::mainMenuState;
 }
+
+PlayHumanState::~PlayHumanState() = default;

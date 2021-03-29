@@ -14,6 +14,7 @@ ChooseStrategyState::ChooseStrategyState(TerminalGUI *term) : State(term) {
 }
 
 void ChooseStrategyState::setSearchStrategy(SearchStrategy *search) {
+    delete this->strategy;
     this->strategy = search;
 }
 
@@ -51,3 +52,5 @@ State *ChooseStrategyState::run() {
         default: throw logic_error("");
     }
 }
+
+ChooseStrategyState::~ChooseStrategyState() = default;

@@ -22,3 +22,7 @@ Heuristic::heuristic_t FiniteHorizonHeuristic::operator()(const GameboardModel &
     }
     return best+1;
 }
+
+FiniteHorizonHeuristic::~FiniteHorizonHeuristic() {
+    delete h;
+}

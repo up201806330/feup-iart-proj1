@@ -33,4 +33,6 @@ public:
     SearchStrategy *getSearchStrategy() const;
 
     State* run() override;
+
+    ~ChooseStrategyState() override;
 };

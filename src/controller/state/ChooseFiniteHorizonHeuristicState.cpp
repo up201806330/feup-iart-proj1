@@ -46,3 +46,5 @@ State *ChooseFiniteHorizonHeuristicState::run() {
         default: throw logic_error("");
     }
 }
+
+ChooseFiniteHorizonHeuristicState::~ChooseFiniteHorizonHeuristicState() = default;

@@ -53,3 +53,5 @@ State *PlayMachineState::run() {
 
     return State::mainMenuState;
 }
+
+PlayMachineState::~PlayMachineState() = default;
