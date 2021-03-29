@@ -5,13 +5,30 @@
 
 #include "State.h"
 
+/**
+ * @brief Given you have chosen to use finite horizon heuristics, choose one of the available finite horizon statistics.
+ */
 class ChooseFiniteHorizonHeuristicState: public State {
 private:
     const Heuristic *h = nullptr;
 public:
     explicit ChooseFiniteHorizonHeuristicState(TerminalGUI *term);
 
+    /**
+     * @brief Set heuristic.
+     *
+     * Forwards the heuristic ChooseHeuristicState::setHeuristic.
+     *
+     * @param heuristic
+     */
     void setHeuristic(const Heuristic *heuristic);
+    /**
+     * @brief Get heuristic.
+     *
+     * Requests the heuristic from ChooseHeuristicState::getHeuristic.
+     *
+     * @return  Heuristic
+     */
     const Heuristic *getHeuristic() const;
 
     State* run() override;

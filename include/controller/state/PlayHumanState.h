@@ -5,6 +5,9 @@
 
 #include "State.h"
 
+/**
+ * @brief Human play
+ */
 class PlayHumanState: public State {
 public:
     explicit PlayHumanState(TerminalGUI *term);

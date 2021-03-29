@@ -5,6 +5,9 @@
 
 #include "State.h"
 
+/**
+ * @brief Main menu.
+ */
 class MainMenuState: public State {
 public:
     explicit MainMenuState(TerminalGUI *term);

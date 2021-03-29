@@ -6,6 +6,9 @@
 #include "algorithm/SearchStrategy.h"
 #include "State.h"
 
+/**
+ * @brief Machine (search strategy) play.
+ */
 class PlayMachineState: public State {
 public:
     explicit PlayMachineState(TerminalGUI *term);
