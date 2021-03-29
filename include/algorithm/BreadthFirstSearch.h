@@ -19,8 +19,8 @@ private:
     GameboardModel initialState;
     GameboardModel finalState;
     std::unordered_map<GameboardModel, std::pair<GameboardModel, GameboardModel::Move>> prev;
-public:
     bool bfs(const GameboardModel& GameboardModel);
+public:
     void initialize(const GameboardModel &gameboard) override;
     GameboardModel::Move next() override;
 };

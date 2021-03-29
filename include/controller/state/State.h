@@ -63,6 +63,9 @@ public:
      * @param terminal  Terminal to build all states
      */
     static void initializeStates(TerminalGUI *terminal);
+    /**
+     * @brief Delete all states created using State::initializeStates(TerminalGUI *).
+     */
     static void deleteStates();
 };
 
