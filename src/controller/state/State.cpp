@@ -1,27 +1,17 @@
 // Copyright (C) 2021 Diogo Rodrigues, Rafael Ribeiro, Bernardo Ferreira
 // Distributed under the terms of the GNU General Public License, version 3
 
-
 #include "controller/state/State.h"
-#include "controller/state/MainMenuState.h"
-#include "controller/state/PlayHumanState.h"
-#include "controller/state/ChooseStrategyState.h"
-#include "controller/state/ChooseHeuristicState.h"
-#include "controller/state/ChooseHorizonState.h"
-#include "controller/state/ChooseBaseHeuristicState.h"
-#include "controller/state/ChooseFiniteHorizonHeuristicState.h"
-#include "controller/state/ChooseHeuristicStrategyState.h"
-#include "controller/state/PlayMachineState.h"
 
 MainMenuState                     *State::mainMenuState                     = nullptr;
 PlayHumanState                    *State::playHumanState                    = nullptr;
-ChooseStrategyState                *State::chooseMachineState                = nullptr;
+ChooseStrategyState               *State::chooseMachineState                = nullptr;
 PlayMachineState                  *State::playMachineState                  = nullptr;
 ChooseHeuristicState              *State::chooseHeuristicState              = nullptr;
 ChooseHorizonState                *State::chooseHorizonState                = nullptr;
 ChooseBaseHeuristicState          *State::chooseBaseHeuristicState          = nullptr;
 ChooseFiniteHorizonHeuristicState *State::chooseFiniteHorizonHeuristicState = nullptr;
-ChooseHeuristicStrategyState       *State::chooseHeuristicMachineState       = nullptr;
+ChooseHeuristicStrategyState      *State::chooseHeuristicMachineState       = nullptr;
 
 State::State(TerminalGUI *term): terminal(term) {
 }
