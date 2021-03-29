@@ -10,7 +10,7 @@ using Move = GameboardModel::Move;
 bool IterativeDeepeningSearch::dfs(const GameboardModel& gameBoard, size_t depth) {
     if (depth > maxDepth) return false;
 
-    if(visited.count(gameBoard) && visited[gameBoard] >= depth) return false;
+    if(visited.count(gameBoard) && visited[gameBoard] <= depth) return false;
     visited[gameBoard] = depth;
 
     if (gameBoard.isGameOver()) return true;
