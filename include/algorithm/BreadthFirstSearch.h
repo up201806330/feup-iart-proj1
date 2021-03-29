@@ -1,20 +1,25 @@
 #pragma once
 
 #include <queue>
-#include <vector>
+#include <stack>
 #include <set>
-#include <bits/stdc++.h>
+#include <unordered_map>
 #include "model/GameboardModel.h"
 #include "algorithm/SearchStrategy.h"
 
-using namespace std;
-
+/**
+ * @brief Breadth-first Search
+ * 
+ * Keep track of visited nodes (nodes added to the path so far) so as to avoid cycles
+ * 
+ */
 class BreadthFirstSearch : public SearchStrategy {
 private:
-   vector<GameboardModel::Move> pathMoves;
-   unordered_set<GameboardModel> visited;
+    std::stack<GameboardModel::Move> solution;
+    GameboardModel initialState;
+    GameboardModel finalState;
+    std::unordered_map<GameboardModel, std::pair<GameboardModel, GameboardModel::Move>> prev;
 public:
-    vector<GameboardModel::Move> getPath();
     bool bfs(const GameboardModel& GameboardModel);
     void initialize(const GameboardModel &gameboard) override;
     GameboardModel::Move next() override;

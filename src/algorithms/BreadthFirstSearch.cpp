@@ -1,56 +1,63 @@
 #include "algorithm/BreadthFirstSearch.h"
 
-vector<GameboardModel::Move> BreadthFirstSearch::getPath() {
-    return this->pathMoves;
-}
+using namespace std;
 
 bool BreadthFirstSearch::bfs(const GameboardModel& gameboardModel) {
+    prev.clear();
 
-    queue<GameboardModel::Move> auxPathMoves;
-    queue<GameboardModel> auxPathState;
+    queue<GameboardModel> q;
     
-    auxPathState.push(gameboardModel);
+   
+    q.push(gameboardModel);
+    prev.emplace(gameboardModel, make_pair(gameboardModel, GameboardModel::Move(0, 0)));
 
-    do {
+    while(!q.empty()) {
 
-        GameboardModel currentState = auxPathState.front();
-        auxPathState.pop();
+        GameboardModel u = q.front();
+        q.pop();
 
-        if(this->visited.count(currentState) == 1) {
-            continue;
-        }
-
-        if(currentState.isGameOver()) {
-            cout << "Descobriu" << endl;
+        if(u.isGameOver()) {
+            finalState = u;
             return true;
         }
-       
-        for(size_t i=0; i<currentState.getAllMoves().size(); i++) {
-           auxPathMoves.push(currentState.getAllMoves()[i]); 
+
+        vector<GameboardModel::Move> moves = u.getAllMoves();
+
+        for(const GameboardModel::Move& m: moves) {
+            GameboardModel v = u;
+            v.move(m);
+            if(!prev.count(v)) {
+                q.push(v);
+                prev.emplace(v, make_pair(u, m)); 
+            }
+             
         }
-
-        for(size_t i=0; i<currentState.getAdjacentStates().size(); i++) {
-           auxPathState.push(currentState.getAdjacentStates()[i]); 
-        }
-
-        this->pathMoves.push_back(auxPathMoves.front());
-        auxPathMoves.pop();
-        this->visited.insert(currentState);
-
-   }while(!auxPathMoves.empty());
-
+    }
+   
    return false;
 }
 
 void BreadthFirstSearch::initialize(const GameboardModel &gameboard) {
+    this->initialState = gameboard;
     
     if(!bfs(gameboard)) throw SearchStrategy::failed_to_find_solution("BreadthFirstSearch");
+
+    GameboardModel v = finalState;
+    GameboardModel u;
+    GameboardModel::Move m(0, 0);
+
+    while(v != this->initialState) {
+        tie(u, m) = prev.at(v);
+        solution.push(m);
+        v = u;           
+    }
+
 }
 
 GameboardModel::Move BreadthFirstSearch::next() {
     
-    GameboardModel::Move nextMove = this->pathMoves[0];
-    this->pathMoves.erase(this->pathMoves.begin());
+    GameboardModel::Move nextMove = solution.top();
+    solution.pop();
 
     return nextMove;
 }
