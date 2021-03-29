@@ -5,7 +5,6 @@
 
 #include <stdexcept>
 #include <algorithm>
-#include <utility> 
 
 using namespace std;
 using Move = GameboardModel::Move;
@@ -157,7 +156,7 @@ vector<Move> GameboardModel::getAllMoves() const {
     return result;
 }
 
-vector<GameboardModel> GameboardModel::getAdjacentStates() {
+vector<GameboardModel> GameboardModel::getAdjacentStates() const {
     vector<GameboardModel> result;
 
     vector<Move> moves = getAllMoves();

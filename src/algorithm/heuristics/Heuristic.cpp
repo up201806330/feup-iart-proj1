@@ -3,6 +3,4 @@
 
 #include "algorithm/heuristics/Heuristic.h"
 
-Heuristic::~Heuristic() {
-
-}
+Heuristic::~Heuristic() = default;

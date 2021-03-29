@@ -5,8 +5,14 @@
 
 #include "State.h"
 
-class ChooseMachineState: public State {
+class ChooseHorizonState: public State {
+private:
+    size_t depth = 0;
 public:
-    explicit ChooseMachineState(TerminalGUI *term);
+    explicit ChooseHorizonState(TerminalGUI *term);
+
+    void setHorizon(size_t horizon);
+    size_t getHorizon() const;
+
     State* run() override;
 };

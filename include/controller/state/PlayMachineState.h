@@ -7,10 +7,7 @@
 #include "State.h"
 
 class PlayMachineState: public State {
-private:
-    SearchStrategy *searchStrategy = nullptr;
 public:
     explicit PlayMachineState(TerminalGUI *term);
-    void setSearchStrategy(SearchStrategy *strategy);
     State* run() override;
 };

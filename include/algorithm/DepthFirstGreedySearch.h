@@ -12,7 +12,7 @@
 
 class DepthFirstGreedySearch : public SearchStrategy {
 private:
-    const Heuristic *h;
+    const Heuristic *h = nullptr;
     std::deque<GameboardModel::Move> solution;
     std::unordered_set<GameboardModel> visited;
 public:
