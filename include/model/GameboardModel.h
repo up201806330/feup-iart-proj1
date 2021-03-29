@@ -165,13 +165,18 @@ namespace std {
     /**
      * @brief Hash a tube.
      *
-     * Currently implemented as a strong hash (https://stackoverflow.com/a/27216842)
+     * Currently implemented as a strong hash (https://stackoverflow.com/a/27216842).
      */
     template <> struct hash<Tube> {
         hash() = default;
         size_t operator()(const Tube &vec) const;
     };
 
+    /**
+     * @brief Hash a gameboard model.
+     *
+     * Using a possibly quite weak hash.
+     */
     template <> struct hash<GameboardModel>{
         hash() = default;
         size_t operator()(const GameboardModel& model) const;

@@ -230,10 +230,11 @@ size_t std::hash<Tube>::operator()(const Tube &vec) const {
 }
 
 // TODO
-// Possibly a weak hash, not sure tho
 size_t std::hash<GameboardModel>::operator()(const GameboardModel& model) const {
     GameboardModel model_sorted = model;
+    /*
     std::sort(model_sorted.begin(), model_sorted.end());
+     */
     size_t seed = model_sorted.size();
     for(const Tube &t: model_sorted){
         seed = (seed << 1) ^ hash<Tube>()(t);
