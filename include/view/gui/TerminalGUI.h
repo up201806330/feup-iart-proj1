@@ -54,8 +54,17 @@ public:
      * @brief Bi-dimensional coordinate object. Can be a position or a size.
      */
     struct pos_t {
-        coord_t x, y;
+        coord_t x; ///< @brief X-coordinate.
+        coord_t y; ///< @brief Y-coordinate.
+
+        /**
+         * @brief Construct a pos_t object (a position or a size).
+         * 
+         * @param x X-coordinate
+         * @param y Y-coordinate
+         */
         explicit pos_t(coord_t x = 0, coord_t y = 0);
+        
         pos_t operator+(const pos_t &p) const;
         pos_t operator-(const pos_t &p) const;
         pos_t operator/(coord_t c) const;
@@ -70,10 +79,18 @@ public:
 private:
     pos_t corner = pos_t(0,0); ///< @brief Coordinates of leftmost, upmost character.
 protected:
+    /**
+     * @brief Tuple of information required to draw a character.
+     */
     typedef std::tuple<pos_t, std::string, Color, Color, effects_t> ToDrawTypedef;
 private:
     std::list<ToDrawTypedef> to_draw;
 protected:
+    /**
+     * @brief Get list of all tuples of chars to be drawn.
+     * 
+     * @return const std::list<ToDrawTypedef>& List of tuples to be drawn
+     */
     const std::list<ToDrawTypedef>& getToDraw() const;
 public:
 
@@ -104,6 +121,7 @@ public:
      * @param c             Character
      * @param foreground    Foreground color
      * @param background    Background color
+     * @param effects       Effects
      */
     void drawCharacter(pos_t pos, const std::string &c, Color foreground = DEFAULT, Color background = DEFAULT, effects_t effects = 0);
 
@@ -114,6 +132,7 @@ public:
      * @param c             Character
      * @param foreground    Foreground color
      * @param background    Background color
+     * @param effects       Effects
      */
     void drawCharacterAbsolute(pos_t pos, const std::string &c, Color foreground = DEFAULT, Color background = DEFAULT, effects_t effects = 0);
 
@@ -122,9 +141,10 @@ public:
      * upper-left corner.
      * 
      * @param pos           Position
-     * @param s             String
+     * @param c             String
      * @param foreground    Foreground color
      * @param background    Background color
+     * @param effects       Effects
      */
     void drawString(pos_t pos, const std::string &c, Color foreground = DEFAULT, Color background = DEFAULT, effects_t effects = 0);
 
@@ -132,9 +152,10 @@ public:
      * @brief Draw string in absolute terminal position.
      * 
      * @param pos           Absolute position
-     * @param s             String
+     * @param c             String
      * @param foreground    Foreground color
      * @param background    Background color
+     * @param effects       Effects
      */
     void drawStringAbsolute(pos_t pos, const std::string &c, Color foreground = DEFAULT, Color background = DEFAULT, effects_t effects = 0);
 
@@ -150,3 +171,14 @@ public:
      */
     virtual void display() = 0;
 };
+
+namespace std {
+    /**
+     * @brief Hash a position.
+     *
+     * Uses a decent hash function.
+     */
+    template <> struct hash<TerminalGUI::pos_t>{
+        std::size_t operator()(const TerminalGUI::pos_t& p) const;
+    };
+}

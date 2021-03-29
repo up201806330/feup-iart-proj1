@@ -12,6 +12,11 @@ class ChooseHorizonState: public State {
 private:
     size_t depth = 0;
 public:
+    /**
+     * @brief Construct a new ChooseHorizonState object.
+     * 
+     * @param term Terminal to print to
+     */
     explicit ChooseHorizonState(TerminalGUI *term);
 
     /**

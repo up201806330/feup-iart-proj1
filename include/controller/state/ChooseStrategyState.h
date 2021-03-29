@@ -12,6 +12,11 @@ class ChooseStrategyState: public State {
 private:
     SearchStrategy *strategy = nullptr;
 public:
+    /**
+     * @brief Construct a new ChooseStrategyState object.
+     * 
+     * @param term Terminal to print to
+     */
     explicit ChooseStrategyState(TerminalGUI *term);
 
     /**

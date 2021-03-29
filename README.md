@@ -44,7 +44,7 @@ and open a new integrated terminal to run with correct color rendering and avoid
 
 © 2021 Diogo Rodrigues, Rafael Ribeiro, Bernardo Ferreira
 
-All files are licensed under [GNU General Public License v3](LICENSE) by **© 2021 Diogo Rodrigues, Rafael Ribeiro, Bernardo Ferreira**, to the exception of:
+All files are licensed under [GNU General Public License v3](https://github.com/dmfrodrigues/feup-iart-proj1/blob/master/LICENSE) by **© 2021 Diogo Rodrigues, Rafael Ribeiro, Bernardo Ferreira**, to the exception of:
 - all files inside directory `doc/report` and all artifacts deriving from them, which are licensed under the [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International](doc/report/LICENSE) public license.
 
 <!-- The files not authored by us are presented as a fundamental complement to the presented solutions, and are made available under *fair use for education*. -->

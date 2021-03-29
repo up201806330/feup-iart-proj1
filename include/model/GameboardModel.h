@@ -59,17 +59,21 @@ private:
     size_t nColors = 0;         ///< @brief Number of colors.
 public:
     /**
-     * @brief Default constructor
-     * 
+     * @brief Default constructor.
      */
     GameboardModel();
 
     /**
-     * @brief Copy constructor
-     * 
+     * @brief Copy constructor.
      */
     GameboardModel(const GameboardModel& original);
 
+    /**
+     * @brief Assign a gameboard to another (copy properties of a gameboard to another).
+     * 
+     * @param gameboard         Gameboard to copy from
+     * @return GameboardModel&  Reference to destination gameboard
+     */
     GameboardModel& operator=(const GameboardModel &gameboard);
 
     /**
@@ -123,8 +127,7 @@ public:
      * @brief Check if the top piece of a tube can be moved to the top of
      * another tube.
      * 
-     * @param tube_orig     Origin tube index
-     * @param tube_dest     Destination tube index
+     * @param move          Move to be checked
      * @return true         If movement is valid
      * @return false        otherwise
      */
@@ -133,8 +136,7 @@ public:
     /**
      * @brief Move piece from one tube to another.
      * 
-     * @param tube_orig     Origin tube
-     * @param tube_dest     Destination tube
+     * @param move      Move to be executed
      */
     void move(const Move &move);
 
@@ -151,6 +153,15 @@ public:
      * @return std::vector<GameboardModel> 
      */
     std::vector<GameboardModel> getAdjacentStates() const;
+
+    /**
+     * @brief Check if game is over.
+     * 
+     * The game is over when each tube is empty, or it is full to its top with
+     * pieces of the same color.
+     * 
+     * @return True if the game is over, false otherwise. 
+     */
     bool isGameOver() const;
 
     bool operator==(const GameboardModel &model) const;

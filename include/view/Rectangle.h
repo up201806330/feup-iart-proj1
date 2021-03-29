@@ -49,7 +49,7 @@ public:
     /**
      * @brief Set rectangle size.
      *
-     * @param size Rectangle size
+     * @param sz Rectangle size
      */
     void setSize(const TerminalGUI::pos_t &sz);
     /**

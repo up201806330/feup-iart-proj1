@@ -14,6 +14,11 @@ class ChooseHeuristicState: public State {
 private:
     const Heuristic *h = nullptr;
 public:
+    /**
+     * @brief Construct a new ChooseHeuristicState object.
+     * 
+     * @param term Terminal to print to
+     */
     explicit ChooseHeuristicState(TerminalGUI *term);
 
     /**
