@@ -7,7 +7,15 @@
 
 class TerminalGUI;
 
+/**
+ * @brief Terminal GUI drawable.
+ */
 class TerminalGUIDrawable {
 public:
+    /**
+     * @brief Draw drawable in a certain terminal.
+     *
+     * @param terminal  Terminal to draw the drawable to.
+     */
     virtual void draw(TerminalGUI &terminal) = 0;
 };

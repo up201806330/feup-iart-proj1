@@ -3,5 +3,8 @@
 
 #pragma once
 
+/**
+ * @brief Graphical User Interface.
+ */
 class GUI {
 };

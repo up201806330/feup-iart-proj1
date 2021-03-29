@@ -33,7 +33,13 @@ public:
         DEFAULT = 255,
     };
 
+    /**
+     * @brief Type used to store effects flags as a bitset.
+     */
     typedef uint32_t effects_t;
+    /**
+     * @brief Effects (e.g., bold, underlined).
+     */
     enum Effects : effects_t {
         BOLD = 1,
         UNDERLINED = 2
@@ -132,6 +138,11 @@ public:
      */
     void drawStringAbsolute(pos_t pos, const std::string &c, Color foreground = DEFAULT, Color background = DEFAULT, effects_t effects = 0);
 
+    /**
+     * @brief Draw drawable in this terminal.
+     *
+     * @param drawable Drawable to draw.
+     */
     void draw(TerminalGUIDrawable &drawable);
 
     /**

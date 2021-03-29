@@ -43,6 +43,10 @@ const pos_t &Rectangle::getPosition() {
     return position;
 }
 
+void Rectangle::setSize(const pos_t &sz) {
+    this->size = sz;
+}
+
 TerminalGUI::pos_t Rectangle::getSize() {
     return size;
 }
