@@ -30,6 +30,6 @@ TerminalGUIFile::pos_t TerminalGUIFile::getSize() const {
 
         return size;
     #else
-        #error Unknown OS, don't know how to get terminal size
+        #error Unknown OS, dont know how to get terminal size
     #endif
 }
