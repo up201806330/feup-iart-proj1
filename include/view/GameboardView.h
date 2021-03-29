@@ -6,11 +6,24 @@
 #include "model/GameboardModel.h"
 #include "view/gui/TerminalGUI.h"
 
+/**
+ * @brief Gameboard view.
+ */
 class GameboardView {
 private:
     const GameboardModel &_gameboardModel;
 public:
+    /**
+     * @brief Construct gameboard view from gameboard model.
+     *
+     * @param gameboardModel Gameboard model
+     */
     explicit GameboardView(const GameboardModel &gameboardModel);
+    /**
+     * @brief Draw view on terminal.
+     *
+     * @param terminal  Terminal to draw view to
+     */
     void draw(TerminalGUI &terminal);
 private:
     TerminalGUI::coord_t TUBE_MARGIN_X = 2;

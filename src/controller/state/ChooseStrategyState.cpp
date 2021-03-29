@@ -1,17 +1,12 @@
 // Copyright (C) 2021 Diogo Rodrigues, Rafael Ribeiro, Bernardo Ferreira
 // Distributed under the terms of the GNU General Public License, version 3
 
-#include "algorithm/heuristics/AdmissibleHeuristic.h"
-#include "algorithm/DepthFirstSearch.h"
-#include "algorithm/DepthFirstGreedySearch.h"
-#include "algorithm/GreedySearch.h"
-#include "algorithm/IterativeDeepeningSearch.h"
 #include "controller/state/ChooseStrategyState.h"
 
+#include "algorithm/DepthFirstSearch.h"
+#include "algorithm/IterativeDeepeningSearch.h"
 #include "controller/MenuController.h"
 #include "view/MenuView.h"
-#include "model/MenuModel.h"
-#include "algorithm/AstarSearch.h"
 
 using namespace std;
 
@@ -48,11 +43,9 @@ State *ChooseStrategyState::run() {
     } while(!menuModel.hasButtonWithId(option));
 
     switch(option){
-        case 1:
-            this->setSearchStrategy(new DepthFirstSearch()); return State::playMachineState;
+        case 1: this->setSearchStrategy(new DepthFirstSearch()); return State::playMachineState;
 //        case 2: this->setSearchStrategy(new BreadthFirstSearch()); return State::playMachineState;
-        case 3:
-            this->setSearchStrategy(new IterativeDeepeningSearch()); return State::playMachineState;
+        case 3: this->setSearchStrategy(new IterativeDeepeningSearch()); return State::playMachineState;
         case 4: return State::chooseHeuristicState;
         case 0: return State::mainMenuState;
         default: throw logic_error("");

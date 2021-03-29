@@ -7,10 +7,23 @@
 #include "model/MainMenuModel.h"
 #include "view/MenuView.h"
 
+/**
+ * @brief Main menu view.
+ */
 class MainMenuView {
 private:
     MenuView menuView;
 public:
+    /**
+     * @brief Build main menu view from main menu model (which is a menu model).
+     *
+     * @param mainMenuModel Main menu model.
+     */
     explicit MainMenuView(const MainMenuModel &mainMenuModel);
+    /**
+     * @brief Draw view on terminal.
+     *
+     * @param terminal  Terminal to draw view to
+     */
     void draw(TerminalGUI &terminal);
 };

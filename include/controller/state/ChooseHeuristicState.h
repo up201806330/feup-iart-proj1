@@ -7,13 +7,31 @@
 
 #include "algorithm/heuristics/Heuristic.h"
 
+/**
+ * @brief Choose heuristic function.
+ */
 class ChooseHeuristicState: public State {
 private:
     const Heuristic *h = nullptr;
 public:
+    /**
+     * @brief Construct a new ChooseHeuristicState object.
+     * 
+     * @param term Terminal to print to
+     */
     explicit ChooseHeuristicState(TerminalGUI *term);
 
+    /**
+     * @brief Set heuristic function.
+     *
+     * @param heuristic     Heuristic
+     */
     void setHeuristic(const Heuristic *heuristic);
+    /**
+     * @brief Get heuristic function.
+     *
+     * @return Heuristic
+     */
     const Heuristic *getHeuristic() const;
 
     State* run() override;

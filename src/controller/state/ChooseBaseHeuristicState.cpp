@@ -12,8 +12,8 @@ using namespace std;
 ChooseBaseHeuristicState::ChooseBaseHeuristicState(TerminalGUI *term) : State(term) {
 }
 
-void ChooseBaseHeuristicState::setBaseHeuristic(const Heuristic *heuristic) {
-    this->h = heuristic;
+void ChooseBaseHeuristicState::setBaseHeuristic(const Heuristic *baseHeuristic) {
+    this->h = baseHeuristic;
 }
 
 const Heuristic *ChooseBaseHeuristicState::getBaseHeuristic() const {
