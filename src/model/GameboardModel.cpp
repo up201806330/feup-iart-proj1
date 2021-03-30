@@ -67,7 +67,7 @@ void GameboardModel::fillRandom(size_t num_colors, unsigned sd){
     size_t num_pieces = num_colors * tubeH;
     // There must be at least as many tubes as there are colors, since each
     // color will be in a separate tube.
-    if(num_colors > nTubes) throw invalid_argument("more colors than tubes");
+    if(num_colors > nTubes) throw invalid_argument("more colors (" + to_string(num_colors) + ") than tubes (" + to_string(nTubes) + ")");
 
     // There must be enough tubes to contain all pieces.
     if(num_pieces > nTubes * tubeH) throw invalid_argument("too many pieces");
