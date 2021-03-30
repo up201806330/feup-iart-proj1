@@ -70,12 +70,12 @@ void CommandLineInterface::run_inside() {
     hrc::time_point end = hrc::now();
     hrc::duration d = end-begin;
     cout
-        << gameboard.size() << "\t"
-        << gameboard.tubeHeight() << "\t"
-        << gameboard.getNumberOfColors() << "\t"
-        << gameboard.getSeed() << "\t"
-        << nMoves << "\t"
-        << mem << "\t"
+        << gameboard.size() << ","
+        << gameboard.tubeHeight() << ","
+        << gameboard.getNumberOfColors() << ","
+        << gameboard.getSeed() << ","
+        << nMoves << ","
+        << mem << ","
         << static_cast<unsigned long>(chrono::duration_cast<chrono::nanoseconds>(d).count()) / nRuns
     << endl;
 }
