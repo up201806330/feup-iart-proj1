@@ -61,14 +61,16 @@ void GameboardModel::clear(){
     }
 }
 
-void GameboardModel::fillRandom(size_t num_colors){
+void GameboardModel::fillRandom(size_t num_colors, unsigned sd){
+    this->seed = sd;
+    srand(sd);
     size_t num_pieces = num_colors * tubeH;
     // There must be at least as many tubes as there are colors, since each
     // color will be in a separate tube.
     if(num_colors > nTubes) throw invalid_argument("more colors than tubes");
 
     // There must be enough tubes to contain all pieces.
-    if(num_pieces > nTubes * num_colors) throw invalid_argument("too many pieces");
+    if(num_pieces > nTubes * tubeH) throw invalid_argument("too many pieces");
 
     // There must be at least one piece of each color, otherwise one of the
     // colors would have 0 pieces, in which case it should be included as a
@@ -220,6 +222,10 @@ bool GameboardModel::operator<(const GameboardModel &model) const {
 bool GameboardModel::operator> (const GameboardModel &model) const { return model < *this; }
 bool GameboardModel::operator<=(const GameboardModel &model) const { return !(*this > model); }
 bool GameboardModel::operator>=(const GameboardModel &model) const { return !(*this < model); }
+
+unsigned GameboardModel::getSeed() const {
+    return seed;
+}
 
 size_t std::hash<Tube>::operator()(const Tube &vec) const {
     size_t seed = vec.size();

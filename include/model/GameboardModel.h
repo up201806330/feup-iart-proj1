@@ -57,6 +57,7 @@ private:
     size_t tubeH = 0;           ///< @brief Tubes' height.
     std::vector<Tube> tubes;    ///< @brief Tubes.
     size_t nColors = 0;         ///< @brief Number of colors.
+    unsigned seed = 0;
 public:
     /**
      * @brief Default constructor.
@@ -114,7 +115,7 @@ public:
      * 
      * @param num_colors    Number of colors of pieces to place
      */
-    void fillRandom(size_t num_colors);
+    void fillRandom(size_t num_colors, unsigned seed = 0);
 
     /**
      * @brief Get number of colors of the pieces currently in this gameboard.
@@ -170,6 +171,8 @@ public:
     bool operator> (const GameboardModel &model) const;
     bool operator<=(const GameboardModel &model) const;
     bool operator>=(const GameboardModel &model) const;
+
+    unsigned getSeed() const;
 };
 
 namespace std {
