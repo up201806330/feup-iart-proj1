@@ -98,7 +98,7 @@ GameboardModel CommandLineInterface::board() {
 SearchStrategy *CommandLineInterface::strategy() {
     string method = args.at(0); args.pop_front();
     if     (method == "dfs"                ) return new DepthFirstSearch        ();
-    else if(method == "bfs"                ) return new DepthFirstSearch        ();
+    else if(method == "bfs"                ) return new BreadthFirstSearch      ();
     else if(method == "iterative-deepening") return new IterativeDeepeningSearch();
     else if(method == "informed"           ) return informed();
     else throw invalid_argument("");
