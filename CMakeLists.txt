@@ -52,6 +52,7 @@ add_executable(main
         src/controller/state/ChooseHeuristicStrategyState.cpp
         src/controller/state/PlayMachineState.cpp
 
+        src/CommandLineInterface.cpp
 )
 
 set(CPP_COMPILER_WARNINGS -Wall -Wunused-result -pedantic-errors -Wextra -Wcast-align -Wcast-qual -Wchar-subscripts

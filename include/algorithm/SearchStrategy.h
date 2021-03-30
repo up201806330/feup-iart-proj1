@@ -36,6 +36,8 @@ public:
          */
         explicit failed_to_find_solution(const std::string &what_arg);
     };
+private:
+    size_t mem = 0;
 public:
     /**
      * @brief Initialize search strategy with initial state.
@@ -54,4 +56,11 @@ public:
      * @brief Destructor.
      */
     virtual ~SearchStrategy();
+
+    /**
+     * @brief Get maximum amount of memory used by search strategy.
+     *
+     * @return Maximum amount of memory, in bytes
+     */
+    size_t getMemory() const;
 };
