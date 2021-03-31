@@ -1,0 +1,35 @@
+name: analysis
+
+on:
+  push:
+    branches: [ '**' ]
+  pull_request:
+    branches: [ '**' ]
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install csvkit
+      run: |
+        sudo apt install -y csvkit
+
+    - name: Checkout submodules
+      shell: bash
+      run: |
+        auth_header="$(git config --local --get http.https://github.com/.extraheader)"
+        git submodule sync --recursive
+        git -c "http.extraheader=$auth_header" -c protocol.version=2 submodule update --init --force --recursive --depth=1
+    
+    - name: Make analysis (discard-dfs)
+      run: |
+        cd analysis/discard-dfs
+        make -f discard-dfs.mk
+
+    - name: Upload analysis
+      uses: actions/upload-artifact@v2
+      with:
+        name: analysis
+        path: analysis/**/*.csv

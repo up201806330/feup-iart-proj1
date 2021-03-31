@@ -20,4 +20,5 @@ build
 .idea/
 cmake-build-*/
 doc/html
-analysis/*.csv
+analysis/**/*.csv
+!analysis/discard-dfs/discard-dfs-math.csv
