@@ -219,11 +219,31 @@ This research is significant for our problem; even though the problems are quite
 \end{frame}
 
 \begin{frame}
+\frametitle{6. Implemented Algorithms}
+\begin{itemize}
+  \item \textbf{Breadth First Search} | In this algorithm, a search by width is made, that is, from an initial state of the board all possible states are explored from it and so on. All states explored are stored in a queue to be able to apply the algorithm correctly.In the end, we have a stack with all the moves that lead us to the objective state. 
+  \item \textbf{Depth First Search} | In this algorithm, a depth search is performed, that is, the algorithm starts in a state of the initial board and explores all the states in depth as far as possible, before doing backtraking. At the end we get all the moves that take us from the initial state of the board to the objective state. 
+  \item \textbf{Iterative Deepening Search} | In this algorithm a search is performed in depth but limited and several times. With each iteration, the search depth increases by one. For this algorithm we implement a dfs function that is called several times and in each iteration the maximum search depth is increased.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{6. Implemented Algorithms}
+\begin{itemize}  
+  \item \textbf{Depth First Search Greedy} | This algorithm is the same as the depth first search, however, using a greedy approach. In our case, the first moves to be choosen will be those that will probably lead us to a shorter path calculated from a heuristic.
+  \item \textbf{Greedy Search} | In this algorithm a search is made in which the next chosen state is the one that seems to be closer to the solution. A heuristic will be used to estimate the cost of the shortest path to the solution board. In our case, we can use one of two heuristics. 
+  \item \textbf{Astar Algorithm} | This algorithm performs a search, choosing the next move depending on the sum between the cost to make such move and the cost estimated by an heuristic. In our case, all the moves have a cost of one and we have two heuristics available to use. At the end we have all the necessary moves we need to make from the initial state to the objective state.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
   \frametitle{Bibliography}
   \setbeamertemplate{bibliography item}{\insertbiblabel}
   \bibliographystyle{acm}
   \bibliography{report}
   
 \end{frame}
+
 
 \end{document}
