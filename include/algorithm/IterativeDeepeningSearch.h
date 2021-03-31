@@ -8,7 +8,7 @@
 
 #include <bits/stdc++.h>
 #include <deque>
-#include <unordered_map>
+#include <map>
 
 /**
  * @brief Iterative deepening depth-first search.
@@ -25,7 +25,7 @@
 class IterativeDeepeningSearch : public SearchStrategy {
 private:
     std::deque<GameboardModel::Move> solution;
-    std::unordered_map<GameboardModel, size_t> visited;
+    std::map<GameboardModel, size_t> visited;
     size_t maxDepth;
 
     bool dfs(const GameboardModel& gameBoard, size_t depth);

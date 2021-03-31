@@ -6,7 +6,7 @@
 #include "algorithm/SearchStrategy.h"
 #include "algorithm/heuristics/Heuristic.h"
 
-#include <unordered_set>
+#include <set>
 
 /**
  * @brief Best-first, A* search.

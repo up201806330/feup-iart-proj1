@@ -3,7 +3,7 @@
 
 #include "algorithm/GreedySearch.h"
 
-#include <unordered_map>
+#include <map>
 #include <queue>
 
 using namespace std;
@@ -15,8 +15,8 @@ GreedySearch::GreedySearch(const Heuristic *heuristic):
 }
 
 void GreedySearch::initialize(const GameboardModel &gameboardModel){
-    unordered_set<GameboardModel> visited;
-    unordered_map<GameboardModel, pair<GameboardModel, Move> > prev;
+    set<GameboardModel> visited;
+    map<GameboardModel, pair<GameboardModel, Move> > prev;
 
     GameboardModel g;
     {

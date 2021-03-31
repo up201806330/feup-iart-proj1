@@ -3,7 +3,7 @@
 
 #include "algorithm/AstarSearch.h"
 
-#include <unordered_map>
+#include <map>
 #include <queue>
 
 using namespace std;
@@ -15,9 +15,9 @@ AstarSearch::AstarSearch(const Heuristic *heuristic):
 }
 
 void AstarSearch::initialize(const GameboardModel &src){
-    unordered_set<GameboardModel> visited;
-    unordered_map<GameboardModel, pair<GameboardModel, Move> > prev;
-    unordered_map<GameboardModel, size_t> dist;
+    set<GameboardModel> visited;
+    map<GameboardModel, pair<GameboardModel, Move> > prev;
+    map<GameboardModel, size_t> dist;
 
     GameboardModel finalGameboard = src;
     {

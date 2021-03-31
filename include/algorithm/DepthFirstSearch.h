@@ -8,7 +8,7 @@
 
 #include <bits/stdc++.h>
 #include <deque>
-#include <unordered_set>
+#include <set>
 
 /**
  * @brief Depth-first search.
@@ -18,7 +18,7 @@
 class DepthFirstSearch : public SearchStrategy {
 private:
     std::deque<GameboardModel::Move> solution;
-    std::unordered_set<GameboardModel> visited;
+    std::set<GameboardModel> visited;
 
     bool dfs(const GameboardModel& gameBoard);
 public:
