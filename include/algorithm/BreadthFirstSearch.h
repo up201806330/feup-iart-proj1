@@ -3,7 +3,7 @@
 #include <queue>
 #include <stack>
 #include <set>
-#include <unordered_map>
+#include <map>
 #include "model/GameboardModel.h"
 #include "algorithm/SearchStrategy.h"
 
@@ -18,7 +18,7 @@ private:
     std::stack<GameboardModel::Move> solution;
     GameboardModel initialState;
     GameboardModel finalState;
-    std::unordered_map<GameboardModel, std::pair<GameboardModel, GameboardModel::Move>> prev;
+    std::map<GameboardModel, std::pair<GameboardModel, GameboardModel::Move>> prev;
     bool bfs(const GameboardModel& GameboardModel);
 public:
     void initialize(const GameboardModel &gameboard) override;
