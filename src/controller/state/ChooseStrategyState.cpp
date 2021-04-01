@@ -4,6 +4,7 @@
 #include "controller/state/ChooseStrategyState.h"
 
 #include "algorithm/DepthFirstSearch.h"
+#include "algorithm/BreadthFirstSearch.h"
 #include "algorithm/IterativeDeepeningSearch.h"
 #include "controller/MenuController.h"
 #include "view/MenuView.h"
@@ -25,7 +26,7 @@ SearchStrategy *ChooseStrategyState::getSearchStrategy() const{
 State *ChooseStrategyState::run() {
     MenuModel menuModel;
     menuModel.addButton(1, "1. Depth first search");
-//    menuModel.addButton(2, "2. Breadth first search");
+    menuModel.addButton(2, "2. Breadth first search");
     menuModel.addButton(3, "3. Iterative deepening depth first search");
     menuModel.addButton(4, "4. Informed search methods (+)");
     menuModel.addButton(0, "0. Back");
@@ -45,7 +46,7 @@ State *ChooseStrategyState::run() {
 
     switch(option){
         case 1: this->setSearchStrategy(new DepthFirstSearch()); return State::playMachineState;
-//        case 2: this->setSearchStrategy(new BreadthFirstSearch()); return State::playMachineState;
+        case 2: this->setSearchStrategy(new BreadthFirstSearch()); return State::playMachineState;
         case 3: this->setSearchStrategy(new IterativeDeepeningSearch()); return State::playMachineState;
         case 4: return State::chooseHeuristicState;
         case 0: return State::mainMenuState;

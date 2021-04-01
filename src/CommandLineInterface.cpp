@@ -1,16 +1,19 @@
 // Copyright (C) 2021 Diogo Rodrigues, Rafael Ribeiro, Bernardo Ferreira
 // Distributed under the terms of the GNU General Public License, version 3
 
-#include <iostream>
-#include <algorithm/DepthFirstSearch.h>
-#include <algorithm/IterativeDeepeningSearch.h>
-#include <algorithm/DepthFirstGreedySearch.h>
-#include <algorithm/GreedySearch.h>
-#include <algorithm/AstarSearch.h>
-#include <algorithm/heuristics/AdmissibleHeuristic.h>
-#include <algorithm/heuristics/FiniteHorizonHeuristic.h>
-#include "model/GameboardModel.h"
 #include "CommandLineInterface.h"
+
+#include <iostream>
+
+#include "algorithm/DepthFirstSearch.h"
+#include "algorithm/IterativeDeepeningSearch.h"
+#include "algorithm/DepthFirstGreedySearch.h"
+#include "algorithm/GreedySearch.h"
+#include "algorithm/AstarSearch.h"
+#include "algorithm/heuristics/AdmissibleHeuristic.h"
+#include "algorithm/heuristics/FiniteHorizonHeuristic.h"
+#include "algorithm/BreadthFirstSearch.h"
+#include "model/GameboardModel.h"
 
 using namespace std;
 using hrc = chrono::high_resolution_clock;
@@ -70,12 +73,12 @@ void CommandLineInterface::run_inside() {
     hrc::time_point end = hrc::now();
     hrc::duration d = end-begin;
     cout
-        << gameboard.size() << "\t"
-        << gameboard.tubeHeight() << "\t"
-        << gameboard.getNumberOfColors() << "\t"
-        << gameboard.getSeed() << "\t"
-        << nMoves << "\t"
-        << mem << "\t"
+        << gameboard.size() << ","
+        << gameboard.tubeHeight() << ","
+        << gameboard.getNumberOfColors() << ","
+        << gameboard.getSeed() << ","
+        << nMoves << ","
+        << mem << ","
         << static_cast<unsigned long>(chrono::duration_cast<chrono::nanoseconds>(d).count()) / nRuns
     << endl;
 }
@@ -98,7 +101,7 @@ GameboardModel CommandLineInterface::board() {
 SearchStrategy *CommandLineInterface::strategy() {
     string method = args.at(0); args.pop_front();
     if     (method == "dfs"                ) return new DepthFirstSearch        ();
-    else if(method == "bfs"                ) return new DepthFirstSearch        ();
+    else if(method == "bfs"                ) return new BreadthFirstSearch      ();
     else if(method == "iterative-deepening") return new IterativeDeepeningSearch();
     else if(method == "informed"           ) return informed();
     else throw invalid_argument("");
