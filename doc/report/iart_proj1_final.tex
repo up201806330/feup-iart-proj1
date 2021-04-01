@@ -66,8 +66,8 @@
  
 %Information to be included in the title page:
 \AtBeginDocument{
-\title[Ball Sort Puzzle (Checkpoint)]{Ball Sort Puzzle}
-\subtitle[]{Checkpoint}
+\title[Ball Sort Puzzle (final delivery)]{Ball Sort Puzzle}
+\subtitle[]{Final delivery}
 \author[Group 48]{
 \begin{tabular}{r l}
 	\email{up201806581@fe.up.pt} & Bernardo António Magalhães Ferreira \\
@@ -76,7 +76,7 @@
 \end{tabular}
 }
 \institute[FEUP/IART]{Faculdade de Engenharia da Universidade do Porto \\ Artificial Intelligence (IART) -- Group 48}
-\date[21/03/2021]{21st of March, 2021}
+\date[03/04/2021]{3rd of April, 2021}
 }
 
 \begin{document}
@@ -183,14 +183,22 @@ This research is significant for our problem; even though the problems are quite
   \begin{itemize}
     \item For each tube, add the number of balls in that tube that have a different color than the last ball in the tube.
     \item Number of balls in the $N-C$ tubes with least balls.
+    \item If there are two tubes with same color at the bottom, we will need at least the additional number of moves required to move pieces from one side to another
   \end{itemize}
 
   Other ideas:
   \begin{itemize}
     \item Number of balls of same color as the most frequent color in a tube;
+    \item When a tube is complete with a color, remove it from game board (reduces problem size).
   \end{itemize}
 \end{frame}
 
+\begin{frame}
+  \frametitle{Uniform Cost Search}
+  From this \href{https://www.javatpoint.com/ai-uninformed-search-algorithms}{source}, 
+  Uniform cost search is equivalent to BFS algorithm if the path cost of all edges is the same.
+  Since in our problem, we only have one operator of weight 1, we did not implement this algorithm.
+\end{frame}
 
 \begin{frame}
 \frametitle{Implementation (so far)}

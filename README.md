@@ -10,6 +10,8 @@ Distributed under the terms of the GNU General Public License, version 3
 
 [![build](https://github.com/dmfrodrigues/feup-iart-proj1/actions/workflows/build.yml/badge.svg)](https://github.com/dmfrodrigues/feup-iart-proj1/actions/workflows/build.yml)
 [![report1](https://github.com/dmfrodrigues/feup-iart-proj1/actions/workflows/report1.yml/badge.svg)](https://github.com/dmfrodrigues/feup-iart-proj1/actions/workflows/report1.yml)
+[![report2](https://github.com/dmfrodrigues/feup-iart-proj1/actions/workflows/report2.yml/badge.svg)](https://github.com/dmfrodrigues/feup-iart-proj1/actions/workflows/report2.yml)
+[![docs](https://github.com/dmfrodrigues/feup-iart-proj1/actions/workflows/docs.yml/badge.svg)](https://github.com/dmfrodrigues/feup-iart-proj1/actions/workflows/docs.yml)
 
 Based on game [*Ball Sort Puzzle*](https://play.google.com/store/apps/details?id=com.spicags.ballsort&hl=pt_PT&gl=US) by [Spica Game Studio](https://play.google.com/store/apps/developer?id=Spica+Game+Studio).
 
@@ -44,7 +46,7 @@ and open a new integrated terminal to run with correct color rendering and avoid
 
 © 2021 Diogo Rodrigues, Rafael Ribeiro, Bernardo Ferreira
 
-All files are licensed under [GNU General Public License v3](LICENSE) by **© 2021 Diogo Rodrigues, Rafael Ribeiro, Bernardo Ferreira**, to the exception of:
+All files are licensed under [GNU General Public License v3](https://github.com/dmfrodrigues/feup-iart-proj1/blob/master/LICENSE) by **© 2021 Diogo Rodrigues, Rafael Ribeiro, Bernardo Ferreira**, to the exception of:
 - all files inside directory `doc/report` and all artifacts deriving from them, which are licensed under the [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International](doc/report/LICENSE) public license.
 
 <!-- The files not authored by us are presented as a fundamental complement to the presented solutions, and are made available under *fair use for education*. -->

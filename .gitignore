@@ -17,3 +17,6 @@ build
 /main
 /main.exe
 *.exe
+.idea/
+cmake-build-*/
+doc/html

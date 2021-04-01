@@ -1,32 +1,29 @@
 // Copyright (C) 2021 Diogo Rodrigues, Rafael Ribeiro, Bernardo Ferreira
 // Distributed under the terms of the GNU General Public License, version 3
 
-#include <iostream>
 
-#include "TerminalGUIColor.h"
-#include "GameboardModel.h"
-#include "GameboardView.h"
-#include "ScoreboardModel.h"
-#include "ScoreboardView.h"
-
-#include <unistd.h>
+#include "CommandLineInterface.h"
+#include "view/gui/TerminalGUIColor.h"
+#include "controller/state/State.h"
 
 using namespace std;
 
-int main(){
-    TerminalGUI *gui = new TerminalGUIColor();
+int main(int argc, char *argv[]){
+    if(argc >= 2 && string(argv[1]) == "cli"){
+        vector<string> args(argv+2, argv+argc);
+        CommandLineInterface interface(args);
+        interface.run();
+        return 0;
+    }
 
-    GameboardModel gameboard(5, 4);
-    gameboard.fillRandom(3);
-    ScoreboardModel scoreboard;
+    TerminalGUI *terminal = new TerminalGUIColor();
+    State::initializeStates(terminal);
 
-    GameboardView gameboardView(gameboard);
-    ScoreboardView scoreboardView(scoreboard);
+    State *currentState = State::mainMenuState;
+    while(currentState != nullptr){
+        currentState = currentState->run();
+    }
 
-    gameboardView.draw(*gui);
-    scoreboardView.draw(*gui);
-
-    gui->display();
-    
+    State::deleteStates();
     return 0;
 }
