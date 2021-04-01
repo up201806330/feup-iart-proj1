@@ -9,7 +9,6 @@ using Move = GameboardModel::Move;
 
 bool DepthFirstSearch::dfs(const GameboardModel& gameBoard) {
     if (visited.count(gameBoard)) return false;
-
     visited.insert(gameBoard);
 
     if (gameBoard.isGameOver()) return true;
@@ -23,11 +22,14 @@ bool DepthFirstSearch::dfs(const GameboardModel& gameBoard) {
         solution.pop_back();
     }
 
+    visited.erase(gameBoard);
+
     return false;
 }
 
 void DepthFirstSearch::initialize(const GameboardModel &gameboardModel){
     visited.clear();
+    solution.clear();
 
     if (!dfs(gameboardModel)) throw SearchStrategy::failed_to_find_solution("DepthFirstSearch");
 }
