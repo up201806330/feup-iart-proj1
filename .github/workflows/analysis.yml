@@ -14,6 +14,7 @@ jobs:
 
     - name: Install csvkit
       run: |
+        sudo apt update
         sudo apt install -y csvkit
 
     - name: Checkout submodules
