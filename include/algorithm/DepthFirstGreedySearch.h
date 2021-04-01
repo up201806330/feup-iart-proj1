@@ -8,7 +8,7 @@
 #include "algorithm/heuristics/Heuristic.h"
 
 #include <deque>
-#include <unordered_set>
+#include <set>
 
 /**
  * @brief Depth first search, expand best neighbours first.
@@ -28,7 +28,7 @@ class DepthFirstGreedySearch : public SearchStrategy {
 private:
     const Heuristic *h = nullptr;
     std::deque<GameboardModel::Move> solution;
-    std::unordered_set<GameboardModel> visited;
+    std::set<GameboardModel> visited;
 
     bool dfs(const GameboardModel& gameBoard);
 public:
