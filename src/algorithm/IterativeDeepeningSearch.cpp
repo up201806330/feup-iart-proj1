@@ -21,8 +21,8 @@ bool IterativeDeepeningSearch::dfs(const GameboardModel& gameBoard, size_t depth
         solution.push_back(move);
         visited.insert(gameBoard);
         if (dfs(state, depth + 1)) return true;
-        solution.pop_back();
         visited.erase(gameBoard);
+        solution.pop_back();
     }
 
     return false;
