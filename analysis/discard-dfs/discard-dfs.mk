@@ -15,7 +15,7 @@ all: discard-dfs-math.csv
 
 discard-dfs-math.csv: discard-dfs.csv
 	head -n 1 discard-dfs.csv > discard-dfs-math.csv
-	cat discard-dfs.csv | tail -n +2 | awk -F , -v OFS=, '{print $$1,$$2,$$3,$$4,$$20/$$5,$$6,$$7/$$10,$$20/$$8,$$9,$$10/1000000,$$20/$$11,$$12,$$13/$$10,$$20/$$14,$$15,$$16/$$10,$$20/$$17,$$18,$$19/$$10,$$20/$$20,$$21,$$22/$$10,$$20/$$23,$$24,$$25/$$10,$$20/$$26,$$27,$$28/$$10,$$20/$$29,$$30,$$31/$$10}' >> discard-dfs-math.csv
+	cat discard-dfs.csv | tail -n +2 | awk -F , -v OFS=, '{print $$1,$$2,$$3,$$4,$$20/$$5,$$6,$$7/$$10,$$20/$$8,$$9,$$10/1000000,$$20/$$11,$$12,$$13/$$10,$$20/$$14,$$15,$$16/$$10,$$20/$$17,$$18,$$19/$$10,$$20,$$21,$$22/$$10,$$20/$$23,$$24,$$25/$$10,$$20/$$26,$$27,$$28/$$10,$$20/$$29,$$30,$$31/$$10}' >> discard-dfs-math.csv
 
 discard-dfs.csv: dfs.csv bfs.csv iterative-deepening.csv dfs-greedy-admissible.csv greedy-admissible.csv astar-admissible.csv dfs-greedy-fh.csv dfs-fh.csv astar-fh.csv
 	csvcut -c 5,6,7 bfs.csv                     > bfs-cut.csv

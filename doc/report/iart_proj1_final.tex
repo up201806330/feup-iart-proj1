@@ -225,55 +225,77 @@ This research is significant for our problem; even though the problems are quite
 
 \begin{frame}
   \frametitle{Preliminary results}
+  \footnotesize
 
-  Seed is 0, and time measurements are averaged over 10 executions.
+  Seed is 0, time measurements averaged over 10 executions.
 
-  \textbf{Optimality}
+  \textbf{Optimality} | Quotient of optimal solution by obtained solution. $1$ means optimal, $<1$ means sub-optimal.
 
-  Defined as quotient of optimal solution by obtained solution. $1$ means optimal, $<1$ means sub-optimal.
+  ~
 
-  \begin{figure}
-    \scriptsize
-    \sisetup{round-mode=places
-      ,round-precision=4
-      ,scientific-notation=fixed
-      ,fixed-exponent=0
-    }
-    \setlength{\tabcolsep}{0.5em}
-    \begin{tabular}{@{} r | r | r || l | l | l | l | l | l | l | l | l @{}}
-      & & & \multicolumn{9}{c}{\textbf{Optimality}} \\ \cline{4-12}
-      \rotatebox[origin=c]{90}{\textbf{\# of tubes}} &
-      \rotatebox[origin=c]{90}{\textbf{Tube height}} &
-      \rotatebox[origin=c]{90}{\textbf{\# of colors}} &
-      \rotatebox[origin=c]{90}{\textbf{DFS}} &
-      \rotatebox[origin=c]{90}{\textbf{BFS}} &
-      \rotatebox[origin=c]{90}{\textbf{ID}} &
-      \rotatebox[origin=c]{90}{\textbf{DFS, greedy}} &
-      \rotatebox[origin=c]{90}{\textbf{Greedy}} &
-      \rotatebox[origin=c]{90}{\textbf{A*}} &
-      \rotatebox[origin=c]{90}{\textbf{~DFS, greedy (FH)~}} &
-      \rotatebox[origin=c]{90}{\textbf{A* (FH)}} &
-      \rotatebox[origin=c]{90}{\textbf{Greedy (FH)}}
-      \csvreader[head to column names]{../../analysis/discard-dfs/discard-dfs-math.csv}{}
-      {\\\hline
-        \nTubes &
-        \tubeH &
-        \nColors &
-        $\num{\dfsnMoves}$ &
-        $\num{\bfsnMoves}$ &
-        $\num{\iterativedeepeningnMoves}$ &
-        $\num{\dfsgreedyadmissiblenMoves}$ &
-        $\num{\greedyadmissiblenMoves}$ &
-        $\num{\astaradmissiblenMoves}$ &
-        $\num{\dfsgreedyfhnMoves}$ &
-        $\num{\dfsfhnMoves}$ &
-        $\num{\astarfhnMoves}$
+  \begin{minipage}[c]{0.73\textwidth}
+    \begin{figure}
+      \scriptsize
+      \sisetup{round-mode=places
+        ,round-precision=3
+        ,scientific-notation=fixed
+        ,fixed-exponent=0
       }
-    \end{tabular}
-    \caption{Optimality of several methods.}
-  \end{figure}
-
-
+      \setlength{\tabcolsep}{0.5em}
+      \begin{tabular}{@{} r | r | r || r || l | l | l | l | l | l | l | l | l @{}}
+        & & & \multirow{2}{*}{\rotatebox[origin=c]{90}{\textbf{Optimal solution}}} &
+        \multicolumn{9}{c}{\textbf{Optimality}} \\ \cline{5-13}
+        \rotatebox[origin=c]{90}{\textbf{\# of tubes}} &
+        \rotatebox[origin=c]{90}{\textbf{Tube height}} &
+        \rotatebox[origin=c]{90}{\textbf{\# of colors}} & &
+        \rotatebox[origin=c]{90}{\textbf{DFS}} &
+        \rotatebox[origin=c]{90}{\textbf{BFS}} &
+        \rotatebox[origin=c]{90}{\textbf{ID}} &
+        \rotatebox[origin=c]{90}{\textbf{DFS-greedy}} &
+        \rotatebox[origin=c]{90}{\textbf{Greedy}} &
+        \rotatebox[origin=c]{90}{\textbf{A*}} &
+        \rotatebox[origin=c]{90}{\textbf{~DFS-greedy (FH)~}} &
+        \rotatebox[origin=c]{90}{\textbf{A* (FH)}} &
+        \rotatebox[origin=c]{90}{\textbf{Greedy (FH)}}
+        \csvreader[head to column names]{../../analysis/discard-dfs/discard-dfs-math.csv}{}
+        {\\\hline
+          \nTubes &
+          \tubeH &
+          \nColors &
+          $\num{\astaradmissiblenMoves}$ &
+          $\num{\dfsnMoves}$ &
+          $\num{\bfsnMoves}$ &
+          $\num{\iterativedeepeningnMoves}$ &
+          $\num{\dfsgreedyadmissiblenMoves}$ &
+          $\num{\greedyadmissiblenMoves}$ &
+          $\num{1}$ &
+          $\num{\dfsgreedyfhnMoves}$ &
+          $\num{\dfsfhnMoves}$ &
+          $\num{\astarfhnMoves}$
+        }
+      \end{tabular}
+      \caption{Optimality of several methods.}
+    \end{figure}
+  \end{minipage}
+  \begin{minipage}[c]{0.26\textwidth}
+    \textbf{Optimal:}
+    \begin{itemize}
+      \item BFS
+      \item ID
+      \item A*
+    \end{itemize}
+    \textbf{Near-optimal:}
+    \begin{itemize}
+      \item DFS-greedy
+      \item Greedy
+      \item DFS-greedy (FH)
+      \item Greedy (FH)
+    \end{itemize}
+    \textbf{Awful:}
+    \begin{itemize}
+      \item DFS
+    \end{itemize}
+  \end{minipage}
 
 \end{frame}
 
@@ -297,10 +319,10 @@ This research is significant for our problem; even though the problems are quite
       \rotatebox[origin=c]{90}{\textbf{\# of colors}} & &
       \rotatebox[origin=c]{90}{\textbf{DFS}} &
       \rotatebox[origin=c]{90}{\textbf{ID}} &
-      \rotatebox[origin=c]{90}{\textbf{DFS, greedy}} &
+      \rotatebox[origin=c]{90}{\textbf{DFS-greedy}} &
       \rotatebox[origin=c]{90}{\textbf{Greedy}} &
       \rotatebox[origin=c]{90}{\textbf{A*}} &
-      \rotatebox[origin=c]{90}{\textbf{~DFS, greedy (FH)~}} &
+      \rotatebox[origin=c]{90}{\textbf{~DFS-greedy (FH)~}} &
       \rotatebox[origin=c]{90}{\textbf{A* (FH)}} &
       \rotatebox[origin=c]{90}{\textbf{Greedy (FH)}}
       \csvreader[head to column names]{../../analysis/discard-dfs/discard-dfs-math.csv}{}
