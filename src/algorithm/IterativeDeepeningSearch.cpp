@@ -10,8 +10,8 @@ using Move = GameboardModel::Move;
 bool IterativeDeepeningSearch::dfs(const GameboardModel& gameBoard, size_t depth) {
     if (depth > maxDepth) return false;
 
-    if(visited.count(gameBoard) && visited[gameBoard] <= depth) return false;
-    visited[gameBoard] = depth;
+    if(visited.count(gameBoard)) return false;
+    visited.insert(gameBoard);
 
     if (gameBoard.isGameOver()) return true;
 
@@ -23,6 +23,8 @@ bool IterativeDeepeningSearch::dfs(const GameboardModel& gameBoard, size_t depth
         if (dfs(state, depth + 1)) return true;
         solution.pop_back();
     }
+
+    visited.erase(gameBoard);
 
     return false;
 }
