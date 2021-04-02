@@ -91,8 +91,7 @@
 
 \begin{frame}
 \frametitle{1. Work specification}
-
-\textbf{The problem}
+\framesubtitle{1.1. Problem description}
 
 Solve solitaire game \href{https://play.google.com/store/apps/details?id=com.spicags.ballsort&hl=pt_PT&gl=US}{\textit{Ball Sort Puzzle}} by \href{https://play.google.com/store/apps/developer?id=Spica+Game+Studio}{Spica Game Studio}, using heuristic search methods.
 
@@ -118,7 +117,8 @@ Starting with a set of differently coloured balls distributed at random in diffe
 \end{frame}
 
 \begin{frame}
-\textbf{How we will solve it}
+\frametitle{1. Work specification}
+\framesubtitle{1.2. Solution description}
 
 \begin{enumerate}
   \itemsep0em
@@ -165,6 +165,7 @@ This research is significant for our problem; even though the problems are quite
 
 \begin{frame}[fragile=singleslide]
 \frametitle{3. Formulation}
+\framesubtitle{3.1. Game definition}
 
 \textbf{Game state} | Vector $S = \langle t_1, t_2, ..., t_N \rangle$ of $N$ tubes with maximum capacity $H$, where tube $i$ is a stack $t_i = \langle t_i(1), t_i(2), ..., t_i(h_i) \rangle$ with $h_i$ balls ($0 \leq h_i \leq H$), where $t_i(1)$ is the color of the ball at the bottom, and $t_i(h_i)$ the color at the top. There are $C$ colors ($C < N$) numbered sequentially, thus $\forall i, j,~1 \leq t_i(j) \leq C$.
 
@@ -183,7 +184,9 @@ This research is significant for our problem; even though the problems are quite
 \end{frame}
 
 \begin{frame}
-  \textbf{Heuristics/Evaluation function} | This heuristic will describe an estimate of the distance to a solution in \# of moves:
+  \frametitle{3. Formulation}
+  \framesubtitle{3.2. Heuristics}
+  This heuristic will describe an estimate of the distance to a solution in \# of moves:
   \begin{itemize}
     \item For each tube, add the number of balls in that tube that have a different color than the last ball in the tube.
     \item Number of balls in the $N-C$ tubes with least balls.
@@ -217,8 +220,7 @@ This research is significant for our problem; even though the problems are quite
 
 \begin{frame}
 \frametitle{6. Implemented algorithms}
-
-\textbf{Uninformed search methods}
+\framesubtitle{6.1. Uninformed search methods}
 
 \begin{itemize}
   \item \textbf{Depth First Search (DFS)} | Starting in a given node, expands its children in a random order until if finds that branch does not have a solution, and backtracks until it finds another branch to explore. 
@@ -234,8 +236,8 @@ This research is significant for our problem; even though the problems are quite
 \end{frame}
 
 \begin{frame}
-
-\textbf{Informed search methods}
+\frametitle{6. Implemented algorithms}
+\framesubtitle{6.2. Informed search methods}
 
 \begin{itemize}  
   \item \textbf{Depth First Search Greedy (DFS-greedy)} | DFS, but uses an heuristic to rank nodes adjacent to current node, and expands them in increasing order of the heuristic score.
@@ -246,6 +248,7 @@ This research is significant for our problem; even though the problems are quite
 
 \begin{frame}
   \frametitle{7. Results}
+  \framesubtitle{7.1. Preliminary results}
   \footnotesize
 
   Seed is 0, time measurements averaged over 10 executions.
@@ -258,14 +261,15 @@ This research is significant for our problem; even though the problems are quite
 
   \begin{minipage}[c]{0.73\textwidth}
     \begin{figure}
+      \centering
       \scriptsize
       \sisetup{round-mode=places
         ,round-precision=3
         ,scientific-notation=fixed
         ,fixed-exponent=0
       }
-      \setlength{\tabcolsep}{0.5em}
-      \begin{tabular}{@{} r | r | r || r || l | l | l | l | l | l | l | l | l @{}}
+      \setlength{\tabcolsep}{0.45em}
+      \begin{tabular}{r | r | r || r || l | l | l | l | l | l | l | l | l}
         & & & \multirow{2}{*}{\rotatebox[origin=c]{90}{\textbf{Optimal solution}}} &
         \multicolumn{9}{c}{\textbf{Optimality}} \\ \cline{5-13}
         \rotatebox[origin=c]{90}{\textbf{\# of tubes}} &
@@ -330,6 +334,7 @@ This research is significant for our problem; even though the problems are quite
 \begin{frame}
   Since BFS is the slowest optimal method, we used it to compare performance.
   \begin{figure}
+    \centering
     \scriptsize
     \sisetup{round-mode=places
       ,round-precision=3
@@ -337,8 +342,8 @@ This research is significant for our problem; even though the problems are quite
       ,scientific-notation=fixed
       ,fixed-exponent=0
     }  
-    \setlength{\tabcolsep}{0.5em}
-    \begin{tabular}{@{} r | r | r || r || r | r | r | r | r | r | r | r @{}}
+    \setlength{\tabcolsep}{0.45em}
+    \begin{tabular}{r | r | r || r || r | r | r | r | r | r | r | r}
       & & & \multirow{2}{*}{\rotatebox[origin=c]{90}{\textbf{BFS exec. time ($\si{\milli\second}$)}}} &
       \multicolumn{8}{c}{\textbf{Execution time} (as multiple of BFS execution time)} \\ \cline{5-12}
 
@@ -358,7 +363,7 @@ This research is significant for our problem; even though the problems are quite
         \nTubes &
         \tubeH &
         \nColors &
-        $\num{\bfstns}$ &
+        $\num[round-precision=2]{\bfstns}$ &
         $\num{\dfstns}$ &
         \ifthenelse{\equal{\iterativedeepeningtns}{\string -}}{
           -
@@ -380,6 +385,7 @@ This research is significant for our problem; even though the problems are quite
 \begin{frame}
   Memory usage measurements is somewhat limited to finding the maximum number of virtual memory pages allocated to a process at any given time, and multiply by the page size. Here the page size is $\SI{128}{\kibi\byte} \approx \SI{0.132}{\mega\byte}$.
   \begin{figure}
+    \centering
     \scriptsize
     \sisetup{round-mode=places
       ,round-precision=3
@@ -387,8 +393,8 @@ This research is significant for our problem; even though the problems are quite
       ,scientific-notation=fixed
       ,fixed-exponent=0
     }  
-    \setlength{\tabcolsep}{0.5em}
-    \begin{tabular}{@{} r | r | r || r | r | r | r | r | r | r | r | r @{}}
+    \setlength{\tabcolsep}{0.45em}
+    \begin{tabular}{r | r | r || r | r | r | r | r | r | r | r | r}
       & & &
       \multicolumn{9}{c}{\textbf{Memory used} (in $\si{\mega\byte}$)} \\ \cline{4-12}
 
@@ -424,7 +430,7 @@ This research is significant for our problem; even though the problems are quite
         $\num{\astarfhmemb}$
       }
     \end{tabular}
-    \caption{Memory performance of several methods, normalized to BFS execution time.}
+    \caption{Maximum memory usage of several methods.}
   \end{figure}
 \end{frame}
 
