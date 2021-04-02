@@ -521,10 +521,10 @@ This research is significant for our problem; even though the problems are quite
   
   \begin{figure}
     \begin{tikzpicture}
-      \begin{semilogyaxis}[xmin=1.7,xmax=9.3,ymin=1e-1,ymax=1e4,width=12cm,height=7.2cm,hide axis]\errorband[black  , opacity=0.15]{../../analysis/further-analysis/bfs-processed.csv                  }{nTubes}{memMin}{memMax}\end{semilogyaxis}
-      \begin{semilogyaxis}[xmin=1.7,xmax=9.3,ymin=1e-1,ymax=1e4,width=12cm,height=7.2cm,hide axis]\errorband[blue   , opacity=0.15]{../../analysis/further-analysis/dfs-greedy-admissible-processed.csv}{nTubes}{memMin}{memMax}\end{semilogyaxis}
-      \begin{semilogyaxis}[xmin=1.7,xmax=9.3,ymin=1e-1,ymax=1e4,width=12cm,height=7.2cm,hide axis]\errorband[red    , opacity=0.15]{../../analysis/further-analysis/greedy-admissible-processed.csv    }{nTubes}{memMin}{memMax}\end{semilogyaxis}
-      \begin{semilogyaxis}[xmin=1.7,xmax=9.3,ymin=1e-1,ymax=1e4,width=12cm,height=7.2cm,hide axis]\errorband[green  , opacity=0.15]{../../analysis/further-analysis/astar-admissible-processed.csv     }{nTubes}{memMin}{memMax}\end{semilogyaxis}
+      \begin{semilogyaxis}[xmin=1.7,xmax=9.3,ymin=1e-1,ymax=1e4,width=12cm,height=7.2cm,hide axis]\errorband[black  , opacity=0.15]{../../analysis/further-analysis/bfs-processed.csv                  }{nTubes}{memMBMin}{memMBMax}\end{semilogyaxis}
+      \begin{semilogyaxis}[xmin=1.7,xmax=9.3,ymin=1e-1,ymax=1e4,width=12cm,height=7.2cm,hide axis]\errorband[blue   , opacity=0.15]{../../analysis/further-analysis/dfs-greedy-admissible-processed.csv}{nTubes}{memMBMin}{memMBMax}\end{semilogyaxis}
+      \begin{semilogyaxis}[xmin=1.7,xmax=9.3,ymin=1e-1,ymax=1e4,width=12cm,height=7.2cm,hide axis]\errorband[red    , opacity=0.15]{../../analysis/further-analysis/greedy-admissible-processed.csv    }{nTubes}{memMBMin}{memMBMax}\end{semilogyaxis}
+      \begin{semilogyaxis}[xmin=1.7,xmax=9.3,ymin=1e-1,ymax=1e4,width=12cm,height=7.2cm,hide axis]\errorband[green  , opacity=0.15]{../../analysis/further-analysis/astar-admissible-processed.csv     }{nTubes}{memMBMin}{memMBMax}\end{semilogyaxis}
       \begin{semilogyaxis}[xmin=1.7,xmax=9.3,ymin=1e-1,ymax=1e4,width=12cm,height=7.2cm
         ,title=Maximum memory usage
         ,grid=both
@@ -532,10 +532,10 @@ This research is significant for our problem; even though the problems are quite
         ,ylabel={Maximum memory usage ($\si{\mega\byte}$)}
         ,legend pos=north west
       ]
-        \addplot [black  ,mark=*,thick] table [col sep=comma,x=nTubes,y=memMean]{../../analysis/further-analysis/bfs-processed.csv};
-        \addplot [blue   ,mark=*,thick] table [col sep=comma,x=nTubes,y=memMean]{../../analysis/further-analysis/dfs-greedy-admissible-processed.csv};
-        \addplot [red    ,mark=*,thick] table [col sep=comma,x=nTubes,y=memMean]{../../analysis/further-analysis/greedy-admissible-processed.csv};
-        \addplot [green  ,mark=*,thick] table [col sep=comma,x=nTubes,y=memMean]{../../analysis/further-analysis/astar-admissible-processed.csv};
+        \addplot [black  ,mark=*,thick] table [col sep=comma,x=nTubes,y=memMBMean]{../../analysis/further-analysis/bfs-processed.csv};
+        \addplot [blue   ,mark=*,thick] table [col sep=comma,x=nTubes,y=memMBMean]{../../analysis/further-analysis/dfs-greedy-admissible-processed.csv};
+        \addplot [red    ,mark=*,thick] table [col sep=comma,x=nTubes,y=memMBMean]{../../analysis/further-analysis/greedy-admissible-processed.csv};
+        \addplot [green  ,mark=*,thick] table [col sep=comma,x=nTubes,y=memMBMean]{../../analysis/further-analysis/astar-admissible-processed.csv};
         \legend{BFS,DFS-greedy,Greedy,A*,DFS-greedy (FH),Greedy (FH),A* (FH)}
       \end{semilogyaxis}
     \end{tikzpicture}
