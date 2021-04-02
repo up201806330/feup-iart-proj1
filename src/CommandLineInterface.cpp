@@ -4,6 +4,7 @@
 #include "CommandLineInterface.h"
 
 #include <iostream>
+#include <unistd.h>
 
 #include "algorithm/DepthFirstSearch.h"
 #include "algorithm/IterativeDeepeningSearch.h"
@@ -59,7 +60,7 @@ void CommandLineInterface::run_inside() {
         cout << "-1" << endl;
         return;
     }
-    size_t mem = search->getMemory() - mem_prev;
+    size_t mem = search->getMemory() - mem_prev + 132000ul;
 
     hrc::time_point begin = hrc::now();
     for(size_t i = 0; i < nRuns; ++i) {

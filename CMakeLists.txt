@@ -65,6 +65,6 @@ set(CPP_COMPILER_WARNINGS -Wall -Wunused-result -pedantic-errors -Wextra -Wcast-
                           -Wunreachable-code -Wunused -Wunused-function  -Wunused-label  -Wunused-parameter
                           -Wunused-value  -Wunused-variable  -Wvariadic-macros -Wvolatile-register-var  -Wwrite-strings)
 
-set(CPP_COMPILER_OPTIMIZE -ffast-math -O3)
+set(CPP_COMPILER_OPTIMIZE -O3)
 
 target_compile_options(main PRIVATE -g ${CPP_COMPILER_WARNINGS} ${CPP_COMPILER_OPTIMIZE})

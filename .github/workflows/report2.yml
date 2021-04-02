@@ -41,12 +41,17 @@ jobs:
         cd analysis/discard-dfs
         make -f discard-dfs.mk
 
-    - name: report1
+    - name: Make analysis (further-analysis)
+      run: |
+        cd analysis/further-analysis
+        make -f further-analysis.mk
+
+    - name: report2
       run: |
         cd doc/report
         latexmk --shell-escape iart_proj1_final.tex -pdf
 
-    - name: Upload delivery1 report
+    - name: Upload delivery2 report
       uses: actions/upload-artifact@v2
       with:
         name: iart_proj1_final.pdf

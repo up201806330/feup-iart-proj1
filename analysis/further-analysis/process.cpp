@@ -54,39 +54,33 @@ int main(int argc, char *argv[]){
     // Calculate averages, mins, maxs
     for(const auto &p1: data){
         string alg = p1.first;
-        map<tuple<lli,lli,lli>, size_t> count;
-        map<tuple<lli,lli,lli>,double> nMovesMin, nMovesMean, nMovesMax;
-        map<tuple<lli,lli,lli>,double> memMin, memMean, memMax;
-        map<tuple<lli,lli,lli>,double> tMin, tMean, tMax;
+        map< tuple<lli,lli,lli>, size_t > count;
+        map< tuple<lli,lli,lli>, double > nMovesMean, memMean, tMean;
+        map< tuple<lli,lli,lli>, deque<double> > nMoves, mem, t;
         for(const auto &p2: p1.second){
             auto key = make_tuple(get<0>(p2.first), get<1>(p2.first), get<2>(p2.first));
-            if(!nMovesMin.count(key)) nMovesMin[key] = +INF;
-            if(!nMovesMax.count(key)) nMovesMax[key] = -INF;
-            if(!memMin   .count(key)) memMin   [key] = +INF;
-            if(!memMax   .count(key)) memMax   [key] = -INF;
-            if(!tMin     .count(key)) tMin     [key] = +INF;
-            if(!tMax     .count(key)) tMax     [key] = -INF;
-
             count[key]++;
             
-            nMovesMin [key] = min(nMovesMin[key], get<0>(p2.second));
+            nMoves    [key].push_back(get<0>(p2.second));
             nMovesMean[key] += get<0>(p2.second);
-            nMovesMax [key] = max(nMovesMax[key], get<0>(p2.second));
 
-            memMin    [key] = min(memMin   [key], get<1>(p2.second));
-            memMean   [key] += get<1>(p2.second);
-            memMax    [key] = max(memMax   [key], get<1>(p2.second));
+            mem       [key].push_back(get<1>(p2.second));
+            memMean   [key] += log(get<1>(p2.second));
 
-            tMin      [key] = min(tMin     [key], get<2>(p2.second));
-            tMean     [key] += get<2>(p2.second);
-            tMax      [key] = max(tMax     [key], get<2>(p2.second));
+            t         [key].push_back(get<2>(p2.second));
+            tMean     [key] += log(get<2>(p2.second));
         }
+        for(auto &p2: nMoves) sort(p2.second.begin(), p2.second.end());
+        for(auto &p2: mem   ) sort(p2.second.begin(), p2.second.end());
+        for(auto &p2: t     ) sort(p2.second.begin(), p2.second.end());
         for(const auto &p2: count){
             auto key = p2.first;
             auto c = static_cast<double>(p2.second);
             nMovesMean.at(key) /= c;
             memMean   .at(key) /= c;
+            memMean   .at(key) = exp(memMean.at(key));
             tMean     .at(key) /= c;
+            tMean     .at(key) = exp(tMean.at(key));
         }
 
         // Print
@@ -95,9 +89,9 @@ int main(int argc, char *argv[]){
             cout
                 << alg
                 << "," << get<0>(testCase) << "," << get<1>(testCase) << "," << get<2>(testCase)
-                << "," << nMovesMin.at(testCase) << "," << nMovesMean.at(testCase) << "," << nMovesMax.at(testCase)
-                << "," << memMin   .at(testCase) << "," << memMean   .at(testCase) << "," << memMax   .at(testCase)
-                << "," << tMin     .at(testCase) << "," << tMean     .at(testCase) << "," << tMax     .at(testCase)
+                << "," << *(nMoves.at(testCase).begin()) << "," << nMovesMean.at(testCase) << "," << *(nMoves.at(testCase).rbegin())
+                << "," << *(mem   .at(testCase).begin()) << "," << memMean   .at(testCase) << "," << *(mem   .at(testCase).rbegin())
+                << "," << *(t     .at(testCase).begin()) << "," << tMean     .at(testCase) << "," << *(t     .at(testCase).rbegin())
                 << endl;
         }
     }

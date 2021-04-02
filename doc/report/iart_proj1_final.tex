@@ -74,19 +74,18 @@
 \usepackage{pgfplots, pgfplotstable}
 \newcommand{\errorband}[5][]{ % x column, y column, error column, optional argument for setting style of the area plot
 \pgfplotstableread[col sep=comma]{#2}\datatable
-    % Lower bound (invisible plot)
+    % Lower bound
     \addplot [draw=none, stack plots=y, forget plot] table [
       x={#3},
       y={#4}
     ] {\datatable};
 
-    % Stack twice the error, draw as area plot
     \addplot [draw=none, fill=gray!40, stack plots=y, area legend, #1] table [
         x={#3},
         y expr=\thisrow{#5}-\thisrow{#4}
     ] {\datatable} \closedcycle;
 
-    % Reset stack using invisible plot
+    % Reset stack
     \addplot [forget plot, stack plots=y,draw=none] table [x={#3}, y expr=-\thisrow{#5}] {\datatable};
 }
 
@@ -312,9 +311,6 @@ This research is significant for our problem; even though the problems are quite
         & \textbf{DFS-greedy}
         & \textbf{Greedy}
         & \textbf{A*}
-        % & \rotatebox[origin=c]{90}{\textbf{~DFS-greedy (FH)~}}
-        % & \rotatebox[origin=c]{90}{\textbf{A* (FH)}}
-        % & \rotatebox[origin=c]{90}{\textbf{Greedy (FH)}}
         \csvreader[head to column names]{../../analysis/discard-dfs/discard-dfs-math.csv}{}
         {\\\hline
           \nTubes
@@ -331,9 +327,6 @@ This research is significant for our problem; even though the problems are quite
           & $\num{\dfsgreedyadmissiblenMoves}$
           & $\num{\greedyadmissiblenMoves}$
           & $\num{1}$
-          % & $\num{\dfsgreedyfhnMoves}$
-          % & $\num{\dfsfhnMoves}$
-          % & $\num{\astarfhnMoves}$
         }
       \end{tabular}
       \caption{Optimality of several methods.}
@@ -390,9 +383,6 @@ This research is significant for our problem; even though the problems are quite
       & \textbf{DFS-greedy}
       & \textbf{Greedy}
       & \textbf{A*}
-      % & \rotatebox[origin=c]{90}{\textbf{~DFS-greedy (FH)~}}
-      % & \rotatebox[origin=c]{90}{\textbf{A* (FH)}}
-      % & \rotatebox[origin=c]{90}{\textbf{Greedy (FH)}}
       \csvreader[head to column names]{../../analysis/discard-dfs/discard-dfs-math.csv}{}
       {\\\hline
         \nTubes
@@ -408,9 +398,6 @@ This research is significant for our problem; even though the problems are quite
         & $\num{\dfsgreedyadmissibletns}$
         & $\num{\greedyadmissibletns}$
         & $\num{\astaradmissibletns}$
-        % & $\num{\dfsgreedyfhtns}$
-        % & $\num{\dfsfhtns}$
-        % & $\num{\astarfhtns}$
       }
     \end{tabular}
     \caption{Time performance of several methods, normalized to BFS execution time.}
@@ -418,7 +405,7 @@ This research is significant for our problem; even though the problems are quite
 \end{frame}
 
 \begin{frame}
-  Memory usage measurements is somewhat limited to finding the maximum number of virtual memory pages allocated to a process at any given time, and multiply by the page size. Here the page size is $\SI{128}{\kibi\byte} \approx \SI{0.132}{\mega\byte}$.
+  Memory usage measurements are somewhat limited due to the way memory is allocated. Although the page size is $\SI{4096}{\byte}$, allocations are made in chunks of $\SI{132}{\kilo\byte}$.
   \begin{figure}
     \centering
     \scriptsize
@@ -442,9 +429,6 @@ This research is significant for our problem; even though the problems are quite
       & \textbf{DFS-greedy}
       & \textbf{Greedy}
       & \textbf{A*}
-      % & \rotatebox[origin=c]{90}{\textbf{~DFS-greedy (FH)~}}
-      % & \rotatebox[origin=c]{90}{\textbf{A* (FH)}}
-      % & \rotatebox[origin=c]{90}{\textbf{Greedy (FH)}}
       \csvreader[head to column names]{../../analysis/discard-dfs/discard-dfs-math.csv}{}
       {\\\hline
         \nTubes
@@ -460,9 +444,6 @@ This research is significant for our problem; even though the problems are quite
         & $\num{\dfsgreedyadmissiblememb}$
         & $\num{\greedyadmissiblememb}$
         & $\num{\astaradmissiblememb}$
-        % & $\num{\dfsgreedyfhmemb}$
-        % & $\num{\dfsfhmemb}$
-        % & $\num{\astarfhmemb}$
       }
     \end{tabular}
     \caption{Maximum memory usage of several methods.}
@@ -498,19 +479,23 @@ This research is significant for our problem; even though the problems are quite
 \begin{frame}
   \frametitle{7. Results}
   \framesubtitle{7.2. Further analysis}
-  
+
+  Each data point was obtained by averaging the execution times of that algorithm on 10 random gameboards with same number of tubes and colors and same tube height, but differing seeds.
+
+  The average time is defined by $\bar{t} = \exp{\left(\frac{1}{N}\sum_{i=0}^{N}\log{t_i}\right)}$. S
+
+\end{frame}
+
+\begin{frame}
   \begin{figure}
     \begin{tikzpicture}
-      \begin{semilogyaxis}[xmin=1.7,xmax=9.3,ymin=1e-3,ymax=1e4,width=12cm,height=7.2cm,hide axis]\errorband[black  , opacity=0.15]{../../analysis/further-analysis/bfs-processed.csv                  }{nTubes}{tmsMin}{tmsMax}\end{semilogyaxis}
-      \begin{semilogyaxis}[xmin=1.7,xmax=9.3,ymin=1e-3,ymax=1e4,width=12cm,height=7.2cm,hide axis]\errorband[blue   , opacity=0.15]{../../analysis/further-analysis/dfs-greedy-admissible-processed.csv}{nTubes}{tmsMin}{tmsMax}\end{semilogyaxis}
-      \begin{semilogyaxis}[xmin=1.7,xmax=9.3,ymin=1e-3,ymax=1e4,width=12cm,height=7.2cm,hide axis]\errorband[red    , opacity=0.15]{../../analysis/further-analysis/greedy-admissible-processed.csv    }{nTubes}{tmsMin}{tmsMax}\end{semilogyaxis}
-      \begin{semilogyaxis}[xmin=1.7,xmax=9.3,ymin=1e-3,ymax=1e4,width=12cm,height=7.2cm,hide axis]\errorband[green  , opacity=0.15]{../../analysis/further-analysis/astar-admissible-processed.csv     }{nTubes}{tmsMin}{tmsMax}\end{semilogyaxis}
-      % \begin{semilogyaxis}[xmin=1.7,xmax=9.3,ymin=1e-3,ymax=1e4,width=12cm,height=7.2cm,hide axis]\errorband[cyan   , opacity=0.15]{../../analysis/further-analysis/dfs-greedy-fh-processed.csv        }{nTubes}{tmsMin}{tmsMax}\end{semilogyaxis}
-      % \begin{semilogyaxis}[xmin=1.7,xmax=9.3,ymin=1e-3,ymax=1e4,width=12cm,height=7.2cm,hide axis]\errorband[magenta, opacity=0.15]{../../analysis/further-analysis/greedy-fh-processed.csv            }{nTubes}{tmsMin}{tmsMax}\end{semilogyaxis}
-      % \begin{semilogyaxis}[xmin=1.7,xmax=9.3,ymin=1e-3,ymax=1e4,width=12cm,height=7.2cm,hide axis]\errorband[yellow , opacity=0.15]{../../analysis/further-analysis/astar-fh-processed.csv             }{nTubes}{tmsMin}{tmsMax}\end{semilogyaxis}
-      \begin{semilogyaxis}[xmin=1.7,xmax=9.3,ymin=1e-3,ymax=1e4,width=12cm,height=7.2cm,
+      \begin{semilogyaxis}[xmin=1.7,xmax=9.3,ymin=1e-3,ymax=1e4,width=11cm,height=7.0cm,hide axis]\errorband[black  , opacity=0.15]{../../analysis/further-analysis/bfs-processed.csv                  }{nTubes}{tmsMin}{tmsMax}\end{semilogyaxis}
+      \begin{semilogyaxis}[xmin=1.7,xmax=9.3,ymin=1e-3,ymax=1e4,width=11cm,height=7.0cm,hide axis]\errorband[blue   , opacity=0.15]{../../analysis/further-analysis/dfs-greedy-admissible-processed.csv}{nTubes}{tmsMin}{tmsMax}\end{semilogyaxis}
+      \begin{semilogyaxis}[xmin=1.7,xmax=9.3,ymin=1e-3,ymax=1e4,width=11cm,height=7.0cm,hide axis]\errorband[red    , opacity=0.15]{../../analysis/further-analysis/greedy-admissible-processed.csv    }{nTubes}{tmsMin}{tmsMax}\end{semilogyaxis}
+      \begin{semilogyaxis}[xmin=1.7,xmax=9.3,ymin=1e-3,ymax=1e4,width=11cm,height=7.0cm,hide axis]\errorband[green  , opacity=0.15]{../../analysis/further-analysis/astar-admissible-processed.csv     }{nTubes}{tmsMin}{tmsMax}\end{semilogyaxis}
+      \begin{semilogyaxis}[xmin=1.7,xmax=9.3,ymin=1e-3,ymax=1e4,width=11cm,height=7.0cm,
         title=Execution time,
-        grid=major,
+        grid=both,
         xtick distance=1,
         ytick distance=10,
         xlabel={Number of tubes},
@@ -521,51 +506,42 @@ This research is significant for our problem; even though the problems are quite
         \addplot [blue   ,mark=*,thick] table [col sep=comma,x=nTubes,y=tmsMean]{../../analysis/further-analysis/dfs-greedy-admissible-processed.csv};
         \addplot [red    ,mark=*,thick] table [col sep=comma,x=nTubes,y=tmsMean]{../../analysis/further-analysis/greedy-admissible-processed.csv};
         \addplot [green  ,mark=*,thick] table [col sep=comma,x=nTubes,y=tmsMean]{../../analysis/further-analysis/astar-admissible-processed.csv};
-        % \addplot [cyan   ,mark=*,thick] table [col sep=comma,x=nTubes,y=tmsMean]{../../analysis/further-analysis/dfs-greedy-fh-processed.csv};
-        % \addplot [magenta,mark=*,thick] table [col sep=comma,x=nTubes,y=tmsMean]{../../analysis/further-analysis/greedy-fh-processed.csv};
-        % \addplot [yellow ,mark=*,thick] table [col sep=comma,x=nTubes,y=tmsMean]{../../analysis/further-analysis/astar-fh-processed.csv};
       
+        \legend{BFS,DFS-greedy,Greedy,A*,DFS-greedy (FH),Greedy (FH),A* (FH)}
+      \end{semilogyaxis}
+    \end{tikzpicture}
+    \caption{Execution times of several methods. Thick lines are the average execution time, shaded areas cover the percentiles $10\%$ through $90\%$.}
+  \end{figure}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{7. Results}
+  \framesubtitle{7.2. Further analysis}
+  
+  \begin{figure}
+    \begin{tikzpicture}
+      \begin{semilogyaxis}[xmin=1.7,xmax=9.3,ymin=1e-1,ymax=1e4,width=12cm,height=7.2cm,hide axis]\errorband[black  , opacity=0.15]{../../analysis/further-analysis/bfs-processed.csv                  }{nTubes}{memMin}{memMax}\end{semilogyaxis}
+      \begin{semilogyaxis}[xmin=1.7,xmax=9.3,ymin=1e-1,ymax=1e4,width=12cm,height=7.2cm,hide axis]\errorband[blue   , opacity=0.15]{../../analysis/further-analysis/dfs-greedy-admissible-processed.csv}{nTubes}{memMin}{memMax}\end{semilogyaxis}
+      \begin{semilogyaxis}[xmin=1.7,xmax=9.3,ymin=1e-1,ymax=1e4,width=12cm,height=7.2cm,hide axis]\errorband[red    , opacity=0.15]{../../analysis/further-analysis/greedy-admissible-processed.csv    }{nTubes}{memMin}{memMax}\end{semilogyaxis}
+      \begin{semilogyaxis}[xmin=1.7,xmax=9.3,ymin=1e-1,ymax=1e4,width=12cm,height=7.2cm,hide axis]\errorband[green  , opacity=0.15]{../../analysis/further-analysis/astar-admissible-processed.csv     }{nTubes}{memMin}{memMax}\end{semilogyaxis}
+      \begin{semilogyaxis}[xmin=1.7,xmax=9.3,ymin=1e-1,ymax=1e4,width=12cm,height=7.2cm
+        ,title=Maximum memory usage
+        ,grid=both
+        ,xlabel={Number of tubes}
+        ,ylabel={Maximum memory usage ($\si{\mega\byte}$)}
+        ,legend pos=north west
+      ]
+        \addplot [black  ,mark=*,thick] table [col sep=comma,x=nTubes,y=memMean]{../../analysis/further-analysis/bfs-processed.csv};
+        \addplot [blue   ,mark=*,thick] table [col sep=comma,x=nTubes,y=memMean]{../../analysis/further-analysis/dfs-greedy-admissible-processed.csv};
+        \addplot [red    ,mark=*,thick] table [col sep=comma,x=nTubes,y=memMean]{../../analysis/further-analysis/greedy-admissible-processed.csv};
+        \addplot [green  ,mark=*,thick] table [col sep=comma,x=nTubes,y=memMean]{../../analysis/further-analysis/astar-admissible-processed.csv};
         \legend{BFS,DFS-greedy,Greedy,A*,DFS-greedy (FH),Greedy (FH),A* (FH)}
       \end{semilogyaxis}
     \end{tikzpicture}
   \end{figure}
 
 \end{frame}
-
-% \begin{frame}
-%   \frametitle{7. Results}
-%   \framesubtitle{7.2. Further analysis}
-  
-%   \begin{figure}
-%     \begin{tikzpicture}
-%       \begin{semilogyaxis}[xmin=1.7,xmax=9.3,ymin=1e-3,ymax=1e4,width=12cm,height=7.2cm,hide axis]\errorband[black  , opacity=0.15]{../../analysis/further-analysis/bfs-processed.csv                  }{nTubes}{memMBMin}{memMBMax}\end{semilogyaxis}
-%       \begin{semilogyaxis}[xmin=1.7,xmax=9.3,ymin=1e-3,ymax=1e4,width=12cm,height=7.2cm,hide axis]\errorband[blue   , opacity=0.15]{../../analysis/further-analysis/dfs-greedy-admissible-processed.csv}{nTubes}{memMBMin}{memMBMax}\end{semilogyaxis}
-%       \begin{semilogyaxis}[xmin=1.7,xmax=9.3,ymin=1e-3,ymax=1e4,width=12cm,height=7.2cm,hide axis]\errorband[red    , opacity=0.15]{../../analysis/further-analysis/greedy-admissible-processed.csv    }{nTubes}{memMBMin}{memMBMax}\end{semilogyaxis}
-%       \begin{semilogyaxis}[xmin=1.7,xmax=9.3,ymin=1e-3,ymax=1e4,width=12cm,height=7.2cm,hide axis]\errorband[green  , opacity=0.15]{../../analysis/further-analysis/astar-admissible-processed.csv     }{nTubes}{memMBMin}{memMBMax}\end{semilogyaxis}
-%       \begin{semilogyaxis}[xmin=1.7,xmax=9.3,ymin=1e-3,ymax=1e4,width=12cm,height=7.2cm,hide axis]\errorband[cyan   , opacity=0.15]{../../analysis/further-analysis/dfs-greedy-fh-processed.csv        }{nTubes}{memMBMin}{memMBMax}\end{semilogyaxis}
-%       \begin{semilogyaxis}[xmin=1.7,xmax=9.3,ymin=1e-3,ymax=1e4,width=12cm,height=7.2cm,hide axis]\errorband[magenta, opacity=0.15]{../../analysis/further-analysis/greedy-fh-processed.csv            }{nTubes}{memMBMin}{memMBMax}\end{semilogyaxis}
-%       \begin{semilogyaxis}[xmin=1.7,xmax=9.3,ymin=1e-3,ymax=1e4,width=12cm,height=7.2cm,hide axis]\errorband[yellow , opacity=0.15]{../../analysis/further-analysis/astar-fh-processed.csv             }{nTubes}{memMBMin}{memMBMax}\end{semilogyaxis}
-%       \begin{semilogyaxis}[xmin=1.7,xmax=9.3,ymin=1e-3,ymax=1e4,width=12cm,height=7.2cm
-%         ,title=Maximum memory usage
-%         ,grid=major
-%         ,xlabel={Number of tubes}
-%         ,ylabel={Maximum memory usage ($\si{\mega\byte}$)}
-%         ,legend pos=north west
-%       ]
-%         \addplot [black  ,mark=*,thick] table [col sep=comma,x=nTubes,y=memMBMean]{../../analysis/further-analysis/bfs-processed.csv};
-%         \addplot [blue   ,mark=*,thick] table [col sep=comma,x=nTubes,y=memMBMean]{../../analysis/further-analysis/dfs-greedy-admissible-processed.csv};
-%         \addplot [red    ,mark=*,thick] table [col sep=comma,x=nTubes,y=memMBMean]{../../analysis/further-analysis/greedy-admissible-processed.csv};
-%         \addplot [green  ,mark=*,thick] table [col sep=comma,x=nTubes,y=memMBMean]{../../analysis/further-analysis/astar-admissible-processed.csv};
-%         \addplot [cyan   ,mark=*,thick] table [col sep=comma,x=nTubes,y=memMBMean]{../../analysis/further-analysis/dfs-greedy-fh-processed.csv};
-%         \addplot [magenta,mark=*,thick] table [col sep=comma,x=nTubes,y=memMBMean]{../../analysis/further-analysis/greedy-fh-processed.csv};
-%         \addplot [yellow ,mark=*,thick] table [col sep=comma,x=nTubes,y=memMBMean]{../../analysis/further-analysis/astar-fh-processed.csv};
-      
-%         \legend{BFS,DFS-greedy,Greedy,A*,DFS-greedy (FH),Greedy (FH),A* (FH)}
-%       \end{semilogyaxis}
-%     \end{tikzpicture}
-%   \end{figure}
-
-% \end{frame}
 
 \begin{frame}
   \frametitle{Bibliography}
