@@ -21,4 +21,8 @@ build
 cmake-build-*/
 doc/html
 analysis/**/*.csv
-!analysis/discard-dfs/discard-dfs-math.csv
+#!analysis/discard-dfs/discard-dfs-math.csv
+#!analysis/further-analysis/*-processed.csv
+analysis/further-analysis/further-analysis-processed.csv
+analysis/further-analysis/process
+*.dat
