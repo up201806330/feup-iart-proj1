@@ -69,7 +69,7 @@
 \usepackage{graphicx}
 	\graphicspath{{./images/}{../documentacao/}}
 
-\usepackage{siunitx}
+\usepackage[binary-units=true]{siunitx}
  
 %Information to be included in the title page:
 \AtBeginDocument{
@@ -252,6 +252,8 @@ This research is significant for our problem; even though the problems are quite
 
   \textbf{Optimality} | Quotient of optimal solution by obtained solution. $1$ means optimal, $<1$ means sub-optimal.
 
+  (Dashes represent computations longer than reasonable time limits)
+
   ~
 
   \begin{minipage}[c]{0.73\textwidth}
@@ -271,7 +273,7 @@ This research is significant for our problem; even though the problems are quite
         \rotatebox[origin=c]{90}{\textbf{\# of colors}} & &
         \rotatebox[origin=c]{90}{\textbf{DFS}} &
         \rotatebox[origin=c]{90}{\textbf{BFS}} &
-        \rotatebox[origin=c]{90}{\textbf{ID}} &
+        \rotatebox[origin=c]{90}{\textbf{IDS}} &
         \rotatebox[origin=c]{90}{\textbf{DFS-greedy}} &
         \rotatebox[origin=c]{90}{\textbf{Greedy}} &
         \rotatebox[origin=c]{90}{\textbf{A*}} &
@@ -286,7 +288,12 @@ This research is significant for our problem; even though the problems are quite
           $\num{\astaradmissiblenMoves}$ &
           $\num{\dfsnMoves}$ &
           $\num{\bfsnMoves}$ &
-          $\num{\iterativedeepeningnMoves}$ &
+          \ifthenelse{\equal{\iterativedeepeningnMoves}{\string -}}{
+            -
+          }{
+            $\num{\iterativedeepeningnMoves}$
+          }
+          &
           $\num{\dfsgreedyadmissiblenMoves}$ &
           $\num{\greedyadmissiblenMoves}$ &
           $\num{1}$ &
@@ -302,7 +309,7 @@ This research is significant for our problem; even though the problems are quite
     \textbf{Optimal:}
     \begin{itemize}
       \item BFS
-      \item ID
+      \item IDS
       \item A*
     \end{itemize}
     \textbf{Near-optimal:}
@@ -339,7 +346,7 @@ This research is significant for our problem; even though the problems are quite
       \rotatebox[origin=c]{90}{\textbf{Tube height}} &
       \rotatebox[origin=c]{90}{\textbf{\# of colors}} & &
       \rotatebox[origin=c]{90}{\textbf{DFS}} &
-      \rotatebox[origin=c]{90}{\textbf{ID}} &
+      \rotatebox[origin=c]{90}{\textbf{IDS}} &
       \rotatebox[origin=c]{90}{\textbf{DFS-greedy}} &
       \rotatebox[origin=c]{90}{\textbf{Greedy}} &
       \rotatebox[origin=c]{90}{\textbf{A*}} &
@@ -353,7 +360,11 @@ This research is significant for our problem; even though the problems are quite
         \nColors &
         $\num{\bfstns}$ &
         $\num{\dfstns}$ &
-        $\num{\iterativedeepeningtns}$ &
+        \ifthenelse{\equal{\iterativedeepeningtns}{\string -}}{
+          -
+        }{
+          $\num{\iterativedeepeningtns}$
+        } &
         $\num{\dfsgreedyadmissibletns}$ &
         $\num{\greedyadmissibletns}$ &
         $\num{\astaradmissibletns}$ &
@@ -364,6 +375,70 @@ This research is significant for our problem; even though the problems are quite
     \end{tabular}
     \caption{Time performance of several methods, normalized to BFS execution time.}
   \end{figure}
+\end{frame}
+
+\begin{frame}
+  Memory usage measurements is somewhat limited to finding the maximum number of virtual memory pages allocated to a process at any given time, and multiply by the page size. Here the page size is $\SI{128}{\kibi\byte} \approx \SI{0.132}{\mega\byte}$.
+  \begin{figure}
+    \scriptsize
+    \sisetup{round-mode=places
+      ,round-precision=3
+      ,round-minimum  = 0.001
+      ,scientific-notation=fixed
+      ,fixed-exponent=0
+    }  
+    \setlength{\tabcolsep}{0.5em}
+    \begin{tabular}{@{} r | r | r || r | r | r | r | r | r | r | r | r @{}}
+      & & &
+      \multicolumn{9}{c}{\textbf{Memory used} (in $\si{\mega\byte}$)} \\ \cline{4-12}
+
+      \rotatebox[origin=c]{90}{\textbf{\# of tubes}} &
+      \rotatebox[origin=c]{90}{\textbf{Tube height}} &
+      \rotatebox[origin=c]{90}{\textbf{\# of colors}} &
+      \rotatebox[origin=c]{90}{\textbf{DFS}} &
+      \rotatebox[origin=c]{90}{\textbf{BFS}} &
+      \rotatebox[origin=c]{90}{\textbf{IDS}} &
+      \rotatebox[origin=c]{90}{\textbf{DFS-greedy}} &
+      \rotatebox[origin=c]{90}{\textbf{Greedy}} &
+      \rotatebox[origin=c]{90}{\textbf{A*}} &
+      \rotatebox[origin=c]{90}{\textbf{~DFS-greedy (FH)~}} &
+      \rotatebox[origin=c]{90}{\textbf{A* (FH)}} &
+      \rotatebox[origin=c]{90}{\textbf{Greedy (FH)}}
+      \csvreader[head to column names]{../../analysis/discard-dfs/discard-dfs-math.csv}{}
+      {\\\hline
+        \nTubes &
+        \tubeH &
+        \nColors &
+        $\num{\dfsmemb}$ &
+        $\num{\bfsmemb}$ &
+        \ifthenelse{\equal{\iterativedeepeningmemb}{\string -}}{
+          -
+        }{
+          $\num{\iterativedeepeningmemb}$
+        } &
+        $\num{\dfsgreedyadmissiblememb}$ &
+        $\num{\greedyadmissiblememb}$ &
+        $\num{\astaradmissiblememb}$ &
+        $\num{\dfsgreedyfhmemb}$ &
+        $\num{\dfsfhmemb}$ &
+        $\num{\astarfhmemb}$
+      }
+    \end{tabular}
+    \caption{Memory performance of several methods, normalized to BFS execution time.}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
+  \textbf{What do we take from that?}
+
+  This problem has a lot of overlapping states.
+  \begin{itemize}
+    \item IDS is optimal and takes less memory than BFS.
+    \item IDS has much greater execution times due to overlapping states.
+    \item BFS not significantly impacted by excessive memory usage.
+  \end{itemize}
+
+  BFS and IDS trade memory for time and vice-versa; BFS is better in this case, as IDS becomes impractically slow, and BFS does not use excessive memory. We'll drop IDS from our analysis from this point on.
 \end{frame}
 
 \begin{frame}
