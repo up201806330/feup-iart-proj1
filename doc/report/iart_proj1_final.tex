@@ -73,23 +73,27 @@
 
 \usepackage{pgfplots, pgfplotstable}
 \newcommand{\errorband}[5][]{ % x column, y column, error column, optional argument for setting style of the area plot
-\pgfplotstableread[col sep=comma]{#2}\datatable
+    \pgfplotstableread[col sep=comma]{#2}{\datatable}
     % Lower bound
     \addplot [draw=none, stack plots=y, forget plot] table [
       x={#3},
-      y={#4}
+      y={#4},
     ] {\datatable};
 
     \addplot [draw=none, fill=gray!40, stack plots=y, area legend, #1] table [
-        x={#3},
+      x={#3},
         y expr=\thisrow{#5}-\thisrow{#4}
     ] {\datatable} \closedcycle;
 
     % Reset stack
-    \addplot [forget plot, stack plots=y,draw=none] table [x={#3}, y expr=-\thisrow{#5}] {\datatable};
+    \addplot [forget plot, stack plots=y,draw=none] table [
+      x={#3},
+      y expr=-\thisrow{#5}
+    ] {\datatable};
 }
 
 \pgfplotsset{
+  compat=1.16,
   title style={font=\bfseries},
   label style={font=\small},
   tick label style={font=\footnotesize},
