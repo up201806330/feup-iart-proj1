@@ -428,8 +428,21 @@ This research is significant for our problem; even though the problems are quite
   \end{figure}
 \end{frame}
 
-\begin{frame}
-  \textbf{What do we take from that?}
+\begin{frame}%
+
+  {\Large \textbf{What do we take from that?}}
+
+  We'll drop DFS and IDS from our analysis from this point on.
+
+  ~
+
+  \textbf{DFS}
+
+  DFS gives very poor results, and is easily outperformed time and memory-wise by other optimal algorithms.
+
+  ~
+
+  \textbf{IDS}
 
   This problem has a lot of overlapping states.
   \begin{itemize}
@@ -438,7 +451,7 @@ This research is significant for our problem; even though the problems are quite
     \item BFS not significantly impacted by excessive memory usage.
   \end{itemize}
 
-  BFS and IDS trade memory for time and vice-versa; BFS is better in this case, as IDS becomes impractically slow, and BFS does not use excessive memory. We'll drop IDS from our analysis from this point on.
+  BFS and IDS trade memory for time and vice-versa; BFS is better in this case, as IDS becomes impractically slow, and BFS does not use excessive memory.
 \end{frame}
 
 \begin{frame}
@@ -447,6 +460,25 @@ This research is significant for our problem; even though the problems are quite
   \bibliographystyle{acm}
   \bibliography{report}
   
+\end{frame}
+
+\begin{frame}
+  \frametitle{Annex 1 | Closer look on preliminary results}
+
+  These are some interesting questions and answers we came about while implementing this project and analyzing its results.
+
+  ~
+  
+  \textbf{Q:} Why does DFS take more memory than IDS?
+  
+  \textbf{A:} Because DFS explores the graph as deep as it wants, while IDS is limited to a certain depth.
+  
+  ~
+
+  \textbf{Q:} In IDS, why not double depth at each iteration until a depth $D$ is reached that guarantees a solution, and then binary-search between $D/2$ and $D$?
+
+  \textbf{A:} Because IDS has time complexity $O(b^d)$ where $d$ is the solution length. Because $d$ is an exponent, the overshooting of $D$ relative to $d$ would have a massive impact in execution time.
+
 \end{frame}
 
 \end{document}
