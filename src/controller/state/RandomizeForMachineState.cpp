@@ -3,15 +3,14 @@
 
 #include "model/MainMenuModel.h"
 #include "view/MainMenuView.h"
-#include "controller/state/MainMenuState.h"
+#include "controller/state/RandomizeForMachineState.h"
 #include "controller/MenuController.h"
 
 using namespace std;
 
-MainMenuState::MainMenuState(TerminalGUI *term) : State(term) {
-}
+RandomizeForMachineState::RandomizeForMachineState(TerminalGUI *term) : State(term) {}
 
-State *MainMenuState::run() {
+State *RandomizeForMachineState::run() {
     MainMenuModel mainMenuModel;
     MainMenuView mainMenuView(mainMenuModel);
     MenuController mainMenuController(mainMenuModel);
@@ -25,15 +24,7 @@ State *MainMenuState::run() {
         id = mainMenuController.getSelectedOption();
     } while(!mainMenuModel.hasButtonWithId(id));
 
-    State *ret;
-    switch(id){
-        case 1: ret = State::randomizeForHumanState; break;
-        case 2: ret = State::randomizeForMachineState; break;
-        case 3:
-        case 0: ret = nullptr; break;
-        default: throw logic_error("");
-    }
-    return ret;
+    return State::playMachineState;
 }
 
-MainMenuState::~MainMenuState() = default;
+RandomizeForMachineState::~RandomizeForMachineState() = default;
