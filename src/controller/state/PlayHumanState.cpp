@@ -30,11 +30,12 @@ State *PlayHumanState::run() {
 
     SearchStrategy *search = new DepthFirstGreedySearch(new AdmissibleHeuristic());
 
-    int fr = 0, to = 0;
+    int fr, to;
     bool invalidMove = false;
     bool askedForHint = false;
     string s;
     while(true) {
+        fr = 0, to = 0;
         getTerminal()->clear();
         gameboardView.draw(*getTerminal());
         scoreboardView.draw(*getTerminal());
@@ -51,6 +52,7 @@ State *PlayHumanState::run() {
 
         getTerminal()->display();
 
+        s.clear();
         getline(cin, s);
         if(s == "h"){
             askedForHint = true;

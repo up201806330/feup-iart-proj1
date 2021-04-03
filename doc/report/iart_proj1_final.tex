@@ -287,9 +287,10 @@ This research is significant for our problem; even though the problems are quite
 
   We implemented three heuristics:
   \begin{itemize}
-    \item \textbf{Admissible heuristic} | TODO
-    \item \textbf{Non-admissible heuristic} | To easily simulate a non-admissible heuristic, we just run the admissible heuristic and multiply by a constant factor. Algorithms using a non-admissible heuristic are marked with (NA).
-    \item \textbf{Finite horizon heuristic} | Instead of making some math from the current state, finds all nodes at a certain depth, evaluates all those nodes against a base heuristic, and then pick the best value, adds the depth and returns that.
+    \item \textbf{Admissible heuristic} | This heuristic uses two factors to estimate the cost to reach the goal state from the current state. The fisrt factor depends on a f(t) function. This function caculates the number of continuos ball with the same color
+    and so that function's value is added to the estimated cost. The second factor takes into account the number of tubes that have the same color in the bottom adding that value to the estimated cost.
+    \item \textbf{Non Admissible heuristic} | This heuristic just use any other heuristic and multiplies its value by a constant making it non-admissible.
+    \item \textbf{Finite horizon heuristic} | Instead of making some math from the current state, finds all nodes at a certain depth, evaluates all those nodes against a base heuristic, and then pick the best value, s the depth and returns that.
     It didn't work out that well, as time performance was worst by a factor of about 100 compared to a regular, 1-step heuristic, so we dropped it from performance analysis.
   \end{itemize}
   \end{frame}
