@@ -7,6 +7,8 @@
 #include "view/GameboardView.h"
 #include "view/ScoreboardView.h"
 
+#include <iostream>
+
 using namespace std;
 using pos_t = TerminalGUI::pos_t;
 
@@ -39,15 +41,15 @@ State *PlayMachineState::run() {
         getchar();
         GameboardModel::Move move = searchStrategy->next();
 
+        if(gameboard.isGameOver()){
+            break;
+        }
+
         if(gameboard.canMove(move)) {
             gameboard.move(move);
             scoreboard.addScore();
         } else {
             return State::mainMenuState;
-        }
-
-        if(gameboard.isGameOver()){
-            break;
         }
     }
 

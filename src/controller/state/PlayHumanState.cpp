@@ -65,15 +65,15 @@ State *PlayHumanState::run() {
         ss >> to;
         GameboardModel::Move move(static_cast<size_t>(fr), static_cast<size_t>(to));
 
+        if(gameboard.isGameOver()){
+            break;
+        }
+
         if(gameboard.canMove(move)) {
             gameboard.move(move);
             scoreboard.addScore();
         } else {
             invalidMove = true;
-        }
-
-        if(gameboard.isGameOver()){
-            break;
         }
     }
 
