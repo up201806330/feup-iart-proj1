@@ -15,6 +15,7 @@ ChooseFactorState                 *State::chooseFactorState                 = nu
 ChooseHeuristicStrategyState      *State::chooseHeuristicMachineState       = nullptr;
 RandomizeForHumanState            *State::randomizeForHumanState            = nullptr;
 RandomizeForMachineState          *State::randomizeForMachineState          = nullptr;
+AboutState                        *State::aboutState                        = nullptr;
 
 State::State(TerminalGUI *term): terminal(term) {
 }
@@ -39,6 +40,7 @@ void State::initializeStates(TerminalGUI *terminal) {
     chooseHeuristicMachineState       = new ChooseHeuristicStrategyState(terminal);
     randomizeForHumanState            = new RandomizeForHumanState(terminal);
     randomizeForMachineState          = new RandomizeForMachineState(terminal);
+    aboutState                        = new AboutState(terminal);
 }
 
 void State::deleteStates() {
@@ -54,4 +56,5 @@ void State::deleteStates() {
     delete chooseHeuristicMachineState;
     delete randomizeForHumanState;
     delete randomizeForMachineState;
+    delete aboutState;
 }

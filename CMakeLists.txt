@@ -40,6 +40,7 @@ add_executable(main
         src/view/Rectangle.cpp
         src/view/ScoreboardView.cpp
         src/view/RandomizeView.cpp
+        src/view/AboutView.cpp
 
         src/controller/MenuController.cpp
         src/controller/RandomizeController.cpp
@@ -57,6 +58,7 @@ add_executable(main
         src/controller/state/PlayMachineState.cpp
         src/controller/state/RandomizeForHumanState.cpp
         src/controller/state/RandomizeForMachineState.cpp
+        src/controller/state/AboutState.cpp
 
         src/CommandLineInterface.cpp
 )
