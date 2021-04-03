@@ -28,7 +28,6 @@ add_executable(main
         src/model/MainMenuModel.cpp
         src/model/MenuModel.cpp
         src/model/ScoreboardModel.cpp
-        src/model/RandomizeModel.cpp
 
         src/view/gui/TerminalGUI.cpp
         src/view/gui/TerminalGUIColor.cpp
