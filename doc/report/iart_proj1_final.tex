@@ -531,12 +531,12 @@ This research is significant for our problem; even though the problems are quite
 \begin{frame}
   \begin{figure}
     \begin{tikzpicture}
-      \begin{semilogyaxis}[xmin=1.7,xmax=15.3,ymin=2e-3,ymax=1e5,width=11cm,height=7.5cm,hide axis]\errorband[black  , opacity=0.15]{../../analysis/large/bfs-processed.csv                     }{nTubes}{tmsMin}{tmsMax}\end{semilogyaxis}
-      \begin{semilogyaxis}[xmin=1.7,xmax=15.3,ymin=2e-3,ymax=1e5,width=11cm,height=7.5cm,hide axis]\errorband[blue   , opacity=0.15]{../../analysis/large/dfs-greedy-admissible-processed.csv   }{nTubes}{tmsMin}{tmsMax}\end{semilogyaxis}
-      \begin{semilogyaxis}[xmin=1.7,xmax=15.3,ymin=2e-3,ymax=1e5,width=11cm,height=7.5cm,hide axis]\errorband[red    , opacity=0.15]{../../analysis/large/greedy-admissible-processed.csv       }{nTubes}{tmsMin}{tmsMax}\end{semilogyaxis}
-      \begin{semilogyaxis}[xmin=1.7,xmax=15.3,ymin=2e-3,ymax=1e5,width=11cm,height=7.5cm,hide axis]\errorband[green  , opacity=0.15]{../../analysis/large/astar-admissible-processed.csv        }{nTubes}{tmsMin}{tmsMax}\end{semilogyaxis}
-      \begin{semilogyaxis}[xmin=1.7,xmax=15.3,ymin=2e-3,ymax=1e5,width=11cm,height=7.5cm,hide axis]\errorband[yellow , opacity=0.15]{../../analysis/large/astar-nonadmissible-processed.csv     }{nTubes}{tmsMin}{tmsMax}\end{semilogyaxis}
-      \begin{semilogyaxis}[xmin=1.7,xmax=15.3,ymin=2e-3,ymax=1e5,width=11cm,height=7.5cm,
+      \begin{semilogyaxis}[xmin=1.7,xmax=15.3,ymin=1e-2,ymax=1e5,width=11cm,height=7.5cm,hide axis]\errorband[black  , opacity=0.15]{../../analysis/large/bfs-processed.csv                     }{nTubes}{tmsMin}{tmsMax}\end{semilogyaxis}
+      \begin{semilogyaxis}[xmin=1.7,xmax=15.3,ymin=1e-2,ymax=1e5,width=11cm,height=7.5cm,hide axis]\errorband[blue   , opacity=0.15]{../../analysis/large/dfs-greedy-admissible-processed.csv   }{nTubes}{tmsMin}{tmsMax}\end{semilogyaxis}
+      \begin{semilogyaxis}[xmin=1.7,xmax=15.3,ymin=1e-2,ymax=1e5,width=11cm,height=7.5cm,hide axis]\errorband[red    , opacity=0.15]{../../analysis/large/greedy-admissible-processed.csv       }{nTubes}{tmsMin}{tmsMax}\end{semilogyaxis}
+      \begin{semilogyaxis}[xmin=1.7,xmax=15.3,ymin=1e-2,ymax=1e5,width=11cm,height=7.5cm,hide axis]\errorband[green  , opacity=0.15]{../../analysis/large/astar-admissible-processed.csv        }{nTubes}{tmsMin}{tmsMax}\end{semilogyaxis}
+      \begin{semilogyaxis}[xmin=1.7,xmax=15.3,ymin=1e-2,ymax=1e5,width=11cm,height=7.5cm,hide axis]\errorband[yellow , opacity=0.15]{../../analysis/large/astar-nonadmissible-processed.csv     }{nTubes}{tmsMin}{tmsMax}\end{semilogyaxis}
+      \begin{semilogyaxis}[xmin=1.7,xmax=15.3,ymin=1e-2,ymax=1e5,width=11cm,height=7.5cm,
         title=Execution time,
         grid=both,
         xtick distance=1,
@@ -828,14 +828,14 @@ This research is significant for our problem; even though the problems are quite
 \end{frame}
 
 \begin{frame}
-  \vspace{-0.5em}
+  \vspace{-0.0em}
   \noindent
   \begin{figure}
     \raggedright
     \setlength{\tabcolsep}{-0.3em}
     \begin{tabular}{c c c}
       \begin{tikzpicture}
-        \begin{semilogyaxis}[xmin=0.7,xmax=6.3,ymin=3e-2,ymax=5e4,width=5.3cm,height=5.8cm,
+        \begin{semilogyaxis}[xmin=0.7,xmax=6.3,ymin=5e-3,ymax=5e4,width=5.3cm,height=5.8cm,
           grid=both,
           xtick distance=1,
           ytick distance=10,
@@ -868,7 +868,7 @@ This research is significant for our problem; even though the problems are quite
 
       \end{minipage} \hspace{0.2em} &
       \begin{tikzpicture}
-        \begin{semilogyaxis}[xmin=0.7,xmax=6.3,ymin=4e-3,ymax=1e1,width=5.3cm,height=5.8cm,
+        \begin{semilogyaxis}[xmin=0.7,xmax=6.3,ymin=5e-3,ymax=3e1,width=5.3cm,height=5.8cm,
           grid=both,
           xtick distance=1,
           ytick distance=10,
@@ -884,10 +884,10 @@ This research is significant for our problem; even though the problems are quite
       \end{tikzpicture}
     \end{tabular}
 
-    \vspace*{-1.7em}
+    \vspace*{-1.0em}
     \begin{tabular}{c c c}
       \begin{tikzpicture}
-        \begin{semilogyaxis}[xmin=0.7,xmax=6.3,ymin=4e-3,ymax=1e1,width=5.3cm,height=5.8cm,
+        \begin{semilogyaxis}[xmin=0.7,xmax=6.3,ymin=5e-3,ymax=3e1,width=5.3cm,height=5.8cm,
           grid=both,
           xtick distance=1,
           ytick distance=10,
@@ -901,7 +901,7 @@ This research is significant for our problem; even though the problems are quite
         \end{semilogyaxis}
       \end{tikzpicture} &
       \begin{tikzpicture}
-        \begin{semilogyaxis}[xmin=0.7,xmax=6.3,ymin=4e-3,ymax=1e1,width=5.3cm,height=5.8cm,
+        \begin{semilogyaxis}[xmin=0.7,xmax=6.3,ymin=5e-3,ymax=3e1,width=5.3cm,height=5.8cm,
           grid=both,
           xtick distance=1,
           ytick distance=10,
@@ -916,7 +916,7 @@ This research is significant for our problem; even though the problems are quite
         \end{semilogyaxis}
       \end{tikzpicture} &
       \begin{tikzpicture}
-        \begin{semilogyaxis}[xmin=0.7,xmax=6.3,ymin=4e-3,ymax=1e1,width=5.3cm,height=5.8cm,
+        \begin{semilogyaxis}[xmin=0.7,xmax=6.3,ymin=5e-3,ymax=3e1,width=5.3cm,height=5.8cm,
           grid=both,
           xtick distance=1,
           ytick distance=10,
@@ -942,7 +942,7 @@ This research is significant for our problem; even though the problems are quite
     \setlength{\tabcolsep}{-0.3em}
     \begin{tabular}{c c c}
       \begin{tikzpicture}
-        \begin{semilogyaxis}[xmin=0.7,xmax=6.3,ymin=1e-1,ymax=5e3,width=5.3cm,height=5.8cm,
+        \begin{semilogyaxis}[xmin=0.7,xmax=6.3,ymin=7e-2,ymax=5e3,width=5.3cm,height=5.8cm,
           grid=both,
           xtick distance=1,
           ytick distance=10,
@@ -994,7 +994,7 @@ This research is significant for our problem; even though the problems are quite
     \vspace*{-1.0em}
     \begin{tabular}{c c c}
       \begin{tikzpicture}
-        \begin{semilogyaxis}[xmin=0.7,xmax=6.3,ymin=7e-2,ymax=5e0,width=5.3cm,height=5.8cm,
+        \begin{semilogyaxis}[xmin=0.7,xmax=6.3,ymin=7e-2,ymax=1.5e1,width=5.3cm,height=5.8cm,
           grid=both,
           xtick distance=1,
           ytick distance=10,
