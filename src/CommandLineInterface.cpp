@@ -55,28 +55,28 @@ void CommandLineInterface::run_inside() {
     GameboardModel gameboard = board();
     SearchStrategy *search = strategy();
 
+    cerr << "Measuring memory" << endl;
     size_t mem_prev = search->getMemory();
-    size_t mem = 0;
-
-    size_t nMoves;
-    hrc::time_point begin, end;
     try {
-        begin = hrc::now();
-        for(size_t i = 0; i < nRuns; ++i) {
-            cerr << "Running for the " << i << "th time" << endl;
-            search->initialize(gameboard);
-            if(mem == 0) mem = search->getMemory() - mem_prev + 132000ul;
-        }
-        end = hrc::now();
-        cerr << "Done running, checking if it is valid" << endl;
-        nMoves = 0;
-        while(!gameboard.isGameOver()){
-            gameboard.move(search->next());
-            ++nMoves;
-        }
+        search->initialize(gameboard);
     } catch(const exception &e){
         cout << "-1" << endl;
         return;
+    }
+    size_t mem = search->getMemory() - mem_prev + 132000ul;
+    cerr << "Measured memory" << endl;
+
+    hrc::time_point begin = hrc::now();
+    for(size_t i = 0; i < nRuns; ++i) {
+        cerr << "Running for the " << i << "th time" << endl;
+        search->initialize(gameboard);
+    }
+    hrc::time_point end = hrc::now();
+    cerr << "Done running, checking if it is valid" << endl;
+    size_t nMoves = 0;
+    while(!gameboard.isGameOver()){
+        gameboard.move(search->next());
+        ++nMoves;
     }
     cerr << "Done" << endl;
     hrc::duration d = end-begin;
