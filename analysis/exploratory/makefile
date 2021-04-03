@@ -1,5 +1,5 @@
 MAIN=../../main
-NRUNS=10
+NRUNS=3
 
 define run_analysis
 	echo "nTubes,tubeH,nColors,seed,$(2)-nMoves,$(2)-mem_b,$(2)-t_ns" > $(2).csv
