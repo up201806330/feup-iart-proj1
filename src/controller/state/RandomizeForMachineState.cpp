@@ -44,7 +44,7 @@ State *RandomizeForMachineState::run() {
     } while(isInvalid || cin.fail());
 
     this->setGameboard(gameboardModel);
-    return State::playMachineState;
+    return State::chooseMachineState;
 }
 
 RandomizeForMachineState::~RandomizeForMachineState() = default;
