@@ -7,8 +7,6 @@
 #include "view/GameboardView.h"
 #include "view/ScoreboardView.h"
 
-#include <iostream>
-
 using namespace std;
 using pos_t = TerminalGUI::pos_t;
 
