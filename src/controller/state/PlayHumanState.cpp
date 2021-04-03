@@ -21,8 +21,7 @@ PlayHumanState::PlayHumanState(TerminalGUI *term) : State(term) {
 State *PlayHumanState::run() {
     getTerminal()->setCorner(pos_t(0,0));
 
-    GameboardModel gameboard(5, 4);
-    gameboard.fillRandom(3);
+    GameboardModel gameboard = State::randomizeForHumanState->getGameboard();
     ScoreboardModel scoreboard;
 
     GameboardView gameboardView(gameboard);
@@ -65,15 +64,15 @@ State *PlayHumanState::run() {
         ss >> to;
         GameboardModel::Move move(static_cast<size_t>(fr), static_cast<size_t>(to));
 
+        if(gameboard.isGameOver()){
+            break;
+        }
+
         if(gameboard.canMove(move)) {
             gameboard.move(move);
             scoreboard.addScore();
         } else {
             invalidMove = true;
-        }
-
-        if(gameboard.isGameOver()){
-            break;
         }
     }
 
