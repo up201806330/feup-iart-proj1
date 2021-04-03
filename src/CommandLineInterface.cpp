@@ -5,6 +5,7 @@
 
 #include <iostream>
 #include <unistd.h>
+#include <algorithm/heuristics/NonAdmissibleHeuristic.h>
 
 #include "algorithm/DepthFirstSearch.h"
 #include "algorithm/IterativeDeepeningSearch.h"
@@ -42,6 +43,7 @@ void CommandLineInterface::printHelp() const {
          "    <STRATEGY> : informed <INFORMED>\n"
          "    <INFORMED> : <HEURISTIC> [dfs-greedy|greedy|astar]\n"
          "    <HEURISTIC>: admissible\n"
+         "    <HEURISTIC>: nonadmissible <factor>\n"
          "    <HEURISTIC>: finite-horizon-heuristics <FH>\n"
          "    <FH>       : <horizon> [admissible] [finite-horizon]\n"
          << flush;
@@ -120,8 +122,14 @@ SearchStrategy *CommandLineInterface::informed() {
 Heuristic *CommandLineInterface::heuristic() {
     string s = args.at(0); args.pop_front();
     if     (s == "admissible"               ) return new AdmissibleHeuristic();
+    else if(s == "nonadmissible"            ) return nonAdmissibleHeuristic();
     else if(s == "finite-horizon-heuristics") return finiteHorizonHeuristic();
     else throw invalid_argument("");
+}
+
+Heuristic *CommandLineInterface::nonAdmissibleHeuristic() {
+    double factor = atof(args.at(0).c_str()); args.pop_front();
+    return new NonAdmissibleHeuristic(new AdmissibleHeuristic(), factor);
 }
 
 Heuristic *CommandLineInterface::finiteHorizonHeuristic() {

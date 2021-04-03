@@ -24,6 +24,7 @@ State *ChooseHeuristicState::run() {
     MenuModel menuModel;
     menuModel.addButton(1, "1. Admissible heuristic");
     menuModel.addButton(2, "2. Finite horizon heuristics (+)");
+    menuModel.addButton(2, "3. Non-admissible heuristics (+)");
     menuModel.addButton(0, "0. Back");
 
     MenuView menuView(menuModel);
@@ -42,6 +43,7 @@ State *ChooseHeuristicState::run() {
     switch(option){
         case 1: this->setHeuristic(new AdmissibleHeuristic()); return State::chooseHeuristicMachineState;
         case 2: return State::chooseHorizonState;
+        case 3: return State::chooseFactorState;
         case 0: return State::chooseMachineState;
         default: throw logic_error("");
     }

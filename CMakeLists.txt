@@ -21,6 +21,7 @@ add_executable(main
         src/algorithm/AstarSearch.cpp
         src/algorithm/heuristics/Heuristic.cpp
         src/algorithm/heuristics/AdmissibleHeuristic.cpp
+        src/algorithm/heuristics/NonAdmissibleHeuristic.cpp
         src/algorithm/heuristics/FiniteHorizonHeuristic.cpp
 
         src/model/GameboardModel.cpp
@@ -50,6 +51,7 @@ add_executable(main
         src/controller/state/ChooseBaseHeuristicState.cpp
         src/controller/state/ChooseFiniteHorizonHeuristicState.cpp
         src/controller/state/ChooseHeuristicStrategyState.cpp
+        src/controller/state/ChooseFactorState.cpp
         src/controller/state/PlayMachineState.cpp
 
         src/CommandLineInterface.cpp
