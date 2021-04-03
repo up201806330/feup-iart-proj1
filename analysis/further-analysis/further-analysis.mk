@@ -162,7 +162,7 @@ define run_analysis
 	$(MAIN) cli $(NRUNS) 15 4 7 12 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
 endef
 
-all: bfs-processed.csv dfs-greedy-admissible-processed.csv greedy-admissible-processed.csv astar-admissible-processed.csv #dfs-greedy-fh-processed.csv greedy-fh-processed.csv astar-fh-processed.csv
+all: bfs-processed.csv dfs-greedy-admissible-processed.csv greedy-admissible-processed.csv astar-admissible-processed.csv astar-nonadmissible-processed.csv #dfs-greedy-fh-processed.csv greedy-fh-processed.csv astar-fh-processed.csv
 
 bfs-processed.csv: further-analysis-processed.csv
 	csvgrep -c 1 -r "^bfs$$" further-analysis-processed.csv > $@
@@ -175,6 +175,9 @@ greedy-admissible-processed.csv: further-analysis-processed.csv
 
 astar-admissible-processed.csv: further-analysis-processed.csv
 	csvgrep -c 1 -r "^astar-admissible$$" further-analysis-processed.csv > $@
+
+astar-nonadmissible-processed.csv: further-analysis-processed.csv
+	csvgrep -c 1 -r "^astar-nonadmissible$$" further-analysis-processed.csv > $@
 
 # dfs-greedy-fh-processed.csv: further-analysis-processed.csv
 # 	csvgrep -c 1 -r "^dfs-greedy-fh$$" further-analysis-processed.csv > $@
@@ -191,12 +194,13 @@ process: process.cpp
 further-analysis-processed.csv: process further-analysis.csv
 	./process < further-analysis.csv > $@
 
-further-analysis.csv: bfs.csv dfs-greedy-admissible.csv greedy-admissible.csv astar-admissible.csv #dfs-greedy-fh.csv greedy-fh.csv astar-fh.csv
+further-analysis.csv: bfs.csv dfs-greedy-admissible.csv greedy-admissible.csv astar-admissible.csv dfs-greedy-nonadmissible.csv greedy-nonadmissible.csv astar-nonadmissible.csv #dfs-greedy-fh.csv greedy-fh.csv astar-fh.csv
 	echo "alg,nTubes,tubeH,nColors,seed,nMoves,mem_b,t_ns" > further-analysis.csv
 	tail -n +2 bfs.csv                   >> further-analysis.csv
 	tail -n +2 dfs-greedy-admissible.csv >> further-analysis.csv
 	tail -n +2 greedy-admissible.csv     >> further-analysis.csv
 	tail -n +2 astar-admissible.csv      >> further-analysis.csv
+	tail -n +2 astar-nonadmissible.csv   >> further-analysis.csv
 #	tail -n +2 dfs-greedy-fh.csv         >> further-analysis.csv
 #	tail -n +2 greedy-fh.csv             >> further-analysis.csv
 #	tail -n +2 astar-fh.csv              >> further-analysis.csv
@@ -212,6 +216,9 @@ greedy-admissible.csv:
 
 astar-admissible.csv:
 	$(call run_analysis,informed admissible astar,astar-admissible)
+
+astar-nonadmissible.csv:
+	$(call run_analysis,informed nonadmissible 1.000000001 astar,astar-nonadmissible)
 
 # dfs-greedy-fh.csv:
 # 	$(call run_analysis,informed finite-horizon-heuristics 3 admissible finite-horizon dfs-greedy,dfs-greedy-fh)
