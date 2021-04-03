@@ -55,6 +55,9 @@ add_executable(main
         src/controller/state/ChooseFactorState.cpp
         src/controller/state/PlayMachineState.cpp
         src/controller/state/AboutState.cpp
+        src/controller/state/RandomizeForHumanState.cpp
+        src/controller/state/RandomizeForMachineState.cpp
+
 
         src/CommandLineInterface.cpp
 )
