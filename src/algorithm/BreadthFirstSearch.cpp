@@ -52,10 +52,9 @@ void BreadthFirstSearch::initialize(const GameboardModel &gameboard) {
 }
 
 GameboardModel::Move BreadthFirstSearch::next() {
-    
-    GameboardModel::Move nextMove = solution.top();
-    solution.pop();
 
+    GameboardModel::Move nextMove = (!solution.empty()) ? solution.top() : *new Move(0,0);
+    solution.pop();
     return nextMove;
 }
 

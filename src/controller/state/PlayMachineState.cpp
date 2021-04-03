@@ -47,7 +47,7 @@ State *PlayMachineState::run() {
             gameboard.move(move);
             scoreboard.addScore();
         } else {
-            return State::mainMenuState;
+            break;
         }
     }
 
