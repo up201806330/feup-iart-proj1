@@ -20,8 +20,7 @@ State *PlayMachineState::run() {
 
     getTerminal()->setCorner(pos_t(0,0));
 
-    GameboardModel gameboard(5, 4);
-    gameboard.fillRandom(3);
+    GameboardModel gameboard = State::randomizeForMachineState->getGameboard();
     ScoreboardModel scoreboard;
 
     GameboardView gameboardView(gameboard);

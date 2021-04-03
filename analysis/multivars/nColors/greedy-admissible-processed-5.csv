@@ -1,0 +1,5 @@
+alg,nTubes,tubeH,nColors,memMBMean,tmsMean
+greedy-admissible,5,4,1,0.396,0.239701
+greedy-admissible,5,4,2,0.528,0.455126
+greedy-admissible,5,4,3,0.47972,0.513932
+greedy-admissible,5,4,4,0.435854,0.628975
