@@ -18,7 +18,7 @@ private:
     std::stack<GameboardModel::Move> solution;
     GameboardModel initialState;
     GameboardModel finalState;
-    std::map<GameboardModel, std::pair<GameboardModel, GameboardModel::Move>> prev;
+    std::map<GameboardModel, GameboardModel::Move> prev;
     bool bfs(const GameboardModel& GameboardModel);
 public:
     void initialize(const GameboardModel &gameboard) override;

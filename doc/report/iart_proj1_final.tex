@@ -8,6 +8,8 @@
 \usepackage[english]{babel}
 \usepackage{verbatim}
 
+\usepackage{csvsimple}
+
 \usetheme{Madrid}
 \usecolortheme{default}
 
@@ -60,11 +62,47 @@
 \usepackage[style=british]{csquotes}
 
 \usepackage{tabularx}
+\usepackage{multirow}
 
 \usepackage{multicol}
 
 \usepackage{graphicx}
 	\graphicspath{{./images/}{../documentacao/}}
+
+\usepackage[binary-units=true]{siunitx}
+
+\usepackage{pgfplots, pgfplotstable}
+\newcommand{\errorband}[5][]{ % x column, y column, error column, optional argument for setting style of the area plot
+    \pgfplotstableread[col sep=comma]{#2}{\datatable}
+    % Lower bound
+    \addplot [draw=none, stack plots=y, forget plot] table [
+      x={#3},
+      y={#4},
+    ] {\datatable};
+
+    \addplot [draw=none, fill=gray!40, stack plots=y, area legend, #1] table [
+      x={#3},
+      y expr=\thisrow{#5}-\thisrow{#4}+1e-4,
+    ] {\datatable} \closedcycle;
+
+    % Reset stack
+    \addplot [forget plot, stack plots=y,draw=none] table [
+      x={#3},
+      y expr=-\thisrow{#5}-1e-4,
+    ] {\datatable};
+}
+
+\pgfplotsset{
+  compat=1.16,
+  title style={font=\bfseries},
+  label style={font=\small},
+  tick label style={font=\footnotesize},
+  legend style={
+    font=\scriptsize,
+    row sep=-1pt,
+  },
+  legend cell align={left},
+}
  
 %Information to be included in the title page:
 \AtBeginDocument{
@@ -86,8 +124,7 @@
 
 \begin{frame}
 \frametitle{1. Work specification}
-
-\textbf{The problem}
+\framesubtitle{1.1. Problem description}
 
 Solve solitaire game \href{https://play.google.com/store/apps/details?id=com.spicags.ballsort&hl=pt_PT&gl=US}{\textit{Ball Sort Puzzle}} by \href{https://play.google.com/store/apps/developer?id=Spica+Game+Studio}{Spica Game Studio}, using heuristic search methods.
 
@@ -113,7 +150,8 @@ Starting with a set of differently coloured balls distributed at random in diffe
 \end{frame}
 
 \begin{frame}
-\textbf{How we will solve it}
+\frametitle{1. Work specification}
+\framesubtitle{1.2. Solution description}
 
 \begin{enumerate}
   \itemsep0em
@@ -160,6 +198,7 @@ This research is significant for our problem; even though the problems are quite
 
 \begin{frame}[fragile=singleslide]
 \frametitle{3. Formulation}
+\framesubtitle{3.1. Game definition}
 
 \textbf{Game state} | Vector $S = \langle t_1, t_2, ..., t_N \rangle$ of $N$ tubes with maximum capacity $H$, where tube $i$ is a stack $t_i = \langle t_i(1), t_i(2), ..., t_i(h_i) \rangle$ with $h_i$ balls ($0 \leq h_i \leq H$), where $t_i(1)$ is the color of the ball at the bottom, and $t_i(h_i)$ the color at the top. There are $C$ colors ($C < N$) numbered sequentially, thus $\forall i, j,~1 \leq t_i(j) \leq C$.
 
@@ -178,7 +217,9 @@ This research is significant for our problem; even though the problems are quite
 \end{frame}
 
 \begin{frame}
-  \textbf{Heuristics/Evaluation function} | This heuristic will describe an estimate of the distance to a solution in \# of moves:
+  \frametitle{3. Formulation}
+  \framesubtitle{3.2. Heuristics}
+  This heuristic will describe an estimate of the distance to a solution in \# of moves:
   \begin{itemize}
     \item For each tube, add the number of balls in that tube that have a different color than the last ball in the tube.
     \item Number of balls in the $N-C$ tubes with least balls.
@@ -212,8 +253,7 @@ This research is significant for our problem; even though the problems are quite
 
 \begin{frame}
 \frametitle{6. Implemented algorithms}
-
-\textbf{Uninformed search methods}
+\framesubtitle{6.1. Uninformed search methods}
 
 \begin{itemize}
   \item \textbf{Depth First Search (DFS)} | Starting in a given node, expands its children in a random order until if finds that branch does not have a solution, and backtracks until it finds another branch to explore. 
@@ -229,14 +269,308 @@ This research is significant for our problem; even though the problems are quite
 \end{frame}
 
 \begin{frame}
-
-\textbf{Informed search methods}
+\frametitle{6. Implemented algorithms}
+\framesubtitle{6.2. Informed search methods}
 
 \begin{itemize}  
   \item \textbf{Depth First Search Greedy (DFS-greedy)} | DFS, but uses an heuristic to rank nodes adjacent to current node, and expands them in increasing order of the heuristic score.
   \item \textbf{Greedy Search (Greedy)} | Best-first search, similar to BFS but the frontier is a priority queue, and priority is given by an heuristic instead of being the distance from the origin to that node.
   \item \textbf{A* Algorithm (A*)} | Similar to Greedy Search, but heuristic is considered an estimate of \# of moves to reach any goal state; priority of a node $u$ is the estimated total length of a solution passing through $u$ (i.e., the minimum distance from origin to $u$ plus the estimated distance from $u$ to any goal state).
 \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{7. Results}
+  \framesubtitle{7.1. Preliminary results}
+  \small
+
+  Seed is 0, time measurements averaged over 10 executions.
+
+  \textbf{Optimality} | Quotient of optimal solution by obtained solution. $1$ means optimal, $<1$ means sub-optimal.
+
+  (Dashes represent computations longer than reasonable time limits)
+
+  ~
+
+  \begin{minipage}[c]{0.77\textwidth}
+    \begin{figure}
+      \centering
+      \scriptsize
+      \sisetup{round-mode=places
+        ,round-precision=3
+        ,scientific-notation=fixed
+        ,fixed-exponent=0
+      }
+      \setlength{\tabcolsep}{0.45em}
+      \begin{tabular}{r | r | r || r || l | l | l | p{3.0em} | l | l}
+        & & & &
+        \multicolumn{6}{c}{\textbf{Optimality}} \\ \cline{5-10}
+        \rotatebox[origin=c]{90}{\textbf{\# of tubes}}
+        & \rotatebox[origin=c]{90}{\textbf{Tube height}}
+        & \rotatebox[origin=c]{90}{\textbf{\# of colors}}
+        & \begin{minipage}{3.5em}\textbf{Optimal solution}\end{minipage}
+        & \textbf{DFS}
+        & \textbf{BFS}
+        & \textbf{IDS}
+        & \textbf{DFS-greedy}
+        & \textbf{Greedy}
+        & \textbf{A*}
+        \csvreader[head to column names]{../../analysis/discard-dfs/discard-dfs-math.csv}{}
+        {\\\hline
+          \nTubes
+          & \tubeH
+          & \nColors
+          & $\num{\astaradmissiblenMoves}$
+          & $\num{\dfsnMoves}$
+          & $\num{\bfsnMoves}$
+          & \ifthenelse{\equal{\iterativedeepeningnMoves}{\string -}}{
+            -
+          }{
+            $\num{\iterativedeepeningnMoves}$
+          }
+          & $\num{\dfsgreedyadmissiblenMoves}$
+          & $\num{\greedyadmissiblenMoves}$
+          & $\num{1}$
+        }
+      \end{tabular}
+      \caption{Optimality of several methods.}
+    \end{figure}
+  \end{minipage}
+  \begin{minipage}[c]{0.22\textwidth}
+    \textbf{Optimal:}
+    \begin{itemize}
+      \itemsep0em
+      \item BFS
+      \item IDS
+      \item A*
+    \end{itemize}
+    \textbf{Near-optimal:}
+    \begin{itemize}
+      \itemsep0em
+      \item DFS-greedy
+      \item Greedy
+    \end{itemize}
+    \textbf{Awful:}
+    \begin{itemize}
+      \itemsep0em
+      \item DFS
+    \end{itemize}
+  \end{minipage}
+
+\end{frame}
+
+\begin{frame}
+  Since BFS is the slowest optimal method, we used it to compare performance.
+  \begin{figure}
+    \centering
+    \scriptsize
+    \sisetup{round-mode=places
+      ,round-precision=3
+      ,round-minimum  = 0.001
+      ,scientific-notation=fixed
+      ,fixed-exponent=0
+    }  
+    \setlength{\tabcolsep}{0.45em}
+    \begin{tabular}{r | r | r || r || r | r | r | r | r}
+      &
+      &
+      &
+      &
+      \multicolumn{5}{c}{\textbf{Execution time} (as multiple of BFS execution time)} \\ \cline{5-9}
+
+      \rotatebox[origin=c]{90}{\textbf{\# of tubes}}
+      & \rotatebox[origin=c]{90}{\textbf{Tube height}}
+      & \rotatebox[origin=c]{90}{\textbf{\# of colors}}
+      & \begin{minipage}{5.0em}\textbf{BFS exec. time ($\si{\milli\second}$)}\end{minipage}
+      & \textbf{DFS}
+      & \textbf{IDS}
+      & \textbf{DFS-greedy}
+      & \textbf{Greedy}
+      & \textbf{A*}
+      \csvreader[head to column names]{../../analysis/discard-dfs/discard-dfs-math.csv}{}
+      {\\\hline
+        \nTubes
+        & \tubeH
+        & \nColors
+        & $\num[round-precision=2]{\bfstns}$
+        & $\num{\dfstns}$
+        & \ifthenelse{\equal{\iterativedeepeningtns}{\string -}}{
+          -
+        }{
+          $\num{\iterativedeepeningtns}$
+        }
+        & $\num{\dfsgreedyadmissibletns}$
+        & $\num{\greedyadmissibletns}$
+        & $\num{\astaradmissibletns}$
+      }
+    \end{tabular}
+    \caption{Time performance of several methods, normalized to BFS execution time.}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
+  Memory usage measurements are somewhat limited due to the way memory is allocated. Although the page size is $\SI{4096}{\byte}$, allocations are made in chunks of $\SI{132}{\kilo\byte}$.
+  \begin{figure}
+    \centering
+    \scriptsize
+    \sisetup{round-mode=places
+      ,round-precision=3
+      ,round-minimum  = 0.001
+      ,scientific-notation=fixed
+      ,fixed-exponent=0
+    }  
+    \setlength{\tabcolsep}{0.45em}
+    \begin{tabular}{r | r | r || r | r | r | r | r | r}
+      & & &
+      \multicolumn{6}{c}{\textbf{Memory used} (in $\si{\mega\byte}$)} \\ \cline{4-9}
+
+      \rotatebox[origin=c]{90}{\textbf{\# of tubes}}
+      & \rotatebox[origin=c]{90}{\textbf{Tube height}}
+      & \rotatebox[origin=c]{90}{\textbf{\# of colors}}
+      & \textbf{DFS}
+      & \textbf{BFS}
+      & \textbf{IDS}
+      & \textbf{DFS-greedy}
+      & \textbf{Greedy}
+      & \textbf{A*}
+      \csvreader[head to column names]{../../analysis/discard-dfs/discard-dfs-math.csv}{}
+      {\\\hline
+        \nTubes
+        & \tubeH
+        & \nColors
+        & $\num{\dfsmemb}$
+        & $\num{\bfsmemb}$
+        & \ifthenelse{\equal{\iterativedeepeningmemb}{\string -}}{
+          -
+        }{
+          $\num{\iterativedeepeningmemb}$
+        }
+        & $\num{\dfsgreedyadmissiblememb}$
+        & $\num{\greedyadmissiblememb}$
+        & $\num{\astaradmissiblememb}$
+      }
+    \end{tabular}
+    \caption{Maximum memory usage of several methods.}
+  \end{figure}
+\end{frame}
+
+\begin{frame}%
+
+  {\Large \textbf{What do we take from that?}}
+
+  We'll drop DFS and IDS from our analysis from this point on.
+
+  ~
+
+  \textbf{DFS}
+
+  DFS gives very poor results, and is easily outperformed time and memory-wise by other optimal algorithms.
+
+  ~
+
+  \textbf{IDS}
+
+  This problem has a lot of overlapping states.
+  \begin{itemize}
+    \item IDS is optimal and takes less memory than BFS.
+    \item IDS has much greater execution times due to overlapping states.
+    \item BFS not significantly impacted by excessive memory usage.
+  \end{itemize}
+
+  BFS and IDS trade memory for time and vice-versa; BFS is better in this case, as IDS becomes impractically slow, and BFS does not use excessive memory.
+\end{frame}
+
+\begin{frame}
+  \frametitle{7. Results}
+  \framesubtitle{7.2. Further analysis}
+
+  Each data point was obtained by averaging the execution times of that algorithm on 10 random gameboards with same number of tubes and colors and same tube height, but differing seeds.
+
+  The average value of the variables plotted in semi-log graphs is calculated from $\bar{x} = \exp{\left(\frac{1}{N}\sum_{i=0}^{N}\log{x_i}\right)}$.
+
+\end{frame}
+
+\begin{frame}
+  \begin{figure}
+    \begin{tikzpicture}
+      \begin{axis}[xmin=1.7,xmax=9.3,ymin=0,ymax=1,width=11cm,height=7.0cm,hide axis]\errorband[black  , opacity=0.15]{../../analysis/further-analysis/bfs-processed.csv                  }{nTubes}{nMovesMin}{nMovesMax}\end{axis}
+      \begin{axis}[xmin=1.7,xmax=9.3,ymin=0,ymax=1,width=11cm,height=7.0cm,hide axis]\errorband[blue   , opacity=0.15]{../../analysis/further-analysis/dfs-greedy-admissible-processed.csv}{nTubes}{nMovesMin}{nMovesMax}\end{axis}
+      \begin{axis}[xmin=1.7,xmax=9.3,ymin=0,ymax=1,width=11cm,height=7.0cm,hide axis]\errorband[red    , opacity=0.15]{../../analysis/further-analysis/greedy-admissible-processed.csv    }{nTubes}{nMovesMin}{nMovesMax}\end{axis}
+      \begin{axis}[xmin=1.7,xmax=9.3,ymin=0,ymax=1,width=11cm,height=7.0cm,hide axis]\errorband[green  , opacity=0.15]{../../analysis/further-analysis/astar-admissible-processed.csv     }{nTubes}{nMovesMin}{nMovesMax}\end{axis}
+      \begin{axis}[xmin=1.7,xmax=9.3,ymin=0,ymax=1,width=11cm,height=7.0cm
+        ,title=Maximum memory usage
+        ,grid=both
+        ,xlabel={Number of tubes}
+        ,ylabel={Maximum memory usage ($\si{\mega\byte}$)}
+        ,legend pos=north west
+      ]
+        \addplot [black  ,mark=*,thick] table [col sep=comma,x=nTubes,y=nMovesMean]{../../analysis/further-analysis/bfs-processed.csv};
+        \addplot [blue   ,mark=*,thick] table [col sep=comma,x=nTubes,y=nMovesMean]{../../analysis/further-analysis/dfs-greedy-admissible-processed.csv};
+        \addplot [red    ,mark=*,thick] table [col sep=comma,x=nTubes,y=nMovesMean]{../../analysis/further-analysis/greedy-admissible-processed.csv};
+        \addplot [green  ,mark=*,thick] table [col sep=comma,x=nTubes,y=nMovesMean]{../../analysis/further-analysis/astar-admissible-processed.csv};
+        \legend{BFS,DFS-greedy,Greedy,A*,DFS-greedy (FH),Greedy (FH),A* (FH)}
+      \end{axis}
+    \end{tikzpicture}
+    \caption{Maximum memory usage of several methods. Thick lines are the average maximum memory usage, shaded areas cover the percentiles $10\%$ through $90\%$.}
+  \end{figure}
+
+\end{frame}
+
+\begin{frame}
+  \begin{figure}
+    \begin{tikzpicture}
+      \begin{semilogyaxis}[xmin=1.7,xmax=15.3,ymin=2e-3,ymax=7e4,width=11cm,height=7.0cm,hide axis]\errorband[black  , opacity=0.15]{../../analysis/further-analysis/bfs-processed.csv                  }{nTubes}{tmsMin}{tmsMax}\end{semilogyaxis}
+      \begin{semilogyaxis}[xmin=1.7,xmax=15.3,ymin=2e-3,ymax=7e4,width=11cm,height=7.0cm,hide axis]\errorband[blue   , opacity=0.15]{../../analysis/further-analysis/dfs-greedy-admissible-processed.csv}{nTubes}{tmsMin}{tmsMax}\end{semilogyaxis}
+      \begin{semilogyaxis}[xmin=1.7,xmax=15.3,ymin=2e-3,ymax=7e4,width=11cm,height=7.0cm,hide axis]\errorband[red    , opacity=0.15]{../../analysis/further-analysis/greedy-admissible-processed.csv    }{nTubes}{tmsMin}{tmsMax}\end{semilogyaxis}
+      \begin{semilogyaxis}[xmin=1.7,xmax=15.3,ymin=2e-3,ymax=7e4,width=11cm,height=7.0cm,hide axis]\errorband[green  , opacity=0.15]{../../analysis/further-analysis/astar-admissible-processed.csv     }{nTubes}{tmsMin}{tmsMax}\end{semilogyaxis}
+      \begin{semilogyaxis}[xmin=1.7,xmax=15.3,ymin=2e-3,ymax=7e4,width=11cm,height=7.0cm,
+        title=Execution time,
+        grid=both,
+        xtick distance=1,
+        ytick distance=10,
+        xlabel={Number of tubes},
+        ylabel={Execution time ($\si{\milli\second}$)},
+        legend pos=north west,
+      ]
+        \addplot [black  ,mark=*,thick] table [col sep=comma,x=nTubes,y=tmsMean]{../../analysis/further-analysis/bfs-processed.csv};
+        \addplot [blue   ,mark=*,thick] table [col sep=comma,x=nTubes,y=tmsMean]{../../analysis/further-analysis/dfs-greedy-admissible-processed.csv};
+        \addplot [red    ,mark=*,thick] table [col sep=comma,x=nTubes,y=tmsMean]{../../analysis/further-analysis/greedy-admissible-processed.csv};
+        \addplot [green  ,mark=*,thick] table [col sep=comma,x=nTubes,y=tmsMean]{../../analysis/further-analysis/astar-admissible-processed.csv};
+      
+        \legend{BFS,DFS-greedy,Greedy,A*,DFS-greedy (FH),Greedy (FH),A* (FH)}
+      \end{semilogyaxis}
+    \end{tikzpicture}
+    \caption{Execution times of several methods. Thick lines are the average execution time, shaded areas cover the percentiles $10\%$ through $90\%$.}
+  \end{figure}
+
+\end{frame}
+
+\begin{frame}
+  \begin{figure}
+    \begin{tikzpicture}
+      \begin{semilogyaxis}[xmin=1.7,xmax=15.3,ymin=1e-1,ymax=8e3,width=11cm,height=7.0cm,hide axis]\errorband[black  , opacity=0.15]{../../analysis/further-analysis/bfs-processed.csv                  }{nTubes}{memMBMin}{memMBMax}\end{semilogyaxis}
+      \begin{semilogyaxis}[xmin=1.7,xmax=15.3,ymin=1e-1,ymax=8e3,width=11cm,height=7.0cm,hide axis]\errorband[blue   , opacity=0.15]{../../analysis/further-analysis/dfs-greedy-admissible-processed.csv}{nTubes}{memMBMin}{memMBMax}\end{semilogyaxis}
+      \begin{semilogyaxis}[xmin=1.7,xmax=15.3,ymin=1e-1,ymax=8e3,width=11cm,height=7.0cm,hide axis]\errorband[red    , opacity=0.15]{../../analysis/further-analysis/greedy-admissible-processed.csv    }{nTubes}{memMBMin}{memMBMax}\end{semilogyaxis}
+      \begin{semilogyaxis}[xmin=1.7,xmax=15.3,ymin=1e-1,ymax=8e3,width=11cm,height=7.0cm,hide axis]\errorband[green  , opacity=0.15]{../../analysis/further-analysis/astar-admissible-processed.csv     }{nTubes}{memMBMin}{memMBMax}\end{semilogyaxis}
+      \begin{semilogyaxis}[xmin=1.7,xmax=15.3,ymin=1e-1,ymax=8e3,width=11cm,height=7.0cm,
+        title=Maximum memory usage,
+        grid=both,
+        xtick distance=1,
+        ytick distance=10,
+        xlabel={Number of tubes},
+        ylabel={Maximum memory usage ($\si{\mega\byte}$)},
+        legend pos=north west
+      ]
+        \addplot [black  ,mark=*,thick] table [col sep=comma,x=nTubes,y=memMBMean]{../../analysis/further-analysis/bfs-processed.csv};
+        \addplot [blue   ,mark=*,thick] table [col sep=comma,x=nTubes,y=memMBMean]{../../analysis/further-analysis/dfs-greedy-admissible-processed.csv};
+        \addplot [red    ,mark=*,thick] table [col sep=comma,x=nTubes,y=memMBMean]{../../analysis/further-analysis/greedy-admissible-processed.csv};
+        \addplot [green  ,mark=*,thick] table [col sep=comma,x=nTubes,y=memMBMean]{../../analysis/further-analysis/astar-admissible-processed.csv};
+        \legend{BFS,DFS-greedy,Greedy,A*,DFS-greedy (FH),Greedy (FH),A* (FH)}
+      \end{semilogyaxis}
+    \end{tikzpicture}
+    \caption{Maximum memory usage of several methods. Thick lines are the average maximum memory usage, shaded areas cover the percentiles $10\%$ through $90\%$.}
+  \end{figure}
+
 \end{frame}
 
 \begin{frame}
@@ -247,5 +581,33 @@ This research is significant for our problem; even though the problems are quite
   
 \end{frame}
 
+\begin{frame}
+  \frametitle{Annex 1}
+  \framesubtitle{Closer look on results}
+
+  We initially implemented a \textit{finite horizon heuristic}, which was basically an heuristic that, instead of making some math from the current state, would find all nodes at a certain depth, evaluate a base heuristic for each of them, and then pick the smallest.
+  It didn't work out that well, as time performance was worst by a factor of about 100.
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Annex 1}
+  \framesubtitle{Closer look on results}
+
+  These are some interesting questions and answers we came about while implementing this project and analyzing its results.
+
+  ~
+  
+  \textbf{Q:} Why does DFS take more memory than IDS?
+  
+  \textbf{A:} Because DFS explores the graph as deep as it wants, while IDS is limited to a certain depth.
+  
+  ~
+
+  \textbf{Q:} In IDS, why not double depth at each iteration until a depth $D$ is reached that guarantees a solution, and then binary-search between $D/2$ and $D$?
+
+  \textbf{A:} Because IDS has time complexity $O(b^d)$ where $d$ is the solution length. Because $d$ is an exponent, the overshooting of $D$ relative to $d$ would have a massive impact in execution time.
+
+\end{frame}
 
 \end{document}

@@ -14,47 +14,54 @@ GreedySearch::GreedySearch(const Heuristic *heuristic):
 {
 }
 
-void GreedySearch::initialize(const GameboardModel &gameboardModel){
+void GreedySearch::initialize(const GameboardModel &src){
     set<GameboardModel> visited;
-    map<GameboardModel, pair<GameboardModel, Move> > prev;
+    map<GameboardModel, Move> prev;
 
-    GameboardModel g;
+    GameboardModel finalGameboard = src;
     {
         priority_queue<
-                tuple<double, GameboardModel, Move, GameboardModel>,
-                vector<tuple<double, GameboardModel, Move, GameboardModel> >,
-                greater<>
+            pair<double, GameboardModel>,
+            vector< pair<double, GameboardModel> >,
+            greater<>
         > q;
-        q.emplace((*h)(gameboardModel), gameboardModel, Move(0, 0), gameboardModel);
-        double c;
-        GameboardModel g_prev;
-        Move m(0, 0);
-        vector<Move> moves;
+
+        prev.emplace(src, Move(0,0));
+        q.emplace((*h)(src), src);
+
+        GameboardModel u;
         while (!q.empty()) {
-            tie(c, g_prev, m, g) = q.top();
+            u = q.top().second;
             q.pop();
-            if (visited.count(g)) continue;
-            visited.insert(g);
-            prev.emplace(g, make_pair(g_prev, m));
-            if (g.isGameOver()) break;
-            moves = g.getAllMoves();
-            for (const Move &m_new: moves) {
-                GameboardModel g_new = g;
-                g_new.move(m_new);
-                q.emplace((*h)(g_new), g, m_new, g_new);
+
+            if (u.isGameOver()){
+                finalGameboard = u;
+                break;
+            }
+
+            if (visited.count(u)) continue;
+            visited.insert(u);
+
+            vector<Move> moves = u.getAllMoves();
+            for (const Move &e: moves) {
+                GameboardModel v = u;
+                v.move(e);
+                if(!visited.count(v)) {
+                    prev.emplace(v, e);
+                    q.emplace((*h)(v), v);
+                }
             }
         }
     }
-    if (!g.isGameOver()) throw failed_to_find_solution("GreedySearch");
+    if (!finalGameboard.isGameOver()) throw failed_to_find_solution("GreedySearch");
     {
         solution.clear();
 
-        GameboardModel g_prev;
-        Move m(0, 0);
-        while (g != gameboardModel) {
-            tie(g_prev, m) = prev.at(g);
+        GameboardModel v = finalGameboard;
+        while (v != src) {
+            const Move &m = prev.at(v);
             solution.push_front(m);
-            g = g_prev;
+            v.reverseMove(m);
         }
     }
 }
