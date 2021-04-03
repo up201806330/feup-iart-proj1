@@ -14,6 +14,7 @@ class ChooseHeuristicState;
 class ChooseHorizonState;
 class ChooseBaseHeuristicState;
 class ChooseFiniteHorizonHeuristicState;
+class ChooseFactorState;
 class ChooseHeuristicStrategyState;
 
 /**
@@ -55,6 +56,7 @@ public:
     static ChooseHorizonState                *chooseHorizonState               ; ///< @brief Choose horizon state instance
     static ChooseBaseHeuristicState          *chooseBaseHeuristicState         ; ///< @brief Choose base heuristic state instance
     static ChooseFiniteHorizonHeuristicState *chooseFiniteHorizonHeuristicState; ///< @brief Choose finite horizon heuristic state instance
+    static ChooseFactorState                 *chooseFactorState                ; ///< @brief Choose factor for non-admissible heuristic
     static ChooseHeuristicStrategyState      *chooseHeuristicMachineState      ; ///< @brief Choose heuristic strategy state instance
 
     /**
@@ -77,4 +79,5 @@ public:
 #include "ChooseHorizonState.h"
 #include "ChooseBaseHeuristicState.h"
 #include "ChooseFiniteHorizonHeuristicState.h"
+#include "ChooseFactorState.h"
 #include "ChooseHeuristicStrategyState.h"

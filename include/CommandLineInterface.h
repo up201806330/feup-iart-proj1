@@ -24,5 +24,6 @@ private:
     SearchStrategy *strategy();
     SearchStrategy *informed();
     Heuristic *heuristic();
+    Heuristic *nonAdmissibleHeuristic();
     Heuristic *finiteHorizonHeuristic();
 };
