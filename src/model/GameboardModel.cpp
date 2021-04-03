@@ -115,6 +115,9 @@ size_t GameboardModel::getNumberOfColors() const {
 }
 
 bool GameboardModel::canMove(const Move &move) const {
+    if (move.from == move.to) return false;
+    if (move.from >= this->nTubes || move.to >= this->nTubes ) return false;
+
     const Tube &tube_origin      = this->at(move.from);
     const Tube &tube_destination = this->at(move.to  );
 
@@ -132,8 +135,19 @@ bool GameboardModel::canMove(const Move &move) const {
     );
 }
 
+bool GameboardModel::canReverseMove(const Move &move) const {
+    const Tube &tube_destination = this->at(move.to  );
+
+    return (
+        // Destination only has a piece; or
+        tube_destination.size() == 1 ||
+        // The two pieces at the top have the same color
+        *tube_destination.rbegin() == *(tube_destination.rbegin()+1)
+    );
+}
+
 void GameboardModel::move(const Move &move) {
-    if(!canMove(move)) throw invalid_argument("");
+//    if(!canMove(move)) throw invalid_argument("");
 
     Tube &tube_origin      = this->at(move.from);
     Tube &tube_destination = this->at(move.to  );
@@ -141,6 +155,17 @@ void GameboardModel::move(const Move &move) {
     color_t c = tube_origin.back();
     tube_origin.pop_back();
     tube_destination.push_back(c);
+}
+
+void GameboardModel::reverseMove(const Move &move) {
+//    if(!canReverseMove(move)) throw invalid_argument("");
+
+    Tube &tube_origin      = this->at(move.from);
+    Tube &tube_destination = this->at(move.to  );
+
+    color_t c = tube_destination.back();
+    tube_destination.pop_back();
+    tube_origin.push_back(c);
 }
 
 vector<Move> GameboardModel::getAllMoves() const {

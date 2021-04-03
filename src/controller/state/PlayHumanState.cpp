@@ -9,6 +9,8 @@
 #include "view/GameboardView.h"
 #include "view/ScoreboardView.h"
 #include "controller/state/PlayHumanState.h"
+#include "algorithm/DepthFirstGreedySearch.h"
+#include "algorithm/heuristics/AdmissibleHeuristic.h"
 
 using namespace std;
 using pos_t = TerminalGUI::pos_t;
@@ -19,17 +21,20 @@ PlayHumanState::PlayHumanState(TerminalGUI *term) : State(term) {
 State *PlayHumanState::run() {
     getTerminal()->setCorner(pos_t(0,0));
 
-    GameboardModel gameboard(5, 4);
-    gameboard.fillRandom(3);
+    GameboardModel gameboard = State::randomizeForHumanState->getGameboard();
     ScoreboardModel scoreboard;
 
     GameboardView gameboardView(gameboard);
     ScoreboardView scoreboardView(scoreboard);
 
-    int fr = 0, to = 0;
+    SearchStrategy *search = new DepthFirstGreedySearch(new AdmissibleHeuristic());
+
+    int fr, to;
     bool invalidMove = false;
+    bool askedForHint = false;
     string s;
     while(true) {
+        fr = 0, to = 0;
         getTerminal()->clear();
         gameboardView.draw(*getTerminal());
         scoreboardView.draw(*getTerminal());
@@ -37,15 +42,31 @@ State *PlayHumanState::run() {
             getTerminal()->drawStringAbsolute(pos_t(0, getTerminal()->getSize().y-2), "Invalid move");
             invalidMove = false;
         }
+        if(askedForHint){
+            search->initialize(gameboard);
+            GameboardModel::Move m = search->next();
+            getTerminal()->drawStringAbsolute(pos_t(0, getTerminal()->getSize().y-2), "Asked for a hint. Try " + to_string(m.from) + " " + to_string(m.to));
+            askedForHint = false;
+        }
 
         getTerminal()->display();
 
+        s.clear();
         getline(cin, s);
+        if(s == "h"){
+            askedForHint = true;
+            continue;
+        }
+
         stringstream ss(s);
         ss >> fr;
         if(fr == -1) break;
         ss >> to;
         GameboardModel::Move move(static_cast<size_t>(fr), static_cast<size_t>(to));
+
+        if(gameboard.isGameOver()){
+            break;
+        }
 
         if(gameboard.canMove(move)) {
             gameboard.move(move);
@@ -53,11 +74,9 @@ State *PlayHumanState::run() {
         } else {
             invalidMove = true;
         }
-
-        if(gameboard.isGameOver()){
-            break;
-        }
     }
+
+    delete search;
 
     return State::mainMenuState;
 }

@@ -25,6 +25,10 @@ void GameboardView::draw(TerminalGUI &terminal){
             drawPiece(terminal, i, j, tube[j]);
         }
     }
+
+    if (_gameboardModel.isGameOver())
+        terminal.drawStringAbsolute(pos_t(0,1), "Puzzle Solved!\nPress Enter to return to Main Menu");
+
 }
 
 void GameboardView::drawPiece(TerminalGUI &terminal, size_t tube, size_t place, color_t piece_color){

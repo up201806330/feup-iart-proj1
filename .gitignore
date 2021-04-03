@@ -20,3 +20,10 @@ build
 .idea/
 cmake-build-*/
 doc/html
+analysis/**/*.csv
+!analysis/exploratory/exploratory-math.csv
+!analysis/large/*-processed.csv
+!analysis/multivars/**/*-processed-*.csv
+analysis/large/large-processed.csv
+analysis/**/process
+*.dat

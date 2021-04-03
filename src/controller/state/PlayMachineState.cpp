@@ -20,8 +20,7 @@ State *PlayMachineState::run() {
 
     getTerminal()->setCorner(pos_t(0,0));
 
-    GameboardModel gameboard(5, 4);
-    gameboard.fillRandom(3);
+    GameboardModel gameboard = State::randomizeForMachineState->getGameboard();
     ScoreboardModel scoreboard;
 
     GameboardView gameboardView(gameboard);
@@ -39,14 +38,14 @@ State *PlayMachineState::run() {
         getchar();
         GameboardModel::Move move = searchStrategy->next();
 
+        if(gameboard.isGameOver()){
+            break;
+        }
+
         if(gameboard.canMove(move)) {
             gameboard.move(move);
             scoreboard.addScore();
         } else {
-            return State::mainMenuState;
-        }
-
-        if(gameboard.isGameOver()){
             break;
         }
     }

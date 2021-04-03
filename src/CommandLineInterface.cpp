@@ -4,6 +4,8 @@
 #include "CommandLineInterface.h"
 
 #include <iostream>
+#include <unistd.h>
+#include <algorithm/heuristics/NonAdmissibleHeuristic.h>
 
 #include "algorithm/DepthFirstSearch.h"
 #include "algorithm/IterativeDeepeningSearch.h"
@@ -41,6 +43,7 @@ void CommandLineInterface::printHelp() const {
          "    <STRATEGY> : informed <INFORMED>\n"
          "    <INFORMED> : <HEURISTIC> [dfs-greedy|greedy|astar]\n"
          "    <HEURISTIC>: admissible\n"
+         "    <HEURISTIC>: nonadmissible <factor>\n"
          "    <HEURISTIC>: finite-horizon-heuristics <FH>\n"
          "    <FH>       : <horizon> [admissible] [finite-horizon]\n"
          << flush;
@@ -52,6 +55,7 @@ void CommandLineInterface::run_inside() {
     GameboardModel gameboard = board();
     SearchStrategy *search = strategy();
 
+    cerr << "Measuring memory" << endl;
     size_t mem_prev = search->getMemory();
     try {
         search->initialize(gameboard);
@@ -59,18 +63,22 @@ void CommandLineInterface::run_inside() {
         cout << "-1" << endl;
         return;
     }
-    size_t mem = search->getMemory() - mem_prev;
+    size_t mem = search->getMemory() - mem_prev + 132000ul;
+    cerr << "Measured memory" << endl;
 
     hrc::time_point begin = hrc::now();
     for(size_t i = 0; i < nRuns; ++i) {
+        cerr << "Running for the " << i << "th time" << endl;
         search->initialize(gameboard);
     }
+    hrc::time_point end = hrc::now();
+    cerr << "Done running, checking if it is valid" << endl;
     size_t nMoves = 0;
     while(!gameboard.isGameOver()){
         gameboard.move(search->next());
         ++nMoves;
     }
-    hrc::time_point end = hrc::now();
+    cerr << "Done" << endl;
     hrc::duration d = end-begin;
     cout
         << gameboard.size() << ","
@@ -119,8 +127,14 @@ SearchStrategy *CommandLineInterface::informed() {
 Heuristic *CommandLineInterface::heuristic() {
     string s = args.at(0); args.pop_front();
     if     (s == "admissible"               ) return new AdmissibleHeuristic();
+    else if(s == "nonadmissible"            ) return nonAdmissibleHeuristic();
     else if(s == "finite-horizon-heuristics") return finiteHorizonHeuristic();
     else throw invalid_argument("");
+}
+
+Heuristic *CommandLineInterface::nonAdmissibleHeuristic() {
+    double factor = atof(args.at(0).c_str()); args.pop_front();
+    return new NonAdmissibleHeuristic(new AdmissibleHeuristic(), factor);
 }
 
 Heuristic *CommandLineInterface::finiteHorizonHeuristic() {

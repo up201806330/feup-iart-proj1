@@ -21,6 +21,7 @@ add_executable(main
         src/algorithm/AstarSearch.cpp
         src/algorithm/heuristics/Heuristic.cpp
         src/algorithm/heuristics/AdmissibleHeuristic.cpp
+        src/algorithm/heuristics/NonAdmissibleHeuristic.cpp
         src/algorithm/heuristics/FiniteHorizonHeuristic.cpp
 
         src/model/GameboardModel.cpp
@@ -38,6 +39,7 @@ add_executable(main
         src/view/MenuView.cpp
         src/view/Rectangle.cpp
         src/view/ScoreboardView.cpp
+        src/view/AboutView.cpp
 
         src/controller/MenuController.cpp
 
@@ -50,7 +52,12 @@ add_executable(main
         src/controller/state/ChooseBaseHeuristicState.cpp
         src/controller/state/ChooseFiniteHorizonHeuristicState.cpp
         src/controller/state/ChooseHeuristicStrategyState.cpp
+        src/controller/state/ChooseFactorState.cpp
         src/controller/state/PlayMachineState.cpp
+        src/controller/state/AboutState.cpp
+        src/controller/state/RandomizeForHumanState.cpp
+        src/controller/state/RandomizeForMachineState.cpp
+
 
         src/CommandLineInterface.cpp
 )
@@ -65,6 +72,6 @@ set(CPP_COMPILER_WARNINGS -Wall -Wunused-result -pedantic-errors -Wextra -Wcast-
                           -Wunreachable-code -Wunused -Wunused-function  -Wunused-label  -Wunused-parameter
                           -Wunused-value  -Wunused-variable  -Wvariadic-macros -Wvolatile-register-var  -Wwrite-strings)
 
-set(CPP_COMPILER_OPTIMIZE -ffast-math -O3)
+set(CPP_COMPILER_OPTIMIZE -O3)
 
 target_compile_options(main PRIVATE -g ${CPP_COMPILER_WARNINGS} ${CPP_COMPILER_OPTIMIZE})

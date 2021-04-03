@@ -14,7 +14,11 @@ class ChooseHeuristicState;
 class ChooseHorizonState;
 class ChooseBaseHeuristicState;
 class ChooseFiniteHorizonHeuristicState;
+class ChooseFactorState;
 class ChooseHeuristicStrategyState;
+class RandomizeForHumanState;
+class RandomizeForMachineState;
+class AboutState;
 
 /**
  * @brief State.
@@ -55,7 +59,11 @@ public:
     static ChooseHorizonState                *chooseHorizonState               ; ///< @brief Choose horizon state instance
     static ChooseBaseHeuristicState          *chooseBaseHeuristicState         ; ///< @brief Choose base heuristic state instance
     static ChooseFiniteHorizonHeuristicState *chooseFiniteHorizonHeuristicState; ///< @brief Choose finite horizon heuristic state instance
+    static ChooseFactorState                 *chooseFactorState                ; ///< @brief Choose factor for non-admissible heuristic
     static ChooseHeuristicStrategyState      *chooseHeuristicMachineState      ; ///< @brief Choose heuristic strategy state instance
+    static RandomizeForHumanState            *randomizeForHumanState           ; ///< @brief Choose parameters to randomize puzzle
+    static RandomizeForMachineState          *randomizeForMachineState         ; ///< @brief Choose parameters to randomize puzzle
+    static AboutState                        *aboutState                       ; ///< @brief About screen state instance
 
     /**
      * @brief Initialize all states with the terminal that must be used to print stuff.
@@ -77,4 +85,8 @@ public:
 #include "ChooseHorizonState.h"
 #include "ChooseBaseHeuristicState.h"
 #include "ChooseFiniteHorizonHeuristicState.h"
+#include "ChooseFactorState.h"
 #include "ChooseHeuristicStrategyState.h"
+#include "RandomizeForHumanState.h"
+#include "RandomizeForMachineState.h"
+#include "AboutState.h"
