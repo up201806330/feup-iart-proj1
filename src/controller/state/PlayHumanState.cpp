@@ -9,6 +9,8 @@
 #include "view/GameboardView.h"
 #include "view/ScoreboardView.h"
 #include "controller/state/PlayHumanState.h"
+#include "algorithm/DepthFirstGreedySearch.h"
+#include "algorithm/heuristics/AdmissibleHeuristic.h"
 
 using namespace std;
 using pos_t = TerminalGUI::pos_t;
@@ -26,8 +28,11 @@ State *PlayHumanState::run() {
     GameboardView gameboardView(gameboard);
     ScoreboardView scoreboardView(scoreboard);
 
+    SearchStrategy *search = new DepthFirstGreedySearch(new AdmissibleHeuristic());
+
     int fr = 0, to = 0;
     bool invalidMove = false;
+    bool askedForHint = false;
     string s;
     while(true) {
         getTerminal()->clear();
@@ -37,10 +42,21 @@ State *PlayHumanState::run() {
             getTerminal()->drawStringAbsolute(pos_t(0, getTerminal()->getSize().y-2), "Invalid move");
             invalidMove = false;
         }
+        if(askedForHint){
+            search->initialize(gameboard);
+            GameboardModel::Move m = search->next();
+            getTerminal()->drawStringAbsolute(pos_t(0, getTerminal()->getSize().y-2), "Asked for a hint. Try " + to_string(m.from) + " " + to_string(m.to));
+            askedForHint = false;
+        }
 
         getTerminal()->display();
 
         getline(cin, s);
+        if(s == "h"){
+            askedForHint = true;
+            continue;
+        }
+
         stringstream ss(s);
         ss >> fr;
         if(fr == -1) break;
@@ -58,6 +74,8 @@ State *PlayHumanState::run() {
             break;
         }
     }
+
+    delete search;
 
     return State::mainMenuState;
 }
