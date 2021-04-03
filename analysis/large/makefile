@@ -162,44 +162,36 @@ define run_analysis
 	$(MAIN) cli $(NRUNS) 15 4 7 12 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
 endef
 
-all: bfs-processed.csv dfs-greedy-admissible-processed.csv greedy-admissible-processed.csv astar-admissible-processed.csv #dfs-greedy-fh-processed.csv greedy-fh-processed.csv astar-fh-processed.csv
+all: bfs-processed.csv dfs-greedy-admissible-processed.csv greedy-admissible-processed.csv astar-admissible-processed.csv astar-nonadmissible-processed.csv #dfs-greedy-fh-processed.csv greedy-fh-processed.csv astar-fh-processed.csv
 
-bfs-processed.csv: further-analysis-processed.csv
-	csvgrep -c 1 -r "^bfs$$" further-analysis-processed.csv > $@
+bfs-processed.csv: large-processed.csv
+	csvgrep -c 1 -r "^bfs$$" large-processed.csv > $@
 
-dfs-greedy-admissible-processed.csv: further-analysis-processed.csv
-	csvgrep -c 1 -r "^dfs-greedy-admissible$$" further-analysis-processed.csv > $@
+dfs-greedy-admissible-processed.csv: large-processed.csv
+	csvgrep -c 1 -r "^dfs-greedy-admissible$$" large-processed.csv > $@
 
-greedy-admissible-processed.csv: further-analysis-processed.csv
-	csvgrep -c 1 -r "^greedy-admissible$$" further-analysis-processed.csv > $@
+greedy-admissible-processed.csv: large-processed.csv
+	csvgrep -c 1 -r "^greedy-admissible$$" large-processed.csv > $@
 
-astar-admissible-processed.csv: further-analysis-processed.csv
-	csvgrep -c 1 -r "^astar-admissible$$" further-analysis-processed.csv > $@
+astar-admissible-processed.csv: large-processed.csv
+	csvgrep -c 1 -r "^astar-admissible$$" large-processed.csv > $@
 
-# dfs-greedy-fh-processed.csv: further-analysis-processed.csv
-# 	csvgrep -c 1 -r "^dfs-greedy-fh$$" further-analysis-processed.csv > $@
-
-# greedy-fh-processed.csv: further-analysis-processed.csv
-# 	csvgrep -c 1 -r "^greedy-fh$$" further-analysis-processed.csv > $@
-
-# astar-fh-processed.csv: further-analysis-processed.csv
-# 	csvgrep -c 1 -r "^astar-fh$$" further-analysis-processed.csv > $@
+astar-nonadmissible-processed.csv: large-processed.csv
+	csvgrep -c 1 -r "^astar-nonadmissible$$" large-processed.csv > $@
 
 process: process.cpp
 	g++ -Wall $< -o $@
 
-further-analysis-processed.csv: process further-analysis.csv
-	./process < further-analysis.csv > $@
+large-processed.csv: process large.csv
+	./process < large.csv > $@
 
-further-analysis.csv: bfs.csv dfs-greedy-admissible.csv greedy-admissible.csv astar-admissible.csv #dfs-greedy-fh.csv greedy-fh.csv astar-fh.csv
-	echo "alg,nTubes,tubeH,nColors,seed,nMoves,mem_b,t_ns" > further-analysis.csv
-	tail -n +2 bfs.csv                   >> further-analysis.csv
-	tail -n +2 dfs-greedy-admissible.csv >> further-analysis.csv
-	tail -n +2 greedy-admissible.csv     >> further-analysis.csv
-	tail -n +2 astar-admissible.csv      >> further-analysis.csv
-#	tail -n +2 dfs-greedy-fh.csv         >> further-analysis.csv
-#	tail -n +2 greedy-fh.csv             >> further-analysis.csv
-#	tail -n +2 astar-fh.csv              >> further-analysis.csv
+large.csv: bfs.csv dfs-greedy-admissible.csv greedy-admissible.csv astar-admissible.csv astar-nonadmissible.csv
+	echo "alg,nTubes,tubeH,nColors,seed,nMoves,mem_b,t_ns" > large.csv
+	tail -n +2 bfs.csv                   >> large.csv
+	tail -n +2 dfs-greedy-admissible.csv >> large.csv
+	tail -n +2 greedy-admissible.csv     >> large.csv
+	tail -n +2 astar-admissible.csv      >> large.csv
+	tail -n +2 astar-nonadmissible.csv   >> large.csv
 
 bfs.csv:
 	$(call run_analysis_short,bfs,bfs)
@@ -213,12 +205,5 @@ greedy-admissible.csv:
 astar-admissible.csv:
 	$(call run_analysis,informed admissible astar,astar-admissible)
 
-# dfs-greedy-fh.csv:
-# 	$(call run_analysis,informed finite-horizon-heuristics 3 admissible finite-horizon dfs-greedy,dfs-greedy-fh)
-
-# greedy-fh.csv:
-# 	$(call run_analysis,informed finite-horizon-heuristics 3 admissible finite-horizon greedy,greedy-fh)
-
-# astar-fh.csv:
-# 	$(call run_analysis,informed finite-horizon-heuristics 3 admissible finite-horizon astar,astar-fh)
-
+astar-nonadmissible.csv:
+	$(call run_analysis,informed nonadmissible 1.000000001 astar,astar-nonadmissible)

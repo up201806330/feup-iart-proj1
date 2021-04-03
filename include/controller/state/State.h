@@ -16,6 +16,7 @@ class ChooseBaseHeuristicState;
 class ChooseFiniteHorizonHeuristicState;
 class ChooseFactorState;
 class ChooseHeuristicStrategyState;
+class AboutState;
 
 /**
  * @brief State.
@@ -58,6 +59,7 @@ public:
     static ChooseFiniteHorizonHeuristicState *chooseFiniteHorizonHeuristicState; ///< @brief Choose finite horizon heuristic state instance
     static ChooseFactorState                 *chooseFactorState                ; ///< @brief Choose factor for non-admissible heuristic
     static ChooseHeuristicStrategyState      *chooseHeuristicMachineState      ; ///< @brief Choose heuristic strategy state instance
+    static AboutState                        *aboutState                       ; ///< @brief About screen state instance
 
     /**
      * @brief Initialize all states with the terminal that must be used to print stuff.
@@ -81,3 +83,4 @@ public:
 #include "ChooseFiniteHorizonHeuristicState.h"
 #include "ChooseFactorState.h"
 #include "ChooseHeuristicStrategyState.h"
+#include "AboutState.h"

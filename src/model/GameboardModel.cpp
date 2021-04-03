@@ -115,6 +115,8 @@ size_t GameboardModel::getNumberOfColors() const {
 }
 
 bool GameboardModel::canMove(const Move &move) const {
+    if (move.from == move.to) return false;
+
     const Tube &tube_origin      = this->at(move.from);
     const Tube &tube_destination = this->at(move.to  );
 
