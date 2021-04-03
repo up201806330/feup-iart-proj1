@@ -237,18 +237,26 @@ This research is significant for our problem; even though the problems are quite
 
 \small
 
-\begin{itemize}
-  \itemsep0em
-  \item \textbf{Language} | C++
-  \item \textbf{Environment} | Compiled with CMake, terminal interface
-  \item \textbf{Data structures} | Game state represented as \texttt{vector<deque<color\_t>>}, where \texttt{color\_t} is a \texttt{typedef} for an \texttt{int}
-  \item \textbf{File structure} | No input from files; project is being developed using an MVC model with small but useful functions
-\end{itemize}
+\vspace{-0.5em}
+
+\setlength{\multicolsep}{6.0pt plus 2.0pt minus 1.5pt}% 50% of original values
+\begin{multicols}{2}
+
+  \textbf{Language} | C++
+
+  \textbf{Environment} | Compiled with CMake, terminal interface
+
+  \textbf{Data structures} | \texttt{color\_t} is a \texttt{typedef} for an \texttt{int}, game state represented as \texttt{vector<deque<color\_t>>}
+
+  \textbf{File structure} | No input from files; project is being developed using an MVC model with small but useful functions
+
+\end{multicols}
 
 \textbf{Summary:} implemented UI, integrated search methods in UI, allows hints; implemented CLI to run batches to evaluate performance.
 
 \begin{center}
-  \includegraphics[width=73mm]{img/game-interface.png}
+  \includegraphics[height=40mm]{img/main-menu.png}
+  \includegraphics[height=40mm]{img/game-interface.png}
 \end{center}
 
 \end{frame}
@@ -262,13 +270,28 @@ This research is significant for our problem; even though the problems are quite
   
   \item \textbf{Breadth First Search (BFS)} |  Expand the non-expanded node closest to the origin. Keeps queue with frontier nodes (visited but not expanded), expands the node at the front of the queue and pushes new frontier nodes to the back.
   
-  \item \textbf{Iterative Deepening Search (IDS)} | DFS with limited depth $d$; starts at $0$ and is incremented until $d$ is exactly the length of the solution. Slower than BFS, but takes less memory in problems with large branching factor.
+  \item \textbf{Iterative Deepening Search (IDS)} | DFS with limited depth $d$; starts at $0$ and is incremented until a solution is found. Slower than BFS, but takes less memory when branching factor is large.
   
-  \item \textbf{Uniform Cost Search (UCS)} | Variation of Dijkstra's algorithm, assumes an infinite number of states, so only adds nodes to queue as they are visited.
+  \item \textcolor{gray}{\textbf{Uniform Cost Search (UCS)} | Variation of Dijkstra's algorithm, assumes an infinite number of states, so only adds nodes to queue as they are visited.
   UCS is equivalent to BFS if all transitions have the same cost \cite{javatpoint-uninformed}.
-  Since we only have one operator with cost 1, we did not implement this algorithm.
+  Since we only have one operator with cost 1, we did not implement this algorithm.}
 \end{itemize}
 \end{frame}
+
+\begin{frame}
+  \frametitle{5. Approach}
+  
+  In our case, our evaluation functions are heuristics, and when an algorithm requires an heuristic we can also provide it with an evaluation function, so the terms are interchangeable.
+
+  ~
+
+  We implemented two heuristics:
+  \begin{itemize}
+    \item \textbf{Admissible heuristic} | TODO
+    \item \textbf{Finite horizon heuristic} | Instead of making some math from the current state, finds all nodes at a certain depth, evaluates all those nodes against a base heuristic, and then pick the best value, adds the depth and returns that.
+    It didn't work out that well, as time performance was worst by a factor of about 100 compared to a regular, 1-step heuristic, so we dropped it from performance analysis.
+  \end{itemize}
+  \end{frame}
 
 \begin{frame}
 \frametitle{6. Implemented algorithms}
@@ -576,20 +599,18 @@ This research is significant for our problem; even though the problems are quite
 \end{frame}
 
 \begin{frame}
+\frametitle{8. Conclusion}
+
+TODO
+
+\end{frame}
+
+\begin{frame}
   \frametitle{Bibliography}
   \setbeamertemplate{bibliography item}{\insertbiblabel}
   \bibliographystyle{acm}
   \bibliography{report}
   
-\end{frame}
-
-\begin{frame}
-  \frametitle{Annex 1}
-  \framesubtitle{Closer look on results}
-
-  We initially implemented a \textit{finite horizon heuristic}, which was basically an heuristic that, instead of making some math from the current state, would find all nodes at a certain depth, evaluate a base heuristic for each of them, and then pick the smallest.
-  It didn't work out that well, as time performance was worst by a factor of about 100.
-
 \end{frame}
 
 \begin{frame}
