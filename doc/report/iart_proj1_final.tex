@@ -311,7 +311,7 @@ This research is significant for our problem; even though the problems are quite
   \framesubtitle{7.1. Exploratory analysis}
   \small
 
-  Seed is 0, time measurements averaged over 10 executions.
+  Seed is 0, time measurements averaged over 3 executions.
 
   \textbf{Optimality} | Quotient of optimal solution by obtained solution. $1$ means optimal, $<1$ means sub-optimal.
 
@@ -528,42 +528,15 @@ This research is significant for our problem; even though the problems are quite
 
 \end{frame}
 
-% \begin{frame}
-%   \begin{figure}
-%     \begin{tikzpicture}
-%       \begin{axis}[xmin=1.7,xmax=9.3,ymin=0,ymax=1,width=11cm,height=7.5cm,hide axis]\errorband[black  , opacity=0.15]{../../analysis/large/bfs-processed.csv                     }{nTubes}{nMovesMin}{nMovesMax}\end{axis}
-%       \begin{axis}[xmin=1.7,xmax=9.3,ymin=0,ymax=1,width=11cm,height=7.5cm,hide axis]\errorband[blue   , opacity=0.15]{../../analysis/large/dfs-greedy-admissible-processed.csv   }{nTubes}{nMovesMin}{nMovesMax}\end{axis}
-%       \begin{axis}[xmin=1.7,xmax=9.3,ymin=0,ymax=1,width=11cm,height=7.5cm,hide axis]\errorband[red    , opacity=0.15]{../../analysis/large/greedy-admissible-processed.csv       }{nTubes}{nMovesMin}{nMovesMax}\end{axis}
-%       \begin{axis}[xmin=1.7,xmax=9.3,ymin=0,ymax=1,width=11cm,height=7.5cm,hide axis]\errorband[green  , opacity=0.15]{../../analysis/large/astar-admissible-processed.csv        }{nTubes}{nMovesMin}{nMovesMax}\end{axis}
-%       \begin{axis}[xmin=1.7,xmax=9.3,ymin=0,ymax=1,width=11cm,height=7.5cm,hide axis]\errorband[yellow , opacity=0.15]{../../analysis/large/astar-nonadmissible-processed.csv     }{nTubes}{nMovesMin}{nMovesMax}\end{axis}
-%       \begin{axis}[xmin=1.7,xmax=9.3,ymin=0,ymax=1,width=11cm,height=7.5cm
-%         ,title=Maximum memory usage
-%         ,grid=both
-%         ,xlabel={Number of tubes}
-%         ,ylabel={Maximum memory usage ($\si{\mega\byte}$)}
-%         ,legend pos=north west
-%       ]
-%         \addplot [black  ,mark=*,thick] table [col sep=comma,x=nTubes,y=nMovesMean]{../../analysis/large/bfs-processed.csv};
-%         \addplot [blue   ,mark=*,thick] table [col sep=comma,x=nTubes,y=nMovesMean]{../../analysis/large/dfs-greedy-admissible-processed.csv};
-%         \addplot [red    ,mark=*,thick] table [col sep=comma,x=nTubes,y=nMovesMean]{../../analysis/large/greedy-admissible-processed.csv};
-%         \addplot [green  ,mark=*,thick] table [col sep=comma,x=nTubes,y=nMovesMean]{../../analysis/large/astar-admissible-processed.csv};
-%         \addplot [yellow ,mark=*,thick] table [col sep=comma,x=nTubes,y=nMovesMean]{../../analysis/large/astar-nonadmissible-processed.csv};
-%         \legend{BFS,DFS-greedy,Greedy,A*,A* (NA),DFS-greedy (FH),Greedy (FH),A* (FH)}
-%       \end{axis}
-%     \end{tikzpicture}
-%     \caption{Maximum memory usage of several methods. Thick lines are the average maximum memory usage, shaded areas cover the percentiles $10\%$ through $90\%$.}
-%   \end{figure}
-% \end{frame}
-
 \begin{frame}
   \begin{figure}
     \begin{tikzpicture}
-      \begin{semilogyaxis}[xmin=1.7,xmax=15.3,ymin=2e-3,ymax=7e4,width=11cm,height=7.5cm,hide axis]\errorband[black  , opacity=0.15]{../../analysis/large/bfs-processed.csv                     }{nTubes}{tmsMin}{tmsMax}\end{semilogyaxis}
-      \begin{semilogyaxis}[xmin=1.7,xmax=15.3,ymin=2e-3,ymax=7e4,width=11cm,height=7.5cm,hide axis]\errorband[blue   , opacity=0.15]{../../analysis/large/dfs-greedy-admissible-processed.csv   }{nTubes}{tmsMin}{tmsMax}\end{semilogyaxis}
-      \begin{semilogyaxis}[xmin=1.7,xmax=15.3,ymin=2e-3,ymax=7e4,width=11cm,height=7.5cm,hide axis]\errorband[red    , opacity=0.15]{../../analysis/large/greedy-admissible-processed.csv       }{nTubes}{tmsMin}{tmsMax}\end{semilogyaxis}
-      \begin{semilogyaxis}[xmin=1.7,xmax=15.3,ymin=2e-3,ymax=7e4,width=11cm,height=7.5cm,hide axis]\errorband[green  , opacity=0.15]{../../analysis/large/astar-admissible-processed.csv        }{nTubes}{tmsMin}{tmsMax}\end{semilogyaxis}
-      \begin{semilogyaxis}[xmin=1.7,xmax=15.3,ymin=2e-3,ymax=7e4,width=11cm,height=7.5cm,hide axis]\errorband[yellow , opacity=0.15]{../../analysis/large/astar-nonadmissible-processed.csv     }{nTubes}{tmsMin}{tmsMax}\end{semilogyaxis}
-      \begin{semilogyaxis}[xmin=1.7,xmax=15.3,ymin=2e-3,ymax=7e4,width=11cm,height=7.5cm,
+      \begin{semilogyaxis}[xmin=1.7,xmax=15.3,ymin=2e-3,ymax=1e5,width=11cm,height=7.5cm,hide axis]\errorband[black  , opacity=0.15]{../../analysis/large/bfs-processed.csv                     }{nTubes}{tmsMin}{tmsMax}\end{semilogyaxis}
+      \begin{semilogyaxis}[xmin=1.7,xmax=15.3,ymin=2e-3,ymax=1e5,width=11cm,height=7.5cm,hide axis]\errorband[blue   , opacity=0.15]{../../analysis/large/dfs-greedy-admissible-processed.csv   }{nTubes}{tmsMin}{tmsMax}\end{semilogyaxis}
+      \begin{semilogyaxis}[xmin=1.7,xmax=15.3,ymin=2e-3,ymax=1e5,width=11cm,height=7.5cm,hide axis]\errorband[red    , opacity=0.15]{../../analysis/large/greedy-admissible-processed.csv       }{nTubes}{tmsMin}{tmsMax}\end{semilogyaxis}
+      \begin{semilogyaxis}[xmin=1.7,xmax=15.3,ymin=2e-3,ymax=1e5,width=11cm,height=7.5cm,hide axis]\errorband[green  , opacity=0.15]{../../analysis/large/astar-admissible-processed.csv        }{nTubes}{tmsMin}{tmsMax}\end{semilogyaxis}
+      \begin{semilogyaxis}[xmin=1.7,xmax=15.3,ymin=2e-3,ymax=1e5,width=11cm,height=7.5cm,hide axis]\errorband[yellow , opacity=0.15]{../../analysis/large/astar-nonadmissible-processed.csv     }{nTubes}{tmsMin}{tmsMax}\end{semilogyaxis}
+      \begin{semilogyaxis}[xmin=1.7,xmax=15.3,ymin=2e-3,ymax=1e5,width=11cm,height=7.5cm,
         title=Execution time,
         grid=both,
         xtick distance=1,
@@ -589,12 +562,12 @@ This research is significant for our problem; even though the problems are quite
 \begin{frame}
   \begin{figure}
     \begin{tikzpicture}
-      \begin{semilogyaxis}[xmin=1.7,xmax=15.3,ymin=1e-1,ymax=8e3,width=11cm,height=7.5cm,hide axis]\errorband[black  , opacity=0.15]{../../analysis/large/bfs-processed.csv                     }{nTubes}{memMBMin}{memMBMax}\end{semilogyaxis}
-      \begin{semilogyaxis}[xmin=1.7,xmax=15.3,ymin=1e-1,ymax=8e3,width=11cm,height=7.5cm,hide axis]\errorband[blue   , opacity=0.15]{../../analysis/large/dfs-greedy-admissible-processed.csv   }{nTubes}{memMBMin}{memMBMax}\end{semilogyaxis}
-      \begin{semilogyaxis}[xmin=1.7,xmax=15.3,ymin=1e-1,ymax=8e3,width=11cm,height=7.5cm,hide axis]\errorband[red    , opacity=0.15]{../../analysis/large/greedy-admissible-processed.csv       }{nTubes}{memMBMin}{memMBMax}\end{semilogyaxis}
-      \begin{semilogyaxis}[xmin=1.7,xmax=15.3,ymin=1e-1,ymax=8e3,width=11cm,height=7.5cm,hide axis]\errorband[green  , opacity=0.15]{../../analysis/large/astar-admissible-processed.csv        }{nTubes}{memMBMin}{memMBMax}\end{semilogyaxis}
-      \begin{semilogyaxis}[xmin=1.7,xmax=15.3,ymin=1e-1,ymax=8e3,width=11cm,height=7.5cm,hide axis]\errorband[yellow , opacity=0.15]{../../analysis/large/astar-nonadmissible-processed.csv     }{nTubes}{memMBMin}{memMBMax}\end{semilogyaxis}
-      \begin{semilogyaxis}[xmin=1.7,xmax=15.3,ymin=1e-1,ymax=8e3,width=11cm,height=7.5cm,
+      \begin{semilogyaxis}[xmin=1.7,xmax=15.3,ymin=1e-1,ymax=1e4,width=11cm,height=7.5cm,hide axis]\errorband[black  , opacity=0.15]{../../analysis/large/bfs-processed.csv                     }{nTubes}{memMBMin}{memMBMax}\end{semilogyaxis}
+      \begin{semilogyaxis}[xmin=1.7,xmax=15.3,ymin=1e-1,ymax=1e4,width=11cm,height=7.5cm,hide axis]\errorband[blue   , opacity=0.15]{../../analysis/large/dfs-greedy-admissible-processed.csv   }{nTubes}{memMBMin}{memMBMax}\end{semilogyaxis}
+      \begin{semilogyaxis}[xmin=1.7,xmax=15.3,ymin=1e-1,ymax=1e4,width=11cm,height=7.5cm,hide axis]\errorband[red    , opacity=0.15]{../../analysis/large/greedy-admissible-processed.csv       }{nTubes}{memMBMin}{memMBMax}\end{semilogyaxis}
+      \begin{semilogyaxis}[xmin=1.7,xmax=15.3,ymin=1e-1,ymax=1e4,width=11cm,height=7.5cm,hide axis]\errorband[green  , opacity=0.15]{../../analysis/large/astar-admissible-processed.csv        }{nTubes}{memMBMin}{memMBMax}\end{semilogyaxis}
+      \begin{semilogyaxis}[xmin=1.7,xmax=15.3,ymin=1e-1,ymax=1e4,width=11cm,height=7.5cm,hide axis]\errorband[yellow , opacity=0.15]{../../analysis/large/astar-nonadmissible-processed.csv     }{nTubes}{memMBMin}{memMBMax}\end{semilogyaxis}
+      \begin{semilogyaxis}[xmin=1.7,xmax=15.3,ymin=1e-1,ymax=1e4,width=11cm,height=7.5cm,
         title=Maximum memory usage,
         grid=both,
         xtick distance=1,
@@ -621,9 +594,453 @@ This research is significant for our problem; even though the problems are quite
   \frametitle{7. Results}
   \framesubtitle{7.3. Performance analysis with simultaneously-varying problem parameters}
 
+  All of the following data points were determined by averaging 3 runs of test cases with similar parameters but different seeds.
 
+  \textbf{Varied number of colors and number of tubes}
 
+  In the following graphs, the X-axis represents the number of colors $C$.
+  We tested all numbers of colors possible for each number of tubes $T$.
+  Each value of the number of tubes $T$ is a data series with a different color.
+  All test cases have tube height $H=4$.
 \end{frame}
+
+\begin{frame}
+  \vspace{-0.5em}
+  \noindent
+  \begin{figure}
+    \raggedright
+    \setlength{\tabcolsep}{-0.3em}
+    \begin{tabular}{c c c}
+      \begin{tikzpicture}
+        \begin{semilogyaxis}[xmin=0.7,xmax=6.3,ymin=3e-3,ymax=2e4,width=5.3cm,height=5.8cm,
+          grid=both,
+          xtick distance=1,
+          ytick distance=10,
+          xticklabels={},
+        ]
+          \addplot [violet,mark=*,ultra thick] table [col sep=comma,x=nColors,y=tmsMean]{../../analysis/multivars/nColors/bfs-processed-2.csv};
+          \addplot [blue  ,mark=*,ultra thick] table [col sep=comma,x=nColors,y=tmsMean]{../../analysis/multivars/nColors/bfs-processed-3.csv};
+          \addplot [green ,mark=*,ultra thick] table [col sep=comma,x=nColors,y=tmsMean]{../../analysis/multivars/nColors/bfs-processed-4.csv};
+          \addplot [yellow,mark=*,ultra thick] table [col sep=comma,x=nColors,y=tmsMean]{../../analysis/multivars/nColors/bfs-processed-5.csv};
+          \addplot [orange,mark=*,ultra thick] table [col sep=comma,x=nColors,y=tmsMean]{../../analysis/multivars/nColors/bfs-processed-6.csv};
+          \addplot [red   ,mark=*,ultra thick] table [col sep=comma,x=nColors,y=tmsMean]{../../analysis/multivars/nColors/bfs-processed-7.csv};
+        \end{semilogyaxis}
+      \end{tikzpicture} &
+      \hspace{0.7em}
+      \begin{minipage}[b]{2.735cm}
+        \scriptsize
+        \textbf{Execution times} ($\si{\milli\second}$); from left to right and top to bottom: BFS, DFS-greedy, Greedy, A*, A* (NA).
+        
+        \vspace{-1.0em}
+        \begin{multicols}{2}
+          \textcolor{purple}{\textbullet} T = 2 \\
+          \textcolor{blue}  {\textbullet} T = 3 \\
+          \textcolor{green} {\textbullet} T = 4 \\
+          \textcolor{yellow}{\textbullet} T = 5 \\
+          \textcolor{orange}{\textbullet} T = 6 \\
+          \textcolor{red}   {\textbullet} T = 7
+        \end{multicols}
+
+        \vspace{1.5em}
+
+      \end{minipage} \hspace{0.2em} &
+      \begin{tikzpicture}
+        \begin{semilogyaxis}[xmin=0.7,xmax=6.3,ymin=4e-3,ymax=1e1,width=5.3cm,height=5.8cm,
+          grid=both,
+          xtick distance=1,
+          ytick distance=10,
+          xticklabels={},
+        ]
+          \addplot [violet,mark=*,ultra thick] table [col sep=comma,x=nColors,y=tmsMean]{../../analysis/multivars/nColors/dfs-greedy-admissible-processed-2.csv};
+          \addplot [blue  ,mark=*,ultra thick] table [col sep=comma,x=nColors,y=tmsMean]{../../analysis/multivars/nColors/dfs-greedy-admissible-processed-3.csv};
+          \addplot [green ,mark=*,ultra thick] table [col sep=comma,x=nColors,y=tmsMean]{../../analysis/multivars/nColors/dfs-greedy-admissible-processed-4.csv};
+          \addplot [yellow,mark=*,ultra thick] table [col sep=comma,x=nColors,y=tmsMean]{../../analysis/multivars/nColors/dfs-greedy-admissible-processed-5.csv};
+          \addplot [orange,mark=*,ultra thick] table [col sep=comma,x=nColors,y=tmsMean]{../../analysis/multivars/nColors/dfs-greedy-admissible-processed-6.csv};
+          \addplot [red   ,mark=*,ultra thick] table [col sep=comma,x=nColors,y=tmsMean]{../../analysis/multivars/nColors/dfs-greedy-admissible-processed-7.csv};
+        \end{semilogyaxis}
+      \end{tikzpicture}
+    \end{tabular}
+
+    \vspace*{-1.7em}
+    \begin{tabular}{c c c}
+      \begin{tikzpicture}
+        \begin{semilogyaxis}[xmin=0.7,xmax=6.3,ymin=4e-3,ymax=1e1,width=5.3cm,height=5.8cm,
+          grid=both,
+          xtick distance=1,
+          ytick distance=10,
+        ]
+          \addplot [violet,mark=*,ultra thick] table [col sep=comma,x=nColors,y=tmsMean]{../../analysis/multivars/nColors/greedy-admissible-processed-2.csv};
+          \addplot [blue  ,mark=*,ultra thick] table [col sep=comma,x=nColors,y=tmsMean]{../../analysis/multivars/nColors/greedy-admissible-processed-3.csv};
+          \addplot [green ,mark=*,ultra thick] table [col sep=comma,x=nColors,y=tmsMean]{../../analysis/multivars/nColors/greedy-admissible-processed-4.csv};
+          \addplot [yellow,mark=*,ultra thick] table [col sep=comma,x=nColors,y=tmsMean]{../../analysis/multivars/nColors/greedy-admissible-processed-5.csv};
+          \addplot [orange,mark=*,ultra thick] table [col sep=comma,x=nColors,y=tmsMean]{../../analysis/multivars/nColors/greedy-admissible-processed-6.csv};
+          \addplot [red   ,mark=*,ultra thick] table [col sep=comma,x=nColors,y=tmsMean]{../../analysis/multivars/nColors/greedy-admissible-processed-7.csv};
+        \end{semilogyaxis}
+      \end{tikzpicture} &
+      \begin{tikzpicture}
+        \begin{semilogyaxis}[xmin=0.7,xmax=6.3,ymin=4e-3,ymax=1e1,width=5.3cm,height=5.8cm,
+          grid=both,
+          xtick distance=1,
+          ytick distance=10,
+          yticklabels={},
+        ]
+          \addplot [violet,mark=*,ultra thick] table [col sep=comma,x=nColors,y=tmsMean]{../../analysis/multivars/nColors/astar-admissible-processed-2.csv};
+          \addplot [blue  ,mark=*,ultra thick] table [col sep=comma,x=nColors,y=tmsMean]{../../analysis/multivars/nColors/astar-admissible-processed-3.csv};
+          \addplot [green ,mark=*,ultra thick] table [col sep=comma,x=nColors,y=tmsMean]{../../analysis/multivars/nColors/astar-admissible-processed-4.csv};
+          \addplot [yellow,mark=*,ultra thick] table [col sep=comma,x=nColors,y=tmsMean]{../../analysis/multivars/nColors/astar-admissible-processed-5.csv};
+          \addplot [orange,mark=*,ultra thick] table [col sep=comma,x=nColors,y=tmsMean]{../../analysis/multivars/nColors/astar-admissible-processed-6.csv};
+          \addplot [red   ,mark=*,ultra thick] table [col sep=comma,x=nColors,y=tmsMean]{../../analysis/multivars/nColors/astar-admissible-processed-7.csv};
+        \end{semilogyaxis}
+      \end{tikzpicture} &
+      \begin{tikzpicture}
+        \begin{semilogyaxis}[xmin=0.7,xmax=6.3,ymin=4e-3,ymax=1e1,width=5.3cm,height=5.8cm,
+          grid=both,
+          xtick distance=1,
+          ytick distance=10,
+          yticklabels={},
+        ]
+          \addplot [violet,mark=*,ultra thick] table [col sep=comma,x=nColors,y=tmsMean]{../../analysis/multivars/nColors/astar-nonadmissible-processed-2.csv};
+          \addplot [blue  ,mark=*,ultra thick] table [col sep=comma,x=nColors,y=tmsMean]{../../analysis/multivars/nColors/astar-nonadmissible-processed-3.csv};
+          \addplot [green ,mark=*,ultra thick] table [col sep=comma,x=nColors,y=tmsMean]{../../analysis/multivars/nColors/astar-nonadmissible-processed-4.csv};
+          \addplot [yellow,mark=*,ultra thick] table [col sep=comma,x=nColors,y=tmsMean]{../../analysis/multivars/nColors/astar-nonadmissible-processed-5.csv};
+          \addplot [orange,mark=*,ultra thick] table [col sep=comma,x=nColors,y=tmsMean]{../../analysis/multivars/nColors/astar-nonadmissible-processed-6.csv};
+          \addplot [red   ,mark=*,ultra thick] table [col sep=comma,x=nColors,y=tmsMean]{../../analysis/multivars/nColors/astar-nonadmissible-processed-7.csv};
+        \end{semilogyaxis}
+      \end{tikzpicture}
+    \end{tabular}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
+  \vspace{-0.0em}
+  \noindent
+  \begin{figure}
+    \raggedright
+    \setlength{\tabcolsep}{-0.3em}
+    \begin{tabular}{c c c}
+      \begin{tikzpicture}
+        \begin{semilogyaxis}[xmin=0.7,xmax=6.3,ymin=3e-2,ymax=2e3,width=5.3cm,height=5.8cm,
+          grid=both,
+          xtick distance=1,
+          ytick distance=10,
+          xticklabels={},
+        ]
+          \addplot [violet,mark=*,ultra thick] table [col sep=comma,x=nColors,y=memMBMean]{../../analysis/multivars/nColors/bfs-processed-2.csv};
+          \addplot [blue  ,mark=*,ultra thick] table [col sep=comma,x=nColors,y=memMBMean]{../../analysis/multivars/nColors/bfs-processed-3.csv};
+          \addplot [green ,mark=*,ultra thick] table [col sep=comma,x=nColors,y=memMBMean]{../../analysis/multivars/nColors/bfs-processed-4.csv};
+          \addplot [yellow,mark=*,ultra thick] table [col sep=comma,x=nColors,y=memMBMean]{../../analysis/multivars/nColors/bfs-processed-5.csv};
+          \addplot [orange,mark=*,ultra thick] table [col sep=comma,x=nColors,y=memMBMean]{../../analysis/multivars/nColors/bfs-processed-6.csv};
+          \addplot [red   ,mark=*,ultra thick] table [col sep=comma,x=nColors,y=memMBMean]{../../analysis/multivars/nColors/bfs-processed-7.csv};
+        \end{semilogyaxis}
+      \end{tikzpicture} &
+      \hspace{0.7em}
+      \begin{minipage}[b]{2.735cm}
+        \scriptsize
+        \textbf{Max. memory usage} ($\si{\mega\byte}$); from left to right and top to bottom: BFS, DFS-greedy, Greedy, A*, A* (NA).
+        
+        \vspace{-1.0em}
+        \begin{multicols}{2}
+          \textcolor{purple}{\textbullet} T = 2 \\
+          \textcolor{blue}  {\textbullet} T = 3 \\
+          \textcolor{green} {\textbullet} T = 4 \\
+          \textcolor{yellow}{\textbullet} T = 5 \\
+          \textcolor{orange}{\textbullet} T = 6 \\
+          \textcolor{red}   {\textbullet} T = 7
+        \end{multicols}
+
+        \vspace{1.5em}
+
+      \end{minipage} \hspace{0.2em} &
+      \begin{tikzpicture}
+        \begin{semilogyaxis}[xmin=0.7,xmax=6.3,ymin=5e-2,ymax=5e0,width=5.3cm,height=5.8cm,
+          grid=both,
+          xtick distance=1,
+          ytick distance=10,
+          xticklabels={},
+        ]
+          \addplot [violet,mark=*,ultra thick] table [col sep=comma,x=nColors,y=memMBMean]{../../analysis/multivars/nColors/dfs-greedy-admissible-processed-2.csv};
+          \addplot [blue  ,mark=*,ultra thick] table [col sep=comma,x=nColors,y=memMBMean]{../../analysis/multivars/nColors/dfs-greedy-admissible-processed-3.csv};
+          \addplot [green ,mark=*,ultra thick] table [col sep=comma,x=nColors,y=memMBMean]{../../analysis/multivars/nColors/dfs-greedy-admissible-processed-4.csv};
+          \addplot [yellow,mark=*,ultra thick] table [col sep=comma,x=nColors,y=memMBMean]{../../analysis/multivars/nColors/dfs-greedy-admissible-processed-5.csv};
+          \addplot [orange,mark=*,ultra thick] table [col sep=comma,x=nColors,y=memMBMean]{../../analysis/multivars/nColors/dfs-greedy-admissible-processed-6.csv};
+          \addplot [red   ,mark=*,ultra thick] table [col sep=comma,x=nColors,y=memMBMean]{../../analysis/multivars/nColors/dfs-greedy-admissible-processed-7.csv};
+        \end{semilogyaxis}
+      \end{tikzpicture}
+    \end{tabular}
+
+    \vspace*{-1.0em}
+    \begin{tabular}{c c c}
+      \begin{tikzpicture}
+        \begin{semilogyaxis}[xmin=0.7,xmax=6.3,ymin=5e-2,ymax=5e0,width=5.3cm,height=5.8cm,
+          grid=both,
+          xtick distance=1,
+          ytick distance=10,
+        ]
+          \addplot [violet,mark=*,ultra thick] table [col sep=comma,x=nColors,y=memMBMean]{../../analysis/multivars/nColors/greedy-admissible-processed-2.csv};
+          \addplot [blue  ,mark=*,ultra thick] table [col sep=comma,x=nColors,y=memMBMean]{../../analysis/multivars/nColors/greedy-admissible-processed-3.csv};
+          \addplot [green ,mark=*,ultra thick] table [col sep=comma,x=nColors,y=memMBMean]{../../analysis/multivars/nColors/greedy-admissible-processed-4.csv};
+          \addplot [yellow,mark=*,ultra thick] table [col sep=comma,x=nColors,y=memMBMean]{../../analysis/multivars/nColors/greedy-admissible-processed-5.csv};
+          \addplot [orange,mark=*,ultra thick] table [col sep=comma,x=nColors,y=memMBMean]{../../analysis/multivars/nColors/greedy-admissible-processed-6.csv};
+          \addplot [red   ,mark=*,ultra thick] table [col sep=comma,x=nColors,y=memMBMean]{../../analysis/multivars/nColors/greedy-admissible-processed-7.csv};
+        \end{semilogyaxis}
+      \end{tikzpicture} &
+      \begin{tikzpicture}
+        \begin{semilogyaxis}[xmin=0.7,xmax=6.3,ymin=5e-2,ymax=5e0,width=5.3cm,height=5.8cm,
+          grid=both,
+          xtick distance=1,
+          ytick distance=10,
+          yticklabels={},
+        ]
+          \addplot [violet,mark=*,ultra thick] table [col sep=comma,x=nColors,y=memMBMean]{../../analysis/multivars/nColors/astar-admissible-processed-2.csv};
+          \addplot [blue  ,mark=*,ultra thick] table [col sep=comma,x=nColors,y=memMBMean]{../../analysis/multivars/nColors/astar-admissible-processed-3.csv};
+          \addplot [green ,mark=*,ultra thick] table [col sep=comma,x=nColors,y=memMBMean]{../../analysis/multivars/nColors/astar-admissible-processed-4.csv};
+          \addplot [yellow,mark=*,ultra thick] table [col sep=comma,x=nColors,y=memMBMean]{../../analysis/multivars/nColors/astar-admissible-processed-5.csv};
+          \addplot [orange,mark=*,ultra thick] table [col sep=comma,x=nColors,y=memMBMean]{../../analysis/multivars/nColors/astar-admissible-processed-6.csv};
+          \addplot [red   ,mark=*,ultra thick] table [col sep=comma,x=nColors,y=memMBMean]{../../analysis/multivars/nColors/astar-admissible-processed-7.csv};
+        \end{semilogyaxis}
+      \end{tikzpicture} &
+      \begin{tikzpicture}
+        \begin{semilogyaxis}[xmin=0.7,xmax=6.3,ymin=5e-2,ymax=5e0,width=5.3cm,height=5.8cm,
+          grid=both,
+          xtick distance=1,
+          ytick distance=10,
+          yticklabels={},
+        ]
+          \addplot [violet,mark=*,ultra thick] table [col sep=comma,x=nColors,y=memMBMean]{../../analysis/multivars/nColors/astar-nonadmissible-processed-2.csv};
+          \addplot [blue  ,mark=*,ultra thick] table [col sep=comma,x=nColors,y=memMBMean]{../../analysis/multivars/nColors/astar-nonadmissible-processed-3.csv};
+          \addplot [green ,mark=*,ultra thick] table [col sep=comma,x=nColors,y=memMBMean]{../../analysis/multivars/nColors/astar-nonadmissible-processed-4.csv};
+          \addplot [yellow,mark=*,ultra thick] table [col sep=comma,x=nColors,y=memMBMean]{../../analysis/multivars/nColors/astar-nonadmissible-processed-5.csv};
+          \addplot [orange,mark=*,ultra thick] table [col sep=comma,x=nColors,y=memMBMean]{../../analysis/multivars/nColors/astar-nonadmissible-processed-6.csv};
+          \addplot [red   ,mark=*,ultra thick] table [col sep=comma,x=nColors,y=memMBMean]{../../analysis/multivars/nColors/astar-nonadmissible-processed-7.csv};
+        \end{semilogyaxis}
+      \end{tikzpicture}
+    \end{tabular}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
+  \textbf{Varied tube height and number of tubes}
+
+  In the following graphs, the X-axis represents the number height $H$.
+  We tested all tube heights possible (within reasonable execution times) for each number of tubes $T$.
+  Each value of the number of tubes $T$ is a data series with a different color.
+  All test cases have number of colors $C = \lceil T/2 \rceil$
+\end{frame}
+
+\begin{frame}
+  \vspace{-0.5em}
+  \noindent
+  \begin{figure}
+    \raggedright
+    \setlength{\tabcolsep}{-0.3em}
+    \begin{tabular}{c c c}
+      \begin{tikzpicture}
+        \begin{semilogyaxis}[xmin=0.7,xmax=6.3,ymin=3e-2,ymax=5e4,width=5.3cm,height=5.8cm,
+          grid=both,
+          xtick distance=1,
+          ytick distance=10,
+          xticklabels={},
+        ]
+          \addplot [violet,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=tmsMean]{../../analysis/multivars/tubeH/bfs-processed-2.csv};
+          \addplot [blue  ,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=tmsMean]{../../analysis/multivars/tubeH/bfs-processed-3.csv};
+          \addplot [green ,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=tmsMean]{../../analysis/multivars/tubeH/bfs-processed-4.csv};
+          \addplot [yellow,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=tmsMean]{../../analysis/multivars/tubeH/bfs-processed-5.csv};
+          \addplot [orange,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=tmsMean]{../../analysis/multivars/tubeH/bfs-processed-6.csv};
+          \addplot [red   ,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=tmsMean]{../../analysis/multivars/tubeH/bfs-processed-7.csv};
+        \end{semilogyaxis}
+      \end{tikzpicture} &
+      \hspace{0.7em}
+      \begin{minipage}[b]{2.735cm}
+        \scriptsize
+        \textbf{Execution times} ($\si{\milli\second}$); from left to right and top to bottom: BFS, DFS-greedy, Greedy, A*, A* (NA).
+        
+        \vspace{-1.0em}
+        \begin{multicols}{2}
+          \textcolor{purple}{\textbullet} T = 2 \\
+          \textcolor{blue}  {\textbullet} T = 3 \\
+          \textcolor{green} {\textbullet} T = 4 \\
+          \textcolor{yellow}{\textbullet} T = 5 \\
+          \textcolor{orange}{\textbullet} T = 6 \\
+          \textcolor{red}   {\textbullet} T = 7
+        \end{multicols}
+
+        \vspace{1.5em}
+
+      \end{minipage} \hspace{0.2em} &
+      \begin{tikzpicture}
+        \begin{semilogyaxis}[xmin=0.7,xmax=6.3,ymin=4e-3,ymax=1e1,width=5.3cm,height=5.8cm,
+          grid=both,
+          xtick distance=1,
+          ytick distance=10,
+          xticklabels={},
+        ]
+          \addplot [violet,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=tmsMean]{../../analysis/multivars/tubeH/dfs-greedy-admissible-processed-2.csv};
+          \addplot [blue  ,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=tmsMean]{../../analysis/multivars/tubeH/dfs-greedy-admissible-processed-3.csv};
+          \addplot [green ,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=tmsMean]{../../analysis/multivars/tubeH/dfs-greedy-admissible-processed-4.csv};
+          \addplot [yellow,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=tmsMean]{../../analysis/multivars/tubeH/dfs-greedy-admissible-processed-5.csv};
+          \addplot [orange,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=tmsMean]{../../analysis/multivars/tubeH/dfs-greedy-admissible-processed-6.csv};
+          \addplot [red   ,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=tmsMean]{../../analysis/multivars/tubeH/dfs-greedy-admissible-processed-7.csv};
+        \end{semilogyaxis}
+      \end{tikzpicture}
+    \end{tabular}
+
+    \vspace*{-1.7em}
+    \begin{tabular}{c c c}
+      \begin{tikzpicture}
+        \begin{semilogyaxis}[xmin=0.7,xmax=6.3,ymin=4e-3,ymax=1e1,width=5.3cm,height=5.8cm,
+          grid=both,
+          xtick distance=1,
+          ytick distance=10,
+        ]
+          \addplot [violet,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=tmsMean]{../../analysis/multivars/tubeH/greedy-admissible-processed-2.csv};
+          \addplot [blue  ,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=tmsMean]{../../analysis/multivars/tubeH/greedy-admissible-processed-3.csv};
+          \addplot [green ,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=tmsMean]{../../analysis/multivars/tubeH/greedy-admissible-processed-4.csv};
+          \addplot [yellow,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=tmsMean]{../../analysis/multivars/tubeH/greedy-admissible-processed-5.csv};
+          \addplot [orange,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=tmsMean]{../../analysis/multivars/tubeH/greedy-admissible-processed-6.csv};
+          \addplot [red   ,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=tmsMean]{../../analysis/multivars/tubeH/greedy-admissible-processed-7.csv};
+        \end{semilogyaxis}
+      \end{tikzpicture} &
+      \begin{tikzpicture}
+        \begin{semilogyaxis}[xmin=0.7,xmax=6.3,ymin=4e-3,ymax=1e1,width=5.3cm,height=5.8cm,
+          grid=both,
+          xtick distance=1,
+          ytick distance=10,
+          yticklabels={},
+        ]
+          \addplot [violet,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=tmsMean]{../../analysis/multivars/tubeH/astar-admissible-processed-2.csv};
+          \addplot [blue  ,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=tmsMean]{../../analysis/multivars/tubeH/astar-admissible-processed-3.csv};
+          \addplot [green ,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=tmsMean]{../../analysis/multivars/tubeH/astar-admissible-processed-4.csv};
+          \addplot [yellow,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=tmsMean]{../../analysis/multivars/tubeH/astar-admissible-processed-5.csv};
+          \addplot [orange,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=tmsMean]{../../analysis/multivars/tubeH/astar-admissible-processed-6.csv};
+          \addplot [red   ,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=tmsMean]{../../analysis/multivars/tubeH/astar-admissible-processed-7.csv};
+        \end{semilogyaxis}
+      \end{tikzpicture} &
+      \begin{tikzpicture}
+        \begin{semilogyaxis}[xmin=0.7,xmax=6.3,ymin=4e-3,ymax=1e1,width=5.3cm,height=5.8cm,
+          grid=both,
+          xtick distance=1,
+          ytick distance=10,
+          yticklabels={},
+        ]
+          \addplot [violet,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=tmsMean]{../../analysis/multivars/tubeH/astar-nonadmissible-processed-2.csv};
+          \addplot [blue  ,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=tmsMean]{../../analysis/multivars/tubeH/astar-nonadmissible-processed-3.csv};
+          \addplot [green ,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=tmsMean]{../../analysis/multivars/tubeH/astar-nonadmissible-processed-4.csv};
+          \addplot [yellow,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=tmsMean]{../../analysis/multivars/tubeH/astar-nonadmissible-processed-5.csv};
+          \addplot [orange,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=tmsMean]{../../analysis/multivars/tubeH/astar-nonadmissible-processed-6.csv};
+          \addplot [red   ,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=tmsMean]{../../analysis/multivars/tubeH/astar-nonadmissible-processed-7.csv};
+        \end{semilogyaxis}
+      \end{tikzpicture}
+    \end{tabular}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
+  \vspace{-0.0em}
+  \noindent
+  \begin{figure}
+    \raggedright
+    \setlength{\tabcolsep}{-0.3em}
+    \begin{tabular}{c c c}
+      \begin{tikzpicture}
+        \begin{semilogyaxis}[xmin=0.7,xmax=6.3,ymin=1e-1,ymax=5e3,width=5.3cm,height=5.8cm,
+          grid=both,
+          xtick distance=1,
+          ytick distance=10,
+          xticklabels={},
+        ]
+          \addplot [violet,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=memMBMean]{../../analysis/multivars/tubeH/bfs-processed-2.csv};
+          \addplot [blue  ,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=memMBMean]{../../analysis/multivars/tubeH/bfs-processed-3.csv};
+          \addplot [green ,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=memMBMean]{../../analysis/multivars/tubeH/bfs-processed-4.csv};
+          \addplot [yellow,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=memMBMean]{../../analysis/multivars/tubeH/bfs-processed-5.csv};
+          \addplot [orange,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=memMBMean]{../../analysis/multivars/tubeH/bfs-processed-6.csv};
+          \addplot [red   ,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=memMBMean]{../../analysis/multivars/tubeH/bfs-processed-7.csv};
+        \end{semilogyaxis}
+      \end{tikzpicture} &
+      \hspace{0.7em}
+      \begin{minipage}[b]{2.735cm}
+        \scriptsize
+        \textbf{Max. memory usage} ($\si{\mega\byte}$); from left to right and top to bottom: BFS, DFS-greedy, Greedy, A*, A* (NA).
+        
+        \vspace{-1.0em}
+        \begin{multicols}{2}
+          \textcolor{purple}{\textbullet} T = 2 \\
+          \textcolor{blue}  {\textbullet} T = 3 \\
+          \textcolor{green} {\textbullet} T = 4 \\
+          \textcolor{yellow}{\textbullet} T = 5 \\
+          \textcolor{orange}{\textbullet} T = 6 \\
+          \textcolor{red}   {\textbullet} T = 7
+        \end{multicols}
+
+        \vspace{1.5em}
+
+      \end{minipage} \hspace{0.2em} &
+      \begin{tikzpicture}
+        \begin{semilogyaxis}[xmin=0.7,xmax=6.3,ymin=7e-2,ymax=1.5e1,width=5.3cm,height=5.8cm,
+          grid=both,
+          xtick distance=1,
+          ytick distance=10,
+          xticklabels={},
+        ]
+          \addplot [violet,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=memMBMean]{../../analysis/multivars/tubeH/dfs-greedy-admissible-processed-2.csv};
+          \addplot [blue  ,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=memMBMean]{../../analysis/multivars/tubeH/dfs-greedy-admissible-processed-3.csv};
+          \addplot [green ,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=memMBMean]{../../analysis/multivars/tubeH/dfs-greedy-admissible-processed-4.csv};
+          \addplot [yellow,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=memMBMean]{../../analysis/multivars/tubeH/dfs-greedy-admissible-processed-5.csv};
+          \addplot [orange,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=memMBMean]{../../analysis/multivars/tubeH/dfs-greedy-admissible-processed-6.csv};
+          \addplot [red   ,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=memMBMean]{../../analysis/multivars/tubeH/dfs-greedy-admissible-processed-7.csv};
+        \end{semilogyaxis}
+      \end{tikzpicture}
+    \end{tabular}
+
+    \vspace*{-1.0em}
+    \begin{tabular}{c c c}
+      \begin{tikzpicture}
+        \begin{semilogyaxis}[xmin=0.7,xmax=6.3,ymin=7e-2,ymax=5e0,width=5.3cm,height=5.8cm,
+          grid=both,
+          xtick distance=1,
+          ytick distance=10,
+        ]
+          \addplot [violet,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=memMBMean]{../../analysis/multivars/tubeH/greedy-admissible-processed-2.csv};
+          \addplot [blue  ,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=memMBMean]{../../analysis/multivars/tubeH/greedy-admissible-processed-3.csv};
+          \addplot [green ,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=memMBMean]{../../analysis/multivars/tubeH/greedy-admissible-processed-4.csv};
+          \addplot [yellow,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=memMBMean]{../../analysis/multivars/tubeH/greedy-admissible-processed-5.csv};
+          \addplot [orange,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=memMBMean]{../../analysis/multivars/tubeH/greedy-admissible-processed-6.csv};
+          \addplot [red   ,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=memMBMean]{../../analysis/multivars/tubeH/greedy-admissible-processed-7.csv};
+        \end{semilogyaxis}
+      \end{tikzpicture} &
+      \begin{tikzpicture}
+        \begin{semilogyaxis}[xmin=0.7,xmax=6.3,ymin=7e-2,ymax=1.5e1,width=5.3cm,height=5.8cm,
+          grid=both,
+          xtick distance=1,
+          ytick distance=10,
+          yticklabels={},
+        ]
+          \addplot [violet,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=memMBMean]{../../analysis/multivars/tubeH/astar-admissible-processed-2.csv};
+          \addplot [blue  ,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=memMBMean]{../../analysis/multivars/tubeH/astar-admissible-processed-3.csv};
+          \addplot [green ,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=memMBMean]{../../analysis/multivars/tubeH/astar-admissible-processed-4.csv};
+          \addplot [yellow,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=memMBMean]{../../analysis/multivars/tubeH/astar-admissible-processed-5.csv};
+          \addplot [orange,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=memMBMean]{../../analysis/multivars/tubeH/astar-admissible-processed-6.csv};
+          \addplot [red   ,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=memMBMean]{../../analysis/multivars/tubeH/astar-admissible-processed-7.csv};
+        \end{semilogyaxis}
+      \end{tikzpicture} &
+      \begin{tikzpicture}
+        \begin{semilogyaxis}[xmin=0.7,xmax=6.3,ymin=7e-2,ymax=1.5e1,width=5.3cm,height=5.8cm,
+          grid=both,
+          xtick distance=1,
+          ytick distance=10,
+          yticklabels={},
+        ]
+          \addplot [violet,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=memMBMean]{../../analysis/multivars/tubeH/astar-nonadmissible-processed-2.csv};
+          \addplot [blue  ,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=memMBMean]{../../analysis/multivars/tubeH/astar-nonadmissible-processed-3.csv};
+          \addplot [green ,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=memMBMean]{../../analysis/multivars/tubeH/astar-nonadmissible-processed-4.csv};
+          \addplot [yellow,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=memMBMean]{../../analysis/multivars/tubeH/astar-nonadmissible-processed-5.csv};
+          \addplot [orange,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=memMBMean]{../../analysis/multivars/tubeH/astar-nonadmissible-processed-6.csv};
+          \addplot [red   ,mark=*,ultra thick] table [col sep=comma,x=tubeH,y=memMBMean]{../../analysis/multivars/tubeH/astar-nonadmissible-processed-7.csv};
+        \end{semilogyaxis}
+      \end{tikzpicture}
+    \end{tabular}
+  \end{figure}
+\end{frame}
+
 
 \begin{frame}
 \frametitle{8. Conclusion}

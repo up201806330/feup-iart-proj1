@@ -18,6 +18,9 @@ define run_analysis
 	$(MAIN) cli $(NRUNS) 2 5 1  0 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
 	$(MAIN) cli $(NRUNS) 2 5 1  1 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
 	$(MAIN) cli $(NRUNS) 2 5 1  2 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 2 6 1  0 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 2 6 1  1 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 2 6 1  2 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
 	
 	$(MAIN) cli $(NRUNS) 3 1 2  0 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
 	$(MAIN) cli $(NRUNS) 3 1 2  1 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
@@ -34,6 +37,9 @@ define run_analysis
 	$(MAIN) cli $(NRUNS) 3 5 2  0 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
 	$(MAIN) cli $(NRUNS) 3 5 2  1 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
 	$(MAIN) cli $(NRUNS) 3 5 2  2 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 3 6 2  0 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 3 6 2  1 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 3 6 2  2 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
 
 	$(MAIN) cli $(NRUNS) 4 1 2  0 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
 	$(MAIN) cli $(NRUNS) 4 1 2  1 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
@@ -50,6 +56,9 @@ define run_analysis
 	$(MAIN) cli $(NRUNS) 4 5 2  0 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
 	$(MAIN) cli $(NRUNS) 4 5 2  1 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
 	$(MAIN) cli $(NRUNS) 4 5 2  2 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 4 6 2  0 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 4 6 2  1 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 4 6 2  2 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
 	
 	$(MAIN) cli $(NRUNS) 5 1 3  0 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
 	$(MAIN) cli $(NRUNS) 5 1 3  1 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
@@ -66,6 +75,9 @@ define run_analysis
 	$(MAIN) cli $(NRUNS) 5 5 3  0 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
 	$(MAIN) cli $(NRUNS) 5 5 3  1 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
 	$(MAIN) cli $(NRUNS) 5 5 3  2 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 5 6 3  0 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 5 6 3  1 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 5 6 3  2 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
 
 	$(MAIN) cli $(NRUNS) 6 1 3  0 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
 	$(MAIN) cli $(NRUNS) 6 1 3  1 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
@@ -82,6 +94,9 @@ define run_analysis
 	$(MAIN) cli $(NRUNS) 6 5 3  0 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
 	$(MAIN) cli $(NRUNS) 6 5 3  1 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
 	$(MAIN) cli $(NRUNS) 6 5 3  2 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 6 6 3  0 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 6 6 3  1 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 6 6 3  2 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
 
 	$(MAIN) cli $(NRUNS) 7 1 4  0 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
 	$(MAIN) cli $(NRUNS) 7 1 4  1 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
@@ -98,6 +113,9 @@ define run_analysis
 	$(MAIN) cli $(NRUNS) 7 5 4  0 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
 	$(MAIN) cli $(NRUNS) 7 5 4  1 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
 	$(MAIN) cli $(NRUNS) 7 5 4  2 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 7 6 4  0 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 7 6 4  1 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 7 6 4  2 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
 endef
 
 all: bfs-processed.csv dfs-greedy-admissible-processed.csv greedy-admissible-processed.csv astar-admissible-processed.csv astar-nonadmissible-processed.csv

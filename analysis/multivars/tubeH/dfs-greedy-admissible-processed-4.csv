@@ -1,6 +1,7 @@
 alg,nTubes,tubeH,nColors,memMBMean,tmsMean
-dfs-greedy-admissible,4,1,2,0.132,0.00122095
-dfs-greedy-admissible,4,2,2,0.132,0.0180592
-dfs-greedy-admissible,4,3,2,0.132,0.0168449
-dfs-greedy-admissible,4,4,2,0.132,0.0376794
-dfs-greedy-admissible,4,5,2,0.132,0.0413942
+dfs-greedy-admissible,4,1,2,0.132,0.0122974
+dfs-greedy-admissible,4,2,2,0.132,0.0277597
+dfs-greedy-admissible,4,3,2,0.132,0.032843
+dfs-greedy-admissible,4,4,2,0.132,0.0582513
+dfs-greedy-admissible,4,5,2,0.132,0.0616972
+dfs-greedy-admissible,4,6,2,0.209537,0.0958276

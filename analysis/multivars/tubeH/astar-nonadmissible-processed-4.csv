@@ -1,6 +1,7 @@
 alg,nTubes,tubeH,nColors,memMBMean,tmsMean
-astar-nonadmissible,4,1,2,0.132,0.00707217
-astar-nonadmissible,4,2,2,0.264,0.100228
-astar-nonadmissible,4,3,2,0.264,0.0893866
-astar-nonadmissible,4,4,2,0.345938,0.24153
-astar-nonadmissible,4,5,2,0.435854,0.263933
+astar-nonadmissible,4,1,2,0.132,0.0163722
+astar-nonadmissible,4,2,2,0.264,0.123075
+astar-nonadmissible,4,3,2,0.264,0.110309
+astar-nonadmissible,4,4,2,0.345938,0.282081
+astar-nonadmissible,4,5,2,0.435854,0.378508
+astar-nonadmissible,4,6,2,0.556666,0.547867
