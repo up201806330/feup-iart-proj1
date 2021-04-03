@@ -275,7 +275,7 @@ This research is significant for our problem; even though the problems are quite
 
 \begin{frame}
 \frametitle{6. Implemented algorithms}
-\framesubtitle{6.1. Uninformed search methods}
+\framesubtitle{6.1. Uninformed search methods (US)}
 
 \begin{itemize}
   \item \textbf{Depth First Search (DFS)} | Starting in a given node, expands its children in a random order until if finds that branch does not have a solution, and backtracks until it finds another branch to explore. 
@@ -292,7 +292,7 @@ This research is significant for our problem; even though the problems are quite
 
 \begin{frame}
 \frametitle{6. Implemented algorithms}
-\framesubtitle{6.2. Informed search methods}
+\framesubtitle{6.2. Informed search methods (IS)}
 
 \begin{itemize}  
   \item \textbf{Depth First Search Greedy (DFS-greedy)} | DFS, but uses an heuristic to rank nodes adjacent to current node, and expands them in increasing order of the heuristic score.
@@ -506,6 +506,8 @@ This research is significant for our problem; even though the problems are quite
     \item BFS not significantly impacted by excessive memory usage.
   \end{itemize}
 
+  ~
+
   BFS and IDS trade memory for time and vice-versa; BFS is better in this case, as IDS becomes impractically slow, and BFS does not use excessive memory.
 \end{frame}
 
@@ -513,9 +515,11 @@ This research is significant for our problem; even though the problems are quite
   \frametitle{7. Results}
   \framesubtitle{7.2. Performance analysis with large problems}
 
-  Each data point was obtained by averaging the execution times of that algorithm on 10 random gameboards with same number of tubes and colors and same tube height, but differing seeds.
+  Each data point was obtained by averaging the execution times of that algorithm on 3 random gameboards with same number of tubes and colors and same tube height, but differing seeds.
 
-  The average value of the variables plotted in semi-log graphs is calculated from $\bar{x} = \exp{\left(\frac{1}{N}\sum_{i=0}^{N}\log{x_i}\right)}$.
+  For a test case with $T$ tubes, we used $C = \lfloor T/2 \rfloor$ different colors, as we empirically concluded that the test case with a given $T$ that takes the longer to execute is the one where $C = \lfloor T/2 \rfloor$.
+
+  Average values were calculated using the formula $\bar{x} = \exp{\left(\frac{1}{N}\sum_{i=0}^{N}\log{x_i}\right)}$.
 
   A* (NA) was run using a non-admissible heuristic, consisting of the regular admissible heuristic multiplied by the constant factor of $1+10^{-9}$.
 
@@ -1040,7 +1044,17 @@ This research is significant for our problem; even though the problems are quite
 \begin{frame}
 \frametitle{8. Conclusion}
 
-TODO
+\small
+
+\textbf{Exploratory analysis} | DFS gives poor results, and IDS is significantly slower than other alternatives.
+
+\textbf{Increasing scale of the problem} | BFS has a relatively poor time performance. A* is optimal but is the slowest and most memory-expensive among the IS methods. DFS-greedy achieves very good time and memory performance, even for quite large problems. Greedy and A* (NA) are a compromise between optimality and performance.
+
+Although A* (NA) multiplies an admissible heuristic by a factor minutely larger than 1, it achieves decisively better time and memory performances than A*, comparable to Greedy.
+
+\textbf{Simultaneously varying parameters} | The hardest problems are those where $C \approx T/2$, as small and large $C$ means there aren't many valid moves (thus searches are faster and take less memory), and an intermediate $C$ is the situation with most complexity. When $H$ is increased, the problem becomes harder, although it does not get harder as fast as when $T$ is increased.
+
+\textbf{Finally:} DFS-greedy has the best performance, but when searching for a solution with some degree of a guarantee of near-optimality we would go for Greedy or A* (NA).
 
 \end{frame}
 
