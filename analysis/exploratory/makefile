@@ -23,13 +23,13 @@ define run_analysis_ids
 	echo ",,,,,," >> $(2).csv
 endef
 
-all: discard-dfs-math.csv
+all: exploratory-math.csv
 
-discard-dfs-math.csv: discard-dfs.csv
-	head -n 1 discard-dfs.csv > discard-dfs-math.csv
-	cat discard-dfs.csv | tail -n +2 | awk -F , -v OFS=, '{print $$1,$$2,$$3,$$4,$$20/$$5,$$6/1000000,$$7/$$10,$$20/$$8,$$9/1000000,$$10/1000000,($$11==""?"-":$$20/$$11),($$12==""?"-":$$12/1000000),($$13==""?"-":$$13/$$10),$$20/$$14,$$15/1000000,$$16/$$10,$$20/$$17,$$18/1000000,$$19/$$10,$$20,$$21/1000000,$$22/$$10,$$20/$$23,$$24/1000000,$$25/$$10}' >> discard-dfs-math.csv
+exploratory-math.csv: exploratory.csv
+	head -n 1 exploratory.csv > exploratory-math.csv
+	cat exploratory.csv | tail -n +2 | awk -F , -v OFS=, '{print $$1,$$2,$$3,$$4,$$20/$$5,$$6/1000000,$$7/$$10,$$20/$$8,$$9/1000000,$$10/1000000,($$11==""?"-":$$20/$$11),($$12==""?"-":$$12/1000000),($$13==""?"-":$$13/$$10),$$20/$$14,$$15/1000000,$$16/$$10,$$20/$$17,$$18/1000000,$$19/$$10,$$20,$$21/1000000,$$22/$$10,$$20/$$23,$$24/1000000,$$25/$$10}' >> exploratory-math.csv
 
-discard-dfs.csv: dfs.csv bfs.csv iterative-deepening.csv dfs-greedy-admissible.csv greedy-admissible.csv astar-admissible.csv astar-nonadmissible.csv #dfs-greedy-fh.csv dfs-fh.csv astar-fh.csv
+exploratory.csv: dfs.csv bfs.csv iterative-deepening.csv dfs-greedy-admissible.csv greedy-admissible.csv astar-admissible.csv astar-nonadmissible.csv #dfs-greedy-fh.csv dfs-fh.csv astar-fh.csv
 	csvcut -c 5,6,7 bfs.csv                     > bfs-cut.csv
 	csvcut -c 5,6,7 iterative-deepening.csv     > iterative-deepening-cut.csv
 	csvcut -c 5,6,7 dfs-greedy-admissible.csv   > dfs-greedy-admissible-cut.csv
@@ -39,9 +39,9 @@ discard-dfs.csv: dfs.csv bfs.csv iterative-deepening.csv dfs-greedy-admissible.c
 #	csvcut -c 5,6,7 dfs-greedy-fh.csv           > dfs-greedy-fh-cut.csv
 #	csvcut -c 5,6,7 dfs-fh.csv                  > dfs-fh-cut.csv
 #	csvcut -c 5,6,7 astar-fh.csv                > astar-fh-cut.csv
-	paste -d , dfs.csv bfs-cut.csv iterative-deepening-cut.csv dfs-greedy-admissible-cut.csv greedy-admissible-cut.csv astar-admissible-cut.csv astar-nonadmissible-cut.csv > discard-dfs.csv
-	sed -i 's/-//g' discard-dfs.csv
-	sed -i 's/_//g' discard-dfs.csv
+	paste -d , dfs.csv bfs-cut.csv iterative-deepening-cut.csv dfs-greedy-admissible-cut.csv greedy-admissible-cut.csv astar-admissible-cut.csv astar-nonadmissible-cut.csv > exploratory.csv
+	sed -i 's/-//g' exploratory.csv
+	sed -i 's/_//g' exploratory.csv
 	rm bfs-cut.csv
 	rm iterative-deepening-cut.csv
 	rm dfs-greedy-admissible-cut.csv
