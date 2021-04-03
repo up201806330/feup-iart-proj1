@@ -179,31 +179,19 @@ astar-admissible-processed.csv: large-processed.csv
 astar-nonadmissible-processed.csv: large-processed.csv
 	csvgrep -c 1 -r "^astar-nonadmissible$$" large-processed.csv > $@
 
-# dfs-greedy-fh-processed.csv: large-processed.csv
-# 	csvgrep -c 1 -r "^dfs-greedy-fh$$" large-processed.csv > $@
-
-# greedy-fh-processed.csv: large-processed.csv
-# 	csvgrep -c 1 -r "^greedy-fh$$" large-processed.csv > $@
-
-# astar-fh-processed.csv: large-processed.csv
-# 	csvgrep -c 1 -r "^astar-fh$$" large-processed.csv > $@
-
 process: process.cpp
 	g++ -Wall $< -o $@
 
 large-processed.csv: process large.csv
 	./process < large.csv > $@
 
-large.csv: bfs.csv dfs-greedy-admissible.csv greedy-admissible.csv astar-admissible.csv dfs-greedy-nonadmissible.csv greedy-nonadmissible.csv astar-nonadmissible.csv #dfs-greedy-fh.csv greedy-fh.csv astar-fh.csv
+large.csv: bfs.csv dfs-greedy-admissible.csv greedy-admissible.csv astar-admissible.csv astar-nonadmissible.csv
 	echo "alg,nTubes,tubeH,nColors,seed,nMoves,mem_b,t_ns" > large.csv
 	tail -n +2 bfs.csv                   >> large.csv
 	tail -n +2 dfs-greedy-admissible.csv >> large.csv
 	tail -n +2 greedy-admissible.csv     >> large.csv
 	tail -n +2 astar-admissible.csv      >> large.csv
 	tail -n +2 astar-nonadmissible.csv   >> large.csv
-#	tail -n +2 dfs-greedy-fh.csv         >> large.csv
-#	tail -n +2 greedy-fh.csv             >> large.csv
-#	tail -n +2 astar-fh.csv              >> large.csv
 
 bfs.csv:
 	$(call run_analysis_short,bfs,bfs)
@@ -219,13 +207,3 @@ astar-admissible.csv:
 
 astar-nonadmissible.csv:
 	$(call run_analysis,informed nonadmissible 1.000000001 astar,astar-nonadmissible)
-
-# dfs-greedy-fh.csv:
-# 	$(call run_analysis,informed finite-horizon-heuristics 3 admissible finite-horizon dfs-greedy,dfs-greedy-fh)
-
-# greedy-fh.csv:
-# 	$(call run_analysis,informed finite-horizon-heuristics 3 admissible finite-horizon greedy,greedy-fh)
-
-# astar-fh.csv:
-# 	$(call run_analysis,informed finite-horizon-heuristics 3 admissible finite-horizon astar,astar-fh)
-

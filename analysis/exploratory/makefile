@@ -36,9 +36,6 @@ exploratory.csv: dfs.csv bfs.csv iterative-deepening.csv dfs-greedy-admissible.c
 	csvcut -c 5,6,7 greedy-admissible.csv       > greedy-admissible-cut.csv
 	csvcut -c 5,6,7 astar-admissible.csv        > astar-admissible-cut.csv
 	csvcut -c 5,6,7 astar-nonadmissible.csv     > astar-nonadmissible-cut.csv
-#	csvcut -c 5,6,7 dfs-greedy-fh.csv           > dfs-greedy-fh-cut.csv
-#	csvcut -c 5,6,7 dfs-fh.csv                  > dfs-fh-cut.csv
-#	csvcut -c 5,6,7 astar-fh.csv                > astar-fh-cut.csv
 	paste -d , dfs.csv bfs-cut.csv iterative-deepening-cut.csv dfs-greedy-admissible-cut.csv greedy-admissible-cut.csv astar-admissible-cut.csv astar-nonadmissible-cut.csv > exploratory.csv
 	sed -i 's/-//g' exploratory.csv
 	sed -i 's/_//g' exploratory.csv
@@ -48,9 +45,6 @@ exploratory.csv: dfs.csv bfs.csv iterative-deepening.csv dfs-greedy-admissible.c
 	rm greedy-admissible-cut.csv
 	rm astar-admissible-cut.csv
 	rm astar-nonadmissible-cut.csv
-#	rm dfs-greedy-fh-cut.csv
-#	rm dfs-fh-cut.csv
-#	rm astar-fh-cut.csv
 
 dfs.csv:
 	$(call run_analysis,dfs,dfs)
@@ -72,12 +66,3 @@ astar-admissible.csv:
 
 astar-nonadmissible.csv:
 	$(call run_analysis,informed nonadmissible 1.1 astar,astar-nonadmissible)
-
-# dfs-greedy-fh.csv:
-# 	$(call run_analysis,informed finite-horizon-heuristics 3 admissible finite-horizon dfs-greedy,dfs-greedy-fh)
-
-# dfs-fh.csv:
-# 	$(call run_analysis,informed finite-horizon-heuristics 3 admissible finite-horizon greedy,dfs-fh)
-
-# astar-fh.csv:
-# 	$(call run_analysis,informed finite-horizon-heuristics 3 admissible finite-horizon astar,astar-fh)
