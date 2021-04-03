@@ -1,0 +1,7 @@
+alg,nTubes,tubeH,nColors,memMBMean,tmsMean
+astar-admissible,2,1,1,0.132,0.0167918
+astar-admissible,2,2,1,0.132,0.0266107
+astar-admissible,2,3,1,0.132,0.0160263
+astar-admissible,2,4,1,0.132,0.0289734
+astar-admissible,2,5,1,0.132,0.0351791
+astar-admissible,2,6,1,0.132,0.0501086

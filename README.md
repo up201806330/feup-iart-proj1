@@ -13,6 +13,18 @@ Distributed under the terms of the GNU General Public License, version 3
 [![report2](https://github.com/dmfrodrigues/feup-iart-proj1/actions/workflows/report2.yml/badge.svg)](https://github.com/dmfrodrigues/feup-iart-proj1/actions/workflows/report2.yml)
 [![docs](https://github.com/dmfrodrigues/feup-iart-proj1/actions/workflows/docs.yml/badge.svg)](https://github.com/dmfrodrigues/feup-iart-proj1/actions/workflows/docs.yml)
 
+- **Project name:** Ball Sort Puzzle
+- **Short description:** Solve the [Ball Sort Puzzle](https://play.google.com/store/apps/details?id=com.spicags.ballsort&hl=pt_PT&gl=US) using informed and uninformed search methods
+- **Environment:** Unix/Windows console
+- **Tools:** C++, CMake
+- **Institution:** [FEUP](https://sigarra.up.pt/feup/en/web_page.Inicial)
+- **Course:** [IART](https://sigarra.up.pt/feup/en/UCURR_GERAL.FICHA_UC_VIEW?pv_ocorrencia_id=459487) (Artificial Intelligence)
+<!-- - **Project grade:** ??.?/20.0 -->
+- **Group members:**
+    - [Diogo Miguel Ferreira Rodrigues](https://github.com/dmfrodrigues) (<dmfrodrigues2000@gmail.com> / <diogo.rodrigues@fe.up.pt>)
+    - [Rafael Soares Ribeiro](https://github.com/up201806330) (<up201806330@fe.up.pt>)
+    - [Bernardo António Magalhães Ferreira](https://github.com/BernardoFerreira00) (<up201806581@fe.up.pt>)
+
 Based on game [*Ball Sort Puzzle*](https://play.google.com/store/apps/details?id=com.spicags.ballsort&hl=pt_PT&gl=US) by [Spica Game Studio](https://play.google.com/store/apps/developer?id=Spica+Game+Studio).
 
 ## Get this project
@@ -41,6 +53,17 @@ and open a new integrated terminal to run with correct color rendering and avoid
 
 ### Compile
 
+This project uses CMake, to compile the project run
+```sh
+mkdir build
+cd build
+cmake ..
+cmake --build .
+```
+
+The executable is called `main` and will be placed in the root of the repository.
+
+To run it in interactive mode, just run `./main`; for the CLI mode, run `./main cli` to check the possible options.
 
 # License
 

@@ -18,6 +18,7 @@ class ChooseFactorState;
 class ChooseHeuristicStrategyState;
 class RandomizeForHumanState;
 class RandomizeForMachineState;
+class AboutState;
 
 /**
  * @brief State.
@@ -62,6 +63,7 @@ public:
     static ChooseHeuristicStrategyState      *chooseHeuristicMachineState      ; ///< @brief Choose heuristic strategy state instance
     static RandomizeForHumanState            *randomizeForHumanState           ; ///< @brief Choose parameters to randomize puzzle
     static RandomizeForMachineState          *randomizeForMachineState         ; ///< @brief Choose parameters to randomize puzzle
+    static AboutState                        *aboutState                       ; ///< @brief About screen state instance
 
     /**
      * @brief Initialize all states with the terminal that must be used to print stuff.
@@ -87,3 +89,4 @@ public:
 #include "ChooseHeuristicStrategyState.h"
 #include "RandomizeForHumanState.h"
 #include "RandomizeForMachineState.h"
+#include "AboutState.h"

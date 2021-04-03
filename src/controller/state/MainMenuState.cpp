@@ -29,7 +29,7 @@ State *MainMenuState::run() {
     switch(id){
         case 1: ret = State::randomizeForHumanState; break;
         case 2: ret = State::randomizeForMachineState; break;
-        case 3:
+        case 3: ret = State::aboutState        ; break;
         case 0: ret = nullptr; break;
         default: throw logic_error("");
     }

@@ -1,0 +1,3 @@
+alg,nTubes,tubeH,nColors,memMBMean,tmsMean
+bfs,3,4,1,0.132,0.0385945
+bfs,3,4,2,0.132,0.0580138
