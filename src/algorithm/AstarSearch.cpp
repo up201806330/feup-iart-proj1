@@ -16,23 +16,24 @@ AstarSearch::AstarSearch(const Heuristic *heuristic):
 
 void AstarSearch::initialize(const GameboardModel &src){
     set<GameboardModel> visited;
-    map<GameboardModel, pair<GameboardModel, Move> > prev;
+    map<GameboardModel, Move> prev;
     map<GameboardModel, size_t> dist;
 
     GameboardModel finalGameboard = src;
     {
         priority_queue<
-        pair<double, GameboardModel>,
-        vector< pair<double, GameboardModel> >,
-        greater<>
+            pair<double, GameboardModel>,
+            vector< pair<double, GameboardModel> >,
+            greater<>
         > q;
 
         dist.emplace(src, 0);
-        prev.emplace(src, make_pair(src, Move(0,0)));
+        prev.emplace(src, Move(0,0));
         q.emplace((*h)(src), src);
 
+        GameboardModel u;
         while (!q.empty()) {
-            GameboardModel u = q.top().second;
+            u = q.top().second;
             q.pop();
 
             if (u.isGameOver()){
@@ -49,7 +50,7 @@ void AstarSearch::initialize(const GameboardModel &src){
                 v.move(e);
                 if(!dist.count(v) || dist.at(v) > dist.at(u) + 1) {
                     dist.emplace(v, dist.at(u) + 1);
-                    prev.emplace(v, make_pair(u, e));
+                    prev.emplace(v, e);
                     q.emplace(static_cast<double>(dist.at(v)) + (*h)(v), v);
                 }
             }
@@ -60,12 +61,10 @@ void AstarSearch::initialize(const GameboardModel &src){
         solution.clear();
 
         GameboardModel v = finalGameboard;
-        GameboardModel u;
-        Move m(0, 0);
         while (v != src) {
-            tie(u, m) = prev.at(v);
+            const Move &m = prev.at(v);
             solution.push_front(m);
-            v = u;
+            v.reverseMove(m);
         }
     }
 }

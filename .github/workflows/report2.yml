@@ -29,23 +29,6 @@ jobs:
         git submodule sync --recursive
         git -c "http.extraheader=$auth_header" -c protocol.version=2 submodule update --init --force --recursive --depth=1
     
-    - name: build
-      run: |
-        mkdir build
-        cd build
-        cmake ..
-        cmake --build .
-
-    - name: Make analysis (discard-dfs)
-      run: |
-        cd analysis/discard-dfs
-        make -f discard-dfs.mk
-
-    - name: Make analysis (further-analysis)
-      run: |
-        cd analysis/further-analysis
-        make -f further-analysis.mk
-
     - name: report2
       run: |
         cd doc/report

@@ -68,10 +68,6 @@ define run_analysis_short
 	$(MAIN) cli $(NRUNS) 7 4 3 7 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
 	$(MAIN) cli $(NRUNS) 7 4 3 8 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
 	$(MAIN) cli $(NRUNS) 7 4 3 9 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
-endef
-
-define run_analysis
-	$(call run_analysis_short,$1,$2,$3)
 
 	$(MAIN) cli $(NRUNS) 8 4 4 0 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
 	$(MAIN) cli $(NRUNS) 8 4 4 1 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
@@ -83,6 +79,10 @@ define run_analysis
 	$(MAIN) cli $(NRUNS) 8 4 4 7 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
 	$(MAIN) cli $(NRUNS) 8 4 4 8 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
 	$(MAIN) cli $(NRUNS) 8 4 4 9 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+endef
+
+define run_analysis
+	$(call run_analysis_short,$1,$2,$3)
 
 	$(MAIN) cli $(NRUNS) 9 4 4 0 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
 	$(MAIN) cli $(NRUNS) 9 4 4 1 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
@@ -94,6 +94,72 @@ define run_analysis
 	$(MAIN) cli $(NRUNS) 9 4 4 7 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
 	$(MAIN) cli $(NRUNS) 9 4 4 8 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
 	$(MAIN) cli $(NRUNS) 9 4 4 9 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+
+	$(MAIN) cli $(NRUNS) 10 4 5 0 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 10 4 5 1 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 10 4 5 2 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 10 4 5 3 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 10 4 5 4 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 10 4 5 5 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 10 4 5 6 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 10 4 5 7 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 10 4 5 8 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 10 4 5 9 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+
+	$(MAIN) cli $(NRUNS) 11 4 5 0 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 11 4 5 1 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 11 4 5 2 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 11 4 5 3 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 11 4 5 4 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 11 4 5 5 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 11 4 5 6 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 11 4 5 7 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 11 4 5 8 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 11 4 5 9 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+
+	$(MAIN) cli $(NRUNS) 12 4 6 0 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 12 4 6 1 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 12 4 6 2 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 12 4 6 3 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 12 4 6 4 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 12 4 6 5 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 12 4 6 6 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 12 4 6 7 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 12 4 6 8 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 12 4 6 9 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+
+	$(MAIN) cli $(NRUNS) 13 4 6 0 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 13 4 6 1 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 13 4 6 2 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 13 4 6 3 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 13 4 6 4 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 13 4 6 5 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 13 4 6 6 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 13 4 6 7 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 13 4 6 8 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 13 4 6 9 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+
+	$(MAIN) cli $(NRUNS) 14 4 7 0 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 14 4 7 1 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 14 4 7 2 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 14 4 7 3 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 14 4 7 4 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 14 4 7 5 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 14 4 7 6 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 14 4 7 7 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 14 4 7 8 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 14 4 7 9 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+
+	$(MAIN) cli $(NRUNS) 15 4 7  0 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 15 4 7  1 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 15 4 7  2 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 15 4 7  5 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 15 4 7  6 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 15 4 7  7 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 15 4 7  8 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 15 4 7  9 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 15 4 7 11 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
+	$(MAIN) cli $(NRUNS) 15 4 7 12 $(1) | awk '{print "$2 ,"$$1}' >> $(2).csv
 endef
 
 all: bfs-processed.csv dfs-greedy-admissible-processed.csv greedy-admissible-processed.csv astar-admissible-processed.csv #dfs-greedy-fh-processed.csv greedy-fh-processed.csv astar-fh-processed.csv

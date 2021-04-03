@@ -135,11 +135,27 @@ public:
     bool canMove(const Move &move) const;
 
     /**
+     * @brief Check if move can be reversed in this gameboard.
+     *
+     * @param move          Move to be checked
+     * @return true         If move can be reversed
+     * @return false        otherwise
+     */
+    bool canReverseMove(const Move &move) const;
+
+    /**
      * @brief Move piece from one tube to another.
      * 
      * @param move      Move to be executed
      */
     void move(const Move &move);
+
+    /**
+     * @brief Reverse a move.
+     *
+     * @param move      Move to be reversed
+     */
+    void reverseMove(const Move &move);
 
     /**
      * @brief Get all possible legal moves from current state

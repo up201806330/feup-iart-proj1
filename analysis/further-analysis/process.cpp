@@ -31,7 +31,13 @@ int main(int argc, char *argv[]){
         if(alg == "astar-admissible") continue;
         for(auto &p2: p1.second){
             auto testCase = p2.first;
-            get<0>(p2.second) = get<0>(data.at("astar-admissible").at(testCase))/get<0>(p2.second);
+            try{
+                get<0>(p2.second) = get<0>(data.at("astar-admissible").at(testCase))/get<0>(p2.second);
+            } catch(const exception &e){
+                cerr << e.what() << endl;
+                cerr << "testCase=" << get<0>(testCase) << " " << get<1>(testCase) << " " << get<2>(testCase) << " " << get<3>(testCase) << endl;
+                throw e;
+            }
         }
     }
     cerr << "Calculated optimality for all except astar-admissible" << endl;
@@ -89,9 +95,9 @@ int main(int argc, char *argv[]){
             cout
                 << alg
                 << "," << get<0>(testCase) << "," << get<1>(testCase) << "," << get<2>(testCase)
-                << "," << *(nMoves.at(testCase).begin()) << "," << nMovesMean.at(testCase) << "," << *(nMoves.at(testCase).rbegin())
-                << "," << *(mem   .at(testCase).begin()) << "," << memMean   .at(testCase) << "," << *(mem   .at(testCase).rbegin())
-                << "," << *(t     .at(testCase).begin()) << "," << tMean     .at(testCase) << "," << *(t     .at(testCase).rbegin())
+                << "," << *(nMoves.at(testCase).begin()+1) << "," << nMovesMean.at(testCase) << "," << *(nMoves.at(testCase).rbegin()+1)
+                << "," << *(mem   .at(testCase).begin()+1) << "," << memMean   .at(testCase) << "," << *(mem   .at(testCase).rbegin()+1)
+                << "," << *(t     .at(testCase).begin()+1) << "," << tMean     .at(testCase) << "," << *(t     .at(testCase).rbegin()+1)
                 << endl;
         }
     }

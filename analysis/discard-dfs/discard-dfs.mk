@@ -9,6 +9,7 @@ define run_analysis
 	$(MAIN) cli $(NRUNS) 5 4 3 0 $(1) >> $(2).csv
 	$(MAIN) cli $(NRUNS) 6 4 3 0 $(1) >> $(2).csv
 	$(MAIN) cli $(NRUNS) 7 4 4 0 $(1) >> $(2).csv
+	$(MAIN) cli $(NRUNS) 8 4 4 0 $(1) >> $(2).csv
 endef
 
 define run_analysis_ids

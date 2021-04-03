@@ -1,15 +1,15 @@
 #include "algorithm/BreadthFirstSearch.h"
 
 using namespace std;
+using Move = GameboardModel::Move;
 
 bool BreadthFirstSearch::bfs(const GameboardModel& gameboardModel) {
     prev.clear();
 
     queue<GameboardModel> q;
-    
-   
+
     q.push(gameboardModel);
-    prev.emplace(gameboardModel, make_pair(gameboardModel, GameboardModel::Move(0, 0)));
+    prev.emplace(gameboardModel, GameboardModel::Move(0, 0));
 
     while(!q.empty()) {
 
@@ -28,7 +28,7 @@ bool BreadthFirstSearch::bfs(const GameboardModel& gameboardModel) {
             v.move(m);
             if(!prev.count(v)) {
                 q.push(v);
-                prev.emplace(v, make_pair(u, m)); 
+                prev.emplace(v, m);
             }
              
         }
@@ -43,13 +43,10 @@ void BreadthFirstSearch::initialize(const GameboardModel &gameboard) {
     if(!bfs(gameboard)) throw SearchStrategy::failed_to_find_solution("BreadthFirstSearch");
 
     GameboardModel v = finalState;
-    GameboardModel u;
-    GameboardModel::Move m(0, 0);
-
     while(v != this->initialState) {
-        tie(u, m) = prev.at(v);
+        const Move &m = prev.at(v);
         solution.push(m);
-        v = u;           
+        v.reverseMove(m);
     }
 
 }
