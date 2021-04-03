@@ -20,6 +20,7 @@ define run_analysis_ids
 	$(MAIN) cli $(NRUNS) 5 4 3 0 $(1) >> $(2).csv
 	echo ",,,,,," >> $(2).csv
 	echo ",,,,,," >> $(2).csv
+	echo ",,,,,," >> $(2).csv
 endef
 
 all: discard-dfs-math.csv
