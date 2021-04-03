@@ -39,6 +39,7 @@ add_executable(main
         src/view/MenuView.cpp
         src/view/Rectangle.cpp
         src/view/ScoreboardView.cpp
+        src/view/AboutView.cpp
 
         src/controller/MenuController.cpp
 
@@ -53,6 +54,7 @@ add_executable(main
         src/controller/state/ChooseHeuristicStrategyState.cpp
         src/controller/state/ChooseFactorState.cpp
         src/controller/state/PlayMachineState.cpp
+        src/controller/state/AboutState.cpp
 
         src/CommandLineInterface.cpp
 )

@@ -13,6 +13,7 @@ ChooseBaseHeuristicState          *State::chooseBaseHeuristicState          = nu
 ChooseFiniteHorizonHeuristicState *State::chooseFiniteHorizonHeuristicState = nullptr;
 ChooseFactorState                 *State::chooseFactorState                 = nullptr;
 ChooseHeuristicStrategyState      *State::chooseHeuristicMachineState       = nullptr;
+AboutState                        *State::aboutState                        = nullptr;
 
 State::State(TerminalGUI *term): terminal(term) {
 }
@@ -35,6 +36,7 @@ void State::initializeStates(TerminalGUI *terminal) {
     chooseFiniteHorizonHeuristicState = new ChooseFiniteHorizonHeuristicState(terminal);
     chooseFactorState                 = new ChooseFactorState(terminal);
     chooseHeuristicMachineState       = new ChooseHeuristicStrategyState(terminal);
+    aboutState                        = new AboutState(terminal);
 }
 
 void State::deleteStates() {
@@ -48,4 +50,5 @@ void State::deleteStates() {
     delete chooseFiniteHorizonHeuristicState;
     delete chooseFactorState;
     delete chooseHeuristicMachineState;
+    delete aboutState;
 }
