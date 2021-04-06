@@ -266,8 +266,8 @@ This research is significant for our problem; even though the problems are quite
   
   We implemented three heuristics:
   \begin{itemize}
-    \item \textbf{Admissible heuristic} | Uses two factors to estimate the cost to reach the goal state: let $f(t)$ be the number of contiguous same-color ball at the bottom of tube $t$. We add $h_t-f(t)$ to the heuristic to account for balls we will have to move. Then we account for the cost of moving all balls of the same color to the same tube.
-    \item \textbf{Non-admissible heuristic} | This heuristic just use any other heuristic and multiplies its value by a constant making it non-admissible.
+    \item \textbf{Admissible heuristic} | Uses two factors to estimate the cost to reach the goal state: let $f(t)$ be the number of contiguous same-color balls at the bottom of tube $t$. We add $h_t-f(t)$ to the heuristic to account for balls we will have to move. Then we account for the cost of moving all balls of the same color to the same tube.
+    \item \textbf{Non-admissible heuristic} | This heuristic just uses any other heuristic and multiplies its value by a constant making it non-admissible.
     \item \textbf{Finite horizon heuristic} | Instead of making some math from the current state, finds all nodes at a certain depth, evaluates all those nodes against a base heuristic, and then pick the best value, s the depth and returns that.
     It didn't work out that well, as time performance was worst by a factor of about 100 compared to a regular, 1-step heuristic, so we dropped it from performance analysis.
   \end{itemize}
