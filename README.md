@@ -19,7 +19,7 @@ Distributed under the terms of the GNU General Public License, version 3
 - **Tools:** C++, CMake
 - **Institution:** [FEUP](https://sigarra.up.pt/feup/en/web_page.Inicial)
 - **Course:** [IART](https://sigarra.up.pt/feup/en/UCURR_GERAL.FICHA_UC_VIEW?pv_ocorrencia_id=459487) (Artificial Intelligence)
-<!-- - **Project grade:** ??.?/20.0 -->
+- **Project grade:** 19.5/20.0
 - **Group members:**
     - [Diogo Miguel Ferreira Rodrigues](https://github.com/dmfrodrigues) (<dmfrodrigues2000@gmail.com> / <diogo.rodrigues@fe.up.pt>)
     - [Rafael Soares Ribeiro](https://github.com/up201806330) (<up201806330@fe.up.pt>)
